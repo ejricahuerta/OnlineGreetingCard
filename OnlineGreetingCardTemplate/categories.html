@@ -15,8 +15,8 @@
 </head>
 
 <body class="container-fluid">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">SENDABLE</a>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="index.html">SENDABLE</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sendablenav" aria-controls="sendablenav"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -35,7 +35,7 @@
           <span class="sr-only">(current)</span>
         </li>
       </ul>
-      <ul class=" navbar-nav float-right">
+      <ul class=" navbar-nav ml-auto">
         <li class="nav-item">
           <a class="nav-link" href="login.html">Login</a>
         </li>
@@ -50,46 +50,51 @@
   <div class="break"></div>
 
   <!--all category Section-->
-  <section class=" mt-5 card allcategories text-center">
-    <div class="card-header">
-      <h3>All Categories</h3>
-    </div>
-    <div class="card-body">
-      <div class="row justify-content-center">
-        <div class="m-3 categories-card col-md col-sm">
-          <ul class="list-group mx-auto pl-3 pr-3">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <a href="cards.html?f=birthday">Birthday</a>
-              <span class="badge badge-primary badge-pill">14</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <a href="cards.html?f=aniversaries">Aniversaries</a>
-              <span class="badge badge-primary badge-pill">14</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <a href="cards.html?f=valentines">Valentines</a>
-              <span class="badge badge-primary badge-pill">2</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <a href="cards.html?f=parents">Parents</a>
-              <span class="badge badge-primary badge-pill">1</span>
-            </li>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <a href="cards.html?f=couple">Couple</a>
-              <span class="badge badge-primary badge-pill">1</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <a href="cards.html?f=friends">Friends</a>
-              <span class="badge badge-primary badge-pill">1</span>
-            </li>
-          </ul>
+  <section class="row justify-content-center">
+    <div class="col-md-8">
+      <div class=" card allcategories">
+        <div class="card-header">
+          <h3>All Categories</h3>
         </div>
-        <div class="col-md  m-4">
-          <img class="img-fluid"  src="images/postcard.png" alt="Post Card">
-          <h4>Choose a Category</h4>
-          <p>All our Cards our made by various art designers from all over the world. Help them get their name out by choosing
-            their card.</p>
+        <div class="card-body">
+          <div class="row justify-content-center">
+            <div class="m-3 categories-card col-md col-sm">
+              <ul class="list-group mx-auto pl-3 pr-3">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <a class="btn" href="cards.html?f=birthday">Birthday</a>
+                  <span class="badge badge-primary badge-pill">14</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <a class="btn" href="cards.html?f=aniversaries">Aniversaries</a>
+                  <span class="badge badge-primary badge-pill">14</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <a class="btn" href="cards.html?f=valentines">Valentines</a>
+                  <span class="badge badge-primary badge-pill">2</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <a class="btn" href="cards.html?f=parents">Parents</a>
+                  <span class="badge badge-primary badge-pill">1</span>
+                </li>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <a class="btn" href="cards.html?f=couple">Couple</a>
+                  <span class="badge badge-primary badge-pill">1</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <a class="btn" href="cards.html?f=friends">Friends</a>
+                  <span class="badge badge-primary badge-pill">1</span>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md  m-4">
+              <img class="img-fluid mb-3" src="images/postcard.png" alt="Post Card">
+              <h4>Choose a Category</h4>
+              <p>All our Cards our made by various art designers from all over the world.
+                Help them get their name out by choosing
+                their card.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

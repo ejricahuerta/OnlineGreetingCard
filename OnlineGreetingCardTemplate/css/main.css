@@ -10,6 +10,10 @@
     margin-top: 100px;
 }
 
+.required-field{
+    color: red;
+}
+
 /*bootstrap overrides*/
 .jumbotron {
     background-color:sandybrown;

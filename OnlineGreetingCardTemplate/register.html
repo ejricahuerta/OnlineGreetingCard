@@ -36,7 +36,7 @@
                     <a class="nav-link" href="categories.html">Categories</a>
                 </li>
             </ul>
-            <ul class="navbar-nav float-right">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="login.html">Login</a>
                 </li>
@@ -53,8 +53,8 @@
 
     <!--Registration Form-->
     <div class="row justify-content-center mb-5">
-        <div class="col-md-8">
-            <div class="card register-formjustify-content-center">
+        <div class="col-md-6">
+            <div class="card egister-formjustify-content-center">
                 <div class="card-header">
                     Register
                 </div>
@@ -65,17 +65,17 @@
                     <form action="#" method="POST">
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="firstname">First Name</label>
+                                <label for="firstname">First Name<span class="required-field"> *</span></label>
                                 <input name="firstname" type="text" class="form-control" id="firstname" placeholder="John">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="lastname">Last Name</label>
+                                <label for="lastname">Last Name<span class="required-field"> *</span> </label>
                                 <input name="lastname" type="text" class="form-control" id="lastname" placeholder="Doe">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="email">Email</label>
+                                <label for="email">Email<span class="required-field"> *</span></label>
                                 <input name="email" type="email" class="form-control" id="email" placeholder="johndoe@example.com">
                             </div>
                             <div class="form-group col-md-6">
@@ -85,17 +85,17 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="password">Password</label>
+                                <label for="password">Password<span class="required-field"> *</span></label>
                                 <input name="password" type="password" class="form-control" id="password" placeholder="Password">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="retypepassword">Re-type Password</label>
+                                <label for="retypepassword">Re-type Password<span class="required-field"> *</span></label>
                                 <input name="retypepassword" type="password" class="form-control" id="retypepassword" placeholder="Password">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md">
-                                <label for="line1">Line 1</label>
+                                <label for="line1">Line 1<span class="required-field"> *</span></label>
                                 <input name="line1" type="text" class="form-control" id="line1" placeholder="70 The Pond Rd">
                             </div>
                             <div class="form-group col-sm">
@@ -105,15 +105,15 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="city">City</label>
+                                <label for="city">City<span class="required-field"> *</span></label>
                                 <input name="city" type="text" class="form-control" id="city" placeholder="Toronto">
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="state">State</label>
+                                <label for="state">State<span class="required-field"> *</span></label>
                                 <input name="state" type="text" id="state" class="form-control" placeholder="Ontario">
                             </div>
                             <div class="form-group col-md-2">
-                                <label for="postal">Zip</label>
+                                <label for="postal">Zip<span class="required-field"> *</span></label>
                                 <input type="text" class="form-control" id="postal" placeholder="A1A 1A1">
                             </div>
                         </div>
