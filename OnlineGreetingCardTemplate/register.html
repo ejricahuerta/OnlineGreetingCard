@@ -19,11 +19,11 @@
 <body class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="#">SENDABLE</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sendablenav" aria-controls="sendablenav"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <div class="collapse navbar-collapse" id="sendablenav">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" href="index.html">Home
@@ -49,73 +49,74 @@
     <!--Spaces-->
     <div class="break"></div>
 
-
     <!--Registration Form-->
-    <div class="card register-form row justify-content-center mt-5">
-        <div class="card-header">
-            Register
-        </div>
-        <div class="card-body">
-            <form action="#" method="POST">
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="firstname">First Name</label>
-                        <input name="firstname" type="text" class="form-control" id="firstname" placeholder="John">
-                    </div>
-                    <div class="form-group col-md-6">
+    <div class="row justify-content-center" <div class="col-md-8">
+        <div class="card register-formjustify-content-center">
+            <div class="card-header">
+                Register
+            </div>
+            <div class="card-body">
+                <form action="#" method="POST">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="firstname">First Name</label>
+                            <input name="firstname" type="text" class="form-control" id="firstname" placeholder="John">
+                        </div>
+                        <div class="form-group col-md-6">
                             <label for="lastname">Last Name</label>
                             <input name="lastname" type="text" class="form-control" id="lastname" placeholder="Doe">
                         </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="email">Email</label>
-                        <input name="email" type="email" class="form-control" id="email" placeholder="johndoe@example.com">
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="email">Email</label>
+                            <input name="email" type="email" class="form-control" id="email" placeholder="johndoe@example.com">
+                        </div>
+                        <div class="form-group col-md-6">
                             <label for="phone">Phone</label>
                             <input name="phone" type="phone" class="form-control" id="phone" placeholder="Tel, Mobile">
                         </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="password">Password</label>
-                        <input name="password" type="password" class="form-control" id="password" placeholder="Password">
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="retypepassword">Re-type Password</label>
-                        <input name="retypepassword" type="password" class="form-control" id="retypepassword" placeholder="Password">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="password">Password</label>
+                            <input name="password" type="password" class="form-control" id="password" placeholder="Password">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="retypepassword">Re-type Password</label>
+                            <input name="retypepassword" type="password" class="form-control" id="retypepassword" placeholder="Password">
+                        </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md">
-                        <label for="line1">Line 1</label>
-                        <input name="line1" type="text" class="form-control" id="line1" placeholder="70 The Pond Rd">
+                    <div class="form-row">
+                        <div class="form-group col-md">
+                            <label for="line1">Line 1</label>
+                            <input name="line1" type="text" class="form-control" id="line1" placeholder="70 The Pond Rd">
+                        </div>
+                        <div class="form-group col-sm">
+                            <label for="line2">Line 2</label>
+                            <input line="line2" type="text" class="form-control" id="line2" placeholder="Apartment, studio, or floor">
+                        </div>
                     </div>
-                    <div class="form-group col-sm">
-                        <label for="line2">Line 2</label>
-                        <input line="line2" type="text" class="form-control" id="line2" placeholder="Apartment, studio, or floor">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="city">City</label>
+                            <input name="city" type="text" class="form-control" id="city" placeholder="Toronto">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="state">State</label>
+                            <input name="state" type="text" id="state" class="form-control" placeholder="Ontario">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="postal">Zip</label>
+                            <input type="text" class="form-control" id="postal" placeholder="A1A 1A1">
+                        </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="city">City</label>
-                        <input name="city" type="text" class="form-control" id="city" placeholder="Toronto">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="state">State</label>
-                        <input name="state" type="text" id="state" class="form-control" placeholder="Ontario">
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label for="postal">Zip</label>
-                        <input type="text" class="form-control" id="postal" placeholder="A1A 1A1">
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Register</button>
-
-                <a name="" id="" class="btn btn-light" href="register.html" role="button">Reset</a>
-            </form>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                    <a class="btn btn-light" href="register.html" role="button">Reset</a>
+                </form>
+            </div>
         </div>
+    </div>
     </div>
 
     <!-- Optional JavaScript -->
@@ -126,7 +127,4 @@
         crossorigin="anonymous"></script>
     <script src="js/bootstrap.min.js"></script>
 </body>
-
 </html>
-
-<div class="form-group">
