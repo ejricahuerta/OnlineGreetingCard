@@ -8,6 +8,20 @@ font-family: 'Open Sans', sans-serif;
 
 
 /*Custom CSS*/
+
+.sidenav-card{
+    background-color: #343a40;
+    height: 800px;
+}
+
+.write-container{
+    margin-top: 200px;
+}
+
+.write-card-space{
+    background-color: azure;
+    height: 800px;
+}
 .register-form, .allcategories{
     margin: 40px;
     min-width: 200px;
@@ -24,11 +38,14 @@ font-family: 'Open Sans', sans-serif;
 .chose-card{
     background-color: #FE5F55;
 }
+
 .write-card{
     background-color: #F2D281;
 }
+
 .send-card{
     background-color: #7893A0;
+
 }
 /*bootstrap overrides*/
 .jumbotron {
