@@ -1,6 +1,16 @@
+body{
+    background: none;
+    font-family: 'Roboto', sans-serif;
+font-family: 'Open Sans', sans-serif;
+}
+
+h2,h3,h4,h5{
+    color:#00A090;
+}
+
+
 
 /*Custom CSS*/
-
 .register-form, .allcategories{
     margin: 40px;
     min-width: 200px;
@@ -16,9 +26,29 @@
 
 /*bootstrap overrides*/
 .jumbotron {
-    background-color:sandybrown;
+    background-color:royalblue;
+    border-radius: 0;
+    color:ghostwhite;
+}
+
+
+.display-4{
+color: azure;
+
 }
 .container-fluid{
     padding-left: 0%;
     padding-right: 0%;
+}
+.card{
+    border-radius: 0;
+}
+.btn-primary{
+background-color:  #343a40;
+border-color: #343a40;
+}
+.btn-primary:hover{
+    background-color:  azure;
+    color: #343a40;
+
 }
