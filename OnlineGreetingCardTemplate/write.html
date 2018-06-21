@@ -58,7 +58,7 @@
             <!--side-->
             <div class="col-lg-3 col-md-4">
                 <div class="card p-4">
-                    <img class="card-img-top shadow-sm" src="images/greetingcard1.jpg" alt="card 1">
+                    <img class="card-img-top rounded-circle" src="images/greetingcard1.jpg" alt="card 1">
                     <div class="card-body">
                         <h5 class="card-title">Selected Card</h5>
                         <p>some descriptive texts</p>
@@ -68,9 +68,9 @@
                 </div>
             </div>
             <!--textarea-->
-            <div class="col-lg-9 col-md-8 shadow-sm">
+            <div class="col-lg-9 col-md-8 mb-5">
                 <div class="row m-1">
-                    <div class="col-12 shadow-lg">
+                    <div class="col-12 shadow-sm">
                         <ul class="nav justify-content-around">
                             <li class="nav-item nav-link disabled">Choosen Font</li>
                             <li class="nav-item dropdown">
@@ -81,10 +81,19 @@
                                     <a href="#" class="dropdown-item">Font 3</a>
                                 </div>
                             </li>
-                            
+
                         </ul>
                     </div>
-                    <div class=" text-space col-12 shadow-lg mt-1">
+                    <div class=" text-space col-12 shadow-lg mt-3">
+                        <form class="mt-1" action="#" method="POST">
+                            <div class="form-group">
+                                <label for="personalizedmsg">Your Message</label>
+                                <textarea class="form-control" id="personalized" rows="8"></textarea>
+                            </div>                            
+                            <button type="button" class="btn btn-primary">Save</button>
+                            <a class="btn" href="#">Clear</a>
+                        
+                        </form>
 
                     </div>
                 </div>
