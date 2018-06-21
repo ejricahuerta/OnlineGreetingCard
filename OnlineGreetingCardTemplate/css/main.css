@@ -17,6 +17,22 @@ font-family: 'Open Sans', sans-serif;
 .text-space{
     min-height: 350px;
 }
+.font1{
+    font-family: 'Sacramento', cursive;
+    
+}
+.font2{
+    font-family: 'Nothing You Could Do', cursive;
+    
+}
+.font3{
+    font-family: 'Homemade Apple', cursive;
+    
+}
+.font4{
+    font-family: 'Allura', cursive;
+    
+}
 .write-card-space{
     background-color: azure;
     height: 800px;
