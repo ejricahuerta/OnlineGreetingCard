@@ -15,9 +15,8 @@ font-family: 'Open Sans', sans-serif;
 }
 
 .text-space{
-    height: inherit;
+    min-height: 200px;
 }
-
 .write-card-space{
     background-color: azure;
     height: 800px;
