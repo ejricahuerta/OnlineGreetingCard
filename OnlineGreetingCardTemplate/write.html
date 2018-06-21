@@ -52,23 +52,46 @@
     <!--spacer-->
     <div class="break"></div>
 
-    <!--heading-->
-    <!--content write-->
-    <section class="row">
-        <!--side-->
-        <div class="col-md-3 border m-5">
-            <div class="row">
-                
-                <h5 class="text-center col-12">Card Name</h5>
-                <img class="colr-12 img img-selected img-fluid" src="images/greetingcard1.jpg" alt="card">
-                <p class="col-12">Font Selected</p>
-            </div>
-        </div>
-        <!--textarea-->
-        <div class="col-9">
+    <div class="container">
 
-        </div>
-    </section>
+        <!--content write-->
+        <section class="row">
+            <!--side-->
+            <div class="col-md-3">
+                <div class="card p-4">
+                    <img class="card-img-top shadow-sm" src="images/greetingcard1.jpg" alt="card 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Selected Card</h5>
+                        <p>some descriptive texts</p>
+                        <a class="btn btn-info">Change Card</a>
+
+                    </div>
+                </div>
+            </div>
+            <!--textarea-->
+            <div class="col-9 border">
+                <div class="row m-1">
+                    <div class="col-12 border">
+                        <ul class="nav justify-content-around">
+                            <li class="nav-item nav-link disabled">Choosen Font</li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="buton" aria-haspopup="true" aria aria-expanded="false">Choose Font</a>
+                                <div class="dropdown-menu">
+                                    <a href="#" class="dropdown-item">Font 1</a>
+                                    <a href="#" class="dropdown-item">Font 2</a>
+                                    <a href="#" class="dropdown-item">Font 3</a>
+                                </div>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                    <div class="textspace col-12 border">
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

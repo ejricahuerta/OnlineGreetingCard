@@ -14,8 +14,8 @@ font-family: 'Open Sans', sans-serif;
     height: 800px;
 }
 
-.write-container{
-    margin-top: 200px;
+.text-space{
+    height: inherit;
 }
 
 .write-card-space{
