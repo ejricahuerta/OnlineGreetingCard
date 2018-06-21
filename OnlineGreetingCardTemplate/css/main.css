@@ -35,10 +35,6 @@ font-family: 'Open Sans', sans-serif;
     color: red;
 }
 
-.chose-card{
-    background-color: ghostwhite;
-    height: 100%;
-}
 
 .write-card{
     background-color: ghostwhite;
@@ -47,6 +43,11 @@ font-family: 'Open Sans', sans-serif;
 .send-card{
     background-color:ghostwhite;
     height: 100%;
+}
+
+.img-selected{
+    width: auto;
+    height: 50px;;
 }
 
 /*bootstrap overrides*/

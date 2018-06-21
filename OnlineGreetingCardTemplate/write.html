@@ -2,18 +2,21 @@
 <html lang="en">
 
 <head>
-    <title>Sendable - Write</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+
+    <title>Sendable</title>
 </head>
 
-<body>
 
-    <!--Nav-->
+<body class="container-fluid">
+    <!--Navigation Bar-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="index.html">SENDABLE</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sendablenav" aria-controls="sendablenav"
@@ -22,20 +25,20 @@
         </button>
 
         <div class="collapse navbar-collapse" id="sendablenav">
-            <ul class="navbar-nav mt-2 mt-lg-0">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
-                    <a class="btn nav-link" href="index.html">Home
+                    <a class="btn nav-link" href="#">Home
+                        <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn nav-link" href="cards.html">Cards</a>
-                    <span class="sr-only">(current)</span>
+                    <a class="btn nav-link active" href="cards.html">Cards</a>
                 </li>
                 <li class="nav-item">
                     <a class="btn nav-link" href="categories.html">Categories</a>
                 </li>
             </ul>
-            <ul class="navbar-nav  ml-auto">
+            <ul class=" navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="btn nav-link" href="login.html">Login</a>
                 </li>
@@ -49,20 +52,28 @@
     <!--spacer-->
     <div class="break"></div>
 
-
-    <div class="row write-container">
-        <div class="col-3 sidenav-card">
+    <!--heading-->
+    <!--content write-->
+    <section class="row">
+        <!--side-->
+        <div class="col-md-3 border m-5">
+            <div class="row">
+                
+                <h5 class="text-center col-12">Card Name</h5>
+                <img class="colr-12 img img-selected img-fluid" src="images/greetingcard1.jpg" alt="card">
+                <p class="col-12">Font Selected</p>
+            </div>
+        </div>
+        <!--textarea-->
+        <div class="col-9">
 
         </div>
-        <div class="col-9 write-card-space">
-            <h3>Side</h3>
-        </div>
-    </div>
+    </section>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
     <script src="js/bootstrap.min.js"></script>
 </body>
