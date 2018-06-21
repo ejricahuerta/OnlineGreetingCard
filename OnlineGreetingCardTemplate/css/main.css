@@ -36,17 +36,19 @@ font-family: 'Open Sans', sans-serif;
 }
 
 .chose-card{
-    background-color: #FE5F55;
+    background-color: ghostwhite;
+    height: 100%;
 }
 
 .write-card{
-    background-color: #F2D281;
+    background-color: ghostwhite;
 }
 
 .send-card{
-    background-color: #7893A0;
-
+    background-color:ghostwhite;
+    height: 100%;
 }
+
 /*bootstrap overrides*/
 .jumbotron {
     background-color:royalblue;
