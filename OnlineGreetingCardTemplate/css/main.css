@@ -5,8 +5,6 @@ font-family: 'Open Sans', sans-serif;
 }
 
 
-
-
 /*Custom CSS*/
 
 .sidenav-card{
@@ -17,6 +15,7 @@ font-family: 'Open Sans', sans-serif;
 .text-space{
     min-height: 350px;
 }
+
 .font1{
     font-family: 'Sacramento', cursive;
     
@@ -33,10 +32,12 @@ font-family: 'Open Sans', sans-serif;
     font-family: 'Allura', cursive;
     
 }
+
 .write-card-space{
     background-color: azure;
     height: 800px;
 }
+
 .register-form, .allcategories{
     margin: 40px;
     min-width: 200px;
@@ -49,7 +50,6 @@ font-family: 'Open Sans', sans-serif;
 .required-field{
     color: red;
 }
-
 
 .write-card{
     background-color: ghostwhite;
