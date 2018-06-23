@@ -30,7 +30,7 @@
         <div class="card-body">
           <h5 class="card-title">Choose A Card</h5>
           <p class="card-text">Select a Card from our various Categories</p>
-          <a href="#" class="btn btn-primary">Go To Categories</a>
+          <a href="categories.jsp" class="btn btn-primary">Go To Categories</a>
         </div>
       </div>
     </div>
@@ -39,7 +39,7 @@
         <div class="card-body">
           <h5 class="card-title">Write your Personalized Message</h5>
           <p class="card-text">Choose font style you want.</p>
-          <a href="#" class="btn btn-primary">See Styles</a>
+          <a href="fonts.jsp" class="btn btn-primary">See Styles</a>
         </div>
       </div>
     </div>
@@ -48,7 +48,7 @@
         <div class="card-body">
           <h5 class="card-title">Send</h5>
           <p class="card-text">We print and send your personalized card.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <a href="write.jsp" class="btn btn-primary">Write Now</a>
         </div>
       </div>
     </div>
