@@ -42,18 +42,17 @@ public class Authenticate extends HttpServlet {
 		System.out.println(temp.getPassword());
 		for (User user : Seed.SeedUsers()) {
 			if (user.getEmail().equals(temp.getEmail()) && user.getPassword().equals(temp.getPassword())) {
-				HttpSession session =  request.getSession();
+				HttpSession session = request.getSession(true);
 				session.setAttribute("username", user.getEmail());
 				request.getRequestDispatcher("index.jsp").forward(request, response);
+				return;
 			} else {
-				request.removeAttribute("valid");
-				request.setAttribute("valid","false");
-				request.setAttribute("validationMessage", "<bold>Invalid Login!</bold> Please try again.");
+				request.setAttribute("validationMessage", "<big>Invalid Login!</big> Please try again.");
 				request.getRequestDispatcher("login.jsp").forward(request, response);
+				return;
 			}
 		}
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)

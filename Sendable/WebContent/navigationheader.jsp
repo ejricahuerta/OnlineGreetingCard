@@ -21,7 +21,7 @@
         </li>
       </ul>
       <ul class=" navbar-nav ml-auto">
-      <% if(request.getParameter("valid").equals("true")) { %>
+      <% if(session.getAttribute("username") != null) { %>
     	      	<li class="nav-item">
           <a class="btn nav-link" href="myaccount.jsp">
           <%=request.getParameter("email")%>
