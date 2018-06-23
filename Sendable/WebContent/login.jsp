@@ -1,38 +1,11 @@
 <jsp:include page="header.jsp"/>
+
 <!--Body-->
-
 <body class="container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="#">SENDABLE</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sendablenav" aria-controls="sendablenav"
-            aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="sendablenav">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item">
-                    <a class="btn nav-link" href="index.html">Home
-                    </a>
-                </li>
-                <li class="nav-item ">
-                    <a class="btn nav-link" href="cards.html">Cards</a>
-                </li>
-                <li class="nav-item">
-                    <a class="btn nav-link" href="categories.html">Categories</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="btn nav-link" href="login.html">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="btn nav-link " href="register.html">Register</a>
-                    <span class="sr-only">(current)</span>
-                </li>
-            </ul>
-        </div>
-    </nav>
 
+<!-- nav header -->
+	<jsp:include page="navigationheader.jsp"/>
+    
     <!--Spaces-->
     <div class="break"></div>
 
