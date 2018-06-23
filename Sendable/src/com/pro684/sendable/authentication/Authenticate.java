@@ -9,6 +9,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.pro684.sendable.entities.User;
 
@@ -41,10 +42,12 @@ public class Authenticate extends HttpServlet {
 		System.out.println(temp.getPassword());
 		for (User user : Seed.SeedUsers()) {
 			if (user.getEmail().equals(temp.getEmail()) && user.getPassword().equals(temp.getPassword())) {
+				HttpSession session =  request.getSession();
+				session.setAttribute("username", user.getEmail());
 				request.getRequestDispatcher("index.jsp").forward(request, response);
-				System.out.println(temp.getEmail());
-
 			} else {
+				request.removeAttribute("valid");
+				request.setAttribute("valid","false");
 				request.setAttribute("validationMessage", "<bold>Invalid Login!</bold> Please try again.");
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}

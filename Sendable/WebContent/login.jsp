@@ -17,9 +17,15 @@
                     Login
                 </div>
                 <div class="card-body">
+           				<%if(request.getAttribute("validationMessage") == null) {%>
                     <div  class="alert alert-info shadow-sm" role="alert">
-           				<%= request.getAttribute("validationMessage") %>
+                    	Enter your Information.
                     </div>
+                    <%}else{ %>
+                    <div  class="alert alert-danger shadow-sm" role="alert">
+                    	<%=request.getAttribute("validationMessage")%>
+                    </div>
+                    <%} %>
                     <form action="Authenticate" method="POST">
                         <div class="form-row">
                             <div class="form-group col-md-6 col-sm-6">
