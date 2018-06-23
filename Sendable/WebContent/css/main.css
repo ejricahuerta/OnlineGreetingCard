@@ -65,7 +65,6 @@ font-family: 'Open Sans', sans-serif;
     height: 50px;;
 }
 
-
 /*bootstrap overrides*/
 .jumbotron {
     background-color:royalblue;
@@ -77,8 +76,8 @@ font-family: 'Open Sans', sans-serif;
     box-shadow: #343a40;
 }
 .display-4{
-    color: azure;
-    
+color: azure;
+
 }
 .container-fluid{
     padding-left: 0%;
@@ -88,7 +87,7 @@ font-family: 'Open Sans', sans-serif;
     border-radius: 0;
 }
 .btn-primary{
-    background-color: darkslategrey;
+background-color: darkslategrey;
 border-color: #343a40;
 }
 .btn-primary:hover{
