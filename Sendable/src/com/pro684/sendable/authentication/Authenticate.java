@@ -44,7 +44,7 @@ public class Authenticate extends HttpServlet {
 			if (user.getEmail().equals(temp.getEmail()) && user.getPassword().equals(temp.getPassword())) {
 				HttpSession session = request.getSession(true);
 				session.setAttribute("username", user.getEmail());
-				request.getRequestDispatcher("index.jsp").forward(request, response);
+				response.sendRedirect("index.jsp");
 				return;
 			} else {
 				request.setAttribute("validationMessage", "<big>Invalid Login!</big> Please try again.");

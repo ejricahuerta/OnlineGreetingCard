@@ -20,16 +20,18 @@
           <a class="btn nav-link" href="categories.jsp">Categories</a>
         </li>
       </ul>
+      
+      
       <ul class=" navbar-nav ml-auto">
-      <% if(session.getAttribute("username") != null) { %>
+      <% if(session.getAttribute("username") != null ) { %>
     	      	<li class="nav-item">
           <a class="btn nav-link" href="myaccount.jsp">
-          <%=request.getParameter("email")%>
+          <%=session.getAttribute("username")%>
           </a>
         </li>
       <%} else { %>
     	<li class="nav-item">
-          <a class="btn nav-link" href="login.jsp">Login</a>
+          <a class="btn nav-link" href="Authenticate">Login</a>
         </li>
         <li class="nav-item">
           <a class="btn nav-link " href="register.jsp">Register</a>
