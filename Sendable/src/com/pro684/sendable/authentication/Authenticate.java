@@ -41,8 +41,7 @@ public class Authenticate extends HttpServlet {
 		System.out.println(temp.getPassword());
 		for (User user : Seed.SeedUsers()) {
 			if (user.getEmail().equals(temp.getEmail()) && user.getPassword().equals(temp.getPassword())) {
-				response.addCookie(new Cookie("user",temp.getEmail()));
-				response.sendRedirect("index.jsp");
+				request.getRequestDispatcher("index.jsp").forward(request, response);
 				System.out.println(temp.getEmail());
 
 			} else {

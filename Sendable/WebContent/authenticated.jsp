@@ -21,20 +21,12 @@
         </li>
       </ul>
       <ul class=" navbar-nav ml-auto">
-      <% if(request.getParameter("email") != null ) { %>
-    	      	<li class="nav-item">
-          <a class="btn nav-link" href="myaccount.jsp">
-          <%=request.getParameter("email")%>
-          </a>
-        </li>
-      <%} else { %>
-    	<li class="nav-item">
+        <li class="nav-item">
           <a class="btn nav-link" href="login.jsp">Login</a>
         </li>
         <li class="nav-item">
           <a class="btn nav-link " href="register.jsp">Register</a>
-        </li>  
-      <% }%>
-        </ul>
+        </li>
+      </ul>
     </div>
   </nav>
