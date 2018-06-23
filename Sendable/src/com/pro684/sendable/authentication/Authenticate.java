@@ -37,7 +37,8 @@ public class Authenticate extends HttpServlet {
 				response.sendRedirect("index.html");
 			}
 			else {
-				response.sendRedirect("register.html");	
+				request.setAttribute("validationMessage", "<bold>Invalid Login!</bold> Please try again.");
+				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}
 	}
 	/**
