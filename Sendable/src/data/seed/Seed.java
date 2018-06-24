@@ -9,11 +9,12 @@ import com.pro684.sendable.entities.*;
  *
  */
 public class Seed {
-	/**
-	 * @param args
-	 */
-	public static ArrayList<User> SeedUsers() {
-		ArrayList<User> SampleUsers = new ArrayList<User>();
+	
+	
+	private ArrayList<User> SampleUsers;
+
+	public Seed() {
+		SampleUsers = new ArrayList<User>();
 		User user1 = new User("abc@111.com","password1");
 		User user2 = new User("abc@112.com","password2");
 		User user3 = new User("abc@113.com","password3");
@@ -28,6 +29,21 @@ public class Seed {
 			System.out.println(user.getEmail());
 			System.out.println(user.getPassword());
 		}
+	
+	}
+	
+	public ArrayList<User> AllUsers() {
 		return SampleUsers;
 	}
+	
+	public boolean AddUser(User newUser) {
+		if(newUser != null) {
+			SampleUsers.add(newUser);
+			return true;
+		}
+		else {
+			System.out.println("Empty User");
+			return false;
+		}
+	} 
 }

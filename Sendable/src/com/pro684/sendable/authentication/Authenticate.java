@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.xml.ws.spi.http.HttpContext;
 
 import com.pro684.sendable.entities.User;
 
@@ -36,17 +37,31 @@ public class Authenticate extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		Seed seed = new Seed();
+		
+		HttpSession session = request.getSession(true);
+		
+		
+		if( session.getServletContext().getAttribute("seedusers") == null){
+			session.getServletContext().setAttribute("seedusers", seed);
+		}
+		
+		
 		User temp = new User(request.getParameter("email"), request.getParameter("password"));
+		
 		System.out.println(temp.getEmail());
 		System.out.println(temp.getPassword());
-		for (User user : Seed.SeedUsers()) {
+		
+		for (User user : seed.AllUsers()) {
 			if (user.getEmail().equals(temp.getEmail()) && user.getPassword().equals(temp.getPassword())) {
-				HttpSession session = request.getSession(true);
+
 				session.setAttribute("username", user.getEmail());
 				response.sendRedirect("index.jsp");
 				return;
+				
 			} else {
+				
 				request.setAttribute("validationMessage", "<big>Invalid Login!</big> Please try again.");
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 				return;
