@@ -31,18 +31,16 @@ public class Register extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Seed seed = new Seed();
-		HttpSession session = request.getSession(true);
-		
-		
+				
 		if(request.getParameter("password").equals(request.getParameter("retypepassword"))) {
 			
 			request.setAttribute("validationMessage", "Password Did not Match!");
 			request.getRequestDispatcher("register.jsp").forward(request, response);			
 		}
-				
+
+		HttpSession session = request.getSession(false);	
 		if( session.getServletContext().getAttribute("seedusers") == null){
-		
+			Seed seed = new Seed();
 			session.getServletContext().setAttribute("seedusers", seed);
 		}
 		

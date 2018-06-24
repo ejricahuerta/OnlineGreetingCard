@@ -62,7 +62,7 @@ public class Authenticate extends HttpServlet {
 				
 			} else {
 				
-				request.setAttribute("validationMessage", "<big>Invalid Login!</big> Please try again.");
+				request.setAttribute("validationMessage", "<b>Invalid Login!</b> Please try again.");
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 				return;
 			}

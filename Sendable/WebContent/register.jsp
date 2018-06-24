@@ -14,10 +14,10 @@
 		<div class="col-xl-6 col-lg-8 col-md-8 col-sm-11 ">
 			<div class="card register-form shadow-lg">
 				<div class="card-header lead">Register</div>
+				<div class="card-body">
 				<%
 					if (request.getAttribute("validationMessage") == null) {
 				%>
-				<div class="card-body">
 					<div class="alert alert-info" role="alert">Enter your
 						information.</div>
 					<%
@@ -52,7 +52,7 @@
 							</div>
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="phone">Phone</label> <input name="phone"
-									type="tel" class="form-control" id="phone"     pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+									type="tel" class="form-control" id="phone"  
 									placeholder="4164934144">
 							</div>
 						</div>
@@ -85,7 +85,7 @@
 						<div class="form-row">
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="city">City<span class="required-field">
-										*</span></label> <input name="city" type="text" class="form-control" pattern="[A-Za-z]"
+										*</span></label> <input name="city" type="text" class="form-control"
 									id="city" placeholder="Toronto" required>
 							</div>
 							<div class="form-group col-md-6 col-sm-4">
