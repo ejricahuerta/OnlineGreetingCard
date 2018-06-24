@@ -3,43 +3,83 @@
  */
 package com.pro684.sendable.entities;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 /**
  * @author EXD
  *
  */
 public class User {
 
-	
-	String email;
-	String hashedPassword;
-	/**
-	 * 
-	 */
+	String DateAdded;
+	String FullName;
+	String Email;
+	String HashedPassword;
+	Address CurrentAddress;
+
 	public User() {
-		// TODO Auto-generated constructor stub
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		LocalDateTime now = LocalDateTime.now();
+		this.DateAdded = dtf.format(now).toString();
 	}
 	
 	public User(String email, String password) {
-		this.email = email;
-		this.hashedPassword = password;		
+		this.Email = email;
+		this.HashedPassword = password;
 	}
 	
-	
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	public String getEmail() {
-		return this.email;
-	}
-	
-	public void setPassword(String password) {
-		this.hashedPassword = password;
+	public User(String fullname, String password, String email, Address current) {
+		
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		LocalDateTime now = LocalDateTime.now();
+		this.DateAdded = dtf.format(now).toString();
+		
+		this.FullName = fullname;
+		this.HashedPassword = password;
+		this.Email = email;
+		this.CurrentAddress = current;
 		
 	}
+
+	public void setFullName(String firstname,String lastname) {
+		this.FullName = String.format("%s %s", firstname,lastname);
+	}
 	
-	public String getPassword() {
-		return this.hashedPassword;
+	public String getFullName() {
+	    return this.FullName;
 	}
 
+	public void setEmail(String email) {
+		this.Email = email;
+	}
+
+	public String getEmail() {
+		return this.Email;
+	}
+
+	public void setPassword(String password) {
+		this.HashedPassword = password;
+
+	}
+
+	public String getPassword() {
+		return this.HashedPassword;
+	}
+	
+	public void setAddress(String line1, String line2, String city, String state, String postalcode) {
+		this.CurrentAddress = new Address(line1,line2,city,state,postalcode); 
+	}
+	
+	public Address getCurrentAddress() {
+		return this.CurrentAddress;
+	}
+	
+	public String getCurrentAddressString() {
+		return String.format("%s %s %s %s", this.CurrentAddress.getLine1(),
+							this.CurrentAddress.getCity(),
+							this.CurrentAddress.getState(),
+							this.CurrentAddress.getPostalCode());
+	}
 }

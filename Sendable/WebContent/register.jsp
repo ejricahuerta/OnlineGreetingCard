@@ -35,25 +35,25 @@
 								<label for="firstname">First Name<span
 									class="required-field"> *</span></label> <input name="firstname"
 									type="text" class="form-control" id="firstname"
-									placeholder="John">
+									placeholder="Seneca" required>
 							</div>
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="lastname">Last Name<span
 									class="required-field"> *</span>
 								</label> <input name="lastname" type="text" class="form-control"
-									id="lastname" placeholder="Doe">
+									id="lastname" placeholder="College" required>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="email">Email<span class="required-field">
 										*</span></label> <input name="email" type="email" class="form-control"
-									id="email" placeholder="johndoe@example.com">
+									id="email" placeholder=" ptreg@senecacollege.ca" required>
 							</div>
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="phone">Phone</label> <input name="phone"
-									type="number" class="form-control" id="phone"
-									placeholder="Tel, Mobile">
+									type="tel" class="form-control" id="phone"     pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+									placeholder="4164934144">
 							</div>
 						</div>
 						<div class="form-row">
@@ -61,20 +61,20 @@
 								<label for="password">Password<span
 									class="required-field"> *</span></label> <input name="password"
 									type="password" class="form-control" id="password"
-									placeholder="Password">
+									placeholder="Password" required>
 							</div>
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="retypepassword">Re-type Password<span
 									class="required-field"> *</span></label> <input name="retypepassword"
 									type="password" class="form-control" id="retypepassword"
-									placeholder="Password">
+									placeholder="Password" required>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md">
 								<label for="line1">Line 1<span class="required-field">
 										*</span></label> <input name="line1" type="text" class="form-control"
-									id="line1" placeholder="70 The Pond Rd">
+									id="line1" placeholder="70 The Pond Rd" required>
 							</div>
 							<div class="form-group col-sm">
 								<label for="line2">Line 2</label> <input name="line2"
@@ -85,18 +85,18 @@
 						<div class="form-row">
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="city">City<span class="required-field">
-										*</span></label> <input name="city" type="text" class="form-control"
-									id="city" placeholder="Toronto">
+										*</span></label> <input name="city" type="text" class="form-control" pattern="[A-Za-z]"
+									id="city" placeholder="Toronto" required>
 							</div>
 							<div class="form-group col-md-6 col-sm-4">
 								<label for="state">State<span class="required-field">
-										*</span></label> <input name="state" type="text" id="state"
-									class="form-control" placeholder="Ontario">
+										*</span></label> <input name="state" type="text" id="state" 
+									class="form-control" placeholder="Ontario" required>
 							</div>
 							<div class="form-group col-md-3 col-sm-4 col-xs-4 col-6">
 								<label for="postal">Zip<span class="required-field">
 										*</span></label> <input type="text" class="form-control" id="postal"
-									placeholder="A1A 1A1">
+									placeholder="A1A 1A1" required>
 							</div>
 						</div>
 						<button type="submit" class="btn btn-primary">Register</button>
@@ -107,4 +107,4 @@
 		</div>
 	</div>
 
-	<jsp:include page="footer.jsp" /></body>
+	<jsp:include page="footer.jsp" />

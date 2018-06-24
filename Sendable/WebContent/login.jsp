@@ -42,7 +42,7 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Login</button>
-                        <a class="btn btn-light" href="register.html" role="button">Register</a>
+                        <a class="btn btn-light" href="register.jsp" role="button">Register</a>
                     </form>
                 </div>
             </div>

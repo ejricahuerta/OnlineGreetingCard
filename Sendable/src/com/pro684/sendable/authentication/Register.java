@@ -32,7 +32,9 @@ public class Register extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Seed seed = new Seed();
-		HttpSession session = request.getSession(true);		
+		HttpSession session = request.getSession(true);
+		
+		
 		if(request.getParameter("password").equals(request.getParameter("retypepassword"))) {
 			
 			request.setAttribute("validationMessage", "Password Did not Match!");
