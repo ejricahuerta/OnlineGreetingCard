@@ -35,9 +35,12 @@ public class Authenticate extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		Seed seed = new Seed();
+		if(request.getParameterNames().hasMoreElements()) {
+			
 		
-		HttpSession session = request.getSession(false);
+		
+		Seed seed = new Seed();
+		HttpSession session = request.getSession(true);
 		
 		if( session.getServletContext().getAttribute("seedusers") == null){
 			session.getServletContext().setAttribute("seedusers", seed);
@@ -59,7 +62,9 @@ public class Authenticate extends HttpServlet {
 		request.setAttribute("validationMessage", "<b>Invalid Login!</b> Please try again.");
 		request.getRequestDispatcher("login.jsp").forward(request, response);
 		return;
-
+		}
+		response.sendRedirect("login.jsp");
+		return;
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -68,5 +73,6 @@ public class Authenticate extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
+		return;
 	}
 }
