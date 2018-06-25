@@ -59,14 +59,12 @@ public class Authenticate extends HttpServlet {
 				session.setAttribute("username", user.getEmail());
 				response.sendRedirect("index.jsp");
 				return;
-				
-			} else {
-				
-				request.setAttribute("validationMessage", "<b>Invalid Login!</b> Please try again.");
-				request.getRequestDispatcher("login.jsp").forward(request, response);
-				return;
 			}
 		}
+		request.setAttribute("validationMessage", "<b>Invalid Login!</b> Please try again.");
+		request.getRequestDispatcher("login.jsp").forward(request, response);
+		return;
+
 	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
