@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.pro684.sendable.entities.Address;
 import com.pro684.sendable.entities.User;
 
 import data.seed.Seed;
@@ -31,22 +32,55 @@ public class Register extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-				
-		if(request.getParameter("password").equals(request.getParameter("retypepassword"))) {
-			
-			request.setAttribute("validationMessage", "Password Did not Match!");
-			request.getRequestDispatcher("register.jsp").forward(request, response);			
-		}
-
-		HttpSession session = request.getSession(false);	
+		
+		HttpSession session = request.getSession(true);	
+		
+		
 		if( session.getServletContext().getAttribute("seedusers") == null){
 			Seed seed = new Seed();
 			session.getServletContext().setAttribute("seedusers", seed);
 		}
 		
-		User newUser = new User();
-		newUser.setEmail(request.getParameter("email"));
-		newUser.setPassword("password");
+		for (User user :((Seed)session.getServletContext().getAttribute("seedusers")).AllUsers()) {
+			if(user.getEmail().equals(request.getParameter("email"))){
+				request.removeAttribute("validationMessage");
+				request.setAttribute("validationMessage", "<b>Email Exists!</b> Go to Login Page.");
+				request.getRequestDispatcher("register.jsp").forward(request, response);			
+				break;
+			}
+		}
+		if(request.getParameter("password").equals(request.getParameter("retypepassword"))) {
+			request.removeAttribute("validationMessage");
+			request.setAttribute("validationMessage", "Password Did not Match!");
+			request.getRequestDispatcher("register.jsp").forward(request, response);			
+		}
+		
+		Address addressforUser = new Address(
+					request.getParameter("line1"),
+					request.getParameter("line2"),
+					request.getParameter("city"),
+					request.getParameter("state"),
+					request.getParameter("postalcode")
+				);
+		
+		if(addressforUser.Isvalid()) {			
+		String name = String.format("%s %s", request.getParameter("firstname"),request.getParameter("lastname"));
+		User newUser = new User(name,
+					request.getParameter("email"),
+					request.getParameter("password"),
+					addressforUser
+				);
+		}
+		
+		else {
+			
+			request.removeAttribute("validationMessage");
+			request.setAttribute("validationMessage", "<b>Address not Found!</b> Please enter valid Address.");
+			request.getRequestDispatcher("register.jsp").forward(request, response);			
+		}
+		
+		
+		
 	}
 
 	/**

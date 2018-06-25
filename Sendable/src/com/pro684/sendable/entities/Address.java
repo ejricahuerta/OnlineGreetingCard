@@ -38,5 +38,16 @@ public class Address {
 	public String getPostalCode() {
 		return this.PostalCode;
 	}
+	
+	//Simple checker
+	public boolean Isvalid() {
+		if(this.Line1 != null && 
+			this.City != null && 
+			this.State != null && 
+			this.PostalCode != null) {
+			return true;
+		}
+		return false;
+	}
 
 }
