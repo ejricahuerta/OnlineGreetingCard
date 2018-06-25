@@ -11,7 +11,7 @@ import java.util.Date;
  * @author EXD
  *
  */
-public class User {
+public class User extends BaseEntity {
 
 	String DateAdded;
 	String FullName;

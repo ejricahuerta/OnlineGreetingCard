@@ -2,13 +2,13 @@ package com.pro684.sendable.repository;
 
 import java.util.ArrayList;
 
-public interface RepositoryInterface<T> {
+public interface RepositoryInterface<BaseEntity> {
 
-	ArrayList<T> ListAll();
+	ArrayList<BaseEntity> ListAll();
 	
-	T Get(int id);
+	BaseEntity Get(int id);
 	
-	void Insert(T obj);
+	void Insert(BaseEntity obj);
 	
 	void Remove(int id);
 }
