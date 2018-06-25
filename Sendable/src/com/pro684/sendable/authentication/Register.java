@@ -35,51 +35,54 @@ public class Register extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session = request.getSession(true);
+		if (request.getParameterNames().hasMoreElements()) {
 
-		if (session.getServletContext().getAttribute("seedusers") == null) {
-			Seed seed = new Seed();
-			session.getServletContext().setAttribute("seedusers", seed);
-		}
-
-		for (User user : ((Seed) session.getServletContext().getAttribute("seedusers")).AllUsers()) {
-			if (user.getEmail().equals(request.getParameter("email"))) {
-				request.removeAttribute("validationMessage");
-				request.setAttribute("validationMessage", "<b>Email Exists!</b> Go to Login Page.");
-				request.getRequestDispatcher("register.jsp").forward(request, response);
-
-				break;
-
+			HttpSession session = request.getSession(false);
+			
+			if (session.getServletContext().getAttribute("seedusers") == null) {
+				Seed seed = new Seed();
+				session.getServletContext().setAttribute("seedusers", seed);
 			}
+
+			if (!request.getParameter("password").equals(request.getParameter("retypepassword"))) {
+				request.removeAttribute("validationMessage");
+				request.setAttribute("validationMessage", "Password Did not Match!");
+				request.getRequestDispatcher("register.jsp").forward(request, response);
+			}
+			for (User user : ((Seed) session.getServletContext().getAttribute("seedusers")).AllUsers()) {
+
+				if (user.getEmail().equals(request.getParameter("email"))) {
+					request.removeAttribute("validationMessage");
+					request.setAttribute("validationMessage", "<b>Email Exists!</b> Go to Login Page.");
+					request.getRequestDispatcher("register.jsp").forward(request, response);
+					return;
+				}
+			}
+
+			Address addressforUser = new Address(request.getParameter("line1"), request.getParameter("line2"),
+					request.getParameter("city"), request.getParameter("state"), request.getParameter("postalcode"));
+			if (!addressforUser.Isvalid()) {
+
+				request.removeAttribute("validationMessage");
+				request.setAttribute("validationMessage", "<b>Address not Found!</b> Please enter valid Address.");
+				request.getRequestDispatcher("register.jsp").forward(request, response);
+				return;
+			}
+
+			User newUser = new User(request.getParameter("firstname") + " " + request.getParameter("lastname"),
+					request.getParameter("password"),request.getParameter("email"),  addressforUser);
+			
+			Seed newseed = new Seed();
+			newseed.AddUser(newUser);
+			
+			printUsers(newseed);//checker
+			session.getServletContext().removeAttribute("seedusers");
+			session.getServletContext().setAttribute("seedusers", newseed);
+			response.sendRedirect("login.jsp");
 			return;
 		}
-		if (!request.getParameter("password").equals(request.getParameter("retypepassword"))) {
-			request.removeAttribute("validationMessage");
-			request.setAttribute("validationMessage", "Password Did not Match!");
-			request.getRequestDispatcher("register.jsp").forward(request, response);
-			return;
-		}
-
-		Address addressforUser = new Address(request.getParameter("line1"), request.getParameter("line2"),
-				request.getParameter("city"), request.getParameter("state"), request.getParameter("postalcode"));
-
-		if (!addressforUser.Isvalid()) {
-
-			request.removeAttribute("validationMessage");
-			request.setAttribute("validationMessage", "<b>Address not Found!</b> Please enter valid Address.");
-			request.getRequestDispatcher("register.jsp").forward(request, response);
-			return;
-		}
-		
-		
-		String name = String.format("%s %s", request.getParameter("firstname"), request.getParameter("lastname"));
-		User newUser = new User(name, request.getParameter("email"), request.getParameter("password"), addressforUser);
-		
-		Seed reseed = ((Seed)request.getServletContext().getAttribute("seeduser"));
-		reseed.AddUser(newUser);
-		request.removeAttribute("seedusers");
-		request.setAttribute("seedusers", reseed);
-		response.sendRedirect("login.jsp");
+		response.sendRedirect("register.jsp");
+		return;
 	}
 
 	/**
@@ -92,4 +95,9 @@ public class Register extends HttpServlet {
 		doGet(request, response);
 	}
 
+	private void printUsers(Seed newseed) {
+		for (User user : newseed.AllUsers()) {
+			System.out.println(user.getEmail());
+		}
+	}
 }

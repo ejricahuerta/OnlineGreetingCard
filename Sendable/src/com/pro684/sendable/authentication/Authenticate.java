@@ -1,8 +1,6 @@
 package com.pro684.sendable.authentication;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -10,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.spi.http.HttpContext;
 
 import com.pro684.sendable.entities.User;
 
@@ -40,13 +37,11 @@ public class Authenticate extends HttpServlet {
 		
 		Seed seed = new Seed();
 		
-		HttpSession session = request.getSession(true);
-		
+		HttpSession session = request.getSession(false);
 		
 		if( session.getServletContext().getAttribute("seedusers") == null){
 			session.getServletContext().setAttribute("seedusers", seed);
 		}
-		
 		
 		User temp = new User(request.getParameter("email"), request.getParameter("password"));
 		
@@ -55,8 +50,8 @@ public class Authenticate extends HttpServlet {
 		
 		for (User user : seed.AllUsers()) {
 			if (user.getEmail().equals(temp.getEmail()) && user.getPassword().equals(temp.getPassword())) {
-
-				session.setAttribute("username", user.getEmail());
+				session.setAttribute("username",temp.getEmail());
+				response.addCookie(new Cookie("user", temp.getEmail()));
 				response.sendRedirect("index.jsp");
 				return;
 			}
@@ -74,5 +69,4 @@ public class Authenticate extends HttpServlet {
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }

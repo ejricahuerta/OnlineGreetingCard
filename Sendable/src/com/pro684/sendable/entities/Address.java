@@ -41,13 +41,13 @@ public class Address {
 	
 	//Simple checker
 	public boolean Isvalid() {
-		if(this.Line1 != null && 
-			this.City != null && 
-			this.State != null && 
-			this.PostalCode != null) {
-			return true;
+		if(this.Line1.isEmpty() && 
+			this.City.isEmpty() && 
+			this.State.isEmpty()&& 
+			this.PostalCode.isEmpty()) {
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 }

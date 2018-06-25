@@ -95,7 +95,7 @@
 							</div>
 							<div class="form-group col-md-3 col-sm-4 col-xs-4 col-6">
 								<label for="postal">Zip<span class="required-field">
-										*</span></label> <input type="text" class="form-control" id="postal"
+										*</span></label> <input type="text" class="form-control" id="postal" name="postalcode"
 									placeholder="A1A 1A1" required>
 							</div>
 						</div>

@@ -39,6 +39,7 @@ public class Seed {
 	public boolean AddUser(User newUser) {
 		if(newUser != null) {
 			SampleUsers.add(newUser);
+			System.out.println("New User: " + newUser.getEmail());
 			return true;
 		}
 		else {
