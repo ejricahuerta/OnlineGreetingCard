@@ -1,4 +1,4 @@
-package com.pro684.sendable.authentication;
+package com.pro684.sendable.secure;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

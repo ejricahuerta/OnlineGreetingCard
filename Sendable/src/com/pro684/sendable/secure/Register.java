@@ -1,4 +1,4 @@
-package com.pro684.sendable.authentication;
+package com.pro684.sendable.secure;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -48,37 +48,6 @@ public class Register extends HttpServlet {
 				request.setAttribute("validationMessage", "Password Did not Match!");
 				request.getRequestDispatcher("register.jsp").forward(request, response);
 			}
-			for (User user : ((MockService) session.getServletContext().getAttribute("seedusers")).AllUsers()) {
-
-				if (user.getEmail().equals(request.getParameter("email"))) {
-					request.removeAttribute("validationMessage");
-					request.setAttribute("validationMessage", "<b>Email Exists!</b> Go to Login Page.");
-					request.getRequestDispatcher("register.jsp").forward(request, response);
-					return;
-				}
-			}
-
-			Address addressforUser = new Address(request.getParameter("line1"), request.getParameter("line2"),
-					request.getParameter("city"), request.getParameter("state"), request.getParameter("postalcode"));
-			if (!addressforUser.Isvalid()) {
-
-				request.removeAttribute("validationMessage");
-				request.setAttribute("validationMessage", "<b>Address not Found!</b> Please enter valid Address.");
-				request.getRequestDispatcher("register.jsp").forward(request, response);
-				return;
-			}
-
-			User newUser = new User(request.getParameter("firstname") + " " + request.getParameter("lastname"),
-					request.getParameter("password"),request.getParameter("email"),  addressforUser);
-			
-			MockService newseed = new MockService();
-			newseed.AddUser(newUser);
-			
-			printUsers(newseed);//checker
-			session.getServletContext().removeAttribute("seedusers");
-			session.getServletContext().setAttribute("seedusers", newseed);
-			response.sendRedirect("login.jsp");
-			return;
 		}
 		response.sendRedirect("register.jsp");
 		return;
