@@ -11,7 +11,7 @@ import java.util.Date;
  * @author EXD
  *
  */
-public class User extends BaseEntity {
+public class User  {
 
 	String DateAdded;
 	String FullName;
@@ -20,30 +20,24 @@ public class User extends BaseEntity {
 	Address CurrentAddress;
 
 	public User() {
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-		LocalDateTime now = LocalDateTime.now();
-		this.DateAdded = dtf.format(now).toString();
+		this.DateAdded = DateTime.GetCurrentDate();
 	}
 	
 	public User(String email, String password) {
+		this.DateAdded = DateTime.GetCurrentDate();
 		this.Email = email;
 		this.HashedPassword = password;
 	}
 	
-	public User(String fullname, String password, String email, Address current) {
-		
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-		LocalDateTime now = LocalDateTime.now();
-		this.DateAdded = dtf.format(now).toString();
-		
-		this.FullName = fullname;
-		this.HashedPassword = password;
-		this.Email = email;
+	public User(String firstname,String lastname, String password, String email, Address current) {
+		this.DateAdded = DateTime.GetCurrentDate();
+		this.setFullName(firstname,lastname);
+		this.setPassword(password);
+		this.setEmail(email);
 		this.CurrentAddress = current;
-		
 	}
 
-	public void setFullName(String firstname,String lastname) {
+	private void setFullName(String firstname,String lastname) {
 		this.FullName = String.format("%s %s", firstname,lastname);
 	}
 	
@@ -51,7 +45,7 @@ public class User extends BaseEntity {
 	    return this.FullName;
 	}
 
-	public void setEmail(String email) {
+	private void setEmail(String email) {
 		this.Email = email;
 	}
 
@@ -59,7 +53,7 @@ public class User extends BaseEntity {
 		return this.Email;
 	}
 
-	public void setPassword(String password) {
+	private void setPassword(String password) {
 		this.HashedPassword = password;
 
 	}
