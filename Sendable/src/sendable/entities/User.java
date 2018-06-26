@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.pro684.sendable.entities;
+package sendable.entities;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

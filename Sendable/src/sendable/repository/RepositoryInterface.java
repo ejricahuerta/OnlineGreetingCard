@@ -1,4 +1,4 @@
-package com.pro684.sendable.repository;
+package sendable.repository;
 
 import java.util.ArrayList;
 

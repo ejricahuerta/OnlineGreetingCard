@@ -1,10 +1,9 @@
-package com.pro684.sendable.repository;
+package sendable.repository;
 
 import java.util.ArrayList;
 
-import com.pro684.sendable.entities.Card;
-
 import data.mock.MockService;
+import sendable.entities.Card;
 
 public class CardRepository implements RepositoryInterface<Card> {
 

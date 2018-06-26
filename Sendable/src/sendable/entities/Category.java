@@ -1,4 +1,4 @@
-package com.pro684.sendable.entities;
+package sendable.entities;
 
 import java.util.ArrayList;
 import java.util.List;

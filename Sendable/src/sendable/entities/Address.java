@@ -1,4 +1,4 @@
-package com.pro684.sendable.entities;
+package sendable.entities;
 
 public class Address extends BaseEntity {
 

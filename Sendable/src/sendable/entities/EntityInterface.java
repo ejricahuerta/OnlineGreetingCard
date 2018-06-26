@@ -1,4 +1,4 @@
-package com.pro684.sendable.entities;
+package sendable.entities;
 
 public interface EntityInterface {
 

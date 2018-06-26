@@ -9,9 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.pro684.sendable.entities.User;
-
 import data.mock.MockService;
+import sendable.entities.User;
 
 /**
  * Servlet implementation class Authenticate
