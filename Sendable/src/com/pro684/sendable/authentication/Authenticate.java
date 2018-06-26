@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import com.pro684.sendable.entities.User;
 
-import data.seed.Seed;
+import data.mock.MockService;
 
 /**
  * Servlet implementation class Authenticate
@@ -39,7 +39,7 @@ public class Authenticate extends HttpServlet {
 			
 		
 		
-		Seed seed = new Seed();
+		MockService seed = new MockService();
 		HttpSession session = request.getSession(true);
 		
 		if( session.getServletContext().getAttribute("seedusers") == null){

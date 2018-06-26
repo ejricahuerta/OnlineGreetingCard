@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import com.pro684.sendable.entities.Address;
 import com.pro684.sendable.entities.User;
 
-import data.seed.Seed;
+import data.mock.MockService;
 
 /**
  * Servlet implementation class Register
@@ -40,7 +40,7 @@ public class Register extends HttpServlet {
 			HttpSession session = request.getSession(false);
 			
 			if (session.getServletContext().getAttribute("seedusers") == null) {
-				Seed seed = new Seed();
+				MockService seed = new MockService();
 				session.getServletContext().setAttribute("seedusers", seed);
 			}
 
@@ -49,7 +49,7 @@ public class Register extends HttpServlet {
 				request.setAttribute("validationMessage", "Password Did not Match!");
 				request.getRequestDispatcher("register.jsp").forward(request, response);
 			}
-			for (User user : ((Seed) session.getServletContext().getAttribute("seedusers")).AllUsers()) {
+			for (User user : ((MockService) session.getServletContext().getAttribute("seedusers")).AllUsers()) {
 
 				if (user.getEmail().equals(request.getParameter("email"))) {
 					request.removeAttribute("validationMessage");
@@ -72,7 +72,7 @@ public class Register extends HttpServlet {
 			User newUser = new User(request.getParameter("firstname") + " " + request.getParameter("lastname"),
 					request.getParameter("password"),request.getParameter("email"),  addressforUser);
 			
-			Seed newseed = new Seed();
+			MockService newseed = new MockService();
 			newseed.AddUser(newUser);
 			
 			printUsers(newseed);//checker
@@ -95,7 +95,7 @@ public class Register extends HttpServlet {
 		doGet(request, response);
 	}
 
-	private void printUsers(Seed newseed) {
+	private void printUsers(MockService newseed) {
 		for (User user : newseed.AllUsers()) {
 			System.out.println(user.getEmail());
 		}

@@ -1,6 +1,6 @@
 package com.pro684.sendable.entities;
 
-public class Address {
+public class Address extends BaseEntity {
 
 	String Line1;
 	String Line2;

@@ -3,9 +3,8 @@ package com.pro684.sendable.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Category {
+public class Category extends BaseEntity{
 
-	int Id;
 	String Name;
 	String Description;
 	List<Card> Cards;

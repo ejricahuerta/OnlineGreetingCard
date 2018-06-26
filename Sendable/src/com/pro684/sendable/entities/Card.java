@@ -1,8 +1,7 @@
 package com.pro684.sendable.entities;
 
-public class Card {
+public class Card extends BaseEntity{
 
-	int Id;
 	String Name;
 	String Description;
 	double Price;

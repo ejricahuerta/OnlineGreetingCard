@@ -1,8 +1,6 @@
 package com.pro684.sendable.entities;
 
-public class CardLetter {
-
-	int id;
+public class CardLetter extends BaseEntity {
 	Card Card;
 	String Message;
 	String FontStyle;

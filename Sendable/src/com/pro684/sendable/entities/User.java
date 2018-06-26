@@ -11,13 +11,15 @@ import java.util.Date;
  * @author EXD
  *
  */
-public class User  {
+public class User extends BaseEntity {
 
 	String DateAdded;
 	String FullName;
 	String Email;
 	String HashedPassword;
 	Address CurrentAddress;
+	Account Account;
+	CardLetter CardLetter;
 
 	public User() {
 		this.DateAdded = DateTime.GetCurrentDate();

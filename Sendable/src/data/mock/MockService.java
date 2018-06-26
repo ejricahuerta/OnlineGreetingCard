@@ -1,21 +1,23 @@
 /**
  * 
  */
-package data.seed;
+package data.mock;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import com.pro684.sendable.entities.*;
 
 /**
  * @author exd
  *
  */
-public class Seed {
+public class MockService {
 
-	private ArrayList<User> SampleUsers = null;
-	ArrayList<Card> cards = null;
+	private List<User> SampleUsers = null;
+	private List<Card> cards = null;
 	
-	public Seed() {
+	public MockService() {
 		SampleUsers = new ArrayList<User>();
 		User user1 = new User("abc@111.com", "password1");
 		User user2 = new User("abc@112.com", "password2");
@@ -31,8 +33,8 @@ public class Seed {
 		
 		//Cards Sample
 		cards = new ArrayList<Card>();
-		cards.add(new Card("Birthday 1", "Sample card for birthday 1"));
-		cards.add(new Card("Birthday 2", "Sample card for birthday 2"));
+		cards.add(new Card("Birthday 1", "Sample card for birthday 1",5));
+		cards.add(new Card("Birthday 2", "Sample card for birthday 2",5));
 		
 		for (User user : SampleUsers) {
 			System.out.println(user.getEmail());
@@ -41,7 +43,7 @@ public class Seed {
 
 	}
 
-	public ArrayList<User> AllUsers() {
+	public List<User> AllUsers() {
 		return SampleUsers;
 	}
 
@@ -56,12 +58,9 @@ public class Seed {
 		}
 	}
 
-	public ArrayList<Card> AllCards() {
-
-		return cards;
+	public List<Card> AllCards() {
+		return this.cards;
 	}
 	
-	public Card GetCard(int id) {
-		return cards.get(id);
-	}
+
 }
