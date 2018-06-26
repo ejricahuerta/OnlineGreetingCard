@@ -1,4 +1,4 @@
-package com.pro684.sendble.dtos;
+package com.pro684.sendable.dtos;
 
 public class CategoryObject {
 
