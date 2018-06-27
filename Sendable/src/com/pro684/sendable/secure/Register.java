@@ -28,44 +28,18 @@ public class Register extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		if (request.getParameterNames().hasMoreElements()) {
-
-			HttpSession session = request.getSession(false);
-			
-			if (session.getServletContext().getAttribute("seedusers") == null) {
-				MockService seed = new MockService();
-				session.getServletContext().setAttribute("seedusers", seed);
-			}
-
-			if (!request.getParameter("password").equals(request.getParameter("retypepassword"))) {
-				request.removeAttribute("validationMessage");
-				request.setAttribute("validationMessage", "Password Did not Match!");
-				request.getRequestDispatcher("register.jsp").forward(request, response);
-			}
-		}
-		response.sendRedirect("register.jsp");
-		return;
-	}
-
-	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
-	private void printUsers(MockService newseed) {
-		for (User user : newseed.AllUsers()) {
-			System.out.println(user.getEmail());
+		if (request.getParameterNames().hasMoreElements()) {
+			HttpSession session = request.getSession(false);
+			if (!request.getParameter("password").equals(request.getParameter("retypepassword"))) {
+				request.setAttribute("validationMessage", "Password Did not Match!");
+				request.getRequestDispatcher("register.jsp").forward(request, response);
+			}
 		}
+		response.sendRedirect("register.jsp");
 	}
 }

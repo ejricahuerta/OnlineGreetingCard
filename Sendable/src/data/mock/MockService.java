@@ -33,31 +33,10 @@ public class MockService {
 		cards = new ArrayList<Card>();
 		cards.add(new Card("Birthday 1", "Sample card for birthday 1", 5));
 		cards.add(new Card("Birthday 2", "Sample card for birthday 2", 5));
-
-		for (User user : SampleUsers) {
-			System.out.println(user.getEmail());
-			System.out.println(user.getPassword());
-		}
-
 	}
 
 	public List<User> AllUsers() {
-
-		return SampleUsers;
-
-	}
-
-	public boolean AddUser(User newUser) 
-	{
-
-		if (newUser != null) {
-			SampleUsers.add(newUser);
-			System.out.println("New User: " + newUser.getEmail());
-			return true;
-		} else {
-			System.out.println("Empty User");
-			return false;
-		}
+		return this.SampleUsers;
 	}
 
 	public List<Card> AllCards() {
