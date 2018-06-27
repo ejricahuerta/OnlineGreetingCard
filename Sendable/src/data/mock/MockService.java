@@ -6,7 +6,7 @@ package data.mock;
 import java.util.ArrayList;
 import java.util.List;
 
-import sendable.entities.*;
+import sendable.dao.entities.*;
 
 public class MockService {
 
