@@ -9,6 +9,7 @@ public class Address extends BaseEntity {
 	String PostalCode;
 
 	public Address() {
+		super(0);
 	}
 
 	public Address(String line1, 
@@ -16,6 +17,7 @@ public class Address extends BaseEntity {
 			String city, 
 			String state, 
 			String postalcode) {
+		super(0);
 		this.Line1 = line1;
 		this.Line2 = line2;
 		this.City = city;

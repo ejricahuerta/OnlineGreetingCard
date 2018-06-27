@@ -13,25 +13,28 @@ import java.util.Date;
  */
 public class User extends BaseEntity {
 
-	String DateAdded;
 	String FullName;
 	String Email;
 	String HashedPassword;
 	Address CurrentAddress;
-	Account Account;
 	CardLetter CardLetter;
+	Account Account;
+	String DateAdded;
 
 	public User() {
+		super(0);
 		this.DateAdded = DateTime.GetCurrentDate();
 	}
 	
 	public User(String email, String password) {
+		super(0);
 		this.DateAdded = DateTime.GetCurrentDate();
 		this.Email = email;
 		this.HashedPassword = password;
 	}
 	
 	public User(String firstname,String lastname, String password, String email, Address current) {
+		super(0);
 		this.DateAdded = DateTime.GetCurrentDate();
 		this.setFullName(firstname,lastname);
 		this.setPassword(password);

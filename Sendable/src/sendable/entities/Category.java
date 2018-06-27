@@ -3,6 +3,10 @@ package sendable.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author exd
+ *
+ */
 public class Category extends BaseEntity{
 
 	String Name;
@@ -11,16 +15,42 @@ public class Category extends BaseEntity{
 	String DateAdded;
 
 	public Category() {
+		super(0);
 		this.DateAdded = DateTime.GetCurrentDate();
 		Cards = new ArrayList<Card>();
 	}
 
-	public Category(String name, String description) {
-		this.DateAdded = DateTime.GetCurrentDate();
-		this.Name = name;
-		this.Description = description;
+
+	/**
+	 * @param id
+	 * @param name
+	 * @param description
+	 * @param dateAdded
+	 */
+	public Category(int id, String name, String description, String dateAdded) {
+		super(id);
+		Name = name;
+		Description = description;
+		DateAdded = dateAdded;
 		Cards = new ArrayList<Card>();
 	}
+
+
+	/**
+	 * @param id
+	 * @param name
+	 * @param description
+	 * @param cards
+	 * @param dateAdded
+	 */
+	public Category(int id, String name, String description, List<Card> cards, String dateAdded) {
+		super(id);
+		Name = name;
+		Description = description;
+		Cards = cards;
+		DateAdded = dateAdded;
+	}
+
 
 	public String getName() {
 		return this.Name;

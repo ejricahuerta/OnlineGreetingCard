@@ -8,6 +8,7 @@ public class CardLetter extends BaseEntity {
 	Address ShippingAddress;
 
 	public CardLetter(Card card, String message, String font, Address shippingAddress) {
+		super(0);
 		this.Card = card;
 		this.Message = message;
 		this.FontStyle = font;
