@@ -15,6 +15,7 @@ public class CardLetter extends BaseEntity {
 		this.CardId = cardId;
 		this.Message = message;
 		this.FontStyle = font;
+		DateAdded = DateTime.GetCurrentDate();
 	}
 	
 	

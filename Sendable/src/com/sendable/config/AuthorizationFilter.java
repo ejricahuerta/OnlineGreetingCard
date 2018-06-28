@@ -1,4 +1,4 @@
-package sendable.web.config;
+package com.sendable.config;
 
 import java.io.IOException;
 import javax.servlet.Filter;

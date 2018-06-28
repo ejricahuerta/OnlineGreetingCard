@@ -1,4 +1,4 @@
-package sendable.web.secure;
+package com.sendable.security;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

@@ -15,6 +15,7 @@ public class Payment  extends BaseEntity{
 	
 	public Payment() {
 		super(0);
+		DateAdded = DateTime.GetCurrentDate();
 	}
 
 	public Payment(int id, int cardId, int userId, String paymentType, double totalAmount, Address billingAddress,
@@ -27,6 +28,7 @@ public class Payment  extends BaseEntity{
 		ShippingAddress = shippingAddress;
 		this.setBillingId(billingAddress.getId());
 		this.setShippingId(shippingAddress.getId());
+		this.DateAdded = DateTime.GetCurrentDate();
 	}
 
 	public int getCardId() {

@@ -1,4 +1,4 @@
-package sendable.web.config;
+package com.sendable.config;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

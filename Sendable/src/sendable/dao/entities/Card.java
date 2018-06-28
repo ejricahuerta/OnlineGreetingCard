@@ -25,6 +25,7 @@ public class Card extends BaseEntity {
 		Price = price;
 		ImageURL = imageURL;
 		Available = available;
+		DateAdded = DateTime.GetCurrentDate();
 	}
 
 	public String getDescription() {

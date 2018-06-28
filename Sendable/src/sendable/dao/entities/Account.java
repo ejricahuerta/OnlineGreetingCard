@@ -16,8 +16,9 @@ public class Account extends BaseEntity{
 	public double getCredit() {
 		return Credit;
 	}
-	public void setCredit(double credit) {
+	public void setCredit(double credit) {		
 		Credit = credit;
+		LastTopUpDate = DateTime.GetCurrentDate();
 	}
 	public String getLastTopUpDate() {
 		return LastTopUpDate;
