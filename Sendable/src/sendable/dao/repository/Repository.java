@@ -6,9 +6,10 @@ import sendable.dao.entities.BaseEntity;
 
 public class Repository<T extends BaseEntity> implements RepositoryInterface<T> 
 {
-	private Class<T> clazz;
+	@SuppressWarnings("unused")
+	private Class<?> clazz;
 	
-	public Repository(Class<T> clazz) {
+	public Repository(Class<?> clazz) {
 		this.clazz = clazz;
 	}
 	

@@ -3,9 +3,10 @@ package sendable.web.config;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import javax.smartcardio.Card;
 
 import data.mock.MockService;
-import sendable.dao.repository.CardRepository;
+import sendable.dao.repository.Repository;
 import sendable.logic.interfaces.CardInterface;
 import sendable.logic.services.CardService;
 
@@ -36,7 +37,8 @@ public class SendableListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent arg0) {
 
 		// Card Repository
-		arg0.getServletContext().setAttribute("cardService", new CardService(new CardRepository()));
+		arg0.getServletContext().setAttribute("cardService", 
+				new CardService(new Repository<sendable.dao.entities.Card>(Card.class)));
 	}
 
 }
