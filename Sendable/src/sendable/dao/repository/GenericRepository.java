@@ -1,15 +1,18 @@
 package sendable.dao.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class GenericRepository<BaseEntity> 
+import sendable.dao.entities.BaseEntity;
+
+public class GenericRepository
 implements RepositoryInterface<BaseEntity>
 {
 
 	@Override
-	public List<BaseEntity> ListAll() {
+	public ArrayList<BaseEntity> ListAll() {
 		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<BaseEntity>();
 	}
 
 	@Override

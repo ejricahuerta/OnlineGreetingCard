@@ -6,6 +6,7 @@ import java.util.List;
 import sendable.dao.entities.Card;
 import sendable.dao.repository.RepositoryInterface;
 import sendable.logic.dtos.CardDto;
+import sendable.logic.dtos.CategoryDto;
 import sendable.logic.interfaces.CardInterface;
 
 public class CardService implements CardInterface {
@@ -30,11 +31,6 @@ public class CardService implements CardInterface {
 		return cardret;
 	}
 
-	@Override
-	public List<CardDto> ListCards(String filter) {
-		System.out.println("Not Implemented");
-		return null;
-	}
 
 	@Override
 	public CardDto getCard(int id) {
@@ -48,5 +44,41 @@ public class CardService implements CardInterface {
 			}
 		});
 		return card;
+	}
+
+	@Override
+	public List<CardDto> ListCardsByquery(String query) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CardDto> ListCardsByCategory(int categoryId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CategoryDto> ListCategories() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<CategoryDto> ListCategoriesByCardCount() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CategoryDto GetCategory(int categoryId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public CategoryDto GetCategoryByCard(int cardId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

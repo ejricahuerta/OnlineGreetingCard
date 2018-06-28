@@ -34,7 +34,9 @@ public class SendableListener implements ServletContextListener {
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
     public void contextInitialized(ServletContextEvent arg0)  { 
-         arg0.getServletContext().setAttribute("cardservice",new CardService(new CardRepository()));        
+    	
+    	//Card Repository
+         arg0.getServletContext().setAttribute("cardService",new CardService(new CardRepository()));        
     }
 	
 }
