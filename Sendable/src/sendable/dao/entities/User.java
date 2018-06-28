@@ -6,12 +6,11 @@ package sendable.dao.entities;
 
 public class User extends BaseEntity {
 
+	int AccountId;
 	String FullName;
 	String Email;
 	String HashedPassword;
 	Address CurrentAddress;
-	CardLetter CardLetter;
-	Account Account;
 	String DateAdded;
 
 	public User() {
@@ -33,6 +32,14 @@ public class User extends BaseEntity {
 		this.setPassword(password);
 		this.setEmail(email);
 		this.CurrentAddress = current;
+	}
+
+	public int getAccountId() {
+		return AccountId;
+	}
+
+	public void setAccountId(int accountId) {
+		AccountId = accountId;
 	}
 
 	private void setFullName(String firstname,String lastname) {

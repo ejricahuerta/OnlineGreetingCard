@@ -3,16 +3,16 @@ package sendable.dao.entities;
 public class CardLetter extends BaseEntity {
 	
 	int UserId;
-	Card Card;
+	int CardId;
 	String Message;
 	String FontStyle;
 	String DateAdded;
 
-	public CardLetter(int userId ,Card card, String message, String font) {
+	public CardLetter(int userId ,int cardId, String message, String font) {
 		super(0);
 		
 		UserId = userId;
-		this.Card = card;
+		this.CardId = cardId;
 		this.Message = message;
 		this.FontStyle = font;
 	}
@@ -29,12 +29,12 @@ public class CardLetter extends BaseEntity {
 
 
 
-	public Card getCard() {
-		return this.Card;
+	public int getCardId() {
+		return this.CardId;
 	}
 	
-	public void setCard(Card card) {
-		this.Card = card;
+	public void setCard(int cardId) {
+		this.CardId = cardId;
 	}
 	
 	public String getMessage() {

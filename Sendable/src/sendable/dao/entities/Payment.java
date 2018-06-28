@@ -4,9 +4,12 @@ public class Payment  extends BaseEntity{
 	
 	int CardId;
 	int UserId;
+	int ShippingId;
+	int BillingId;
 	String DateAdded;
 	String PaymentType;
 	double TotalAmount;
+	
 	Address BillingAddress;
 	Address ShippingAddress;
 	
@@ -22,6 +25,8 @@ public class Payment  extends BaseEntity{
 		TotalAmount = totalAmount;
 		BillingAddress = billingAddress;
 		ShippingAddress = shippingAddress;
+		this.setBillingId(billingAddress.getId());
+		this.setShippingId(shippingAddress.getId());
 	}
 
 	public int getCardId() {
@@ -38,6 +43,15 @@ public class Payment  extends BaseEntity{
 
 	public void setUserId(int userId) {
 		UserId = userId;
+	}
+
+	
+	private void setShippingId(int shippingId) {
+		ShippingId = shippingId;
+	}
+
+	private void setBillingId(int billingId) {
+		BillingId = billingId;
 	}
 
 	public String getDateAdded() {
