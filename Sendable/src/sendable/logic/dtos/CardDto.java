@@ -1,6 +1,8 @@
 package sendable.logic.dtos;
 public class CardDto {
+	
 	int Id;
+	CategoryDto CategoryDto;
 	String Name;
 	String Description;
 	double Price;
@@ -25,41 +27,63 @@ public class CardDto {
 	
 	public CardDto() {
 	}
-
+	
 
 	public int getId() {
 		return Id;
 	}
+	
 	public void setId(int id) {
 		Id = id;
 	}
+	
+	
+	public CategoryDto getCategoryDto() {
+		return CategoryDto;
+	}
+
+
+	public void setCategoryDto(CategoryDto categoryDto) {
+		CategoryDto = categoryDto;
+	}
+
+
 	public String getName() {
 		return Name;
 	}
+	
 	public void setName(String name) {
 		Name = name;
 	}
+	
 	public String getDescription() {
 		return Description;
 	}
+	
 	public void setDescription(String description) {
 		Description = description;
 	}
+	
 	public double getPrice() {
 		return Price;
 	}
+	
 	public void setPrice(double price) {
 		Price = price;
 	}
+	
 	public boolean isAvailable() {
 		return Available;
 	}
+	
 	public void setAvailable(boolean available) {
 		Available = available;
 	}
+	
 	public String getDateAdded() {
 		return DateAdded;
 	}
+	
 	public void setDateAdded(String dateAdded) {
 		DateAdded = dateAdded;
 	}

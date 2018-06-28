@@ -5,7 +5,6 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import javax.smartcardio.Card;
 
-import data.mock.MockService;
 import sendable.dao.repository.Repository;
 import sendable.logic.interfaces.CardInterface;
 import sendable.logic.services.CardService;
