@@ -38,6 +38,10 @@ public class UserDto {
 		DateAdded = dateAdded;
 		Payments = payments;
 	}
+	
+	public UserDto() {
+		// TODO Auto-generated constructor stub
+	}
 	public int getId() {
 		return Id;
 	}

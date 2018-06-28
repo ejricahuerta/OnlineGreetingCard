@@ -18,9 +18,7 @@ public class UserSevice implements UserInterface{
 	public UserDto FindUserById(int id) {
 		// TODO Auto-generated method stub
 		User user = repository.Get(id);
-		UserDto dto= new UserDto(
-				""
-				);
+		UserDto dto= new UserDto();
 		return dto;
 	}
 	@Override
