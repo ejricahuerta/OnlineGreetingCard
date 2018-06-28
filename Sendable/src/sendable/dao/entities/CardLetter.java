@@ -1,20 +1,34 @@
 package sendable.dao.entities;
 
 public class CardLetter extends BaseEntity {
+	
+	int UserId;
 	Card Card;
 	String Message;
 	String FontStyle;
 	String DateAdded;
-	Address ShippingAddress;
 
-	public CardLetter(Card card, String message, String font, Address shippingAddress) {
+	public CardLetter(int userId ,Card card, String message, String font) {
 		super(0);
+		
+		UserId = userId;
 		this.Card = card;
 		this.Message = message;
 		this.FontStyle = font;
-		this.ShippingAddress = shippingAddress;
 	}
 	
+	
+	
+	public int getUserId() {
+		return UserId;
+	}
+
+	public void setUserId(int userId) {
+		UserId = userId;
+	}
+
+
+
 	public Card getCard() {
 		return this.Card;
 	}
@@ -37,13 +51,5 @@ public class CardLetter extends BaseEntity {
 	
 	public void setFont(String font) {
 		this.FontStyle = font;
-	}
-	
-	public Address getShippingAddress() {
-		return this.ShippingAddress;
-	}
-	
-	public void setShippingAddress(Address shippingAddress) {
-		this.ShippingAddress = shippingAddress;
 	}
 }

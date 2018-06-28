@@ -3,14 +3,7 @@
  */
 package sendable.dao.entities;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
-/**
- * @author EXD
- *
- */
 public class User extends BaseEntity {
 
 	String FullName;
@@ -81,4 +74,5 @@ public class User extends BaseEntity {
 							this.CurrentAddress.getState(),
 							this.CurrentAddress.getPostalCode());
 	}
+
 }

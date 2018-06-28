@@ -1,4 +1,4 @@
-package com.sendable.web.cards;
+package sendable.web.cards;
 
 import java.io.IOException;
 import javax.servlet.ServletConfig;

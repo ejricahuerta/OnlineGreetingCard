@@ -1,6 +1,6 @@
 package sendable.dao.entities;
 
-public class BaseEntity implements EntityInterface{
+public abstract class BaseEntity implements EntityInterface{
 
 	public BaseEntity(int id) {
 		Id = id;

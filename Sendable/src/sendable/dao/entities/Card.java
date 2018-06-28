@@ -2,6 +2,7 @@ package sendable.dao.entities;
 
 public class Card extends BaseEntity {
 
+	int CategoryId;
 	String Name;
 	String Description;
 	double Price;
@@ -16,15 +17,15 @@ public class Card extends BaseEntity {
 	}
 
 
-	public Card(int id, String name, String description, double price, String imageURL, boolean available) {
+	public Card(int id, int categoryId, String name, String description, double price, String imageURL, boolean available) {
 		super(id);
+		CategoryId = categoryId;
 		Name = name;
 		Description = description;
 		Price = price;
 		ImageURL = imageURL;
 		Available = available;
 	}
-
 
 	public String getDescription() {
 		return this.Description;

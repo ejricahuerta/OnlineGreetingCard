@@ -1,4 +1,4 @@
-package com.sendable.web.config;
+package sendable.web.config;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -15,12 +15,12 @@ import javax.servlet.annotation.WebFilter;
 @WebFilter("/AuthorizationFilter")
 public class AuthorizationFilter implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public AuthorizationFilter() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor.
+	 */
+	public AuthorizationFilter() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -32,7 +32,8 @@ public class AuthorizationFilter implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		// place your code here
 

@@ -31,8 +31,8 @@ public class MockService {
 
 		// Cards Sample
 		cards = new ArrayList<Card>();
-		cards.add(new Card(1, "Birthday 1", "Sample card for birthday 1", 5, "bday1.jpeg", true));
-		cards.add(new Card(2, "Birthday 2", "Sample card for birthday 2", 5, "bday2.jpeg", true));
+		cards.add(new Card(1, 0, "Birthday 1", "Sample card for birthday 1", 5, "bday1.jpeg", true));
+		cards.add(new Card(2, 0, "Birthday 2", "Sample card for birthday 2", 5, "bday2.jpeg", true));
 	}
 
 	public List<User> AllUsers() {

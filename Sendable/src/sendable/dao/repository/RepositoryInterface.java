@@ -1,18 +1,18 @@
 package sendable.dao.repository;
 
 
-import java.util.ArrayList;
+
 import java.util.List;
 
-public interface RepositoryInterface<BaseEntity> {
+public interface RepositoryInterface<T> {
 
-	ArrayList<BaseEntity> ListAll();
+	List<T> ListAll();
 	
-	BaseEntity Get(int id);
+	T Get(int id);
 	
-	void Insert(BaseEntity obj);
+	void Insert(T obj);
 	
-	BaseEntity Find(String query);
+	T Find(String query);
 	
 	void Remove(int id);
 
