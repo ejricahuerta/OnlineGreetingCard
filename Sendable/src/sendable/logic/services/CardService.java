@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sendable.dao.entities.Card;
+import sendable.dao.entities.Category;
 import sendable.dao.repository.RepositoryInterface;
 import sendable.logic.dtos.CardDto;
 import sendable.logic.dtos.CategoryDto;
@@ -11,18 +12,24 @@ import sendable.logic.interfaces.CardInterface;
 
 public class CardService implements CardInterface {
 
-	private RepositoryInterface<Card> repository = null; //TODO change to database
+	private RepositoryInterface<Card> cardRepository;
+	private RepositoryInterface<Category> categoryRepository;
 	private List<CardDto> AllCards = null;
-	CardDto  card = null;
+	CardDto card = null;
 
-	public CardService(RepositoryInterface<Card> cardRepo) { 
-		this.repository = cardRepo;
+	public CardService(RepositoryInterface<Card> cardRepo) {
+		this.cardRepository = cardRepo;
+	}
+
+	public CardService(RepositoryInterface<Card> cardRepo, RepositoryInterface<Category> categoryRepo) {
+		this.cardRepository = cardRepo;
+		this.categoryRepository = categoryRepo;
 	}
 
 	@Override
 	public List<CardDto> ListCards() {
 		ArrayList<CardDto> cardret = new ArrayList<CardDto>();
-		for (Card card : repository.ListAll()) {
+		for (Card card : cardRepository.ListAll()) {
 
 			cardret.add(new CardDto(card.getId(), card.getName(), card.getDescription(), card.getPrice(),
 					card.isAvailable(), card.getDateAdded()));
@@ -31,16 +38,13 @@ public class CardService implements CardInterface {
 		return cardret;
 	}
 
-
 	@Override
 	public CardDto getCard(int id) {
 		card = null;
-		AllCards.forEach(c -> 
-		{
+		AllCards.forEach(c -> {
 			if (c.getId() == id) {
 				card = c;
 				return;
-				
 			}
 		});
 		return card;
@@ -54,25 +58,36 @@ public class CardService implements CardInterface {
 
 	@Override
 	public List<CardDto> ListCardsByCategory(int categoryId) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<CardDto> ret = new ArrayList<CardDto>();
+		AllCards.forEach(c -> {
+			if (c.getCategoryDto().getId() == categoryId) {
+				ret.add(c);
+			}
+		});
+		return ret;
 	}
 
 	@Override
 	public List<CategoryDto> ListCategories() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<CategoryDto> ret = new ArrayList<CategoryDto>();
+		for (Category c : categoryRepository.ListAll()) {
+			CategoryDto catret = new CategoryDto(c.getId(), c.getName(), c.getDescription(), c.getDateAdded());
+			catret.setCards(ListCardsByCategory(c.getId()));
+			ret.add(catret);
+		}
+		return ret;
 	}
 
 	@Override
 	public List<CategoryDto> ListCategoriesByCardCount() {
-		// TODO Auto-generated method stub
-		return null;
+		List<CategoryDto> ret = this.ListCategories();
+		ret.sort((a, b) -> (a.getCards().size() > b.getCards().size()) ? 1 : 0);
+		return ret;
 	}
 
 	@Override
 	public CategoryDto GetCategory(int categoryId) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

@@ -81,5 +81,4 @@ public class User extends BaseEntity {
 							this.CurrentAddress.getState(),
 							this.CurrentAddress.getPostalCode());
 	}
-
 }
