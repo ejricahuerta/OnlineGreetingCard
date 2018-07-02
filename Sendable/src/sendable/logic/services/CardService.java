@@ -87,13 +87,16 @@ public class CardService implements CardInterface {
 
 	@Override
 	public CategoryDto GetCategory(int categoryId) {
-		
+		for (CategoryDto category : this.ListCategories()) {
+			if (category.getId() == categoryId) {
+				return category;
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public CategoryDto GetCategoryByCard(int cardId) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getCard(cardId).getCategoryDto();
 	}
 }
