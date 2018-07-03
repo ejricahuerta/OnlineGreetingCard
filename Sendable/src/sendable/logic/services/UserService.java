@@ -8,24 +8,26 @@ import sendable.dao.repository.RepositoryInterface;
 import sendable.logic.dtos.*;
 import sendable.logic.interfaces.UserInterface;
 
-public class UserSevice implements UserInterface {
+public class UserService implements UserInterface {
 
 	private RepositoryInterface<User> userRepository;
 	private RepositoryInterface<CardLetter> cardletterRepository;
-	private RepositoryInterface<Card> cardRepository;
 	private RepositoryInterface<Account> accountRepository;
 	private RepositoryInterface<Payment> paymentRepository;
+	private RepositoryInterface<Address> addressRepository;
 
 	private ArrayList<UserDto> AllUsers;
 
-	public UserSevice(RepositoryInterface<User> userrepo, RepositoryInterface<CardLetter> cardletterrepo,
-			RepositoryInterface<Card> cardrepo, RepositoryInterface<Account> accountrepo,
-			RepositoryInterface<Payment> paymentrepo) {
+	public UserService(RepositoryInterface<User> userrepo,
+					RepositoryInterface<CardLetter> cardletterrepo,
+					RepositoryInterface<Account> accountrepo,
+					RepositoryInterface<Payment> paymentrepo,
+					RepositoryInterface<Address> addressrepo) {
 		this.userRepository = userrepo;
 		this.cardletterRepository = cardletterrepo;
-		this.cardRepository = cardrepo;
 		this.accountRepository = accountrepo;
 		this.paymentRepository = paymentrepo;
+		this.addressRepository = addressrepo;
 		this.AllUsers = new ArrayList<UserDto>();
 
 		this.userRepository.ListAll().forEach(u -> {
@@ -184,8 +186,6 @@ public class UserSevice implements UserInterface {
 			// get all cards where user id == userId
 			this.cardletterRepository.ListAll().forEach(c -> {
 				if (c.getUserId() == user.getId()) {
-					Card card = this.cardRepository.Get(c.getCardId());
-
 					cardletters.add(new CardLetterDto(c.getId(), c.getUserId(), c.getCardId(), c.getMessage(),
 							c.getFont(), c.getTotalCost(), c.getDateAdded()));
 				}
@@ -208,6 +208,15 @@ public class UserSevice implements UserInterface {
 							p.getPaymentType(), p.getDateAdded(), p.getTotalAmount()));
 				}
 			});
+
+			for (Address address : this.addressRepository.ListAll()) {
+				if (address.getId() == user.getCurrentAddressId()) {
+					user.setAddress(address.getLine1(), address.getLine2(), address.getCity(), address.getState(),
+							address.getPostalCode());
+					break;
+				}
+			}
+
 			// User Dto Mapping
 			UserDto userdto = new UserDto(user.getId(), user.getFullName(), user.getEmail(), user.getPassword(),
 					user.getCurrentAddressString(), cardletters, accountdto, user.getDateAdded(), allpayments);
@@ -228,10 +237,10 @@ public class UserSevice implements UserInterface {
 	@Override
 	public CardLetterDto GetUserLetters(int userId, int letterId) {
 		for (CardLetterDto letter : this.GetAllUserLetters(userId)) {
-			if(letter.getId() == letterId) {
+			if (letter.getId() == letterId) {
 				return letter;
 			}
-		} 
+		}
 		return null;
 	}
 

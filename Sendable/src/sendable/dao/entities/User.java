@@ -7,6 +7,7 @@ package sendable.dao.entities;
 public class User extends BaseEntity {
 
 	int AccountId;
+	int CurrentAddressId;
 	String FullName;
 	String Email;
 	String HashedPassword;
@@ -32,6 +33,7 @@ public class User extends BaseEntity {
 		this.setPassword(password);
 		this.setEmail(email);
 		this.CurrentAddress = current;
+		this.setCurrentAddressId(current.getId());
 	}
 
 	public int getAccountId() {
@@ -89,6 +91,15 @@ public class User extends BaseEntity {
 	public void setDateAdded(String dateAdded) {
 		DateAdded = dateAdded;
 	}
+
+	public int getCurrentAddressId() {
+		return this.CurrentAddressId;
+	}
+
+	private void setCurrentAddressId(int currentAddressId) {
+		this.CurrentAddressId = currentAddressId;
+	}
+	
 	
 	
 }
