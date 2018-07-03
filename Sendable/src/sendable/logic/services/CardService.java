@@ -14,7 +14,7 @@ public class CardService implements CardInterface {
 
 	private RepositoryInterface<Card> cardRepository;
 	private RepositoryInterface<Category> categoryRepository;
-	
+
 	private List<CardDto> AllCards = null;
 	private List<CategoryDto> AllCategory = null;
 
@@ -31,18 +31,14 @@ public class CardService implements CardInterface {
 		for (Category category : this.categoryRepository.ListAll()) {
 			AllCategory.add(this.MapCategory(category));
 		}
+		for (Card card : this.cardRepository.ListAll()) {
+			AllCards.add(this.MapCard(card));
+		}
 	}
 
 	@Override
 	public List<CardDto> ListCards() {
-		ArrayList<CardDto> cardret = new ArrayList<CardDto>();
-		for (Card card : cardRepository.ListAll()) {
-
-			cardret.add(new CardDto(card.getId(), card.getName(), card.getDescription(), card.getPrice(),
-					card.isAvailable(), card.getDateAdded()));
-		}
-		AllCards = cardret;
-		return cardret;
+		return this.AllCards;
 	}
 
 	@Override
@@ -99,9 +95,9 @@ public class CardService implements CardInterface {
 	@Override
 	public CategoryDto GetCategoryByCard(int cardId) {
 		for (CardDto cardDto : AllCards) {
-			if(cardDto.getId() == cardId){
+			if (cardDto.getId() == cardId) {
 				for (CategoryDto category : this.AllCategory) {
-					if(category.getId() == cardDto.getCategoryId()) {
+					if (category.getId() == cardDto.getCategoryId()) {
 						return category;
 					}
 				}
@@ -117,5 +113,13 @@ public class CardService implements CardInterface {
 			return new CategoryDto(category.getId(), category.getName(), category.getDescription(),
 					category.getDateAdded());
 		}
+	}
+
+	private CardDto MapCard(Card card) {
+		if(card == null) {
+			return null;
+		}
+		return new CardDto(card.getId(), card.getName(), card.getDescription(), card.getPrice(), card.isAvailable(),
+				card.getDateAdded());
 	}
 }
