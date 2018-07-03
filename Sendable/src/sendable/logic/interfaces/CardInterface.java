@@ -22,5 +22,4 @@ public interface CardInterface {
 	CategoryDto GetCategoryByCard(int cardId);
 	
 	CardDto getCard(int id);
-	
 }

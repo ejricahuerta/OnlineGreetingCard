@@ -1,6 +1,9 @@
 package sendable.logic.interfaces;
 
 
+import java.util.List;
+
+import sendable.logic.dtos.AccountDto;
 import sendable.logic.dtos.CardLetterDto;
 import sendable.logic.dtos.UserDto;
 
@@ -19,10 +22,20 @@ public interface UserInterface {
 			String city, String state,
 			String postalcode);
 	
+	AccountDto GetUserAccount(int userId);
+
 	boolean TopUpUserAccount(int UserId, double amount);
+
+	CardLetterDto GetUserLetters(int userId,int letterId);
+	
+	List<CardLetterDto> GetAllUserLetters(int userId);
 	
 	boolean AddUserLetter(int UserId, CardLetterDto letter);
 	
 	boolean RemoveUserLetter(int userId, int letterId);
+	
+
+	
+	
 	
 }

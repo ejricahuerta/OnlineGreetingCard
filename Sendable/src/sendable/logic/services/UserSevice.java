@@ -215,4 +215,37 @@ public class UserSevice implements UserInterface {
 		}
 	}
 
+	@Override
+	public AccountDto GetUserAccount(int userId) {
+		for (UserDto userDto : AllUsers) {
+			if (userDto.getId() == userId) {
+				return userDto.getAccountDto();
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public CardLetterDto GetUserLetters(int userId, int letterId) {
+		for (CardLetterDto letter : this.GetAllUserLetters(userId)) {
+			if(letter.getId() == letterId) {
+				return letter;
+			}
+		} 
+		return null;
+	}
+
+	@Override
+	public List<CardLetterDto> GetAllUserLetters(int userId) {
+		try {
+			for (UserDto userDto : AllUsers) {
+				if (userDto.getId() == userId) {
+					return userDto.getCardLetters();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

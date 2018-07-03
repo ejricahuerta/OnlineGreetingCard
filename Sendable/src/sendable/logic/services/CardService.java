@@ -14,7 +14,10 @@ public class CardService implements CardInterface {
 
 	private RepositoryInterface<Card> cardRepository;
 	private RepositoryInterface<Category> categoryRepository;
+	
 	private List<CardDto> AllCards = null;
+	private List<CategoryDto> AllCategory = null;
+
 	CardDto card = null;
 
 	public CardService(RepositoryInterface<Card> cardRepo) {
@@ -24,6 +27,10 @@ public class CardService implements CardInterface {
 	public CardService(RepositoryInterface<Card> cardRepo, RepositoryInterface<Category> categoryRepo) {
 		this.cardRepository = cardRepo;
 		this.categoryRepository = categoryRepo;
+
+		for (Category category : this.categoryRepository.ListAll()) {
+			AllCategory.add(this.MapCategory(category));
+		}
 	}
 
 	@Override
@@ -60,7 +67,7 @@ public class CardService implements CardInterface {
 	public List<CardDto> ListCardsByCategory(int categoryId) {
 		ArrayList<CardDto> ret = new ArrayList<CardDto>();
 		AllCards.forEach(c -> {
-			if (c.getCategoryDto().getId() == categoryId) {
+			if (c.getCategoryId() == categoryId) {
 				ret.add(c);
 			}
 		});
@@ -69,13 +76,7 @@ public class CardService implements CardInterface {
 
 	@Override
 	public List<CategoryDto> ListCategories() {
-		ArrayList<CategoryDto> ret = new ArrayList<CategoryDto>();
-		for (Category c : categoryRepository.ListAll()) {
-			CategoryDto catret = new CategoryDto(c.getId(), c.getName(), c.getDescription(), c.getDateAdded());
-			catret.setCards(ListCardsByCategory(c.getId()));
-			ret.add(catret);
-		}
-		return ret;
+		return this.AllCategory;
 	}
 
 	@Override
@@ -97,6 +98,24 @@ public class CardService implements CardInterface {
 
 	@Override
 	public CategoryDto GetCategoryByCard(int cardId) {
-		return this.getCard(cardId).getCategoryDto();
+		for (CardDto cardDto : AllCards) {
+			if(cardDto.getId() == cardId){
+				for (CategoryDto category : this.AllCategory) {
+					if(category.getId() == cardDto.getCategoryId()) {
+						return category;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	private CategoryDto MapCategory(Category category) {
+		if (category == null) {
+			return null;
+		} else {
+			return new CategoryDto(category.getId(), category.getName(), category.getDescription(),
+					category.getDateAdded());
+		}
 	}
 }
