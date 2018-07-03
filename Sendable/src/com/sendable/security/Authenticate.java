@@ -46,9 +46,9 @@ public class Authenticate extends HttpServlet {
 
 			User temp = new User(request.getParameter("email"), request.getParameter("password"));
 
-			System.out.println(temp.getEmail());
-			System.out.println(temp.getPassword());
-
+			System.out.println("Current Logged In User...");
+			System.out.println(String.format("Email: %s", temp.getEmail()));
+			System.out.println(String.format("Password ", temp.getPassword()));
 			for (User user : seed.AllUsers()) {
 				if (user.getEmail().equals(temp.getEmail()) && user.getPassword().equals(temp.getPassword())) {
 					session.setAttribute("username", temp.getEmail());

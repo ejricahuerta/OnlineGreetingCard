@@ -34,7 +34,6 @@ public class Register extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		if (request.getParameterNames().hasMoreElements()) {
-			HttpSession session = request.getSession(false);
 			if (!request.getParameter("password").equals(request.getParameter("retypepassword"))) {
 				request.setAttribute("validationMessage", "Password Did not Match!");
 				request.getRequestDispatcher("register.jsp").forward(request, response);
