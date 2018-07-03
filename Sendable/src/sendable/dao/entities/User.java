@@ -42,7 +42,7 @@ public class User extends BaseEntity {
 		AccountId = accountId;
 	}
 
-	private void setFullName(String firstname,String lastname) {
+	public void setFullName(String firstname,String lastname) {
 		this.FullName = String.format("%s %s", firstname,lastname);
 	}
 	
@@ -50,7 +50,7 @@ public class User extends BaseEntity {
 	    return this.FullName;
 	}
 
-	private void setEmail(String email) {
+	public void setEmail(String email) {
 		this.Email = email;
 	}
 
@@ -58,7 +58,7 @@ public class User extends BaseEntity {
 		return this.Email;
 	}
 
-	private void setPassword(String password) {
+	public void setPassword(String password) {
 		this.HashedPassword = password;
 
 	}
@@ -81,4 +81,14 @@ public class User extends BaseEntity {
 							this.CurrentAddress.getState(),
 							this.CurrentAddress.getPostalCode());
 	}
+
+	public String getDateAdded() {
+		return DateAdded;
+	}
+
+	public void setDateAdded(String dateAdded) {
+		DateAdded = dateAdded;
+	}
+	
+	
 }

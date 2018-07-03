@@ -1,61 +1,218 @@
 package sendable.logic.services;
 
-import sendable.dao.entities.User;
+import java.util.ArrayList;
+import java.util.List;
+
+import sendable.dao.entities.*;
 import sendable.dao.repository.RepositoryInterface;
-import sendable.logic.dtos.CardLetterDto;
-import sendable.logic.dtos.UserDto;
+import sendable.logic.dtos.*;
 import sendable.logic.interfaces.UserInterface;
 
-public class UserSevice implements UserInterface{
+public class UserSevice implements UserInterface {
 
+	private RepositoryInterface<User> userRepository;
+	private RepositoryInterface<CardLetter> cardletterRepository;
+	private RepositoryInterface<Card> cardRepository;
+	private RepositoryInterface<Account> accountRepository;
+	private RepositoryInterface<Payment> paymentRepository;
 
-	private RepositoryInterface<User> repository;
-	
-	public UserSevice(RepositoryInterface<User> repo) {
-		this.repository  = repo;
+	private ArrayList<UserDto> AllUsers;
+
+	public UserSevice(RepositoryInterface<User> userrepo, RepositoryInterface<CardLetter> cardletterrepo,
+			RepositoryInterface<Card> cardrepo, RepositoryInterface<Account> accountrepo,
+			RepositoryInterface<Payment> paymentrepo) {
+		this.userRepository = userrepo;
+		this.cardletterRepository = cardletterrepo;
+		this.cardRepository = cardrepo;
+		this.accountRepository = accountrepo;
+		this.paymentRepository = paymentrepo;
+		this.AllUsers = new ArrayList<UserDto>();
+
+		this.userRepository.ListAll().forEach(u -> {
+			this.AllUsers.add(this.MapUser(u));
+		});
 	}
+
 	@Override
 	public UserDto FindUserById(int id) {
-		// TODO Auto-generated method stub
-		User user = repository.Get(id);
-		UserDto dto= new UserDto();
-		return dto;
+		return this.MapUser(this.userRepository.Get(id));
 	}
+
 	@Override
 	public UserDto FindUSerByEmail(String email) {
-		// TODO Auto-generated method stub
+		for (UserDto userDto : AllUsers) {
+			if (userDto.getEmail().equals(email)) {
+				return userDto;
+			}
+		}
 		return null;
 	}
+
 	@Override
 	public boolean ChangeUserPassword(int userId, String password) {
-		// TODO Auto-generated method stub
+		try {
+			AllUsers.forEach(u -> {
+				if (u.getId() == userId) {
+					u.setHashedPassword(password);
+					// Updating User
+					User user = this.userRepository.Get(userId);
+					user.setPassword(password);
+					this.userRepository.Update(user);
+				}
+			});
+
+			return true;
+		} catch (
+
+		Exception e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
+
 	@Override
 	public boolean UpdateUserInfo(int userId, String fname, String lname, String email) {
-		// TODO Auto-generated method stub
+
+		try {
+			AllUsers.forEach(u -> {
+				if (u.getId() == userId) {
+					u.setFullName(String.format("%s %s", fname, lname));
+					u.setEmail(email);
+
+					User user = this.userRepository.Get(userId);
+					user.setFullName(fname, lname);
+					user.setEmail(email);
+					this.userRepository.Update(user);
+				}
+			});
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return false;
 	}
+
 	@Override
 	public boolean UpdateUserAddress(int userId, String line1, String line2, String city, String state,
 			String postalcode) {
-		// TODO Auto-generated method stub
+
+		try {
+			AllUsers.forEach(u -> {
+				if (u.getId() == userId) {
+					String address = null;
+					if (line2.isEmpty()) {
+						address = String.format("%s %s %s %s", line1, city, state, postalcode);
+					} else {
+						address = String.format("%s %s %s %s", line1, city, state, postalcode);
+					}
+					u.setCurrentAddress(address);
+					User user = this.userRepository.Get(userId);
+					user.setAddress(line1, line2, city, state, postalcode);
+					this.userRepository.Update(user);
+				}
+			});
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
+
 	@Override
 	public boolean TopUpUserAccount(int UserId, double amount) {
-		// TODO Auto-generated method stub
+		try {
+			AllUsers.forEach(u -> {
+				if (u.getId() == UserId) {
+					u.getAccountDto().setCredit(amount);
+
+					// Update Account
+					Account account = accountRepository.Get(u.getAccountDto().getId());
+					accountRepository.Update(account);
+				}
+			});
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
+
 	@Override
 	public boolean AddUserLetter(int UserId, CardLetterDto letter) {
-		// TODO Auto-generated method stub
+		try {
+			AllUsers.forEach(u -> {
+				if (u.getId() == UserId) {
+					u.getCardLetters().add(letter);
+
+					// add new card
+					this.cardletterRepository.Insert(
+							new CardLetter(letter.getId(), letter.getUserId(), letter.getCardId(), letter.getMessage(),
+									letter.getFontStyle(), letter.getTotalCost(), letter.getDateAdded()));
+				}
+			});
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return false;
 	}
+
 	@Override
 	public boolean RemoveUserLetter(int userId, int letterId) {
-		// TODO Auto-generated method stub
+		try {
+			AllUsers.forEach(u -> {
+				u.getCardLetters().removeIf(l -> l.getId() == letterId);
+			});
+
+			this.cardletterRepository.Remove(letterId);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return false;
+	}
+
+	private UserDto MapUser(User user) {
+		if (user == null) {
+			return null;
+		} else {
+			// Mapping all data to DTOs;
+			ArrayList<CardLetterDto> cardletters = new ArrayList<CardLetterDto>();
+
+			// get all cards where user id == userId
+			this.cardletterRepository.ListAll().forEach(c -> {
+				if (c.getUserId() == user.getId()) {
+					Card card = this.cardRepository.Get(c.getCardId());
+
+					cardletters.add(new CardLetterDto(c.getId(), c.getUserId(), c.getCardId(), c.getMessage(),
+							c.getFont(), c.getTotalCost(), c.getDateAdded()));
+				}
+			});
+
+			// get account from database
+			Account account = this.accountRepository.Get(user.getAccountId());
+
+			// user account mapping
+			AccountDto accountdto = new AccountDto(account.getId(), account.getUserId(), account.getCredit(),
+					account.getLastTopUpDate());
+
+			List<PaymentDto> allpayments = new ArrayList<PaymentDto>();
+			this.paymentRepository.ListAll().forEach(p -> {
+				if (p.getUserId() == user.getId()) {
+
+					// user payment mapping
+					allpayments.add(new PaymentDto(p.getId(), p.getUserId(), p.getCardLetterId(),
+							p.getBillingAddress().GetAddressString(), p.getShippingAddress().GetAddressString(),
+							p.getPaymentType(), p.getDateAdded(), p.getTotalAmount()));
+				}
+			});
+			// User Dto Mapping
+			UserDto userdto = new UserDto(user.getId(), user.getFullName(), user.getEmail(), user.getPassword(),
+					user.getCurrentAddressString(), cardletters, accountdto, user.getDateAdded(), allpayments);
+			return userdto;
+		}
 	}
 
 }

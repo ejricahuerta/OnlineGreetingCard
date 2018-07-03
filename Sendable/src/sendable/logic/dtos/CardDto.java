@@ -2,7 +2,7 @@ package sendable.logic.dtos;
 public class CardDto {
 	
 	int Id;
-	CategoryDto CategoryDto;
+	int CategoryId;
 	String Name;
 	String Description;
 	double Price;
@@ -38,13 +38,13 @@ public class CardDto {
 	}
 	
 	
-	public CategoryDto getCategoryDto() {
-		return CategoryDto;
+	public int getCategoryId() {
+		return CategoryId;
 	}
 
 
-	public void setCategoryDto(CategoryDto categoryDto) {
-		CategoryDto = categoryDto;
+	public void setCategoryId(int CategoryId) {
+		this.CategoryId = CategoryId;
 	}
 
 

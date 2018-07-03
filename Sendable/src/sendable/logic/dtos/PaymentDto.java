@@ -3,91 +3,117 @@ package sendable.logic.dtos;
 public class PaymentDto {
 
 	int Id;
-	CardDto CardDto;
-	UserDto UserDto;
-	AddressDto ShippingDto;
-	AddressDto BillingDto;
+	int	CardLetterId;
+	int	UserId;
+	String Shipping;
+	String Billing;
 	String DateAdded;
 	String PaymentType;
 	double TotalAmount;
 
-	public PaymentDto(int id, CardDto cardDto, UserDto userDto, 
-			AddressDto shippingDto, AddressDto billingDto, 
-			String dateAdded, String paymentType, double totalAmount) {
+	
+	/**
+	 * @param id
+	 * @param cardLetterId
+	 * @param UserId
+	 * @param Shipping
+	 * @param Billing
+	 * @param dateAdded
+	 * @param paymentType
+	 * @param totalAmount
+	 */
+	public PaymentDto(int id, int cardLetterId, int UserId, String Shipping,
+			String Billing, String dateAdded, String paymentType, double totalAmount) {
 		super();
 		Id = id;
-		CardDto = cardDto;
-		UserDto = userDto;
-		ShippingDto = shippingDto;
-		BillingDto = billingDto;
+		CardLetterId = cardLetterId;
+		this.UserId = UserId;
+		this.Shipping = Shipping;
+		this.Billing = Billing;
 		DateAdded = dateAdded;
 		PaymentType = paymentType;
 		TotalAmount = totalAmount;
 	}
+
 
 	public int getId() {
 		return Id;
 	}
 
+
 	public void setId(int id) {
 		Id = id;
 	}
 
-	public CardDto getCardDto() {
-		return CardDto;
+
+	public int getCardLetterId() {
+		return CardLetterId;
 	}
 
-	public void setCardDto(CardDto cardDto) {
-		CardDto = cardDto;
+
+	public void setCardLetterId(int cardLetterId) {
+		CardLetterId = cardLetterId;
 	}
 
-	public UserDto getUserDto() {
-		return UserDto;
+
+	public int getUserId() {
+		return UserId;
 	}
 
-	public void setUserDto(UserDto userDto) {
-		UserDto = userDto;
+
+	public void setUserId(int UserId) {
+		this.UserId = UserId;
 	}
 
-	public AddressDto getShippingDto() {
-		return ShippingDto;
+
+	public String getShipping() {
+		return Shipping;
 	}
 
-	public void setShippingDto(AddressDto shippingDto) {
-		ShippingDto = shippingDto;
+
+	public void setShipping(String Shipping) {
+		this.Shipping = Shipping;
 	}
 
-	public AddressDto getBillingDto() {
-		return BillingDto;
+
+	public String getBilling() {
+		return Billing;
 	}
 
-	public void setBillingDto(AddressDto billingDto) {
-		BillingDto = billingDto;
+
+	public void setBilling(String Billing) {
+		this.Billing = Billing;
 	}
+
 
 	public String getDateAdded() {
 		return DateAdded;
 	}
 
+
 	public void setDateAdded(String dateAdded) {
 		DateAdded = dateAdded;
 	}
+
 
 	public String getPaymentType() {
 		return PaymentType;
 	}
 
+
 	public void setPaymentType(String paymentType) {
 		PaymentType = paymentType;
 	}
+
 
 	public double getTotalAmount() {
 		return TotalAmount;
 	}
 
+
 	public void setTotalAmount(double totalAmount) {
 		TotalAmount = totalAmount;
 	}
 	
-	
 }
+

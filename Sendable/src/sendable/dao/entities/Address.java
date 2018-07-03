@@ -44,4 +44,20 @@ public class Address extends BaseEntity {
 	public String getPostalCode() {
 		return this.PostalCode;
 	}
+	
+	public String GetAddressString() {
+		if(this.Line2.isEmpty()) {
+			
+		return String.format("%s %s %s %s", this.getLine1(),
+				this.getCity(),
+				this.getState(),
+				this.getPostalCode());
+		}
+		return String.format("%s %s %s %s %s",
+				this.getLine1(),
+				this.getLine2(),
+				this.getCity(),
+				this.getState(),
+				this.getPostalCode());
+	}
 }

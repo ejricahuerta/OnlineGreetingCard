@@ -42,6 +42,12 @@ public class Repository<T extends BaseEntity> implements RepositoryInterface<T>
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void Update(T obj) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	

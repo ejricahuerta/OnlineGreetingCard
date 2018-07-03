@@ -1,27 +1,27 @@
 package sendable.dao.entities;
 
-public class Payment  extends BaseEntity{
-	
-	int CardId;
+public class Payment extends BaseEntity {
+
+	int CardLetterId;
 	int UserId;
 	int ShippingId;
 	int BillingId;
 	String DateAdded;
 	String PaymentType;
 	double TotalAmount;
-	
+
 	Address BillingAddress;
 	Address ShippingAddress;
-	
+
 	public Payment() {
 		super(0);
 		DateAdded = DateTime.GetCurrentDate();
 	}
 
-	public Payment(int id, int cardId, int userId, String paymentType, double totalAmount, Address billingAddress,
+	public Payment(int id, int cardLetterId, int userId, String paymentType, double totalAmount, Address billingAddress,
 			Address shippingAddress) {
 		super(id);
-		CardId = cardId;
+		this.CardLetterId = cardLetterId;
 		PaymentType = paymentType;
 		TotalAmount = totalAmount;
 		BillingAddress = billingAddress;
@@ -29,14 +29,6 @@ public class Payment  extends BaseEntity{
 		this.setBillingId(billingAddress.getId());
 		this.setShippingId(shippingAddress.getId());
 		this.DateAdded = DateTime.GetCurrentDate();
-	}
-
-	public int getCardId() {
-		return CardId;
-	}
-
-	public void setCardId(int cardId) {
-		CardId = cardId;
 	}
 
 	public int getUserId() {
@@ -47,7 +39,6 @@ public class Payment  extends BaseEntity{
 		UserId = userId;
 	}
 
-	
 	private void setShippingId(int shippingId) {
 		ShippingId = shippingId;
 	}
@@ -95,6 +86,22 @@ public class Payment  extends BaseEntity{
 	public void setShippingAddress(Address shippingAddress) {
 		ShippingAddress = shippingAddress;
 	}
+
+	public int getCardLetterId() {
+		return CardLetterId;
+	}
+
+	public void setCardLetterId(int cardLetterId) {
+		CardLetterId = cardLetterId;
+	}
+
+	public int getShippingId() {
+		return ShippingId;
+	}
+
+	public int getBillingId() {
+		return BillingId;
+	}
 	
-	
+
 }

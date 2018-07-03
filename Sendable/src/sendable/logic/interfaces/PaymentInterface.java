@@ -10,9 +10,9 @@ public interface PaymentInterface {
 	void MakePayment(int userId, int cardId, double amount, 
 			AddressDto shipping, AddressDto billing, String paymentType);
 	
-	List<PaymentDto> ListAlllUserPayments();
+	List<PaymentDto> ListAlllUserPayments(int userId);
 	
-	List<PaymentDto> ListUserPaymentsByQuery(String query);
+	List<PaymentDto> ListUserPaymentsByDate(String query);
 	
 	PaymentDto GetLatestPaymentByUser(int userId);
 	

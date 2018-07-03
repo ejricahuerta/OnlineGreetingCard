@@ -8,7 +8,7 @@ public class UserDto {
 	String FullName;
 	String Email;
 	String HashedPassword;
-	AddressDto CurrentAddress;
+	String CurrentAddress;
 	AccountDto AccountDto;
 	String DateAdded;
 	List<CardLetterDto> CardLetters;
@@ -24,8 +24,8 @@ public class UserDto {
 	 * @param dateAdded
 	 * @param payments
 	 */
-	public UserDto(int id, String fullName, String email, String hashedPassword, AddressDto currentAddress,
-			List<CardLetterDto> cardLetters, sendable.logic.dtos.AccountDto accountDto,
+	public UserDto(int id, String fullName, String email, String hashedPassword, String currentAddress,
+			List<CardLetterDto> cardLetters, AccountDto accountDto,
 			String dateAdded, List<PaymentDto> payments) {
 		super();
 		Id = id;
@@ -66,10 +66,10 @@ public class UserDto {
 	public void setHashedPassword(String hashedPassword) {
 		HashedPassword = hashedPassword;
 	}
-	public AddressDto getCurrentAddress() {
+	public String getCurrentAddress() {
 		return CurrentAddress;
 	}
-	public void setCurrentAddress(AddressDto currentAddress) {
+	public void setCurrentAddress(String currentAddress) {
 		CurrentAddress = currentAddress;
 	}
 	

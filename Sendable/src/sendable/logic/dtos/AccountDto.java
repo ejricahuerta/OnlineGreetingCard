@@ -2,13 +2,13 @@ package sendable.logic.dtos;
 
 public class AccountDto {
 	int Id;
-	UserDto UserDto;
+	int UserId;
 	double Credit;
 	String LastTopUpDate;
 
-	public AccountDto(UserDto userDto, double credit, String lastTopUpDate) {
-		super();
-		UserDto = userDto;
+	public AccountDto(int id, int userId, double credit, String lastTopUpDate) {
+		Id = id;
+		UserId = userId;
 		Credit = credit;
 		LastTopUpDate = lastTopUpDate;
 	}
@@ -24,12 +24,12 @@ public class AccountDto {
 	}
 
 
-	public UserDto getUserDto() {
-		return UserDto;
+	public int getUserId() {
+		return UserId;
 	}
 
-	public void setUserDto(UserDto userDto) {
-		UserDto = userDto;
+	public void setUserId(int UserId) {
+		this.UserId = UserId;
 	}
 
 	public double getCredit() {

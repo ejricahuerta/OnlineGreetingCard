@@ -12,6 +12,8 @@ public interface RepositoryInterface<T> {
 	
 	void Insert(T obj);
 	
+	void Update(T obj);
+	
 	T Find(String query);
 	
 	void Remove(int id);

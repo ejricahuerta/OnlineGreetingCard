@@ -2,20 +2,33 @@ package sendable.logic.dtos;
 
 public class CardLetterDto {
 	int Id;
-	UserDto UserDto;
-	CardDto CardDto;
+	int UserId;
+	int CardId;
 	String Message;
 	String FontStyle;
+	double TotalCost;
 	String DateAdded;
 
-	public CardLetterDto(int id, UserDto userDto, CardDto cardDto,
-			String message, String fontStyle, String dateAdded) {
+	
+
+	/**
+	 * @param id
+	 * @param userId
+	 * @param cardId
+	 * @param message
+	 * @param fontStyle
+	 * @param totalCost
+	 * @param dateAdded
+	 */
+	public CardLetterDto(int id, int userId, int cardId, String message, String fontStyle, double totalCost,
+			String dateAdded) {
 		super();
 		Id = id;
-		UserDto = userDto;
-		CardDto = cardDto;
+		UserId = userId;
+		CardId = cardId;
 		Message = message;
 		FontStyle = fontStyle;
+		TotalCost = totalCost;
 		DateAdded = dateAdded;
 	}
 	public int getId() {
@@ -24,17 +37,17 @@ public class CardLetterDto {
 	public void setId(int id) {
 		Id = id;
 	}
-	public UserDto getUserDto() {
-		return UserDto;
+	public int getUserId() {
+		return UserId;
 	}
-	public void setUserDto(UserDto userDto) {
-		UserDto = userDto;
+	public void setUserId(int UserId) {
+		this.UserId = UserId;
 	}
-	public CardDto getCardDto() {
-		return CardDto;
+	public int getCardId() {
+		return CardId;
 	}
-	public void setCardDto(CardDto cardDto) {
-		CardDto = cardDto;
+	public void setCardId(int CardId) {
+		this.CardId = CardId;
 	}
 	public String getMessage() {
 		return Message;
@@ -54,5 +67,13 @@ public class CardLetterDto {
 	public void setDateAdded(String dateAdded) {
 		DateAdded = dateAdded;
 	}
+	public double getTotalCost() {
+		return TotalCost;
+	}
+	public void setTotalCost(double totalCost) {
+		TotalCost = totalCost;
+	}
+	
+	
 		
 }

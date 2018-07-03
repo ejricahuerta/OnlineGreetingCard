@@ -6,15 +6,16 @@ public class CardLetter extends BaseEntity {
 	int CardId;
 	String Message;
 	String FontStyle;
+	double TotalCost;
 	String DateAdded;
 
-	public CardLetter(int userId ,int cardId, String message, String font) {
-		super(0);
-		
+	public CardLetter(int id, int userId ,int cardId, String message, String font,double totalCost, String dateAdded) {
+		super(id);
 		UserId = userId;
 		this.CardId = cardId;
 		this.Message = message;
 		this.FontStyle = font;
+		this.setTotalCost(totalCost);
 		DateAdded = DateTime.GetCurrentDate();
 	}
 	
@@ -53,4 +54,35 @@ public class CardLetter extends BaseEntity {
 	public void setFont(String font) {
 		this.FontStyle = font;
 	}
+
+
+
+	public String getDateAdded() {
+		return DateAdded;
+	}
+
+
+
+	public void setDateAdded(String dateAdded) {
+		DateAdded = dateAdded;
+	}
+
+
+
+	public void setCardId(int cardId) {
+		CardId = cardId;
+	}
+
+
+
+	public double getTotalCost() {
+		return TotalCost;
+	}
+
+
+
+	private void setTotalCost(double totalCost) {
+		this.TotalCost = totalCost * 1.13;
+	}
+	
 }
