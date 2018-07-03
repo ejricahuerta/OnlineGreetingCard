@@ -17,5 +17,9 @@ public interface RepositoryInterface<T> {
 	T Find(String query);
 	
 	void Remove(int id);
+	
+	void Connect(String connection);
+	
+	void Commit();
 
 }

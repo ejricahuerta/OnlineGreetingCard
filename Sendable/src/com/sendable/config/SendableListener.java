@@ -5,6 +5,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import sendable.dao.entities.Account;
+import sendable.dao.entities.Address;
 import sendable.dao.entities.Card;
 import sendable.dao.entities.CardLetter;
 import sendable.dao.entities.Category;
@@ -45,16 +46,13 @@ public class SendableListener implements ServletContextListener {
 		arg0.getServletContext().setAttribute("cardService", 
 				new CardService(new Repository<Card>(Card.class), 
 								new Repository<Category>(Category.class)));
+		
 		arg0.getServletContext().setAttribute("userService",
 				new UserService(new Repository<User>(User.class), 
 						new Repository<CardLetter>(CardLetter.class),
-						new Repository<Card>(Card.class), 
 						new Repository<Account>(Account.class),
-						new Repository<Payment>(Payment.class))
-				);
-		
-		
-	
+						new Repository<Payment>(Payment.class), 
+						new Repository<Address>(Address.class)));
 	}
 
 }

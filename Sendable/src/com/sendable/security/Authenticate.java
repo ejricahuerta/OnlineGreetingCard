@@ -15,7 +15,7 @@ import sendable.dao.entities.User;
 /**
  * Servlet implementation class Authenticate
  */
-@WebServlet("/Authenticate")
+@WebServlet("/Login")
 public class Authenticate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -33,38 +33,34 @@ public class Authenticate extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		if(request.getParameterNames().hasMoreElements()) {
-			
-		
-		
-		MockService seed = new MockService();
-		HttpSession session = request.getSession(true);
-		
-		if( session.getServletContext().getAttribute("seedusers") == null){
-			session.getServletContext().setAttribute("seedusers", seed);
-		}
-		
-		User temp = new User(request.getParameter("email"), request.getParameter("password"));
-		
-		System.out.println(temp.getEmail());
-		System.out.println(temp.getPassword());
-		
-		for (User user : seed.AllUsers()) {
-			if (user.getEmail().equals(temp.getEmail()) && user.getPassword().equals(temp.getPassword())) {
-				session.setAttribute("username",temp.getEmail());
-				response.addCookie(new Cookie("user", temp.getEmail()));
-				response.sendRedirect("index.jsp");
-				return;
+
+		if (request.getSession().getAttribute("username") != null) {
+			response.sendRedirect("index.jsp");
+		} else {
+			MockService seed = new MockService();
+			HttpSession session = request.getSession(true);
+
+			if (session.getServletContext().getAttribute("seedusers") == null) {
+				session.getServletContext().setAttribute("seedusers", seed);
 			}
+
+			User temp = new User(request.getParameter("email"), request.getParameter("password"));
+
+			System.out.println(temp.getEmail());
+			System.out.println(temp.getPassword());
+
+			for (User user : seed.AllUsers()) {
+				if (user.getEmail().equals(temp.getEmail()) && user.getPassword().equals(temp.getPassword())) {
+					session.setAttribute("username", temp.getEmail());
+					response.addCookie(new Cookie("user", temp.getEmail()));
+					response.sendRedirect("index.jsp");
+				}
+			}
+			request.setAttribute("validationMessage", "<b>Invalid Login!</b> Please try again.");
+			request.getRequestDispatcher("login.jsp").include(request, response);
 		}
-		request.setAttribute("validationMessage", "<b>Invalid Login!</b> Please try again.");
-		request.getRequestDispatcher("login.jsp").forward(request, response);
-		return;
-		}
-		response.sendRedirect("login.jsp");
-		return;
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -72,6 +68,5 @@ public class Authenticate extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
-		return;
 	}
 }

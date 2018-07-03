@@ -9,8 +9,9 @@ import sendable.dao.repository.RepositoryInterface;
 import sendable.logic.dtos.CardDto;
 import sendable.logic.dtos.CategoryDto;
 import sendable.logic.interfaces.CardInterface;
+import sendable.logic.interfaces.DatabaseConnectionInterface;
 
-public class CardService implements CardInterface {
+public class CardService implements CardInterface , DatabaseConnectionInterface{
 
 	private RepositoryInterface<Card> cardRepository;
 	private RepositoryInterface<Category> categoryRepository;
@@ -28,11 +29,11 @@ public class CardService implements CardInterface {
 		this.cardRepository = cardRepo;
 		this.categoryRepository = categoryRepo;
 
-		for (Category category : this.categoryRepository.ListAll()) {
-			AllCategory.add(this.MapCategory(category));
-		}
 		for (Card card : this.cardRepository.ListAll()) {
 			AllCards.add(this.MapCard(card));
+		}
+		for (Category category : this.categoryRepository.ListAll()) {
+			AllCategory.add(this.MapCategory(category));
 		}
 	}
 
@@ -121,5 +122,17 @@ public class CardService implements CardInterface {
 		}
 		return new CardDto(card.getId(), card.getName(), card.getDescription(), card.getPrice(), card.isAvailable(),
 				card.getDateAdded());
+	}
+
+	@Override
+	public void Connect(String connection) {
+		this.cardRepository.Connect(connection);
+		this.categoryRepository.Connect(connection);
+	}
+
+	@Override
+	public void Disconnect() {
+		this.cardRepository.Commit();
+		
 	}
 }

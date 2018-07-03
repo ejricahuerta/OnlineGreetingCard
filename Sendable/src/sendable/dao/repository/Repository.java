@@ -16,7 +16,7 @@ public class Repository<T extends BaseEntity> implements RepositoryInterface<T>
 	@Override
 	public List<T> ListAll() {
 		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<T>();
 	}
 
 	@Override
@@ -48,7 +48,16 @@ public class Repository<T extends BaseEntity> implements RepositoryInterface<T>
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
-	
+
+	@Override
+	public void Connect(String connection) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Commit() {
+		// TODO Auto-generated method stub
+		
+	}
 }

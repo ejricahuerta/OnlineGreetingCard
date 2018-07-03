@@ -26,7 +26,7 @@
                     	<%=request.getAttribute("validationMessage")%>
                     </div>
                     <%} %>
-                    <form action="Authenticate" method="POST">
+                    <form action="Login" method="POST">
                         <div class="form-row">
                             <div class="form-group col-md-6 col-sm-6">
                                 <label for="email">Email
