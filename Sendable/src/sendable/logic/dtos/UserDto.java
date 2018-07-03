@@ -7,6 +7,7 @@ public class UserDto {
 	int Id;
 	String FullName;
 	String Email;
+	String Phone;
 	String HashedPassword;
 	String CurrentAddress;
 	AccountDto AccountDto;
@@ -24,7 +25,7 @@ public class UserDto {
 	 * @param dateAdded
 	 * @param payments
 	 */
-	public UserDto(int id, String fullName, String email, String hashedPassword, String currentAddress,
+	public UserDto(int id, String fullName, String email, String hashedPassword,String phone, String currentAddress,
 			List<CardLetterDto> cardLetters, AccountDto accountDto,
 			String dateAdded, List<PaymentDto> payments) {
 		super();
@@ -63,6 +64,16 @@ public class UserDto {
 	public String getHashedPassword() {
 		return HashedPassword;
 	}
+	
+	
+	public String getPhone() {
+		return Phone;
+	}
+
+	public void setPhone(String phone) {
+		Phone = phone;
+	}
+
 	public void setHashedPassword(String hashedPassword) {
 		HashedPassword = hashedPassword;
 	}

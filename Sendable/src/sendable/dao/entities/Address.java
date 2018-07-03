@@ -24,6 +24,7 @@ public class Address extends BaseEntity {
 		this.State = state;
 		this.PostalCode = postalcode;
 	}
+	
 
 	public String getLine1() {
 		return this.Line1;

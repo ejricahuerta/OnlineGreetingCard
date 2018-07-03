@@ -1,27 +1,23 @@
 package sendable.logic.interfaces;
 
 import java.util.List;
-
-import sendable.logic.dtos.AddressDto;
 import sendable.logic.dtos.PaymentDto;
 
 public interface PaymentInterface {
 
-	void MakePayment(int userId, int cardLetterId, double amount, 
-			String shipping, String billing, String paymentType);
+	boolean MakePayment(int id, int cardLetterId, int userId, String paymentType, double totalAmount, int billingId,
+			int shippingId);
 
-	void MakePaymentByAccount(int userId, int accountId, int cardLetterId, double amount, 
-			String shipping, String billing);
-	
+	boolean MakePaymentByAccount(int id, int cardLetterId, int userId,int accountId, String paymentType, double totalAmount, int billingId,
+			int shippingId);
 	
 	List<PaymentDto> ListAlllPayments();
 	
 	List<PaymentDto> ListAlllUserPayments(int userId);
 	
-	List<PaymentDto> ListUserPaymentsByDate(String query);
-	
 	PaymentDto GetLatestPaymentByUser(int userId);
 	
 	PaymentDto GetLatestPayment();
+	
 	
 }

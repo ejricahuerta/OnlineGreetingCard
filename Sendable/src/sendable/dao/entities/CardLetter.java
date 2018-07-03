@@ -8,6 +8,8 @@ public class CardLetter extends BaseEntity {
 	String FontStyle;
 	double TotalCost;
 	String DateAdded;
+	String Status;
+	String DateSent;
 
 	public CardLetter(int id, int userId ,int cardId, String message, String font,double totalCost, String dateAdded) {
 		super(id);
@@ -17,8 +19,8 @@ public class CardLetter extends BaseEntity {
 		this.FontStyle = font;
 		this.setTotalCost(totalCost);
 		DateAdded = DateTime.GetCurrentDate();
+		this.Status = "Pending";
 	}
-	
 	
 	
 	public int getUserId() {
@@ -83,6 +85,31 @@ public class CardLetter extends BaseEntity {
 
 	private void setTotalCost(double totalCost) {
 		this.TotalCost = totalCost * 1.13;
+	}
+	
+	public String getStatus() {
+		return Status;
+	}
+
+
+	public void setStatus(String status) {
+		Status = status;
+	}
+
+
+	public String getDateSent() {
+		return DateSent;
+	}
+
+
+	public void setDateSent(String dateSent) {
+		DateSent = dateSent;
+	}
+
+
+	public void sendLetter(){
+		this.Status = "Sent";
+		this.DateSent = DateTime.GetCurrentDate();
 	}
 	
 }

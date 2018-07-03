@@ -218,7 +218,7 @@ public class UserService implements UserInterface {
 			}
 
 			// User Dto Mapping
-			UserDto userdto = new UserDto(user.getId(), user.getFullName(), user.getEmail(), user.getPassword(),
+			UserDto userdto = new UserDto(user.getId(), user.getFullName(), user.getEmail(), user.getPassword(),user.getPhone(),
 					user.getCurrentAddressString(), cardletters, accountdto, user.getDateAdded(), allpayments);
 			return userdto;
 		}

@@ -10,6 +10,7 @@ public class User extends BaseEntity {
 	int CurrentAddressId;
 	String FullName;
 	String Email;
+	String Phone;
 	String HashedPassword;
 	Address CurrentAddress;
 	String DateAdded;
@@ -26,12 +27,13 @@ public class User extends BaseEntity {
 		this.HashedPassword = password;
 	}
 	
-	public User(String firstname,String lastname, String password, String email, Address current) {
+	public User(String firstname,String lastname, String password, String email, String phone,Address current) {
 		super(0);
 		this.DateAdded = DateTime.GetCurrentDate();
 		this.setFullName(firstname,lastname);
 		this.setPassword(password);
 		this.setEmail(email);
+		this.setPhone(phone);
 		this.CurrentAddress = current;
 		this.setCurrentAddressId(current.getId());
 	}
@@ -98,6 +100,14 @@ public class User extends BaseEntity {
 
 	private void setCurrentAddressId(int currentAddressId) {
 		this.CurrentAddressId = currentAddressId;
+	}
+
+	public String getPhone() {
+		return Phone;
+	}
+
+	public void setPhone(String phone) {
+		Phone = phone;
 	}
 	
 	
