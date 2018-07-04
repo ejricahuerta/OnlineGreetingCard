@@ -2,30 +2,56 @@ package sendable.dao.repository;
 
 import java.util.*;
 
-public class Repository<T> implements RepositoryInterface<T> 
-{
-	@SuppressWarnings("unused")
-	private Class<?> clazz;
-	
-	public Repository(Class<?> clazz) {
+import javax.persistence.EntityManager;
+
+
+import sendable.dao.database.DatabaseManager;
+import sendable.dao.entities.User;
+
+@SuppressWarnings("rawtypes")
+
+public class Repository<T> implements RepositoryInterface<T> {
+
+	private EntityManager manager;
+	private Class clazz;
+	private ArrayList<T> AllList = null;
+	public Repository(Class clazz) {
 		this.clazz = clazz;
-	}
-	
-	@Override
-	public List<T> ListAll() {
-		// TODO Auto-generated method stub
-		return new ArrayList<T>();
+		manager = DatabaseManager.getEntityManager();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<T> ListAll() {
+
+		try {
+			manager.getTransaction().begin();
+			 AllList =  (ArrayList<T>) manager.createQuery("select u from " + clazz.getSimpleName()    +" u").getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		manager.close();
+		return AllList;
+	}
+
+	@SuppressWarnings("unchecked")
 	@Override
 	public T Get(int id) {
-		// TODO Auto-generated method stub
+		try {
+			return (T) manager.find(clazz, id); 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
 	@Override
 	public void Insert(T obj) {
-		// TODO Auto-generated method stub
+		try {
+			manager.persist(obj);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -35,27 +61,37 @@ public class Repository<T> implements RepositoryInterface<T>
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void Remove(int id) {
-		// TODO Auto-generated method stub
-		
+		try {
+			T obj = (T) manager.find(clazz, id);
+			manager.remove(obj);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	@Override
 	public void Update(T obj) {
-		// TODO Auto-generated method stub
-		
+		try {
+			manager.merge(obj);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
-	@Override
-	public void Connect(String connection) {
-		// TODO Auto-generated method stub
-		
-	}
+	public static void main(String[] args) {
+		RepositoryInterface<User> user = new Repository<User>(User.class);
 
-	@Override
-	public void Commit() {
-		// TODO Auto-generated method stub
+		for (User u : user.ListAll()) {
+			System.out.println(u.getEmail());
+		}
+		System.out.println("End..");
 		
+		
+
 	}
 }

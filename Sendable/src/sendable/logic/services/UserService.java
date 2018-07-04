@@ -198,7 +198,7 @@ public class UserService implements UserInterface {
 			});
 
 			// get account from database
-			Account account = this.accountRepository.Get(user.getAccountId());
+			Account account = this.accountRepository.Get(user.getAccount().getId());
 
 			// user account mapping
 			AccountDto accountdto = new AccountDto(account.getId(), account.getUser().getId(), account.getCredit(),

@@ -11,8 +11,7 @@ public class User{
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	int Id;
-	
-	int AccountId;
+
 	String FullName;
 	String Email;
 	String Phone;
@@ -49,14 +48,6 @@ public class User{
 
 	public void setId(int id) {
 		Id = id;
-	}
-
-	public int getAccountId() {
-		return AccountId;
-	}
-
-	public void setAccountId(int accountId) {
-		AccountId = accountId;
 	}
 
 	public void setFullName(String firstname,String lastname) {
@@ -113,6 +104,14 @@ public class User{
 
 	public void setPhone(String phone) {
 		Phone = phone;
+	}
+
+	public Account getAccount() {
+		return Account;
+	}
+
+	public void setAccount(Account account) {
+		Account = account;
 	}
 	
 	
