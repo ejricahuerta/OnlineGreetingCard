@@ -16,6 +16,8 @@
           <div class="row justify-content-center">
             <div class="m-3 categories-card col-md col-sm">
               <ul class="list-group mx-auto pl-3 pr-3">
+              
+ 
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                   <a class="btn" href="cards.html?f=birthdays">Birthdays</a>
                   <span class="badge badge-primary badge-pill">14</span>
