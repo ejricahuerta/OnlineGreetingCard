@@ -71,7 +71,9 @@ public class CardService implements CardInterface {
 	@Override
 	public List<CategoryDto> ListCategories() {
 		if(AllCategory.isEmpty()) {
-			
+			for (Category c : unit.GetCategoryRepo().ListAll()) {
+				AllCategory.add(this.MapCategory(c));
+			}
 		}
 		return this.AllCategory;
 	}

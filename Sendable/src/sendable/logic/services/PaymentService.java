@@ -15,37 +15,24 @@ import sendable.logic.interfaces.PaymentInterface;
 
 public class PaymentService implements PaymentInterface {
 
-	private RepositoryInterface<Payment> paymentRepository;
-	private RepositoryInterface<User> userRepository;
-	private RepositoryInterface<CardLetter> cardLetterRepository;
-	private RepositoryInterface<Address> addressRepository;
-
 	private UnitOfWork unit ;
 	
 	public PaymentService(UnitOfWork work) {
 		unit = work;
 	}
 	
-	private List<PaymentDto> AllPayments;
+	private List<PaymentDto> AllPayments = new ArrayList<PaymentDto>();
 
-	public PaymentService(RepositoryInterface<Payment> payment, RepositoryInterface<User> user,
-			RepositoryInterface<CardLetter> letter, RepositoryInterface<Address> address) {
-		this.paymentRepository = payment;
-		this.userRepository = user;
-		this.cardLetterRepository = letter;
-		this.addressRepository = address;
-
-	}
-
-	public void Init() {
-
-		for (Payment p : this.paymentRepository.ListAll()) {
-			AllPayments.add(this.MapPayment(p));
-		}
-	}
 
 	@Override
 	public List<PaymentDto> ListAlllPayments() {
+		
+		if(AllPayments.isEmpty())
+		{
+			for (Payment p : unit.GetPaymentRepo().ListAll()) {
+				AllPayments.add(this.MapPayment(p));
+			}
+		}
 		return AllPayments;
 	}
 

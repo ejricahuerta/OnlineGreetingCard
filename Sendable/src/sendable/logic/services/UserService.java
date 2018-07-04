@@ -11,46 +11,20 @@ import sendable.logic.interfaces.UserInterface;
 
 public class UserService implements UserInterface {
 
-	private RepositoryInterface<User> userRepository;
-	private RepositoryInterface<CardLetter> cardletterRepository;
-	private RepositoryInterface<Card> cardRepository;
-	private RepositoryInterface<Account> accountRepository;
-	private RepositoryInterface<Payment> paymentRepository;
-	private RepositoryInterface<Address> addressRepository;
-	
+
 	private UnitOfWork unit;
 
 	
-	
-	private ArrayList<UserDto> AllUsers;
+	private ArrayList<UserDto> AllUsers = new ArrayList<UserDto>();
 
 	public UserService(UnitOfWork work) {
 		unit  = work;
 	}
-	
-	public UserService(RepositoryInterface<User> userrepo, RepositoryInterface<CardLetter> cardletterrepo,
-			RepositoryInterface<Card> cardrepo, RepositoryInterface<Account> accountrepo,
-			RepositoryInterface<Payment> paymentrepo, RepositoryInterface<Address> addressrepo) {
-		this.userRepository = userrepo;
-		this.cardletterRepository = cardletterrepo;
-		this.cardRepository = cardrepo;
-		this.accountRepository = accountrepo;
-		this.paymentRepository = paymentrepo;
-		this.addressRepository = addressrepo;
 
-	}
-
-	public void Init() {
-		this.AllUsers = new ArrayList<UserDto>();
-
-		this.userRepository.ListAll().forEach(u -> {
-			this.AllUsers.add(this.MapUser(u));
-		});
-	}
 
 	@Override
 	public UserDto FindUserById(int id) {
-		return this.MapUser(this.userRepository.Get(id));
+		return this.MapUser(this.unit.GetUserRepo().Get(id));
 	}
 
 	@Override
@@ -70,9 +44,9 @@ public class UserService implements UserInterface {
 				if (u.getId() == userId) {
 					u.setHashedPassword(password);
 					// Updating User
-					User user = this.userRepository.Get(userId);
+					User user = this.unit.GetUserRepo().Get(userId);
 					user.setPassword(password);
-					this.userRepository.Update(user);
+					this.unit.GetUserRepo().Update(user);
 				}
 			});
 
@@ -94,10 +68,10 @@ public class UserService implements UserInterface {
 					u.setFullName(String.format("%s %s", fname, lname));
 					u.setEmail(email);
 
-					User user = this.userRepository.Get(userId);
+					User user = this.unit.GetUserRepo().Get(userId);
 					user.setFullName(fname, lname);
 					user.setEmail(email);
-					this.userRepository.Update(user);
+					this.unit.GetUserRepo().Update(user);
 				}
 			});
 			return true;
@@ -122,10 +96,10 @@ public class UserService implements UserInterface {
 						address = String.format("%s %s %s %s", line1, city, state, postalcode);
 					}
 					u.setCurrentAddress(address);
-					User user = this.userRepository.Get(userId);
-					Address useraddress = addressRepository.Get(user.getCurrentAddress().getId());
+					User user = this.unit.GetUserRepo().Get(userId);
+					Address useraddress = this.unit.GetAddressRepo().Get(user.getCurrentAddress().getId());
 					useraddress.Update(line1, line2, city, state, postalcode);
-					this.addressRepository.Update(useraddress);
+					this.unit.GetAddressRepo().Update(useraddress);
 				}
 			});
 			return true;
@@ -143,8 +117,8 @@ public class UserService implements UserInterface {
 					u.getAccountDto().setCredit(amount);
 
 					// Update Account
-					Account account = accountRepository.Get(u.getAccountDto().getId());
-					accountRepository.Update(account);
+					Account account = this.unit.GetAccountRepo().Get(u.getAccountDto().getId());
+					this.unit.GetAccountRepo().Update(account);
 				}
 			});
 			return true;
@@ -162,9 +136,9 @@ public class UserService implements UserInterface {
 					u.getCardLetters().add(letter);
 
 					// add new card
-					User userLetter = this.userRepository.Get(UserId);
-					Card card = this.cardRepository.Get(letter.getCardId());
-					this.cardletterRepository.Insert(new CardLetter(userLetter, card, letter.getMessage(),
+					User userLetter = this.unit.GetUserRepo().Get(UserId);
+					Card card = this.unit.GetCardRepo().Get(letter.getCardId());
+					this.unit.GetCardLetterRepo().Insert(new CardLetter(userLetter, card, letter.getMessage(),
 							letter.getFontStyle(), letter.getTotalCost(), letter.getDateAdded()));
 				}
 			});
@@ -182,7 +156,7 @@ public class UserService implements UserInterface {
 				u.getCardLetters().removeIf(l -> l.getId() == letterId);
 			});
 
-			this.cardletterRepository.Remove(letterId);
+			this.unit.GetCardLetterRepo().Remove(letterId);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -199,7 +173,7 @@ public class UserService implements UserInterface {
 			ArrayList<CardLetterDto> cardletters = new ArrayList<CardLetterDto>();
 
 			// get all cards where user id == userId
-			this.cardletterRepository.ListAll().forEach(c -> {
+			this.unit.GetCardLetterRepo().ListAll().forEach(c -> {
 				if (c.getUser() == user) {
 					cardletters.add(new CardLetterDto(c.getId(), c.getUser().getId(), c.getCard().getId(),
 							c.getMessage(), c.getFont(), c.getTotalCost(), c.getDateAdded()));
@@ -207,14 +181,14 @@ public class UserService implements UserInterface {
 			});
 
 			// get account from database
-			Account account = this.accountRepository.Get(user.getAccount().getId());
+			Account account = this.unit.GetAccountRepo().Get(user.getAccount().getId());
 
 			// user account mapping
 			AccountDto accountdto = new AccountDto(account.getId(), account.getUser().getId(), account.getCredit(),
 					account.getLastTopUpDate());
 
 			List<PaymentDto> allpayments = new ArrayList<PaymentDto>();
-			this.paymentRepository.ListAll().forEach(p -> {
+			this.unit.GetPaymentRepo().ListAll().forEach(p -> {
 				if (p.getUser() == user) {
 
 					// user payment mapping
@@ -224,7 +198,7 @@ public class UserService implements UserInterface {
 				}
 			});
 
-			for (Address address : this.addressRepository.ListAll()) {
+			for (Address address : this.unit.GetAddressRepo().ListAll()) {
 				if (address.getId() == user.getCurrentAddress().getId()) {
 					user.setAddress(address);
 					break;
