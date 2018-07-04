@@ -5,13 +5,9 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import sendable.dao.database.DatabaseManager;
-import sendable.dao.database.SeedDatabase;
 import sendable.dao.entities.Card;
 import sendable.dao.entities.Category;
-import sendable.dao.repository.Repository;
-import sendable.dao.repository.RepositoryInterface;
-import sendable.dao.repository.UnitOfWork;
+import sendable.dao.repository.*;
 import sendable.logic.dtos.CardDto;
 import sendable.logic.dtos.CategoryDto;
 import sendable.logic.interfaces.CardInterface;

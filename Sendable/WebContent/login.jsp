@@ -11,7 +11,7 @@
 
     <!--Registration Form-->
     <div class="row justify-content-center mb-5">
-        <div class="col-xl-6 col-lg-8 col-md-8 col-sm-11">
+        <div class="col-xl-6 col-lg-8 col-md-8 col-sm-12">
             <div class="card register-form shadow-lg">
                 <div class="card-header lead">
                     Login

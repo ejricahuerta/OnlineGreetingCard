@@ -17,6 +17,5 @@ public interface UnitOfWorkInterface {
 	RepositoryInterface<Payment> GetPaymentRepo();
 	RepositoryInterface<Address> GetAddressRepo();
 	RepositoryInterface<Account> GetAccountRepo();
-	
-	
+
 }

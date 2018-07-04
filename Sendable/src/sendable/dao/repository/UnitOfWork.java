@@ -1,5 +1,7 @@
 package sendable.dao.repository;
 
+import javax.persistence.EntityManager;
+
 import sendable.dao.entities.Account;
 import sendable.dao.entities.Address;
 import sendable.dao.entities.Card;
@@ -78,4 +80,5 @@ public class UnitOfWork implements UnitOfWorkInterface {
 		return null;
 	}
 
+	
 }

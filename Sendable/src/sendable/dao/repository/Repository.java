@@ -10,11 +10,13 @@ import sendable.dao.database.DatabaseManager;
 
 @SuppressWarnings("rawtypes")
 
-public class Repository<T> implements RepositoryInterface<T> {
+public class Repository<T> implements RepositoryInterface<T>, EntityInterface {
 
 	private Class clazz;
 	private ArrayList<T> AllList = new ArrayList<T>();
 	private EntityManager manager;
+	private EntityManagerFactory ef;
+
 	public Repository(Class clazz) {
 		this.clazz = clazz;
 	}
@@ -24,10 +26,9 @@ public class Repository<T> implements RepositoryInterface<T> {
 	public List<T> ListAll() {
 
 		try {
-			 manager = this.getEntityManager();
-			 manager.getTransaction().begin();
-			AllList = (ArrayList<T>) manager.createQuery("select u from " + clazz.getSimpleName() + " u")
-					.getResultList();
+
+			AllList = (ArrayList<T>) this.GetEntityManager()
+					.createQuery("select u from " + clazz.getSimpleName() + " u").getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -40,9 +41,8 @@ public class Repository<T> implements RepositoryInterface<T> {
 	@Override
 	public T Get(int id) {
 		try {
-			manager = this.getEntityManager();
-			manager.getTransaction().begin();
-			return (T) manager.find(clazz, id);
+
+			return (T) this.GetEntityManager().find(clazz, id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -53,16 +53,16 @@ public class Repository<T> implements RepositoryInterface<T> {
 	@Override
 	public void Insert(T obj) {
 		try {
-			manager = this.getEntityManager();
-			manager.getTransaction().begin();
-			manager.persist(obj);
-			manager.getTransaction().commit();
+
+			this.GetEntityManager().persist(obj);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 		manager.close();
-		manager  = null;
-		
+		manager = null;
+
 	}
 
 	@Override
@@ -75,48 +75,51 @@ public class Repository<T> implements RepositoryInterface<T> {
 	@Override
 	public void Remove(int id) {
 		try {
-			manager = this.getEntityManager();
-			manager.getTransaction().begin();
-			T obj = (T) this.manager.find(clazz, id);
+
+			T obj = (T) this.GetEntityManager().find(clazz, id);
 			manager.remove(obj);
-			manager.getTransaction().commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		manager.close();
-		manager  = null;
+		this.Commit();
 
 	}
 
 	@Override
 	public void Update(T obj) {
 		try {
-			manager = this.getEntityManager();
-			manager.getTransaction().begin();
-			
-			manager.merge(obj);
-			manager.getTransaction().commit();
+			this.GetEntityManager().merge(obj);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		manager.close();
+		this.Commit();
+		this.Close();
 		manager = null;
 	}
 
-	public EntityManager getEntityManager() {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("sendable_hibernate");
-		return ((EntityManager) emf.createEntityManager());
+	@Override
+	public EntityManager GetEntityManager() {
+		if (manager == null) {
+
+			ef = Persistence.createEntityManagerFactory("sendable_hibernate");
+			manager = ef.createEntityManager();
+			manager.getTransaction().begin();
+		}
+		return manager;
 	}
 
-//	public static void main(String[] args) {
-//		RepositoryInterface<User> user = new Repository<User>(User.class);
-//
-//		for (User u : user.ListAll()) {
-//			System.out.println(u.getEmail());
-//		}
-//		System.out.println("End..");
-//		
-//		
-//
-//	}
+	@Override
+	public void Close() {
+		manager.close();
+		ef.close();
+		ef = null;
+		manager = null;
+
+	}
+
+	@Override
+	public void Commit() {
+		manager.getTransaction().commit();
+
+	}
 }

@@ -11,7 +11,6 @@
   <!--heading-->
   <section class="catchphrase row justify-content-center mt-3 mx-auto">
     <div class="col-md-8">
-
       <div class="card text-center shadow-sm">
         <div class="card-header lead">
           Search
@@ -28,7 +27,6 @@
           </form>
         </div>
       </div>
-    </div>
     </div>
   </section>
   <section class="container">
