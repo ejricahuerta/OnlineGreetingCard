@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 3-Jul-2018 10:49:55 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <subclass name="sendable.dao.entities.Payment" extends="sendable.dao.entities.BaseEntity" discriminator-value="Payment" lazy="false">
+        <property name="CardLetterId" type="int">
+            <column name="CARDLETTERID" />
+        </property>
+        <many-to-one name="BillingAddress" class="sendable.dao.entities.Address" fetch="join">
+            <column name="BILLINGADDRESS" />
+        </many-to-one>
+        <property name="BillingId" type="int">
+            <column name="BILLINGID" />
+        </property>
+        <many-to-one name="User" class="sendable.dao.entities.User" access="field" fetch="join">
+            <column name="USER" />
+        </many-to-one>
+        <property name="ShippingId" type="int">
+            <column name="SHIPPINGID" />
+        </property>
+        <property name="UserId" type="int">
+            <column name="USERID" />
+        </property>
+        <many-to-one name="CardLetter" class="sendable.dao.entities.CardLetter" access="field" fetch="join">
+            <column name="CARDLETTER" />
+        </many-to-one>
+        <many-to-one name="ShippingAddress" class="sendable.dao.entities.Address" fetch="join">
+            <column name="SHIPPINGADDRESS" />
+        </many-to-one>
+        <property name="PaymentType" type="java.lang.String">
+            <column name="PAYMENTTYPE" />
+        </property>
+        <property name="TotalAmount" type="double">
+            <column name="TOTALAMOUNT" />
+        </property>
+        <property name="DateAdded" type="java.lang.String">
+            <column name="DATEADDED" />
+        </property>
+    </subclass>
+</hibernate-mapping>

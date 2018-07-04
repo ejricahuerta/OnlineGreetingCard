@@ -16,12 +16,13 @@
   <property name="hibernate.format_sql">true</property>
   <property name="hibernate.default_entity_mode">pojo</property>
   <!-- Mapping properties -->
-  <mapping resource="hibernate/mapping/User.hbm.xml"/>
-  <mapping resource="hibernate/mapping/Account.hbm.xml"/>
-  <mapping resource="hibernate/mapping/Card.hbm.xml"/>
-  <mapping resource="hibernate/mapping/Category.hbm.xml"/>
-  <mapping resource="hibernate/mapping/CardLetter.hbm.xml"/>
-  <mapping resource="hibernate/mapping/Address.hbm.xml"/>
-  <mapping resource="hibernate/mapping/Payment.hbm.xml"/>
+  <mapping resource="sendable/dao/entities/User.hbm.xml"/>
+  <mapping resource="sendable/dao/entities/Address.hbm.xml"/>
+  <mapping resource="sendable/dao/entities/BaseEntity.hbm.xml"/>
+  <mapping resource="sendable/dao/entities/Card.hbm.xml"/>
+  <mapping resource="sendable/dao/entities/CardLetter.hbm.xml"/>
+  <mapping resource="sendable/dao/entities/Category.hbm.xml"/>
+  <mapping resource="sendable/dao/entities/Payment.hbm.xml"/>
+  <mapping resource="sendable/dao/entities/Account.hbm.xml"/>
  </session-factory>
 </hibernate-configuration>

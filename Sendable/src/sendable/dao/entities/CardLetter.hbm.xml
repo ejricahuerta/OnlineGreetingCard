@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 3-Jul-2018 10:49:55 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <subclass name="sendable.dao.entities.CardLetter" extends="sendable.dao.entities.BaseEntity" discriminator-value="CardLetter" lazy="false">
+        <property name="UserId" type="int">
+            <column name="USERID" />
+        </property>
+        <property name="TotalCost" type="double">
+            <column name="TOTALCOST" />
+        </property>
+        <property name="Status" type="java.lang.String">
+            <column name="STATUS" />
+        </property>
+        <property name="FontStyle" type="java.lang.String" access="field">
+            <column name="FONTSTYLE" />
+        </property>
+        <many-to-one name="User" class="sendable.dao.entities.User" access="field" fetch="join">
+            <column name="USER" />
+        </many-to-one>
+        <property name="DateSent" type="java.lang.String">
+            <column name="DATESENT" />
+        </property>
+        <property name="Message" type="java.lang.String">
+            <column name="MESSAGE" />
+        </property>
+        <property name="CardId" type="int">
+            <column name="CARDID" />
+        </property>
+        <property name="DateAdded" type="java.lang.String">
+            <column name="DATEADDED" />
+        </property>
+        <many-to-one name="Card" class="sendable.dao.entities.Card" access="field" fetch="join">
+            <column name="CARD" />
+        </many-to-one>
+    </subclass>
+</hibernate-mapping>

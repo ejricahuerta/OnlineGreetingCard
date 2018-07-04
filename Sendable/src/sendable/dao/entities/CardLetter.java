@@ -4,6 +4,8 @@ public class CardLetter extends BaseEntity {
 	
 	int UserId;
 	int CardId;
+	User User;
+	Card Card;
 	String Message;
 	String FontStyle;
 	double TotalCost;

@@ -8,11 +8,12 @@ public class User extends BaseEntity {
 
 	int AccountId;
 	int CurrentAddressId;
+	Account Account;
+	Address CurrentAddress;
 	String FullName;
 	String Email;
 	String Phone;
 	String HashedPassword;
-	Address CurrentAddress;
 	String DateAdded;
 
 	public User() {

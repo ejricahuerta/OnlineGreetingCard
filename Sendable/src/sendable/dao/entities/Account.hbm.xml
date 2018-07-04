@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 3-Jul-2018 10:49:55 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <subclass name="sendable.dao.entities.Account" extends="sendable.dao.entities.BaseEntity" discriminator-value="Account" lazy="false">
+        <property name="UserId" type="int">
+            <column name="USERID" />
+        </property>
+        <one-to-one name="User" class="sendable.dao.entities.User" access="field"></one-to-one>
+        <property name="Credit" type="double">
+            <column name="CREDIT" />
+        </property>
+        <property name="LastTopUpDate" type="java.lang.String">
+            <column name="LASTTOPUPDATE" />
+        </property>
+    </subclass>
+</hibernate-mapping>

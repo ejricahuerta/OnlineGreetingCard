@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 3-Jul-2018 10:49:55 PM by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <subclass name="sendable.dao.entities.User" extends="sendable.dao.entities.BaseEntity" discriminator-value="User" lazy="false">
+        <property name="AccountId" type="int">
+            <column name="ACCOUNTID" />
+        </property>
+        <property name="CurrentAddressId" type="int">
+            <column name="CURRENTADDRESSID" />
+        </property>
+        <one-to-one name="Account" class="sendable.dao.entities.Account" access="field"></one-to-one>
+        <many-to-one name="CurrentAddress" class="sendable.dao.entities.Address" access="field" fetch="join">
+            <column name="CURRENTADDRESS" />
+        </many-to-one>
+        <property name="Email" type="java.lang.String">
+            <column name="EMAIL" />
+        </property>
+        <property name="Phone" type="java.lang.String">
+            <column name="PHONE" />
+        </property>
+        <property name="FullName" type="java.lang.String">
+            <column name="FULLNAME" />
+        </property>
+        <property name="DateAdded" type="java.lang.String">
+            <column name="DATEADDED" />
+        </property>
+        <property name="HashedPassword" type="java.lang.String" access="field">
+            <column name="HASHEDPASSWORD" />
+        </property>
+    </subclass>
+</hibernate-mapping>

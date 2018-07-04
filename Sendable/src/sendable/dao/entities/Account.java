@@ -4,6 +4,7 @@ package sendable.dao.entities;
 public class Account extends BaseEntity{
 	
 	int UserId;
+	User User;
 	double Credit;
 	String LastTopUpDate;
 	

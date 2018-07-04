@@ -6,12 +6,13 @@ public class Payment extends BaseEntity {
 	int UserId;
 	int ShippingId;
 	int BillingId;
+	CardLetter CardLetter;
+	User User;
+	Address BillingAddress;
+	Address ShippingAddress;
 	String DateAdded;
 	String PaymentType;
 	double TotalAmount;
-
-	Address BillingAddress;
-	Address ShippingAddress;
 
 	public Payment() {
 		super(0);

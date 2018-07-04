@@ -3,6 +3,7 @@ package sendable.dao.entities;
 public class Card extends BaseEntity {
 
 	int CategoryId;
+	Category Category;
 	String Name;
 	String Description;
 	double Price;
