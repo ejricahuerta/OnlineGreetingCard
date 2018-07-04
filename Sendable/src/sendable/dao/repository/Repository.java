@@ -2,9 +2,7 @@ package sendable.dao.repository;
 
 import java.util.*;
 
-import sendable.dao.entities.BaseEntity;
-
-public class Repository<T extends BaseEntity> implements RepositoryInterface<T> 
+public class Repository<T> implements RepositoryInterface<T> 
 {
 	@SuppressWarnings("unused")
 	private Class<?> clazz;
@@ -26,7 +24,7 @@ public class Repository<T extends BaseEntity> implements RepositoryInterface<T>
 	}
 
 	@Override
-	public void Insert(BaseEntity obj) {
+	public void Insert(T obj) {
 		// TODO Auto-generated method stub
 		
 	}

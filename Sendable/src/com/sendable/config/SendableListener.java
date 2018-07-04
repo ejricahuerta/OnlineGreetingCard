@@ -50,6 +50,7 @@ public class SendableListener implements ServletContextListener {
 		arg0.getServletContext().setAttribute("userService",
 				new UserService(new Repository<User>(User.class), 
 						new Repository<CardLetter>(CardLetter.class),
+						new Repository<Card>(Card.class),
 						new Repository<Account>(Account.class),
 						new Repository<Payment>(Payment.class), 
 						new Repository<Address>(Address.class)));

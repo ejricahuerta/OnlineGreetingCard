@@ -3,40 +3,52 @@
  */
 package sendable.dao.entities;
 
+import javax.persistence.*;
 
-public class User extends BaseEntity {
+@Entity
+public class User{
 
+	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
+	int Id;
+	
 	int AccountId;
-	int CurrentAddressId;
-	Account Account;
-	Address CurrentAddress;
 	String FullName;
 	String Email;
 	String Phone;
 	String HashedPassword;
 	String DateAdded;
 
+	@OneToOne
+	Account Account;
+	@Transient
+	Address CurrentAddress;
+
 	public User() {
-		super(0);
 		this.DateAdded = DateTime.GetCurrentDate();
 	}
 	
 	public User(String email, String password) {
-		super(0);
 		this.DateAdded = DateTime.GetCurrentDate();
 		this.Email = email;
 		this.HashedPassword = password;
 	}
 	
 	public User(String firstname,String lastname, String password, String email, String phone,Address current) {
-		super(0);
 		this.DateAdded = DateTime.GetCurrentDate();
 		this.setFullName(firstname,lastname);
 		this.setPassword(password);
 		this.setEmail(email);
 		this.setPhone(phone);
 		this.CurrentAddress = current;
-		this.setCurrentAddressId(current.getId());
+	}
+
+	public int getId() {
+		return Id;
+	}
+
+	public void setId(int id) {
+		Id = id;
 	}
 
 	public int getAccountId() {
@@ -72,8 +84,8 @@ public class User extends BaseEntity {
 		return this.HashedPassword;
 	}
 	
-	public void setAddress(String line1, String line2, String city, String state, String postalcode) {
-		this.CurrentAddress = new Address(line1,line2,city,state,postalcode); 
+	public void setAddress(Address address) {
+		this.CurrentAddress = address;
 	}
 	
 	public Address getCurrentAddress() {
@@ -93,14 +105,6 @@ public class User extends BaseEntity {
 
 	public void setDateAdded(String dateAdded) {
 		DateAdded = dateAdded;
-	}
-
-	public int getCurrentAddressId() {
-		return this.CurrentAddressId;
-	}
-
-	private void setCurrentAddressId(int currentAddressId) {
-		this.CurrentAddressId = currentAddressId;
 	}
 
 	public String getPhone() {

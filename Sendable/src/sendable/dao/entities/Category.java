@@ -1,49 +1,46 @@
 package sendable.dao.entities;
 
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * @author exd
- *
- */
-public class Category extends BaseEntity{
+import javax.persistence.*;
 
+@Entity
+@Table
+public class Category {
+	
+	@Id
+	@GeneratedValue(strategy  = GenerationType.AUTO)
+	int Id;
 	String Name;
 	String Description;
 	String DateAdded;
-
-	public Category() {
-		super(0);
-		this.DateAdded = DateTime.GetCurrentDate();
-	}
-
-	/**
-	 * @param id
-	 * @param name
-	 * @param description
-	 * @param cards
-	 * @param dateAdded
-	 */
 	
+	@OneToMany
+	List<Card> Cards = new ArrayList<Card>();
+
 	
-	public Category(int id, String name, String description, String dateAdded) {
-		super(id);
+	public Category() {}
+	
+	public Category( String name, String description, String dateAdded) {
 		Name = name;
 		Description = description;
 		DateAdded = dateAdded;
 	}
 
-	/**
-	 * @param id
-	 * @param name
-	 * @param description
-	 */
 	public Category(int id, String name, String description) {
-		super(id);
 		Name = name;
 		Description = description;
 		DateAdded = DateTime.GetCurrentDate();
 	}
 
+	public int getId() {
+		return Id;
+	}
+	
+	public void setId(int id) {
+		Id = id;
+	}
 	public String getName() {
 		return this.Name;
 	}
@@ -59,8 +56,19 @@ public class Category extends BaseEntity{
 	public void setDescription(String description) {
 		this.Description = description;
 	}
-	
+
 	public String getDateAdded() {
 		return this.DateAdded;
 	}
+
+
+	public List<Card> getCards() {
+		return Cards;
+	}
+
+	public void setCards(List<Card> cards) {
+		Cards = cards;
+	}
+	
+	
 }

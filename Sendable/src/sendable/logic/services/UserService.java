@@ -12,6 +12,7 @@ public class UserService implements UserInterface {
 
 	private RepositoryInterface<User> userRepository;
 	private RepositoryInterface<CardLetter> cardletterRepository;
+	private RepositoryInterface<Card> cardRepository;
 	private RepositoryInterface<Account> accountRepository;
 	private RepositoryInterface<Payment> paymentRepository;
 	private RepositoryInterface<Address> addressRepository;
@@ -20,11 +21,13 @@ public class UserService implements UserInterface {
 
 	public UserService(RepositoryInterface<User> userrepo,
 					RepositoryInterface<CardLetter> cardletterrepo,
+					RepositoryInterface<Card> cardrepo,
 					RepositoryInterface<Account> accountrepo,
 					RepositoryInterface<Payment> paymentrepo,
 					RepositoryInterface<Address> addressrepo) {
 		this.userRepository = userrepo;
 		this.cardletterRepository = cardletterrepo;
+		this.cardRepository = cardrepo;
 		this.accountRepository = accountrepo;
 		this.paymentRepository = paymentrepo;
 		this.addressRepository = addressrepo;
@@ -110,8 +113,9 @@ public class UserService implements UserInterface {
 					}
 					u.setCurrentAddress(address);
 					User user = this.userRepository.Get(userId);
-					user.setAddress(line1, line2, city, state, postalcode);
-					this.userRepository.Update(user);
+					 Address useraddress = addressRepository.Get(user.getCurrentAddress().getId());
+					 useraddress.Update(line1, line2, city, state, postalcode);
+					 this.addressRepository.Update(useraddress);
 				}
 			});
 			return true;
@@ -148,8 +152,10 @@ public class UserService implements UserInterface {
 					u.getCardLetters().add(letter);
 
 					// add new card
+					User userLetter  = this.userRepository.Get(UserId);
+					Card card = this.cardRepository.Get(letter.getCardId());
 					this.cardletterRepository.Insert(
-							new CardLetter(letter.getId(), letter.getUserId(), letter.getCardId(), letter.getMessage(),
+							new CardLetter(userLetter, card, letter.getMessage(),
 									letter.getFontStyle(), letter.getTotalCost(), letter.getDateAdded()));
 				}
 			});
@@ -185,8 +191,8 @@ public class UserService implements UserInterface {
 
 			// get all cards where user id == userId
 			this.cardletterRepository.ListAll().forEach(c -> {
-				if (c.getUserId() == user.getId()) {
-					cardletters.add(new CardLetterDto(c.getId(), c.getUserId(), c.getCardId(), c.getMessage(),
+				if (c.getUser() == user) {
+					cardletters.add(new CardLetterDto(c.getId(), c.getUser().getId(), c.getCard().getId(), c.getMessage(),
 							c.getFont(), c.getTotalCost(), c.getDateAdded()));
 				}
 			});
@@ -195,24 +201,23 @@ public class UserService implements UserInterface {
 			Account account = this.accountRepository.Get(user.getAccountId());
 
 			// user account mapping
-			AccountDto accountdto = new AccountDto(account.getId(), account.getUserId(), account.getCredit(),
+			AccountDto accountdto = new AccountDto(account.getId(), account.getUser().getId(), account.getCredit(),
 					account.getLastTopUpDate());
 
 			List<PaymentDto> allpayments = new ArrayList<PaymentDto>();
 			this.paymentRepository.ListAll().forEach(p -> {
-				if (p.getUserId() == user.getId()) {
+				if (p.getUser() == user) {
 
 					// user payment mapping
-					allpayments.add(new PaymentDto(p.getId(), p.getUserId(), p.getCardLetterId(),
+					allpayments.add(new PaymentDto(p.getId(), p.getUser().getId(), p.getCardLetter().getId(),
 							p.getBillingAddress().GetAddressString(), p.getShippingAddress().GetAddressString(),
 							p.getPaymentType(), p.getDateAdded(), p.getTotalAmount()));
 				}
 			});
 
 			for (Address address : this.addressRepository.ListAll()) {
-				if (address.getId() == user.getCurrentAddressId()) {
-					user.setAddress(address.getLine1(), address.getLine2(), address.getCity(), address.getState(),
-							address.getPostalCode());
+				if (address.getId() == user.getCurrentAddress().getId()) {
+					user.setAddress(address);
 					break;
 				}
 			}

@@ -1,23 +1,29 @@
+
 package sendable.dao.entities;
 
-public class Address extends BaseEntity {
+import javax.persistence.*;
 
+@Entity
+@Table
+public class Address {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	int Id;
+	
 	String Line1;
 	String Line2;
 	String City;
 	String State;
 	String PostalCode;
 
-	public Address() {
-		super(0);
-	}
-
+	public Address() {}
+	
 	public Address(String line1, 
 			String line2, 
 			String city, 
 			String state, 
 			String postalcode) {
-		super(0);
 		this.Line1 = line1;
 		this.Line2 = line2;
 		this.City = city;
@@ -25,6 +31,13 @@ public class Address extends BaseEntity {
 		this.PostalCode = postalcode;
 	}
 	
+	public void setId(int id) {
+		this.Id = id;
+	}
+
+	public int getId() {
+		return this.Id;
+	}
 
 	public String getLine1() {
 		return this.Line1;
@@ -61,4 +74,13 @@ public class Address extends BaseEntity {
 				this.getState(),
 				this.getPostalCode());
 	}
+	
+	public void Update(String line1, String line2, String city, String state, String postal) {
+		this.Line1  = line1;
+		this.Line2 = line2;
+		this.City = city;
+		this.State = state;
+		this.PostalCode = postal;
+	}
+	
 }

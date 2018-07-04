@@ -1,22 +1,32 @@
 package sendable.dao.entities;
 
-public class CardLetter extends BaseEntity {
-	
-	int UserId;
-	int CardId;
-	User User;
-	Card Card;
+import javax.persistence.Entity;
+import javax.persistence.*;
+
+@Entity
+@Table
+public class CardLetter {
+	@Id
+	@GeneratedValue(strategy  = GenerationType.AUTO)
+	int Id;
 	String Message;
 	String FontStyle;
 	double TotalCost;
 	String DateAdded;
 	String Status;
 	String DateSent;
+	
+	@ManyToOne
+	User User;
+	@OneToOne
+	Card Card;
+	
+	public CardLetter() {}
+	
+	public CardLetter(User user ,Card card, String message, String font,double totalCost, String dateAdded) {
 
-	public CardLetter(int id, int userId ,int cardId, String message, String font,double totalCost, String dateAdded) {
-		super(id);
-		UserId = userId;
-		this.CardId = cardId;
+		this.User = user;
+		this.Card  = card;
 		this.Message = message;
 		this.FontStyle = font;
 		this.setTotalCost(totalCost);
@@ -25,24 +35,36 @@ public class CardLetter extends BaseEntity {
 	}
 	
 	
-	public int getUserId() {
-		return UserId;
-	}
-
-	public void setUserId(int userId) {
-		UserId = userId;
+	public int getId() {
+		return Id;
 	}
 
 
+	public void setId(int id) {
+		Id = id;
+	}
 
-	public int getCardId() {
-		return this.CardId;
+
+	public User getUser() {
+		return User;
 	}
-	
-	public void setCard(int cardId) {
-		this.CardId = cardId;
+
+
+	public void setUser(User user) {
+		User = user;
 	}
-	
+
+
+	public Card getCard() {
+		return Card;
+	}
+
+
+	public void setCard(Card card) {
+		Card = card;
+	}
+
+
 	public String getMessage() {
 		return this.Message;
 	}
@@ -72,17 +94,9 @@ public class CardLetter extends BaseEntity {
 	}
 
 
-
-	public void setCardId(int cardId) {
-		CardId = cardId;
-	}
-
-
-
 	public double getTotalCost() {
 		return TotalCost;
 	}
-
 
 
 	private void setTotalCost(double totalCost) {

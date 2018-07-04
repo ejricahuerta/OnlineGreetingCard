@@ -1,36 +1,60 @@
 package sendable.dao.entities;
 
+import javax.persistence.*;
 
-public class Account extends BaseEntity{
+@Entity
+@Table
+public class Account {
 	
-	int UserId;
-	User User;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	int Id;
 	double Credit;
 	String LastTopUpDate;
 	
-	public Account(int userId, double credit, String lastTopUpDate) {
-		super(0);
-		UserId = userId;
+	@OneToOne
+	User User;
+
+	public Account() {}
+	
+	public Account(User	user, double credit, String lastTopUpDate) {
+		this.User = user;
 		Credit = credit;
 		LastTopUpDate = lastTopUpDate;
 	}
+
+	public void setId(int id) {
+		this.Id = id;
+	}
+
+	public int getId() {
+		return this.Id;
+	}
+
 	public double getCredit() {
 		return Credit;
 	}
-	public void setCredit(double credit) {		
+
+	public void setCredit(double credit) {
 		Credit = credit;
 		LastTopUpDate = DateTime.GetCurrentDate();
 	}
+
 	public String getLastTopUpDate() {
 		return LastTopUpDate;
 	}
+
 	public void setLastTopUpDate(String lastTopUpDate) {
 		LastTopUpDate = lastTopUpDate;
 	}
-	public int getUserId() {
-		return UserId;
+
+	public User getUser() {
+		return User;
 	}
-	public void setUserId(int userId) {
-		UserId = userId;
+
+	public void setUser(User user) {
+		User = user;
 	}
+	
+
 }

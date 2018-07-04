@@ -97,9 +97,15 @@ public class PaymentService implements PaymentInterface {
 	
 	private PaymentDto MapPayment(Payment payment) {
 		try {
-			return new PaymentDto(payment.getId(), payment.getCardLetterId(), payment.getUserId(),
-					payment.getShippingAddress().GetAddressString(), payment.getBillingAddress().GetAddressString(),
-					payment.getDateAdded(), payment.getPaymentType(), payment.getTotalAmount());
+			
+			return new PaymentDto(payment.getId(), 
+					payment.getCardLetter().getId(), 
+					payment.getUser().getId(),
+					payment.getShippingAddress().GetAddressString(), 
+					payment.getBillingAddress().GetAddressString(),
+					payment.getDateAdded(), payment.getPaymentType(), 
+					payment.getTotalAmount());
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

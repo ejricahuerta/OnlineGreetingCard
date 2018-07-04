@@ -1,51 +1,70 @@
 package sendable.dao.entities;
 
-public class Payment extends BaseEntity {
+import javax.persistence.*;
 
-	int CardLetterId;
-	int UserId;
-	int ShippingId;
-	int BillingId;
-	CardLetter CardLetter;
-	User User;
-	Address BillingAddress;
-	Address ShippingAddress;
+@Entity
+@Table
+public class Payment{
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	int Id;
+	
 	String DateAdded;
 	String PaymentType;
 	double TotalAmount;
+	
+	@OneToOne
+	CardLetter CardLetter;
+	@OneToOne
+	User User;
+	
+	@Transient
+	Address BillingAddress;
+	
+	@Transient
+	Address ShippingAddress;
+	
+
 
 	public Payment() {
-		super(0);
+
 		DateAdded = DateTime.GetCurrentDate();
 	}
 
-	public Payment(int id, int cardLetterId, int userId, String paymentType, double totalAmount, Address billingAddress,
+	public Payment(CardLetter cardLetter, User user, String paymentType, double totalAmount, Address billingAddress,
 			Address shippingAddress) {
-		super(id);
-		this.CardLetterId = cardLetterId;
+		
 		PaymentType = paymentType;
 		TotalAmount = totalAmount;
 		BillingAddress = billingAddress;
 		ShippingAddress = shippingAddress;
-		this.setBillingId(billingAddress.getId());
-		this.setShippingId(shippingAddress.getId());
 		this.DateAdded = DateTime.GetCurrentDate();
 	}
 
-	public int getUserId() {
-		return UserId;
+	
+	public int getId() {
+		return Id;
 	}
 
-	public void setUserId(int userId) {
-		UserId = userId;
+	public void setId(int id) {
+		Id = id;
 	}
 
-	private void setShippingId(int shippingId) {
-		ShippingId = shippingId;
+	public CardLetter getCardLetter() {
+		return CardLetter;
 	}
 
-	private void setBillingId(int billingId) {
-		BillingId = billingId;
+	public void setCardLetter(CardLetter cardLetter) {
+		CardLetter = cardLetter;
+	}
+
+	public User getUser() {
+		return User;
+	}
+
+	public void setUser(User user) {
+		User = user;
 	}
 
 	public String getDateAdded() {
@@ -88,21 +107,6 @@ public class Payment extends BaseEntity {
 		ShippingAddress = shippingAddress;
 	}
 
-	public int getCardLetterId() {
-		return CardLetterId;
-	}
-
-	public void setCardLetterId(int cardLetterId) {
-		CardLetterId = cardLetterId;
-	}
-
-	public int getShippingId() {
-		return ShippingId;
-	}
-
-	public int getBillingId() {
-		return BillingId;
-	}
 	
 
 }
