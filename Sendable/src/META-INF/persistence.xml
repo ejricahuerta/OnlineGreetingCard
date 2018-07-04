@@ -31,7 +31,6 @@
 	</persistence-unit>
 	<persistence-unit name="sendable_hibernate"
 		transaction-type="RESOURCE_LOCAL">
-		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<class>sendable.dao.entities.User</class>
 		<class>sendable.dao.entities.Card</class>
 		<class>sendable.dao.entities.Category</class>
@@ -46,7 +45,7 @@
 				 
 		 	
 			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
-			<property name="hibernate.hbm2ddl.auto" value="update"/>
+			<property name="hibernate.hbm2ddl.auto" value="create-drop"/>
 			<property name="hibernate.id.new_generator_mappings" value="true"/>	
 					
 	

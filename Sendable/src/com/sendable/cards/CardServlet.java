@@ -14,24 +14,22 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Card")
 public class CardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
 
-    public CardServlet() {
-        super();
-    }
-
+	public CardServlet() {
+		super();
+	}
 
 	public void init(ServletConfig config) throws ServletException {
 		// TODO Auto-generated method stub
 	}
 
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 	}
 
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
 	}
 

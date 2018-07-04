@@ -8,27 +8,27 @@ import javax.persistence.*;
 @Entity
 @Table
 public class Category {
-	
+
 	@Id
-	@GeneratedValue(strategy  = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	int Id;
 	String Name;
 	String Description;
 	String DateAdded;
-	
+
 	@OneToMany
 	List<Card> Cards = new ArrayList<Card>();
 
-	
-	public Category() {}
-	
-	public Category( String name, String description, String dateAdded) {
+	public Category() {
+	}
+
+	public Category(String name, String description, String dateAdded) {
 		Name = name;
 		Description = description;
 		DateAdded = dateAdded;
 	}
 
-	public Category(int id, String name, String description) {
+	public Category(String name, String description) {
 		Name = name;
 		Description = description;
 		DateAdded = DateTime.GetCurrentDate();
@@ -37,10 +37,11 @@ public class Category {
 	public int getId() {
 		return Id;
 	}
-	
+
 	public void setId(int id) {
 		Id = id;
 	}
+
 	public String getName() {
 		return this.Name;
 	}
@@ -61,7 +62,6 @@ public class Category {
 		return this.DateAdded;
 	}
 
-
 	public List<Card> getCards() {
 		return Cards;
 	}
@@ -69,6 +69,5 @@ public class Category {
 	public void setCards(List<Card> cards) {
 		Cards = cards;
 	}
-	
-	
+
 }

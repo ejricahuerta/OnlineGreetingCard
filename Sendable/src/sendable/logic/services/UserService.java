@@ -5,6 +5,7 @@ import java.util.List;
 
 import sendable.dao.entities.*;
 import sendable.dao.repository.RepositoryInterface;
+import sendable.dao.repository.UnitOfWork;
 import sendable.logic.dtos.*;
 import sendable.logic.interfaces.UserInterface;
 
@@ -16,21 +17,30 @@ public class UserService implements UserInterface {
 	private RepositoryInterface<Account> accountRepository;
 	private RepositoryInterface<Payment> paymentRepository;
 	private RepositoryInterface<Address> addressRepository;
+	
+	private UnitOfWork unit;
 
+	
+	
 	private ArrayList<UserDto> AllUsers;
 
-	public UserService(RepositoryInterface<User> userrepo,
-					RepositoryInterface<CardLetter> cardletterrepo,
-					RepositoryInterface<Card> cardrepo,
-					RepositoryInterface<Account> accountrepo,
-					RepositoryInterface<Payment> paymentrepo,
-					RepositoryInterface<Address> addressrepo) {
+	public UserService(UnitOfWork work) {
+		unit  = work;
+	}
+	
+	public UserService(RepositoryInterface<User> userrepo, RepositoryInterface<CardLetter> cardletterrepo,
+			RepositoryInterface<Card> cardrepo, RepositoryInterface<Account> accountrepo,
+			RepositoryInterface<Payment> paymentrepo, RepositoryInterface<Address> addressrepo) {
 		this.userRepository = userrepo;
 		this.cardletterRepository = cardletterrepo;
 		this.cardRepository = cardrepo;
 		this.accountRepository = accountrepo;
 		this.paymentRepository = paymentrepo;
 		this.addressRepository = addressrepo;
+
+	}
+
+	public void Init() {
 		this.AllUsers = new ArrayList<UserDto>();
 
 		this.userRepository.ListAll().forEach(u -> {
@@ -113,9 +123,9 @@ public class UserService implements UserInterface {
 					}
 					u.setCurrentAddress(address);
 					User user = this.userRepository.Get(userId);
-					 Address useraddress = addressRepository.Get(user.getCurrentAddress().getId());
-					 useraddress.Update(line1, line2, city, state, postalcode);
-					 this.addressRepository.Update(useraddress);
+					Address useraddress = addressRepository.Get(user.getCurrentAddress().getId());
+					useraddress.Update(line1, line2, city, state, postalcode);
+					this.addressRepository.Update(useraddress);
 				}
 			});
 			return true;
@@ -152,11 +162,10 @@ public class UserService implements UserInterface {
 					u.getCardLetters().add(letter);
 
 					// add new card
-					User userLetter  = this.userRepository.Get(UserId);
+					User userLetter = this.userRepository.Get(UserId);
 					Card card = this.cardRepository.Get(letter.getCardId());
-					this.cardletterRepository.Insert(
-							new CardLetter(userLetter, card, letter.getMessage(),
-									letter.getFontStyle(), letter.getTotalCost(), letter.getDateAdded()));
+					this.cardletterRepository.Insert(new CardLetter(userLetter, card, letter.getMessage(),
+							letter.getFontStyle(), letter.getTotalCost(), letter.getDateAdded()));
 				}
 			});
 		} catch (Exception e) {
@@ -192,8 +201,8 @@ public class UserService implements UserInterface {
 			// get all cards where user id == userId
 			this.cardletterRepository.ListAll().forEach(c -> {
 				if (c.getUser() == user) {
-					cardletters.add(new CardLetterDto(c.getId(), c.getUser().getId(), c.getCard().getId(), c.getMessage(),
-							c.getFont(), c.getTotalCost(), c.getDateAdded()));
+					cardletters.add(new CardLetterDto(c.getId(), c.getUser().getId(), c.getCard().getId(),
+							c.getMessage(), c.getFont(), c.getTotalCost(), c.getDateAdded()));
 				}
 			});
 
@@ -223,8 +232,9 @@ public class UserService implements UserInterface {
 			}
 
 			// User Dto Mapping
-			UserDto userdto = new UserDto(user.getId(), user.getFullName(), user.getEmail(), user.getPassword(),user.getPhone(),
-					user.getCurrentAddressString(), cardletters, accountdto, user.getDateAdded(), allpayments);
+			UserDto userdto = new UserDto(user.getId(), user.getFullName(), user.getEmail(), user.getPassword(),
+					user.getPhone(), user.getCurrentAddressString(), cardletters, accountdto, user.getDateAdded(),
+					allpayments);
 			return userdto;
 		}
 	}

@@ -3,41 +3,39 @@ package sendable.logic.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
+import sendable.dao.database.DatabaseManager;
+import sendable.dao.database.SeedDatabase;
 import sendable.dao.entities.Card;
 import sendable.dao.entities.Category;
+import sendable.dao.repository.Repository;
 import sendable.dao.repository.RepositoryInterface;
+import sendable.dao.repository.UnitOfWork;
 import sendable.logic.dtos.CardDto;
 import sendable.logic.dtos.CategoryDto;
 import sendable.logic.interfaces.CardInterface;
 
 public class CardService implements CardInterface {
 
-	private RepositoryInterface<Card> cardRepository;
-	private RepositoryInterface<Category> categoryRepository;
-
-	private List<CardDto> AllCards = null;
-	private List<CategoryDto> AllCategory = null;
+	private UnitOfWork unit;
+	
+	private List<CardDto> AllCards = new ArrayList<CardDto>();
+	private List<CategoryDto> AllCategory = new ArrayList<CategoryDto>();
 
 	CardDto card = null;
 
-	public CardService(RepositoryInterface<Card> cardRepo) {
-		this.cardRepository = cardRepo;
-	}
-
-	public CardService(RepositoryInterface<Card> cardRepo, RepositoryInterface<Category> categoryRepo) {
-		this.cardRepository = cardRepo;
-		this.categoryRepository = categoryRepo;
-
-		for (Card card : this.cardRepository.ListAll()) {
-			AllCards.add(this.MapCard(card));
-		}
-		for (Category category : this.categoryRepository.ListAll()) {
-			AllCategory.add(this.MapCategory(category));
-		}
+	public CardService(UnitOfWork work) {
+		unit = work;
 	}
 
 	@Override
 	public List<CardDto> ListCards() {
+		if(AllCards.isEmpty()) {
+			 for (Card c : unit.GetCardRepo().ListAll()) {
+				AllCards.add(this.MapCard(c));
+			}
+		}
 		return this.AllCards;
 	}
 
@@ -72,6 +70,9 @@ public class CardService implements CardInterface {
 
 	@Override
 	public List<CategoryDto> ListCategories() {
+		if(AllCategory.isEmpty()) {
+			
+		}
 		return this.AllCategory;
 	}
 
@@ -116,7 +117,7 @@ public class CardService implements CardInterface {
 	}
 
 	private CardDto MapCard(Card card) {
-		if(card == null) {
+		if (card == null) {
 			return null;
 		}
 		return new CardDto(card.getId(), card.getName(), card.getDescription(), card.getPrice(), card.isAvailable(),
@@ -124,4 +125,24 @@ public class CardService implements CardInterface {
 	}
 
 	
+	
+//	public static void main(String[] args) {
+//		SeedDatabase seed = new SeedDatabase();
+//		
+//		
+//		EntityManager manager =  DatabaseManager.getEntityManager();
+//		manager.getTransaction().begin();
+//		
+//		for (Card c : seed.AddCards()) {
+//			manager.persist(c);
+//		} 
+//		manager.getTransaction().commit();
+//		manager.close();
+//		
+//		CardService cardService = new CardService(new Repository<Card>(Card.class), new Repository<Category>(Category.class));
+//		
+//		System.out.println( cardService.getCard(1).getDateAdded());
+//		System.out.println("End of Test");
+//		
+//	}
 }

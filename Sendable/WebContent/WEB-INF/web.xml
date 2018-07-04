@@ -10,8 +10,4 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
-  <context-param>
-  	<param-name>URL</param-name>
-  	<param-value>jdbc://localhost:3307/sendable</param-value>
-  </context-param>
 </web-app>

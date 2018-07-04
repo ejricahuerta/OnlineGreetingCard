@@ -7,8 +7,8 @@ import javax.persistence.ManyToOne;
 
 @Entity
 @Table
-public class Card{
-	
+public class Card {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	int Id;
@@ -18,7 +18,7 @@ public class Card{
 	String ImageURL;
 	boolean Available;
 	String DateAdded;
-	
+
 	@ManyToOne
 	Category Category;
 
@@ -79,7 +79,6 @@ public class Card{
 	public void setDateAdded(String dateAdded) {
 		DateAdded = dateAdded;
 	}
-	
 
 	public Category getCategory() {
 		return Category;

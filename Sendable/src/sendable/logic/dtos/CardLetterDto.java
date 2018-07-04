@@ -9,8 +9,6 @@ public class CardLetterDto {
 	double TotalCost;
 	String DateAdded;
 
-	
-
 	/**
 	 * @param id
 	 * @param userId
@@ -31,49 +29,61 @@ public class CardLetterDto {
 		TotalCost = totalCost;
 		DateAdded = dateAdded;
 	}
+
 	public int getId() {
 		return Id;
 	}
+
 	public void setId(int id) {
 		Id = id;
 	}
+
 	public int getUserId() {
 		return UserId;
 	}
+
 	public void setUserId(int UserId) {
 		this.UserId = UserId;
 	}
+
 	public int getCardId() {
 		return CardId;
 	}
+
 	public void setCardId(int CardId) {
 		this.CardId = CardId;
 	}
+
 	public String getMessage() {
 		return Message;
 	}
+
 	public void setMessage(String message) {
 		Message = message;
 	}
+
 	public String getFontStyle() {
 		return FontStyle;
 	}
+
 	public void setFontStyle(String fontStyle) {
 		FontStyle = fontStyle;
 	}
+
 	public String getDateAdded() {
 		return DateAdded;
 	}
+
 	public void setDateAdded(String dateAdded) {
 		DateAdded = dateAdded;
 	}
+
 	public double getTotalCost() {
 		return TotalCost;
 	}
+
 	public void setTotalCost(double totalCost) {
 		TotalCost = totalCost;
 	}
-	
-	
-		
+
 }

@@ -4,28 +4,26 @@ import javax.persistence.*;
 
 @Entity
 @Table
-public class Payment{
-	
+public class Payment {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	int Id;
-	
+
 	String DateAdded;
 	String PaymentType;
 	double TotalAmount;
-	
+
 	@OneToOne
 	CardLetter CardLetter;
 	@OneToOne
 	User User;
-	
+
 	@Transient
 	Address BillingAddress;
-	
+
 	@Transient
 	Address ShippingAddress;
-	
-
 
 	public Payment() {
 
@@ -34,7 +32,7 @@ public class Payment{
 
 	public Payment(CardLetter cardLetter, User user, String paymentType, double totalAmount, Address billingAddress,
 			Address shippingAddress) {
-		
+
 		PaymentType = paymentType;
 		TotalAmount = totalAmount;
 		BillingAddress = billingAddress;
@@ -42,7 +40,6 @@ public class Payment{
 		this.DateAdded = DateTime.GetCurrentDate();
 	}
 
-	
 	public int getId() {
 		return Id;
 	}
@@ -106,7 +103,5 @@ public class Payment{
 	public void setShippingAddress(Address shippingAddress) {
 		ShippingAddress = shippingAddress;
 	}
-
-	
 
 }

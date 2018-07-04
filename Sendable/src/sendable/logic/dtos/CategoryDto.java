@@ -3,7 +3,7 @@ package sendable.logic.dtos;
 import java.util.List;
 
 public class CategoryDto {
-	
+
 	int Id;
 	String Name;
 	String Description;
@@ -57,6 +57,5 @@ public class CategoryDto {
 	public void setCards(List<CardDto> cards) {
 		Cards = cards;
 	}
-	
-	
+
 }

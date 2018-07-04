@@ -4,9 +4,7 @@ import java.util.*;
 
 import javax.persistence.EntityManager;
 
-
 import sendable.dao.database.DatabaseManager;
-import sendable.dao.entities.User;
 
 @SuppressWarnings("rawtypes")
 
@@ -15,6 +13,7 @@ public class Repository<T> implements RepositoryInterface<T> {
 	private EntityManager manager;
 	private Class clazz;
 	private ArrayList<T> AllList = null;
+
 	public Repository(Class clazz) {
 		this.clazz = clazz;
 		manager = DatabaseManager.getEntityManager();
@@ -26,7 +25,8 @@ public class Repository<T> implements RepositoryInterface<T> {
 
 		try {
 			manager.getTransaction().begin();
-			 AllList =  (ArrayList<T>) manager.createQuery("select u from " + clazz.getSimpleName()    +" u").getResultList();
+			AllList = (ArrayList<T>) manager.createQuery("select u from " + clazz.getSimpleName() + " u")
+					.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -38,7 +38,7 @@ public class Repository<T> implements RepositoryInterface<T> {
 	@Override
 	public T Get(int id) {
 		try {
-			return (T) manager.find(clazz, id); 
+			return (T) manager.find(clazz, id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -52,7 +52,6 @@ public class Repository<T> implements RepositoryInterface<T> {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 	@Override
@@ -83,15 +82,15 @@ public class Repository<T> implements RepositoryInterface<T> {
 
 	}
 
-	public static void main(String[] args) {
-		RepositoryInterface<User> user = new Repository<User>(User.class);
-
-		for (User u : user.ListAll()) {
-			System.out.println(u.getEmail());
-		}
-		System.out.println("End..");
-		
-		
-
-	}
+//	public static void main(String[] args) {
+//		RepositoryInterface<User> user = new Repository<User>(User.class);
+//
+//		for (User u : user.ListAll()) {
+//			System.out.println(u.getEmail());
+//		}
+//		System.out.println("End..");
+//		
+//		
+//
+//	}
 }

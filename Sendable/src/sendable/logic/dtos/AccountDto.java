@@ -13,16 +13,13 @@ public class AccountDto {
 		LastTopUpDate = lastTopUpDate;
 	}
 
-	
 	public int getId() {
 		return Id;
 	}
 
-
 	public void setId(int id) {
 		Id = id;
 	}
-
 
 	public int getUserId() {
 		return UserId;
@@ -47,7 +44,5 @@ public class AccountDto {
 	public void setLastTopUpDate(String lastTopUpDate) {
 		LastTopUpDate = lastTopUpDate;
 	}
-	
-	
-	
+
 }

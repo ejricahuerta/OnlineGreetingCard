@@ -38,7 +38,17 @@ public class SeedDatabase {
 
 	public List<Category> AddCategories() {
 		if (AllCategories.isEmpty()) {
+			this.AllCategories.add(new Category("Birthdays", "All Birthday Greetings"));
 
+			this.AllCategories.add(new Category("Aniversaries", "All Aniversary Greetings"));
+
+			this.AllCategories.add(new Category("Parents", "All Parents Ocassion Greetings"));
+
+			this.AllCategories.add(new Category("Birthday", "All Birthday Greetings"));
+
+			this.AllCategories.add(new Category("Birthday", "All Birthday Greetings"));
+
+			this.AllCategories.add(new Category("Birthday", "All Birthday Greetings"));
 		}
 		return this.AllCategories;
 	}
@@ -47,15 +57,15 @@ public class SeedDatabase {
 		return this.Seeded;
 	}
 
-	public static void main(String[] args) {
-
-		EntityManager manager = DatabaseManager.getEntityManager();
-		manager.getTransaction().begin();
-		SeedDatabase seed = new SeedDatabase();
-		for (User u : seed.AddUsers()) {
-			manager.persist(u);
-		}
-		manager.getTransaction().commit();
-		manager.close();
-	}
+//	public static void main(String[] args) {
+//
+//		EntityManager manager = DatabaseManager.getEntityManager();
+//		manager.getTransaction().begin();
+//		SeedDatabase seed = new SeedDatabase();
+//		for (User u : seed.AddUsers()) {
+//			manager.persist(u);
+//		}
+//		manager.getTransaction().commit();
+//		manager.close();
+//	}
 }

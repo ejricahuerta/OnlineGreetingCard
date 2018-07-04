@@ -9,6 +9,7 @@ import sendable.dao.entities.CardLetter;
 import sendable.dao.entities.Payment;
 import sendable.dao.entities.User;
 import sendable.dao.repository.RepositoryInterface;
+import sendable.dao.repository.UnitOfWork;
 import sendable.logic.dtos.PaymentDto;
 import sendable.logic.interfaces.PaymentInterface;
 
@@ -18,18 +19,25 @@ public class PaymentService implements PaymentInterface {
 	private RepositoryInterface<User> userRepository;
 	private RepositoryInterface<CardLetter> cardLetterRepository;
 	private RepositoryInterface<Address> addressRepository;
-	
 
+	private UnitOfWork unit ;
+	
+	public PaymentService(UnitOfWork work) {
+		unit = work;
+	}
+	
 	private List<PaymentDto> AllPayments;
 
 	public PaymentService(RepositoryInterface<Payment> payment, RepositoryInterface<User> user,
-			RepositoryInterface<CardLetter> letter,
-			RepositoryInterface<Address> address
-			) {
+			RepositoryInterface<CardLetter> letter, RepositoryInterface<Address> address) {
 		this.paymentRepository = payment;
 		this.userRepository = user;
 		this.cardLetterRepository = letter;
 		this.addressRepository = address;
+
+	}
+
+	public void Init() {
 
 		for (Payment p : this.paymentRepository.ListAll()) {
 			AllPayments.add(this.MapPayment(p));
@@ -56,7 +64,6 @@ public class PaymentService implements PaymentInterface {
 		return paymentret;
 	}
 
-
 	@Override
 	public PaymentDto GetLatestPaymentByUser(int userId) {
 		List<PaymentDto> payments = new ArrayList<PaymentDto>();
@@ -69,17 +76,14 @@ public class PaymentService implements PaymentInterface {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		return payments.get(payments.size()-1);
+
+		return payments.get(payments.size() - 1);
 	}
 
 	@Override
 	public PaymentDto GetLatestPayment() {
-		return AllPayments.get(AllPayments.size()-1);
+		return AllPayments.get(AllPayments.size() - 1);
 	}
-
-	
-
 
 	@Override
 	public boolean MakePayment(int id, int cardLetterId, int userId, String paymentType, double totalAmount,
@@ -94,23 +98,19 @@ public class PaymentService implements PaymentInterface {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 	private PaymentDto MapPayment(Payment payment) {
 		try {
-			
-			return new PaymentDto(payment.getId(), 
-					payment.getCardLetter().getId(), 
-					payment.getUser().getId(),
-					payment.getShippingAddress().GetAddressString(), 
-					payment.getBillingAddress().GetAddressString(),
-					payment.getDateAdded(), payment.getPaymentType(), 
-					payment.getTotalAmount());
-			
+
+			return new PaymentDto(payment.getId(), payment.getCardLetter().getId(), payment.getUser().getId(),
+					payment.getShippingAddress().GetAddressString(), payment.getBillingAddress().GetAddressString(),
+					payment.getDateAdded(), payment.getPaymentType(), payment.getTotalAmount());
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
-		
+
 	}
 
 }

@@ -5,19 +5,20 @@ import javax.persistence.*;
 @Entity
 @Table
 public class Account {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	int Id;
 	double Credit;
 	String LastTopUpDate;
-	
+
 	@OneToOne
 	User User;
 
-	public Account() {}
-	
-	public Account(User	user, double credit, String lastTopUpDate) {
+	public Account() {
+	}
+
+	public Account(User user, double credit, String lastTopUpDate) {
 		this.User = user;
 		Credit = credit;
 		LastTopUpDate = lastTopUpDate;
@@ -55,6 +56,5 @@ public class Account {
 	public void setUser(User user) {
 		User = user;
 	}
-	
 
 }
