@@ -1,4 +1,4 @@
-package sendable.dao.repository;
+package sendable.dao.interfaces;
 
 import sendable.dao.entities.Account;
 import sendable.dao.entities.Address;
