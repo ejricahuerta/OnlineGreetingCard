@@ -5,7 +5,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import sendable.dao.database.DatabaseManager;
-import sendable.dao.database.DatabaseManagerInterface;
+import sendable.dao.interfaces.DatabaseManagerInterface;
 import sendable.dao.repository.UnitOfWork;
 import sendable.logic.services.CardService;
 import sendable.logic.services.PaymentService;

@@ -1,7 +1,8 @@
 package sendable.dao.repository;
 
 import java.util.*;
-import sendable.dao.database.DatabaseManagerInterface;
+
+import sendable.dao.interfaces.DatabaseManagerInterface;
 import sendable.dao.interfaces.RepositoryInterface;
 
 @SuppressWarnings("rawtypes")

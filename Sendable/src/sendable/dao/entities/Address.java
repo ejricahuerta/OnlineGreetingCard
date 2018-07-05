@@ -3,7 +3,7 @@ package sendable.dao.entities;
 
 import javax.persistence.*;
 
-@Entity
+@Embeddable
 @Table
 public class Address {
 

@@ -1,4 +1,4 @@
-package sendable.dao.database;
+package sendable.dao.interfaces;
 
 import javax.persistence.Query;
 
@@ -16,9 +16,11 @@ public interface DatabaseManagerInterface {
 	
 	Object Get(Class<?> clazz,int id)throws Exception;;
 	
-	void Save()throws Exception;;
+	void Save()throws Exception;
 	
 	void RollBack() throws Exception;
+	
+	void Close();
 	
 	Query ExecuteQuery(String query)throws Exception;;
 }
