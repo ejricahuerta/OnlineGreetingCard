@@ -1,16 +1,16 @@
 package sendable.dao.repository;
 
 import java.util.*;
-
-import sendable.dao.database.DatabaseManager;
+import sendable.dao.database.DatabaseManagerInterface;
+import sendable.dao.interfaces.RepositoryInterface;
 
 @SuppressWarnings("rawtypes")
 
 public class Repository<T> implements RepositoryInterface<T> {
 
-	private DatabaseManager db;
+	private DatabaseManagerInterface db;
 	private Class clazz;
-	public Repository(Class clazz, DatabaseManager db) {
+	public Repository(Class clazz, DatabaseManagerInterface db) {
 		this.clazz = clazz;
 		this.db = db;
 	}

@@ -118,26 +118,4 @@ public class CardService implements CardInterface {
 		return new CardDto(card.getId(), card.getName(), card.getDescription(), card.getPrice(), card.isAvailable(),
 				card.getDateAdded());
 	}
-
-	
-	
-//	public static void main(String[] args) {
-//		SeedDatabase seed = new SeedDatabase();
-//		
-//		
-//		EntityManager manager =  DatabaseManager.getEntityManager();
-//		manager.getTransaction().begin();
-//		
-//		for (Card c : seed.AddCards()) {
-//			manager.persist(c);
-//		} 
-//		manager.getTransaction().commit();
-//		manager.close();
-//		
-//		CardService cardService = new CardService(new Repository<Card>(Card.class), new Repository<Category>(Category.class));
-//		
-//		System.out.println( cardService.getCard(1).getDateAdded());
-//		System.out.println("End of Test");
-//		
-//	}
 }
