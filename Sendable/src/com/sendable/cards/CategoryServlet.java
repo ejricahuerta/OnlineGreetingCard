@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import sendable.dao.entities.Card;
 import sendable.dao.entities.Category;
+import sendable.logic.dtos.CategoryDto;
 import sendable.logic.services.CardService;
 
 /**
@@ -44,6 +45,14 @@ public class CategoryServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		CardService service =  (CardService)request.getServletContext().getAttribute("cardService");
+		
+		request.setAttribute("allcategories", service.ListCategories());
+		for (CategoryDto dto : service.ListCategories()) {
+			
+			System.out.println(dto.getName());
+		}
 		
 		request.getRequestDispatcher("categories.jsp").forward(request, response);
 	}

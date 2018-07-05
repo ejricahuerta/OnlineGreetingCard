@@ -27,15 +27,7 @@ public class CardServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		PrintWriter out = response.getWriter();
-		CardService service =  (CardService)request.getServletContext().getAttribute("cardService");
-		 
-		
-		request.setAttribute("allcategories", service.ListCards());
-		
-		
-		out.println(String.format( "AllCategories Count : %.2f" , service.ListCards().size()));
+	
 		
 	}
 }

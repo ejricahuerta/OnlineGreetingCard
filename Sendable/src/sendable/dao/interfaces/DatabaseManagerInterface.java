@@ -16,11 +16,14 @@ public interface DatabaseManagerInterface {
 	
 	Object Get(Class<?> clazz,int id)throws Exception;;
 	
-	void Save()throws Exception;
+	Query ExecuteQuery(String query)throws Exception;;
 	
-	void RollBack() throws Exception;
+	void Save();
+	
+	void RollBack();
+	
+	void Finished();
 	
 	void Close();
-	
-	Query ExecuteQuery(String query)throws Exception;;
+
 }

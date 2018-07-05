@@ -1,7 +1,6 @@
 package sendable.dao.repository;
 
 import java.util.*;
-
 import sendable.dao.interfaces.DatabaseManagerInterface;
 import sendable.dao.interfaces.RepositoryInterface;
 
@@ -21,7 +20,10 @@ public class Repository<T> implements RepositoryInterface<T> {
 	public List<T> ListAll() {
 		try {
 			String query = "select u from " + clazz.getSimpleName() + " u";
-			return this.db.ExecuteQuery(query).getResultList();
+			List ret = 	this.db.ExecuteQuery(query).getResultList();
+			db.Finished();
+			return ret;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -30,11 +32,12 @@ public class Repository<T> implements RepositoryInterface<T> {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T Get(int id) {
+	public T Get(int id){
 		try {
 
 			return	(T) this.db.Get(clazz, id);
 		} catch (Exception e) {
+			db.RollBack();
 			e.printStackTrace();
 		}
 		return null;
@@ -47,6 +50,7 @@ public class Repository<T> implements RepositoryInterface<T> {
 			this.db.Add(obj);
 
 		} catch (Exception e) {
+			db.RollBack();
 			e.printStackTrace();
 		}
 	}
@@ -74,7 +78,10 @@ public class Repository<T> implements RepositoryInterface<T> {
 		try {
 			this.db.Update(obj);
 		} catch (Exception e) {
+			db.RollBack();
 			e.printStackTrace();
 		}
 	}
+	
+	
 }

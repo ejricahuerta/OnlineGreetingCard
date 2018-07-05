@@ -1,12 +1,13 @@
 package sendable.dao.repository;
 
 
-import sendable.dao.database.DatabaseManager;
+
 import sendable.dao.entities.Account;
 import sendable.dao.entities.Address;
 import sendable.dao.entities.Card;
 import sendable.dao.entities.CardLetter;
 import sendable.dao.entities.Category;
+
 import sendable.dao.entities.Payment;
 import sendable.dao.entities.User;
 import sendable.dao.interfaces.DatabaseManagerInterface;
@@ -87,6 +88,14 @@ public class UnitOfWork implements UnitOfWorkInterface {
 		}
 		return category;
 	}
-
 	
+	@Override
+	public void Save() {
+		this.datasource.Save();
+	}
+
+	@Override
+	public void Close() {
+		this.datasource.Close();	
+	}
 }

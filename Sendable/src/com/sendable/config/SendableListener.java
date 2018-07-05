@@ -1,12 +1,18 @@
 package com.sendable.config;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 import sendable.dao.database.DatabaseManager;
+import sendable.dao.entities.Card;
 import sendable.dao.interfaces.DatabaseManagerInterface;
 import sendable.dao.repository.UnitOfWork;
+import sendable.logic.dtos.CategoryDto;
+import sendable.logic.interfaces.CardInterface;
 import sendable.logic.services.CardService;
 import sendable.logic.services.PaymentService;
 import sendable.logic.services.UserService;
@@ -39,17 +45,20 @@ public class SendableListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent arg0) {
 		
 		DatabaseManagerInterface database = new DatabaseManager();
-		
 		UnitOfWork uow = new UnitOfWork(database);
-		
+		CardInterface cardservice = new CardService(uow);
 		arg0.getServletContext()
-		.setAttribute("cardService",new CardService(uow));
-		
+			.setAttribute("db", database);
 		arg0.getServletContext()
-		.setAttribute("userService",new UserService(uow));
-		
+			.setAttribute("uow", uow);
 		arg0.getServletContext()
-		.setAttribute("paymentService",new PaymentService(uow));
+			.setAttribute("cardService",cardservice);
+		arg0.getServletContext()
+			.setAttribute("userService",new UserService(uow));
+		arg0.getServletContext()
+			.setAttribute("paymentService",new PaymentService(uow));
 		
+		List<CategoryDto> allcat = cardservice.ListCategories();
+		arg0.getServletContext().setAttribute("allcategories", allcat);
 	}
 }

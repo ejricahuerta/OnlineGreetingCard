@@ -4,9 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-
-import sendable.dao.entities.Category;
-import sendable.dao.entities.DateTime;
 import sendable.dao.interfaces.DatabaseManagerInterface;
 
 public class DatabaseManager implements DatabaseManagerInterface {
@@ -14,22 +11,28 @@ public class DatabaseManager implements DatabaseManagerInterface {
 	/*
 	 * Database Manager Injected with Entity Persistence
 	 */
-	
+
 	private EntityManager entityManager;
 	private EntityManagerFactory entityManagerFactory;
-	
+
 	public EntityManager getEntityManager() {
-		if(this.entityManagerFactory == null && this.entityManager == null) {
-			this.entityManagerFactory = Persistence.createEntityManagerFactory("sendable_hibernate");
+		if (this.entityManager == null) {
+			if (this.entityManagerFactory == null) {
+				this.entityManagerFactory = Persistence.createEntityManagerFactory("sendable_hibernate");
+			}
 			this.setEntityManager(this.entityManagerFactory.createEntityManager());
-			this.entityManager.getTransaction().begin();
-		}
+		}		
+		this.entityManager.getTransaction().begin();
 		return entityManager;
 	}
+
 	private void setEntityManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}
-	public DatabaseManager() {}
+
+	public DatabaseManager() {
+	}
+
 	@Override
 	public void Add(Object obj) throws Exception {
 		this.getEntityManager().persist(obj);
@@ -46,14 +49,12 @@ public class DatabaseManager implements DatabaseManagerInterface {
 	}
 
 	@Override
-	public void Save() throws Exception {
+	public void Save() {
 		this.getEntityManager().getTransaction().commit();
-		this.entityManager.close();
-		
 	}
 
 	@Override
-	public void RollBack() throws Exception {
+	public void RollBack() {
 		this.getEntityManager().getTransaction().rollback();
 		this.entityManager.close();
 	}
@@ -62,26 +63,22 @@ public class DatabaseManager implements DatabaseManagerInterface {
 	public Query ExecuteQuery(String query) throws Exception {
 		return this.getEntityManager().createQuery(query);
 	}
+
 	@Override
 	public void Update(Object obj) throws Exception {
 		this.getEntityManager().merge(obj);
-		
+
 	}
-	
+
 	@Override
 	public void Close() {
 		this.entityManagerFactory.close();
+		this.entityManagerFactory = null;
 	}
-	
-	public static void main(String[] args){
-		DatabaseManager db = new DatabaseManager();
-		
-		try {
-			db.Add(new Category("Birthdays", "Sample data", DateTime.GetCurrentDate()));
-			db.Save();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+	@Override
+	public void Finished() {
+		this.entityManager.close();
 	}
+
 }
