@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebListener;
 
 import org.hibernate.service.spi.InjectService;
 
+import sendable.dao.database.SeedDatabase;
 import sendable.dao.entities.Account;
 import sendable.dao.entities.Address;
 import sendable.dao.entities.Card;
@@ -44,13 +45,15 @@ public class SendableListener implements ServletContextListener {
 	 */
 	public void contextInitialized(ServletContextEvent arg0) {
 
-		
+		SeedDatabase seed = new SeedDatabase();
+	
 		// Card Repository
-		arg0.getServletContext().setAttribute("cardService", 
-				new CardService(new UnitOfWork()));
-		
-		arg0.getServletContext().setAttribute("userService",
-				new UserService(new UnitOfWork()));
+//		arg0.getServletContext().setAttribute("cardservice", 
+//				new CardService(new UnitOfWork()));
+//		
+//		arg0.getServletContext().setAttribute("userService",
+//				new UserService(new UnitOfWork()));
+		arg0.getServletContext().setAttribute("categories",seed.AddCategories());
 	}
 
 }

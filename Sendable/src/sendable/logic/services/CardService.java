@@ -2,9 +2,6 @@ package sendable.logic.services;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.EntityManager;
-
 import sendable.dao.entities.Card;
 import sendable.dao.entities.Category;
 import sendable.dao.repository.*;

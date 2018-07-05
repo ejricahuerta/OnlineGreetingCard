@@ -3,8 +3,6 @@ package sendable.dao.database;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.EntityManager;
-
 import sendable.dao.entities.Address;
 import sendable.dao.entities.Card;
 import sendable.dao.entities.Category;
@@ -30,7 +28,11 @@ public class SeedDatabase {
 
 	public List<Card> AddCards() {
 		if (AllCards.isEmpty()) {
-
+			AllCards.add(new Card(AllCategories.get(1), "Birthday 1", null, 0, null, Seeded));
+			AllCards.add(new Card(AllCategories.get(1), "Birthday 2", null, 0, null, Seeded));
+			AllCards.add(new Card(AllCategories.get(1), "Birthday 2", null, 0, null, Seeded));
+			AllCards.add(new Card(AllCategories.get(1), "Birthday 2", null, 0, null, Seeded));
+			AllCards.add(new Card(AllCategories.get(1), "Birthday 2", null, 0, null, Seeded));
 		}
 		return AllCards;
 
@@ -38,17 +40,16 @@ public class SeedDatabase {
 
 	public List<Category> AddCategories() {
 		if (AllCategories.isEmpty()) {
+			
 			this.AllCategories.add(new Category("Birthdays", "All Birthday Greetings"));
 
 			this.AllCategories.add(new Category("Aniversaries", "All Aniversary Greetings"));
 
 			this.AllCategories.add(new Category("Parents", "All Parents Ocassion Greetings"));
 
-			this.AllCategories.add(new Category("Birthday", "All Birthday Greetings"));
+			this.AllCategories.add(new Category("Valentines", "All Love is in the Air"));
 
-			this.AllCategories.add(new Category("Birthday", "All Birthday Greetings"));
-
-			this.AllCategories.add(new Category("Birthday", "All Birthday Greetings"));
+			this.AllCategories.add(new Category("Congratulation", "Send Congratulations"));
 		}
 		return this.AllCategories;
 	}
@@ -56,16 +57,4 @@ public class SeedDatabase {
 	public boolean IsSeeded() {
 		return this.Seeded;
 	}
-
-//	public static void main(String[] args) {
-//
-//		EntityManager manager = DatabaseManager.getEntityManager();
-//		manager.getTransaction().begin();
-//		SeedDatabase seed = new SeedDatabase();
-//		for (User u : seed.AddUsers()) {
-//			manager.persist(u);
-//		}
-//		manager.getTransaction().commit();
-//		manager.close();
-//	}
 }
