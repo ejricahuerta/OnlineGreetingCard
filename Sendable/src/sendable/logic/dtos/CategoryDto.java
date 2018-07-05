@@ -9,13 +9,24 @@ public class CategoryDto {
 	String Description;
 	String DateAdded;
 	List<CardDto> Cards;
+	int CardCount= 0;
 
 	public CategoryDto(int id, String name, String description, String dateAdded) {
 		super();
 		Id = id;
+		
 		Name = name;
 		Description = description;
 		DateAdded = dateAdded;
+		
+	}
+
+	public int getCardCount() {
+		return CardCount;
+	}
+
+	public void setCardCount(int cardCount) {
+		CardCount = cardCount;
 	}
 
 	public int getId() {
@@ -55,6 +66,7 @@ public class CategoryDto {
 	}
 
 	public void setCards(List<CardDto> cards) {
+		this.CardCount = cards.size();
 		Cards = cards;
 	}
 

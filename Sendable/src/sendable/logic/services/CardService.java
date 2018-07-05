@@ -3,12 +3,8 @@ package sendable.logic.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import sendable.dao.database.DatabaseManager;
 import sendable.dao.entities.Card;
 import sendable.dao.entities.Category;
-import sendable.dao.entities.DateTime;
-import sendable.dao.interfaces.DatabaseManagerInterface;
-import sendable.dao.interfaces.UnitOfWorkInterface;
 import sendable.dao.repository.*;
 import sendable.logic.dtos.CardDto;
 import sendable.logic.dtos.CategoryDto;
@@ -17,7 +13,7 @@ import sendable.logic.interfaces.CardInterface;
 public class CardService implements CardInterface {
 
 	private UnitOfWork unit;
-	
+
 	private List<CardDto> AllCards = new ArrayList<CardDto>();
 	private List<CategoryDto> AllCategory = new ArrayList<CategoryDto>();
 
@@ -29,8 +25,8 @@ public class CardService implements CardInterface {
 
 	@Override
 	public List<CardDto> ListCards() {
-		if(AllCards.isEmpty()) {
-			 for (Card c : unit.GetCardRepo().ListAll()) {
+		if (AllCards.isEmpty()) {
+			for (Card c : unit.GetCardRepo().ListAll()) {
 				AllCards.add(this.MapCard(c));
 			}
 		}
@@ -68,14 +64,14 @@ public class CardService implements CardInterface {
 
 	@Override
 	public List<CategoryDto> ListCategories() {
-		
-		if(AllCategory.isEmpty()) {
+
+		if (AllCategory.isEmpty()) {
 			for (Category c : unit.GetCategoryRepo().ListAll()) {
 				AllCategory.add(this.MapCategory(c));
 			}
 			unit.Close();
 		}
-		
+
 		return this.AllCategory;
 	}
 
@@ -114,8 +110,16 @@ public class CardService implements CardInterface {
 		if (category == null) {
 			return null;
 		} else {
-			return new CategoryDto(category.getId(), category.getName(), category.getDescription(),
+			CategoryDto tmp = new CategoryDto(category.getId(), category.getName(), category.getDescription(),
 					category.getDateAdded());
+			List<CardDto> cardtmp = new ArrayList<CardDto>();
+			for (Card card : unit.GetCardRepo().ListAll()) {
+				if (card.getCategory().getId() == category.getId()) {
+					cardtmp.add(this.MapCard(card));
+				}
+			}
+			tmp.setCards(cardtmp);
+			return tmp;
 		}
 	}
 
@@ -123,8 +127,10 @@ public class CardService implements CardInterface {
 		if (card == null) {
 			return null;
 		}
-		return new CardDto(card.getId(), card.getName(), card.getDescription(), card.getPrice(), card.isAvailable(),
-				card.getDateAdded());
+		CardDto temp = new CardDto(card.getId(), card.getName(), card.getDescription(), card.getPrice(),
+				card.isAvailable(), card.getDateAdded());
+		temp.setCategoryId(card.getCategory().getId());
+		return temp;
 	}
 
 }
