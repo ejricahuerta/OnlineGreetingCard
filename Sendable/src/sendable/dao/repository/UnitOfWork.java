@@ -2,6 +2,7 @@ package sendable.dao.repository;
 
 
 import sendable.dao.database.DatabaseManager;
+import sendable.dao.database.DatabaseManagerInterface;
 import sendable.dao.entities.Account;
 import sendable.dao.entities.Address;
 import sendable.dao.entities.Card;
@@ -9,6 +10,8 @@ import sendable.dao.entities.CardLetter;
 import sendable.dao.entities.Category;
 import sendable.dao.entities.Payment;
 import sendable.dao.entities.User;
+import sendable.dao.interfaces.RepositoryInterface;
+import sendable.dao.interfaces.UnitOfWorkInterface;
 
 public class UnitOfWork implements UnitOfWorkInterface {
 
@@ -19,10 +22,10 @@ public class UnitOfWork implements UnitOfWorkInterface {
 	RepositoryInterface<Address> address;
 	RepositoryInterface<Account> account;
 	RepositoryInterface<Category> category;
-	DatabaseManager datasource;
+	DatabaseManagerInterface datasource;
 	
-	public UnitOfWork() {
-		datasource = new DatabaseManager();
+	public UnitOfWork(DatabaseManagerInterface databasemanager) {
+		datasource = databasemanager;
 	}
 
 	@Override
