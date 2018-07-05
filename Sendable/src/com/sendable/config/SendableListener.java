@@ -4,8 +4,12 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-
-import sendable.dao.database.SeedDatabase;
+import sendable.dao.database.DatabaseManager;
+import sendable.dao.database.DatabaseManagerInterface;
+import sendable.dao.repository.UnitOfWork;
+import sendable.logic.services.CardService;
+import sendable.logic.services.PaymentService;
+import sendable.logic.services.UserService;
 
 
 /**
@@ -33,8 +37,19 @@ public class SendableListener implements ServletContextListener {
 	 * @see ServletContextListener#contextInitialized(ServletContextEvent)
 	 */
 	public void contextInitialized(ServletContextEvent arg0) {
-
-		SeedDatabase seed = new SeedDatabase();
-		arg0.getServletContext().setAttribute("categories",seed.AddCategories());
+		
+		DatabaseManagerInterface database = new DatabaseManager();
+		
+		UnitOfWork uow = new UnitOfWork(database);
+		
+		arg0.getServletContext()
+		.setAttribute("cardService",new CardService(uow));
+		
+		arg0.getServletContext()
+		.setAttribute("userService",new UserService(uow));
+		
+		arg0.getServletContext()
+		.setAttribute("paymentService",new PaymentService(uow));
+		
 	}
 }
