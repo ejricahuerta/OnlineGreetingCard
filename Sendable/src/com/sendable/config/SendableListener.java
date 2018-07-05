@@ -4,20 +4,9 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-import org.hibernate.service.spi.InjectService;
 
 import sendable.dao.database.SeedDatabase;
-import sendable.dao.entities.Account;
-import sendable.dao.entities.Address;
-import sendable.dao.entities.Card;
-import sendable.dao.entities.CardLetter;
-import sendable.dao.entities.Category;
-import sendable.dao.entities.Payment;
-import sendable.dao.entities.User;
-import sendable.dao.repository.Repository;
-import sendable.dao.repository.UnitOfWork;
-import sendable.logic.services.CardService;
-import sendable.logic.services.UserService;
+
 
 /**
  * Application Lifecycle Listener implementation class SendableListener
@@ -46,14 +35,6 @@ public class SendableListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent arg0) {
 
 		SeedDatabase seed = new SeedDatabase();
-	
-		// Card Repository
-//		arg0.getServletContext().setAttribute("cardservice", 
-//				new CardService(new UnitOfWork()));
-//		
-//		arg0.getServletContext().setAttribute("userService",
-//				new UserService(new UnitOfWork()));
 		arg0.getServletContext().setAttribute("categories",seed.AddCategories());
 	}
-
 }

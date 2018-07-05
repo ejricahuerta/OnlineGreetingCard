@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sendable.dao.entities.*;
-import sendable.dao.repository.RepositoryInterface;
 import sendable.dao.repository.UnitOfWork;
 import sendable.logic.dtos.*;
 import sendable.logic.interfaces.UserInterface;

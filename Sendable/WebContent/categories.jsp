@@ -18,7 +18,7 @@
           <div class="row justify-content-center">
             <div class="m-3 categories-card col-md col-sm">
               <ul class="list-group mx-auto pl-3 pr-3">
-              <c:forEach items="${categories}" var= "category">
+              <c:forEach items="${categories}" var="category">
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                   <a class="btn" href="cards.html?f=${category.getName()}">${category.getName()}</a>
                   <span class="badge badge-primary badge-pill">${category.getCards().size() }</span>

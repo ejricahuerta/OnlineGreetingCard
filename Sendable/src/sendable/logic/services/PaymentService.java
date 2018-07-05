@@ -1,14 +1,11 @@
 package sendable.logic.services;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import sendable.dao.entities.Address;
-import sendable.dao.entities.CardLetter;
+
 import sendable.dao.entities.Payment;
-import sendable.dao.entities.User;
-import sendable.dao.repository.RepositoryInterface;
+
 import sendable.dao.repository.UnitOfWork;
 import sendable.logic.dtos.PaymentDto;
 import sendable.logic.interfaces.PaymentInterface;
