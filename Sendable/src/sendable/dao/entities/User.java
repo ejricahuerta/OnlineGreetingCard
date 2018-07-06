@@ -3,6 +3,9 @@
  */
 package sendable.dao.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -20,9 +23,13 @@ public class User {
 
 	@OneToOne
 	Account Account;
-	@Transient
+
+	@OneToOne
 	Address CurrentAddress;
 
+	@OneToMany
+	List<Payment> Payments = new ArrayList<Payment>();
+	
 	public User() {
 		this.DateAdded = DateTime.GetCurrentDate();
 	}
@@ -110,6 +117,14 @@ public class User {
 
 	public void setAccount(Account account) {
 		Account = account;
+	}
+
+	public List<Payment> getPayments() {
+		return Payments;
+	}
+
+	public void setPayments(List<Payment> payments) {
+		Payments = payments;
 	}
 
 }

@@ -13,17 +13,18 @@ public class Payment {
 	String DateAdded;
 	String PaymentType;
 	double TotalAmount;
+	
+	@OneToOne
+	Address BillingAddress;
+	
+	@OneToOne
+	Address ShippingAddress;
 
 	@OneToOne
 	CardLetter CardLetter;
 	@OneToOne
 	User User;
-
-	@Transient
-	Address BillingAddress;
-
-	@Transient
-	Address ShippingAddress;
+	
 
 	public Payment() {
 

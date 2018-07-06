@@ -3,14 +3,14 @@ package sendable.dao.entities;
 
 import javax.persistence.*;
 
-@Embeddable
-@Table
+@Entity
+@Table(name="Address")
 public class Address {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	int Id;
-
+	
 	String Line1;
 	String Line2;
 	String City;
