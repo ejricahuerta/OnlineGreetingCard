@@ -21,13 +21,12 @@
             <div class="m-3 categories-card col-md col-sm">
               <ul class="list-group mx-auto pl-3 pr-3">
               
-              <c:forEach items="${applicationScope['allcategories']}" var="category">
+              <c:forEach items="${applicationScope['allcategories']}" var="category">        
                 <li class="list-group-item d-flex justify-content-between align-items-center">
                   <a class="btn" href="cards.html?f=${category.getName()}">${category.getName()}</a>
                   <span class="badge badge-primary badge-pill">${category.getCards().size()}</span>
                 </li>
-                </c:forEach>
-                
+                </c:forEach>               
               </ul>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 m-2 text-center">

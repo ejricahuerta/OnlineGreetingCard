@@ -46,9 +46,9 @@
 			<h3>All Cards</h3>
 		</div>
 		<div class="row container justify-content-center">
-			<c:forEach items="${applicationScope['allcards']}" var="card">
-				<div class="col-md-4 col-lg-4 col-sm-12 p-3 m-1 text-center">
-					<div class="card justify-content-center" style="width: 18rem;">
+			<c:forEach items="${applicationScope['allcards']}" var="card"> 
+				<div class="col-md-6 col-lg-5 col-sm-12 p-3 m-1 justify-content-center">
+					<div class="card text-center" style="width: 18rem;">
 						<img class="card-img-top shadow-lg " src="${card.getImageURL()} "
 							alt="${card.getImageURL()}">
 						<div class="card-body">

@@ -1,6 +1,5 @@
 package com.sendable.config;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContextEvent;
@@ -66,8 +65,7 @@ public class SendableListener implements ServletContextListener {
 				}
 			}
 		}
-		List<CategoryDto> allcat = cardservice.ListCategories();
-		arg0.getServletContext().setAttribute("allcategories", allcat);
+
 		
 
 		
@@ -97,14 +95,25 @@ public class SendableListener implements ServletContextListener {
 				.Insert(new Card(c1, "Dad Birthday", "I Love you dad! Happy Birthday!", 5, "images/birthdays/bday9.jpeg", true));
 			}
 			uow.Save();			
-			uow.Close();
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
 		}
-
-		List<CardDto> allcards = cardservice.ListCards();
 		
+		
+		uow.Close();
+
+		List<Card> cards =  uow.GetCardRepo().ListAll();
+		for (Card card : cards) {
+			Category ct = uow.GetCategoryRepo().Get(card.getCategory().getId());
+			ct.getCards().add(card);
+			uow.GetCategoryRepo().Update(ct);
+		}
+		
+		uow.Save();
+		List<CardDto> allcards = cardservice.ListCards();
+		List<CategoryDto> allcat = cardservice.ListCategories();
+		arg0.getServletContext().setAttribute("allcategories", allcat);
 		arg0.getServletContext().setAttribute("allcards", allcards);
 		arg0.getServletContext().setAttribute("db", database);
 		arg0.getServletContext().setAttribute("uow", uow);
