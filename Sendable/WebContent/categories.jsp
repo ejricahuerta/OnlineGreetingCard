@@ -2,9 +2,8 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="sendable.logic.dtos.CategoryDto"%>
-<%@page import="sendable.dao.entities.Category"%>
+ <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="header.jsp"/>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <body class="container-fluid">
 
 	<jsp:include page="navigationheader.jsp"/>

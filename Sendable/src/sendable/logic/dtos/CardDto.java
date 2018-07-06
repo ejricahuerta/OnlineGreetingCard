@@ -6,11 +6,12 @@ public class CardDto {
 	int CategoryId;
 	String Name;
 	String Description;
+	String ImageURL;
 	double Price;
 	boolean Available;
 	String DateAdded;
 
-	public CardDto(int id, String name, String description, double price, boolean available, String dateAdded) {
+	public CardDto(int id, String name, String description, String image, double price, boolean available, String dateAdded) {
 		super();
 		Id = id;
 		Name = name;
@@ -18,6 +19,7 @@ public class CardDto {
 		Price = price;
 		Available = available;
 		DateAdded = dateAdded;
+		ImageURL = image;
 	}
 
 	public CardDto() {
@@ -53,6 +55,16 @@ public class CardDto {
 
 	public void setDescription(String description) {
 		Description = description;
+	}
+
+	
+	
+	public String getImageURL() {
+		return ImageURL;
+	}
+
+	public void setImageURL(String imageURL) {
+		ImageURL = imageURL;
 	}
 
 	public double getPrice() {

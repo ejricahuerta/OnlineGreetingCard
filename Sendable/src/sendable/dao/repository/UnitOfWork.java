@@ -96,6 +96,7 @@ public class UnitOfWork implements UnitOfWorkInterface {
 
 	@Override
 	public void Close() {
+		this.datasource.Finished();
 		this.datasource.Close();	
 	}
 }

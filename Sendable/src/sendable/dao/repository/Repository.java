@@ -21,7 +21,7 @@ public class Repository<T> implements RepositoryInterface<T> {
 		try {
 			String query = "select u from " + clazz.getSimpleName() + " u";
 			List ret = 	this.db.ExecuteQuery(query).getResultList();
-			db.Finished();
+			//db.Finished();
 			return ret;
 			
 		} catch (Exception e) {

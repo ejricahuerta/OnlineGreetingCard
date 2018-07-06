@@ -3,14 +3,11 @@ package sendable.dao.database;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
 import javax.persistence.Query;
 import sendable.dao.interfaces.DatabaseManagerInterface;
 
 public class DatabaseManager implements DatabaseManagerInterface {
-
-	/*
-	 * Database Manager Injected with Entity Persistence
-	 */
 
 	private EntityManager entityManager;
 	private EntityManagerFactory entityManagerFactory;
@@ -21,8 +18,10 @@ public class DatabaseManager implements DatabaseManagerInterface {
 				this.entityManagerFactory = Persistence.createEntityManagerFactory("sendable_hibernate");
 			}
 			this.setEntityManager(this.entityManagerFactory.createEntityManager());
-		}		
-		this.entityManager.getTransaction().begin();
+		}
+		if(!this.entityManager.getTransaction().isActive()) {			
+			this.entityManager.getTransaction().begin();
+		}
 		return entityManager;
 	}
 
@@ -79,6 +78,7 @@ public class DatabaseManager implements DatabaseManagerInterface {
 	@Override
 	public void Finished() {
 		this.entityManager.close();
+		this.entityManager = null;
 	}
 
 }

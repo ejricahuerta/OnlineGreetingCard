@@ -127,7 +127,7 @@ public class CardService implements CardInterface {
 		if (card == null) {
 			return null;
 		}
-		CardDto temp = new CardDto(card.getId(), card.getName(), card.getDescription(), card.getPrice(),
+		CardDto temp = new CardDto(card.getId(), card.getName(), card.getDescription(), card.getImageURL(), card.getPrice(),
 				card.isAvailable(), card.getDateAdded());
 		temp.setCategoryId(card.getCategory().getId());
 		return temp;

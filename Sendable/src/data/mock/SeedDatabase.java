@@ -28,6 +28,9 @@ public class SeedDatabase {
 
 	public List<Card> AddCards() {
 		if (AllCards.isEmpty()) {
+		
+			
+			
 			AllCards.add(new Card(AllCategories.get(1), "Birthday 1", "", 0, null, Seeded));
 			AllCards.add(new Card(AllCategories.get(1), "Birthday 2", null, 0, null, Seeded));
 			AllCards.add(new Card(AllCategories.get(1), "Birthday 2", null, 0, null, Seeded));
@@ -42,15 +45,14 @@ public class SeedDatabase {
 		
 		if (AllCategories.isEmpty()) {
 			
-			this.AllCategories.add(new Category("Birthdays", "All Birthday Greetings"));
+			this.AllCategories.add(new Category("Birthdays", "All Birthday Greeting Cards"));
 
 			this.AllCategories.add(new Category("Aniversaries", "All Aniversary Greetings"));
 
-			this.AllCategories.add(new Category("Family", "All Parents Ocassion Greetings"));
+			this.AllCategories.add(new Category("Christmas", "All Christmas Holiday Cards"));
 
 			this.AllCategories.add(new Category("Valentines", "All Love is in the Air"));
 
-			this.AllCategories.add(new Category("Congratulations", "Send Congratulatory Messages"));
 		}
 		
 		return this.AllCategories;
@@ -59,4 +61,6 @@ public class SeedDatabase {
 	public boolean IsSeeded() {
 		return this.Seeded;
 	}
+	
+	
 }
