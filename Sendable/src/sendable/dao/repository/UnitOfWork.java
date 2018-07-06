@@ -92,6 +92,7 @@ public class UnitOfWork implements UnitOfWorkInterface {
 	@Override
 	public void Save() {
 		this.datasource.Save();
+		this.datasource.Finished();
 	}
 
 	@Override
