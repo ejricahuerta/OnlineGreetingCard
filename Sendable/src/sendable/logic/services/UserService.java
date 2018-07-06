@@ -245,4 +245,15 @@ public class UserService implements UserInterface {
 		}
 		return null;
 	}
+
+
+	@Override
+	public void AddNewUser(UserDto user) {
+		try {
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
 }

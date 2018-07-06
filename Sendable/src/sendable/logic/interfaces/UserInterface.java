@@ -8,6 +8,8 @@ import sendable.logic.dtos.UserDto;
 
 public interface UserInterface {
 
+	void AddNewUser(UserDto user);
+		
 	UserDto FindUserById(int id);
 
 	UserDto FindUSerByEmail(String email);
