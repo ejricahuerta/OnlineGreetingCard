@@ -14,10 +14,10 @@ public class Payment {
 	String PaymentType;
 	double TotalAmount;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	Address BillingAddress;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	Address ShippingAddress;
 
 	@OneToOne
@@ -25,7 +25,6 @@ public class Payment {
 	@OneToOne
 	User User;
 	
-
 	public Payment() {
 
 		DateAdded = DateTime.GetCurrentDate();

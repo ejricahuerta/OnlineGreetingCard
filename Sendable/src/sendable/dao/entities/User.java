@@ -21,15 +21,17 @@ public class User {
 	String HashedPassword;
 	String DateAdded;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	Account Account;
 
-	@OneToOne
+	@OneToOne(cascade  = CascadeType.ALL)
 	Address CurrentAddress;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	List<Payment> Payments = new ArrayList<Payment>();
 	
+	@OneToMany(cascade = CascadeType.ALL)
+	List<CardLetter> CardLetters = new ArrayList<CardLetter>();
 	public User() {
 		this.DateAdded = DateTime.GetCurrentDate();
 	}
@@ -47,7 +49,7 @@ public class User {
 		this.setEmail(email);
 		this.setPhone(phone);
 		this.CurrentAddress = current;
-	}
+		this.Account = new Account(this,0,DateTime.GetCurrentDate());	}
 
 	public int getId() {
 		return Id;
@@ -115,7 +117,7 @@ public class User {
 		return Account;
 	}
 
-	public void setAccount(Account account) {
+	private void setAccount(Account account) {
 		Account = account;
 	}
 

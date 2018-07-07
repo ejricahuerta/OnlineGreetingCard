@@ -123,5 +123,4 @@ public class UserDto {
 	public void setCardLetters(List<CardLetterDto> cardLetters) {
 		CardLetters = cardLetters;
 	}
-
 }
