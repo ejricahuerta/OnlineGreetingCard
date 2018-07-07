@@ -15,7 +15,7 @@
 
 	<!--heading-->
 	<section class="catchphrase row justify-content-center mt-3 mx-auto">
-		<div class="col-lg-6 col-md-12 col-sm-12 ">
+		<div class="col-lg-8 col-md-10 col-sm-12 ">
 			<div class="card text-center shadow-sm">
 				<div class="card-header lead">Filter</div>
 				<div class="card-body">
