@@ -19,10 +19,11 @@
 			<div class="card text-center shadow-sm">
 				<div class="card-header lead">Filter</div>
 				<div class="card-body">
-					<form action="Cards" method="GET"
+					<form action="Cards" method="POST"
 						class="form-inline justify-content-center">
 						<div class="form-group mx-sm-3 mb-2">
-							<label for="Search" class="sr-only">Search</label> <input
+							<label for="Search" class="sr-only">Search</label> 
+							<input
 								type="search" name="search" class="form-control" id="search"
 								placeholder="Search">
 						</div>
@@ -37,7 +38,7 @@
 		<div class="container">
 			<div class="row">
 				<c:forEach
-					items="${requestScope['allcards'] == null?applicationScope['allcards']:requestScope['allcards']}"
+					items="${requestScope['allcards'] == null? applicationScope['allcards']:requestScope['allcards']}"
 					var="card">
 					<div class="col-lg-4 col-md-6 col-xs-11 img-space">
 						<div class="gallery">
