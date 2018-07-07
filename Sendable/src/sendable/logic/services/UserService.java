@@ -10,16 +10,13 @@ import sendable.logic.interfaces.UserInterface;
 
 public class UserService implements UserInterface {
 
-
 	private UnitOfWork unit;
 
-	
 	private ArrayList<UserDto> AllUsers = new ArrayList<UserDto>();
 
 	public UserService(UnitOfWork work) {
-		unit  = work;
+		unit = work;
 	}
-
 
 	@Override
 	public UserDto FindUserById(int id) {
@@ -246,14 +243,38 @@ public class UserService implements UserInterface {
 		return null;
 	}
 
-
 	@Override
-	public void AddNewUser(UserDto user) {
+	public void AddNewUser(UserDto user, AddressDto address) {
 		try {
+			String[] name = user.getFullName().split(" ");
+			String fname = name[0];
+			String lname = name[1];
+
+			Address userAddress = null;
+			for (Address a : unit.GetAddressRepo().ListAll()) {
+				if (a.getLine1().toLowerCase().equals(address.getLine1().toLowerCase())
+						&& a.getPostalCode().toLowerCase().equals(address.getPostalCode().toLowerCase())) {
+					userAddress = a;
+					break;
+				}
+			}
 			
+			if (userAddress == null) {
+				userAddress = new Address(address.getLine1(), 
+						address.getLine2(),
+						address.getCity(),
+						address.getState(),
+						address.getPostalCode());
+			}
+			
+			User newUser = new User(fname, lname, 
+							user.getHashedPassword(), 
+							user.getEmail(), 
+							user.getPhone(),
+							userAddress);
+			unit.GetUserRepo().Insert(newUser);
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
-		
 	}
 }

@@ -3,12 +3,13 @@ package sendable.logic.interfaces;
 import java.util.List;
 
 import sendable.logic.dtos.AccountDto;
+import sendable.logic.dtos.AddressDto;
 import sendable.logic.dtos.CardLetterDto;
 import sendable.logic.dtos.UserDto;
 
 public interface UserInterface {
 
-	void AddNewUser(UserDto user);
+	void AddNewUser(UserDto user,AddressDto address);
 		
 	UserDto FindUserById(int id);
 

@@ -30,19 +30,16 @@ public class CardServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		this.doGet(request, response);
-	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
 		if (request.getParameter("search") == null) {
 			response.sendRedirect("cards.jsp");
 		} else {
+
 			CardService service = (CardService) request.getServletContext().getAttribute("cardService");
-			String filter = request.getParameter("search");
+			String filter = request.getParameter("search").toLowerCase().trim();
 			List<CardDto> allcards = new ArrayList<CardDto>();
-			switch (filter.toLowerCase()) {
-			case "birthdays":
+			switch (filter) {
+			case "brithdays":
 				allcards = service.ListCardsByCategory(1);
 				break;
 			case "aniversaries":
@@ -56,7 +53,7 @@ public class CardServlet extends HttpServlet {
 				break;
 			default:
 				for (CardDto c : service.ListCards()) {
-					if (c.getName().contains(filter) || c.getDescription().contains(filter)
+					if (c.getName().contains(filter.toLowerCase()) || c.getDescription().contains(filter)
 							|| c.getImageURL().contains(filter)) {
 						if (!allcards.contains(c)) {
 							allcards.add(c);
@@ -73,5 +70,10 @@ public class CardServlet extends HttpServlet {
 			request.setAttribute("allcards", allcards);
 			request.getRequestDispatcher("cards.jsp").forward(request, response);
 		}
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+			response.sendRedirect("cards.jsp");
 	}
 }

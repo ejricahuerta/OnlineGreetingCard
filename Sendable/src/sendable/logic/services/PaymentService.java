@@ -9,6 +9,7 @@ import sendable.dao.entities.Payment;
 import sendable.dao.repository.UnitOfWork;
 import sendable.logic.dtos.PaymentDto;
 import sendable.logic.interfaces.PaymentInterface;
+import sendable.logic.mapper.SendableMapper;
 
 public class PaymentService implements PaymentInterface {
 
@@ -27,7 +28,7 @@ public class PaymentService implements PaymentInterface {
 		if(AllPayments.isEmpty())
 		{
 			for (Payment p : unit.GetPaymentRepo().ListAll()) {
-				AllPayments.add(this.MapPayment(p));
+				AllPayments.add(SendableMapper.MapPayment(p));
 			}
 		}
 		return AllPayments;
@@ -81,20 +82,6 @@ public class PaymentService implements PaymentInterface {
 			double totalAmount, int billingId, int shippingId) {
 		// TODO Auto-generated method stub
 		return false;
-	}
-
-	private PaymentDto MapPayment(Payment payment) {
-		try {
-
-			return new PaymentDto(payment.getId(), payment.getCardLetter().getId(), payment.getUser().getId(),
-					payment.getShippingAddress().GetAddressString(), payment.getBillingAddress().GetAddressString(),
-					payment.getDateAdded(), payment.getPaymentType(), payment.getTotalAmount());
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-
 	}
 
 }

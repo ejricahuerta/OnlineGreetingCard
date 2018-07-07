@@ -9,6 +9,7 @@ import sendable.dao.repository.*;
 import sendable.logic.dtos.CardDto;
 import sendable.logic.dtos.CategoryDto;
 import sendable.logic.interfaces.CardInterface;
+import sendable.logic.mapper.SendableMapper;
 
 public class CardService implements CardInterface {
 
@@ -27,7 +28,7 @@ public class CardService implements CardInterface {
 	public List<CardDto> ListCards() {
 		if (AllCards.isEmpty()) {
 			for (Card c : unit.GetCardRepo().ListAll()) {
-				AllCards.add(this.MapCard(c));
+				AllCards.add(SendableMapper.MapCard(c));
 			}
 		}
 		return this.AllCards;
@@ -115,7 +116,7 @@ public class CardService implements CardInterface {
 			List<CardDto> cardtmp = new ArrayList<CardDto>();
 			for (Card card : unit.GetCardRepo().ListAll()) {
 				if (card.getCategory().getId() == category.getId()) {
-					cardtmp.add(this.MapCard(card));
+					cardtmp.add(SendableMapper.MapCard(card));
 				}
 			}
 			tmp.setCards(cardtmp);
@@ -123,14 +124,6 @@ public class CardService implements CardInterface {
 		}
 	}
 
-	private CardDto MapCard(Card card) {
-		if (card == null) {
-			return null;
-		}
-		CardDto temp = new CardDto(card.getId(), card.getName(), card.getDescription(), card.getImageURL(), card.getPrice(),
-				card.isAvailable(), card.getDateAdded());
-		temp.setCategoryId(card.getCategory().getId());
-		return temp;
-	}
+	
 
 }
