@@ -36,7 +36,7 @@
 		<div class="container">
 			<div class="row">
 				<c:forEach items="${applicationScope['allcards']}" var="card">
-					<div class="col-lg-6 col-xs-12 img-space">
+					<div class="col-lg-4 col-md-6 col-xs-11 img-space">
 						<div class="gallery">
 							<a type="button" href="${card.getImageURL()}" data-toggle="modal"
 								data-target="#${card.getId()}"> <img class="img-responsive"
