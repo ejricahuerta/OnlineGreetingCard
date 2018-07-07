@@ -126,7 +126,7 @@ border-color: #343a40;
 
 /*bootstrap overrides*/
 .modal-dialog {
-    max-width: 720px;
+    max-width: 600px;
     margin: 1.75rem auto;
     border: none;
     border-radius: 0;

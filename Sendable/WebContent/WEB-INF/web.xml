@@ -6,11 +6,19 @@
   	<servlet-name>Category</servlet-name>
   	<servlet-class>com.sendable.cards.CategoryServlet</servlet-class>
   </servlet>
-  
   <servlet-mapping>
   	<servlet-name>Category</servlet-name>
   	<url-pattern>/category.jsp</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>Cards</servlet-name>
+  	<servlet-class>com.sendable.cards.CardServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>Cards</servlet-name>
+  	<url-pattern>/card.jsp</url-pattern>
+  </servlet-mapping>
+  
   
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

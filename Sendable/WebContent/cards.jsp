@@ -19,7 +19,7 @@
 			<div class="card text-center shadow-sm">
 				<div class="card-header lead">Filter</div>
 				<div class="card-body">
-					<form action="/Cards" method="POST"
+					<form action="Cards" method="GET"
 						class="form-inline justify-content-center">
 						<div class="form-group mx-sm-3 mb-2">
 							<label for="Search" class="sr-only">Search</label> <input
@@ -27,6 +27,7 @@
 								placeholder="Search">
 						</div>
 						<button type="submit" class="btn btn-primary mb-2">Go</button>
+						<a href="cards.jsp" class="btn btn-link">Reset</a>
 					</form>
 				</div>
 			</div>
@@ -35,7 +36,9 @@
 	<section id="gallery">
 		<div class="container">
 			<div class="row">
-				<c:forEach items="${applicationScope['allcards']}" var="card">
+				<c:forEach
+					items="${requestScope['allcards'] == null?applicationScope['allcards']:requestScope['allcards']}"
+					var="card">
 					<div class="col-lg-4 col-md-6 col-xs-11 img-space">
 						<div class="gallery">
 							<a type="button" href="${card.getImageURL()}" data-toggle="modal"
@@ -52,18 +55,16 @@
 						role="dialog" aria-labelledby="modalcard" aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered" role="document">
 							<div class="modal-content">
-								<div class="modal-header">
+								<div class="modal-body">
 									<button type="button" class="close" data-dismiss="modal"
 										aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
-								</div>
-								<div class="modal-body">
 									<img class="img-fluid" src="${card.getImageURL()}"
 										alt="${card.getName()}" style="width: 100%;" />
 								</div>
-								<div class="modal-footer float-left">
-									<p>${ card.getDescription() }<span class="d-flex">${card.getPrice() }
+								<div class="modal-footer">
+									<p>${ card.getDescription() }<span class="d-flex">$${card.getPrice() }
 										</span>
 									</p>
 								</div>
