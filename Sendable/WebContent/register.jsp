@@ -8,8 +8,8 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/main.css">
 <title>Sendable</title>
 </head>
 
@@ -19,7 +19,7 @@
 	<!-- nav header -->
 	<!--Navigation Bar-->
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-	<a class="navbar-brand" href="../index.jsp">SENDABLE</a>
+	<a class="navbar-brand" href="index.jsp">SENDABLE</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#sendablenav" aria-controls="sendablenav"
 		aria-expanded="false" aria-label="Toggle navigation">
@@ -28,12 +28,12 @@
 
 	<div class="collapse navbar-collapse" id="sendablenav">
 		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-			<li class="nav-item"><a class="btn nav-link" href="../index.jsp">Home
+			<li class="nav-item"><a class="btn nav-link" href="index.jsp">Home
 			</a></li>
-			<li class="nav-item"><a class="btn nav-link" href="../cards.jsp">Cards</a>
+			<li class="nav-item"><a class="btn nav-link" href="cards.jsp">Cards</a>
 			</li>
 			<li class="nav-item"><a class="btn nav-link"
-				href="../categories.jsp">Categories</a></li>
+				href="categories.jsp">Categories</a></li>
 		</ul>
 
 		<ul class=" navbar-nav ml-auto">
@@ -88,7 +88,7 @@
 									id="email" placeholder=" ptreg@senecacollege.ca" required>
 							</div>
 							<div class="form-group col-md-6 col-sm-6">
-								<label for="phone">Phone</label> <input name="phone" type="tel"
+								<label for="phone">Phone</label> <input name="phone" type="text"
 									class="form-control" id="phone" placeholder="4164934144">
 							</div>
 						</div>
@@ -153,7 +153,7 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
 		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
 		crossorigin="anonymous"></script>
-	<script src="../js/bootstrap.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 </body>
 
 </html>

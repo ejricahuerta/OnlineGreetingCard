@@ -276,5 +276,7 @@ public class UserService implements UserInterface {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		unit.Save();
+		unit.Close();
 	}
 }

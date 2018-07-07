@@ -33,7 +33,7 @@ public class Authenticate extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-			response.sendRedirect("Authenticate/login.jsp");
+			response.sendRedirect("login.jsp");
 	}
 
 	/**
@@ -60,13 +60,14 @@ public class Authenticate extends HttpServlet {
 			System.out.println(String.format("Password ", temp.getPassword()));
 			for (User user : seed.AllUsers()) {
 				if (user.getEmail().equals(temp.getEmail()) && user.getPassword().equals(temp.getPassword())) {
-					session.setAttribute("username", temp.getEmail());
+					session.setAttribute("user", temp.getEmail());
 					response.addCookie(new Cookie("user", temp.getEmail()));
-					response.sendRedirect("index.jsp");
+					request.getRequestDispatcher("index.jsp").forward(request, response);
+					break;
 				}
 			}
 			request.setAttribute("validationMessage", "<b>Invalid Login!</b> Please try again.");
-			request.getRequestDispatcher("Authenticate/login.jsp").include(request, response);
+			request.getRequestDispatcher("login.jsp").include(request, response);
 		}
 	}
 }

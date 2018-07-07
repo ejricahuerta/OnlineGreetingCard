@@ -11,8 +11,8 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="../css/bootstrap.min.css">
-<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/main.css">
 <title>Sendable</title>
 </head>
 
@@ -29,12 +29,12 @@
 
 	<div class="collapse navbar-collapse" id="sendablenav">
 		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-			<li class="nav-item"><a class="btn nav-link" href="../index.jsp">Home
+			<li class="nav-item"><a class="btn nav-link" href="index.jsp">Home
 			</a></li>
-			<li class="nav-item"><a class="btn nav-link" href="../cards.jsp">Cards</a>
+			<li class="nav-item"><a class="btn nav-link" href="cards.jsp">Cards</a>
 			</li>
 			<li class="nav-item"><a class="btn nav-link"
-				href="../categories.jsp">Categories</a></li>
+				href="categories.jsp">Categories</a></li>
 		</ul>
 
 		<ul class=" navbar-nav ml-auto">
@@ -51,10 +51,10 @@
       	} else {
       %>
     	<li class="nav-item">
-          <a class="btn nav-link" href="../Authenticate/login.jsp">Login</a>
+          <a class="btn nav-link" href="Authenticate/login.jsp">Login</a>
         </li>
         <li class="nav-item">
-          <a class="btn nav-link " href="../Authenticate/register.jsp">Register</a>
+          <a class="btn nav-link " href="Authenticate/register.jsp">Register</a>
         </li>  
       <%
         	}
@@ -136,7 +136,7 @@
 					src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
 					integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
 					crossorigin="anonymous"></script>
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
 			</body>
 

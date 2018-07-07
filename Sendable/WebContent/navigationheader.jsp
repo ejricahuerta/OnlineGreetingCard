@@ -32,10 +32,10 @@
         </li>
       <%} else { %>
     	<li class="nav-item">
-          <a class="btn nav-link" href="Authenticate/login.jsp">Login</a>
+          <a class="btn nav-link" href="login.jsp">Login</a>
         </li>
         <li class="nav-item">
-          <a class="btn nav-link " href="Authenticate/register.jsp">Register</a>
+          <a class="btn nav-link " href="register.jsp">Register</a>
         </li>  
       <% }%>
         </ul>
