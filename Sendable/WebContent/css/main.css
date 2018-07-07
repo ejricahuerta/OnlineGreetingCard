@@ -59,22 +59,52 @@ font-family: 'Open Sans', sans-serif;
     background-color:ghostwhite;
 }
 
-.img-selected{
-    width: auto;
-    height: 50px;;
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-size: 100px;
+    height: 100%;
+	width: 100%;
+    padding-top:40px;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    text-align: center;
+    transition: all 0.5s ease 0s;
+    z-index: 20;
 }
 
-/*bootstrap overrides*/
-.jumbotron {
-    background-color:royalblue;
-    border-radius: 0;
-    color:ghostwhite;
+.overlay2{
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-size: 50px;
+    height: 100%;
+	width: 100%;
+    padding-top:100px;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    text-align: center;
+    transition: all 0.5s ease 0s;
+    z-index: 20;
 }
 
-.card{
-        border-radius: 0;
-        border: none;
-    
+.gallery a:hover .overlay ,
+.gallery a:hover .overlay2 {
+    opacity: 0.8;
+}
+
+.img-space{
+    margin:20px 0px;
 }
 .display-4{
 color: azure;
@@ -92,4 +122,19 @@ border-color: #343a40;
     background-color:  azure;
     color: #343a40;
 
+}
+
+/*bootstrap overrides*/
+.modal-dialog {
+    max-width: 720px;
+    margin: 1.75rem auto;
+}
+.jumbotron {
+    background-color:royalblue;
+    border-radius: 0;
+    color:ghostwhite;
+}
+.gallery a {
+	position: relative;
+	display: block;
 }

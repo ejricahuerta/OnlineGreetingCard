@@ -15,13 +15,10 @@
 
 	<!--heading-->
 	<section class="catchphrase row justify-content-center mt-3 mx-auto">
-		<div class="col-md-8">
+		<div class="col-lg-6 col-md-12 col-sm-12 ">
 			<div class="card text-center shadow-sm">
-				<div class="card-header lead">Search</div>
+				<div class="card-header lead">Filter</div>
 				<div class="card-body">
-					<h5 class="card-title"></h5>
-					<p class="card-text">Type anything like (e.g. birthday, 22, mom
-						etc.)</p>
 					<form action="/Cards" method="POST"
 						class="form-inline justify-content-center">
 						<div class="form-group mx-sm-3 mb-2">
@@ -35,34 +32,48 @@
 			</div>
 		</div>
 	</section>
-	<section class="container">
-		<ul class="nav justify-content-center">
-			<li class="nav-item"><a class="nav-link"></a></li>
-		</ul>
-	</section>
-	<!--top seller section-->
-	<section class="mt-3 topseller container ">
-		<div class="topseller-heading text-center">
-			<h3>All Cards</h3>
-		</div>
-		<div class="row container justify-content-center">
-			<c:forEach items="${applicationScope['allcards']}" var="card"> 
-				<div class="col-md-6 col-lg-5 col-sm-12 p-3 m-1 justify-content-center">
-					<div class="card text-center" style="width: 18rem;">
-						<img class="card-img-top shadow-lg " src="${card.getImageURL()} "
-							alt="${card.getImageURL()}">
-						<div class="card-body">
-							<h5 class="card-title">${card.getName() }-
-								${card.getPrice()}</h5>
-							<p class="card-text">${card.getDescription() }</p>
-							<a href="#" class="btn btn-primary">Proceed</a>
+	<section id="gallery">
+		<div class="container">
+			<div class="row">
+				<c:forEach items="${applicationScope['allcards']}" var="card">
+					<div class="col-lg-6 col-xs-12 img-space">
+						<div class="gallery">
+							<a type="button" href="${card.getImageURL()}" data-toggle="modal"
+								data-target="#${card.getId()}"> <img class="img-responsive"
+								src="${card.getImageURL()}" style="width: 100%;" /> <span
+								class="overlay2"> ${card.getName()} - $${card.getPrice()}
+							</span>
+							</a>
 						</div>
 					</div>
-				</div>
-			</c:forEach>
+
+					<!--modal-->
+					<div class="modal fade" id="${card.getId()}" tabindex="-1"
+						role="dialog" aria-labelledby="modalcard" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-centered" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<img class="img-fluid" src="${card.getImageURL()}"
+										alt="${card.getName()}" style="width: 100%;" />
+								</div>
+								<div class="modal-footer float-left">
+									<p>${ card.getDescription() }<span class="d-flex">${card.getPrice() }
+										</span>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
 		</div>
 	</section>
-
 
 	<!--Contact Us Section-->
 	<jsp:include page="footer.jsp" />
