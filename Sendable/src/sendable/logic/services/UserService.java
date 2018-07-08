@@ -45,7 +45,6 @@ public class UserService implements UserInterface {
 					this.unit.GetUserRepo().Update(user);
 				}
 			});
-
 			return true;
 		} catch (
 
@@ -272,7 +271,6 @@ public class UserService implements UserInterface {
 			e.printStackTrace();
 		}
 		unit.Save();
-		unit.Close();
 	}
 
 	public boolean ValidateLogin(String email, String password) {

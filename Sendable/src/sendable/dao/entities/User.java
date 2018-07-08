@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	int Id;
 
 	String FullName;
@@ -21,7 +21,7 @@ public class User {
 	String HashedPassword;
 	String DateAdded;
 
-	@OneToOne(mappedBy = "User")
+	@OneToOne(cascade = CascadeType.PERSIST)
 	Account Account;
 
 	@OneToOne(cascade  = CascadeType.ALL)

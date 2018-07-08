@@ -72,13 +72,13 @@ public class DatabaseManager implements DatabaseManagerInterface {
 	@Override
 	public void Close() {
 		this.entityManagerFactory.close();
-		this.entityManager = null;
 		this.entityManagerFactory = null;
 	}
 
 	@Override
 	public void Finished() {
 		this.entityManager.close();
+		this.entityManager = null;
 	}
 
 }
