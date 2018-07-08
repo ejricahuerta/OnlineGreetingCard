@@ -13,7 +13,7 @@ public interface UserInterface {
 		
 	UserDto FindUserById(int id);
 
-	UserDto FindUSerByEmail(String email);
+	UserDto FindUserByEmail(String email);
 
 	boolean ChangeUserPassword(int userId, String password);
 
@@ -32,5 +32,8 @@ public interface UserInterface {
 	boolean AddUserLetter(int UserId, CardLetterDto letter);
 
 	boolean RemoveUserLetter(int userId, int letterId);
-
+	
+	boolean ValidateLogin(String email, String password);
+	
+	boolean IsUserFound(String email);
 }

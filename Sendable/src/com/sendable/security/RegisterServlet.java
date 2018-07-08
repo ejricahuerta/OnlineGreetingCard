@@ -14,13 +14,13 @@ import sendable.logic.dtos.UserDto;
 import sendable.logic.services.UserService;
 
 @WebServlet("/Register")
-public class Register extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Register() {
+	public RegisterServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -40,6 +40,7 @@ public class Register extends HttpServlet {
 		String lname = request.getParameter("lastname");
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
+		System.out.println(phone);
 		String line1 = request.getParameter("line1");
 		String line2 = request.getParameter("line2");
 		String city = request.getParameter("city");
@@ -49,12 +50,15 @@ public class Register extends HttpServlet {
 		if (!request.getParameter("password").equals(request.getParameter("retypepassword"))) {
 			request.setAttribute("validationMessage", "Password Did not Match!");
 			request.getRequestDispatcher("register.jsp").forward(request, response);
+			return;
 		}
-		if (service.FindUSerByEmail(email) != null) {
+		if (service.IsUserFound(email)) {
 			request.setAttribute("validationMessage", "Email Exist! Please go and Login");
 			request.getRequestDispatcher("register.jsp").forward(request, response);
-		} else {
+		} 
+		else {
 			try {
+				
 				UserDto newUser = new UserDto(0, fname+ " " +lname ,
 						email, 
 						request.getParameter("password"), 

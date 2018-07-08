@@ -34,6 +34,7 @@ public class UserDto {
 		Email = email;
 		HashedPassword = hashedPassword;
 		CurrentAddress = currentAddress;
+		Phone = phone;
 		CardLetters = cardLetters;
 		AccountDto = accountDto;
 		DateAdded = dateAdded;

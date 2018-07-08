@@ -24,7 +24,7 @@ public class UserService implements UserInterface {
 	}
 
 	@Override
-	public UserDto FindUSerByEmail(String email) {
+	public UserDto FindUserByEmail(String email) {
 		for (UserDto userDto : AllUsers) {
 			if (userDto.getEmail().equals(email)) {
 				return userDto;
@@ -258,20 +258,15 @@ public class UserService implements UserInterface {
 					break;
 				}
 			}
-			
+
 			if (userAddress == null) {
-				userAddress = new Address(address.getLine1(), 
-						address.getLine2(),
-						address.getCity(),
-						address.getState(),
+
+				userAddress = new Address(address.getLine1(), address.getLine2(), address.getCity(), address.getState(),
 						address.getPostalCode());
 			}
-			
-			User newUser = new User(fname, lname, 
-							user.getHashedPassword(), 
-							user.getEmail(), 
-							user.getPhone(),
-							userAddress);
+
+			User newUser = new User(fname, lname, user.getHashedPassword(), user.getEmail(), user.getPhone(),
+					userAddress);
 			unit.GetUserRepo().Insert(newUser);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -279,4 +274,24 @@ public class UserService implements UserInterface {
 		unit.Save();
 		unit.Close();
 	}
+
+	public boolean ValidateLogin(String email, String password) {
+		
+		for (User u : unit.GetUserRepo().ListAll()) {
+			if(u.getEmail().equals(email) && u.getPassword().equals(password)) { 
+				return true; 
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean IsUserFound(String email) {
+		boolean IsFound = false;
+		for (User u : unit.GetUserRepo().ListAll()) {
+			IsFound = (u.getEmail().equals(email)) ? true : false;
+		}
+		return IsFound;
+	}
+
 }
