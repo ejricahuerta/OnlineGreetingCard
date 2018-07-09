@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class AuthorizationFilter
  */
-@WebFilter({"/MyAccount/*", "/User/*", "/Payment/*", "myaccount.jsp", "write.jsp", "payment.jsp"})
+@WebFilter({"/MyAccount/*", "/User/*", "/Payment/*", "/myaccount.jsp", "/write.jsp", "/payment.jsp"})
 public class AuthorizationFilter implements Filter {
 
 	/**
@@ -45,7 +45,7 @@ public class AuthorizationFilter implements Filter {
 		
 		HttpSession session = req.getSession(false);
 		if(session == null || session.getAttribute("user") == null) {
-			res.sendRedirect("Authenticate/login.jsp");
+			res.sendRedirect("login.jsp");
 		}
 		// pass the request along the filter chain
 		chain.doFilter(request, response);
