@@ -21,10 +21,10 @@
       </ul>
       
       <ul class=" navbar-nav ml-auto">
-      <% if(session.getAttribute("user") != null ) { %>
+      <% if(session.getAttribute("userId") != null ) { %>
     	   <li class="nav-item">
-          <a class="btn nav-link" href="myaccount.jsp">
-          <%=session.getAttribute("user")%>
+          <a class="btn nav-link" href="MyAccount">
+          <%=session.getAttribute("userEmail")%>
           </a>
           <li class="nav-item">
           <a class="btn nav-link" href="Logout">
