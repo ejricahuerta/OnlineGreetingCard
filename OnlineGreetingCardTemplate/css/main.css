@@ -3,9 +3,53 @@ body{
     font-family: 'Roboto', sans-serif;
 font-family: 'Open Sans', sans-serif;
 }
+input:disabled{
+    background-color: white;
+}
+
+/*bootstrap overrides*/
+
+.form-control:disabled, .form-control[readonly] {
+    background-color: white;
+}
+
+
+.jumbotron {
+    background-color:royalblue;
+    border-radius: 0;
+    color:ghostwhite;
+}
+
+.card{
+    box-shadow: #343a40;
+}
+.display-4{
+    color: azure;
+    
+}
+.container-fluid{
+    padding-left: 0%;
+    padding-right: 0%;
+}
+.card{
+    border-radius: 0;
+}
+.btn-primary{
+    background-color: darkslategrey;
+border-color: #343a40;
+}
+.btn-primary:hover{
+    background-color:  azure;
+    color: #343a40;
+
+}
 
 
 /*Custom CSS*/
+.sendable-main-content{
+    width: 100%;
+    min-height: 600px;
+}
 
 .sidenav-card{
     background-color: #343a40;
@@ -65,34 +109,3 @@ font-family: 'Open Sans', sans-serif;
     height: 50px;;
 }
 
-
-/*bootstrap overrides*/
-.jumbotron {
-    background-color:royalblue;
-    border-radius: 0;
-    color:ghostwhite;
-}
-
-.card{
-    box-shadow: #343a40;
-}
-.display-4{
-    color: azure;
-    
-}
-.container-fluid{
-    padding-left: 0%;
-    padding-right: 0%;
-}
-.card{
-    border-radius: 0;
-}
-.btn-primary{
-    background-color: darkslategrey;
-border-color: #343a40;
-}
-.btn-primary:hover{
-    background-color:  azure;
-    color: #343a40;
-
-}
