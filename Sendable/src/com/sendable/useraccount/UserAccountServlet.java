@@ -41,12 +41,15 @@ public class UserAccountServlet extends HttpServlet {
 		HttpSession session = (HttpSession) request.getSession();
 		UserService service =  (UserService)session.getAttribute("userService");
 		
-		int userId = (int)session.getAttribute("userId");
-		if(userId <= 0) {
-			request.getRequestDispatcher("index.jsp");
+		String email = (String)session.getAttribute("userEmail");
+		if(email == null) {
+			response.sendRedirect("index.jsp");
 		}
-		UserDto user = service.FindUserById(userId);
+		else {
+		UserDto user = service.FindUserByEmail(email);
+		System.out.println("Current User Email: " + user.getEmail());
 		session.setAttribute("user", user);
 		response.sendRedirect("myaccount.jsp");	
+		}
 	}
 }
