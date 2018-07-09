@@ -4,6 +4,7 @@ import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -15,8 +16,10 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class AuthorizationFilter
  */
-@WebFilter({"/MyAccount/*", "/User/*", "/Payment/*", "/myaccount.jsp", "/write.jsp", "/payment.jsp"})
+@WebFilter({"/User", "/Payment", })
 public class AuthorizationFilter implements Filter {
+
+	private ServletContext context;
 
 	/**
 	 * Default constructor.
@@ -39,23 +42,25 @@ public class AuthorizationFilter implements Filter {
 			throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		// place your code here
-		
-		HttpServletRequest req = (HttpServletRequest)request;
+
+		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
-		
+
 		HttpSession session = req.getSession(false);
-		if(session == null || session.getAttribute("user") == null) {
-			res.sendRedirect("login.jsp");
+		if (session == null) {
+			this.context.log("Unauthorized access request");
+			res.sendRedirect("index.jsp");
+		} else {
+			chain.doFilter(request, response);
 		}
-		// pass the request along the filter chain
-		chain.doFilter(request, response);
 	}
 
 	/**
 	 * @see Filter#init(FilterConfig)
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method st
+		this.context = fConfig.getServletContext();
+		this.context.log("AuthenticationFilter initialized");
 	}
 
 }

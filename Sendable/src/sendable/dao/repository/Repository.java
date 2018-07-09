@@ -34,7 +34,6 @@ public class Repository<T> implements RepositoryInterface<T> {
 	@Override
 	public T Get(int id){
 		try {
-
 			return	(T) this.db.Get(clazz, id);
 		} catch (Exception e) {
 			db.RollBack();

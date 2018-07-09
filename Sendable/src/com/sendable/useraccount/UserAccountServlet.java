@@ -17,39 +17,39 @@ import sendable.logic.services.UserService;
 @WebServlet("/MyAccount")
 public class UserAccountServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UserAccountServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		this.doPost(request, response);
+	public UserAccountServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		HttpSession session = (HttpSession) request.getSession();
-		UserService service =  (UserService)session.getAttribute("userService");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		
-		String email = (String)session.getAttribute("userEmail");
-		if(email == null) {
-			response.sendRedirect("index.jsp");
-		}
-		else {
-		UserDto user = service.FindUserByEmail(email);
+		HttpSession session = (HttpSession) request.getSession(false);
+		int id = (int) session.getAttribute("userId");
+		
+		UserService service = (UserService) session.getServletContext().getAttribute("userService");
+		UserDto user = service.FindUserById(id);
 		System.out.println("Current User Email: " + user.getEmail());
 		session.setAttribute("user", user);
-		response.sendRedirect("myaccount.jsp");	
-		}
+		
+		request.getRequestDispatcher("myaccount.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
 	}
 }

@@ -85,9 +85,9 @@ public class UserService implements UserInterface {
 				if (u.getId() == userId) {
 					String address = null;
 					if (line2.isEmpty()) {
-						address = String.format("%s %s %s %s", line1, city, state, postalcode);
+						address = String.format("%s, %s, %s, %s", line1, city, state, postalcode);
 					} else {
-						address = String.format("%s %s %s %s", line1, city, state, postalcode);
+						address = String.format("%s, %s, %s, %s, %s", line1, line2, city, state, postalcode);
 					}
 					u.setCurrentAddress(address);
 					User user = this.unit.GetUserRepo().Get(userId);

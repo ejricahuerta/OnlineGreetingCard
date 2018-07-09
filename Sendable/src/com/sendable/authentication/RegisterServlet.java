@@ -40,7 +40,6 @@ public class RegisterServlet extends HttpServlet {
 		String lname = request.getParameter("lastname");
 		String email = request.getParameter("email");
 		String phone = request.getParameter("phone");
-		System.out.println(phone);
 		String line1 = request.getParameter("line1");
 		String line2 = request.getParameter("line2");
 		String city = request.getParameter("city");

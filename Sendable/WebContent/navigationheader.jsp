@@ -23,7 +23,7 @@
       <ul class=" navbar-nav ml-auto">
       <% if(session.getAttribute("userId") != null ) { %>
     	   <li class="nav-item">
-          <a class="btn nav-link" href="MyAccount">
+          <a class="btn nav-link" href="MyAccount/${sessionScope['userId']}">
           <%=session.getAttribute("userEmail")%>
           </a>
           <li class="nav-item">
