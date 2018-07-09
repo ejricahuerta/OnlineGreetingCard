@@ -25,14 +25,13 @@ public class UserService implements UserInterface {
 
 	@Override
 	public UserDto FindUserByEmail(String email) {
-		for (UserDto userDto : AllUsers) {
-			if (userDto.getEmail().equals(email)) {
-				return userDto;
+		for (User user : unit.GetUserRepo().ListAll()) {
+			if (user.getEmail().equals(email)) {
+				return this.MapUser(user);
 			}
 		}
 		return null;
 	}
-
 	@Override
 	public boolean ChangeUserPassword(int userId, String password) {
 		try {
