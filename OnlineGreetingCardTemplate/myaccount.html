@@ -53,66 +53,90 @@
             Welcome to your Page!
         </div>
         <!--left-side bar-->
-        <div class="row sendable-myaccount">
-            <div class="leftsidenav col-lg-3 col-md-3 col-sm-3 m-1">
-                <nav class="nav flex-column text-center">
-                    <a class="  nav-link shadow-sm" href="#">Profile</a>
-                    <a class="  nav-link shadow-sm" href="#">My Cards</a>
-                    <a class="  nav-link shadow-sm" href="#">Account</a>
-                    <a class="  nav-link shadow-sm" href="#">Payments</a>
-                    <a class="  nav-link shadow-sm" href="#">Security</a>
-                </nav>
+        <div class="row ">
+            <div class="col-lg-3 col-md-4 col-sm-10 col-10">
+                <div class="list-group" id="list-tab" role="tablist">
+                    <a class="list-group-item list-group-item-action active" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab"
+                        aria-controls="profile">Profile</a>
+                    <a class="list-group-item list-group-item-action" id="list-card-list" data-toggle="list" href="#list-card" role="tab" aria-controls="messages">My Cards</a>
+                    <a class="list-group-item list-group-item-action" id="list-payment-list" data-toggle="list" href="#list-payment" role="tab"
+                        aria-controls="settings">My Payments</a>
+                    <a class="list-group-item list-group-item-action" id="list-security-list" data-toggle="list" href="#list-security" role="tab"
+                        aria-controls="settings">Security</a>
+                </div>
             </div>
-            <div id="profile" class="sendable-main-content mt-2 col-lg-8 col-md-8 col-sm-8 border">
-                <h3 class="text-center mt-2">Your Profile</h3>
-                <form class="m-5">
-                    <div class="form-row ">
-                        <div class="form-group col-md-6">
-                            <label for="firstname">First Name</label>
-                            <input name="firstname" type="text" class="form-control bg-white border-light font-weight-bold" id="firstname" placeholder="First Name" value="Edmel" disabled>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="lastname">Last Name</label>
-                            <input name="lastname" type="text" class="form-control bg-white border-light font-weight-bold" id="lastname" placeholder="Last Name" disabled>
+            <div class="col-8 border rounded bg-light">
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+                        <form class="m-5">
+                            <h4 class="text-center">Your Profile</h4>
+                            <div class="form-group col-md-8 mt-2 ">
+                                <label class="font-italic" for="fulname">Full Name</label>
+                                <input name="fullname" type="text" class="form-control bg-light border font-weight-bold" id="fullname" placeholder="Full Name"
+                                    value="Edmel Ricahuerta" disabled>
+                            </div>
+
+                            <div class="form-group mt-1 col-md-10">
+                                <label class="font-italic" for="address">Address</label>
+                                <input name="adress" type="text" class="form-control bg-light border font-weight-bold" id="address" placeholder="Line 1"
+                                    value="64 Hord Cres, Thornhill, Ontario, L4J3A7" disabled>
+                            </div>
+
+                            <div class="form-group mt-1 col-md-6">
+                                <label class="font-italic" for="phone">Phone</label>
+                                <input name="phone" type="text" class="form-control bg-light border font-weight-bold" id="phone" placeholder="Mobile / Tel"
+                                    value="581-998-5673" disabled>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" disabled>Update</button>
+                        </form>
+                    </div>
+                    <div class="tab-pane fade sendable-usercards" id="list-card" role="tabpanel" aria-labelledby="list-card-list">
+                            
+                                <h4 class="text-center mt-4">Your Cards</h4>
+                        <div class="row p-4">
+                            <div class="col">
+                                                        
+                                <ul class="list-unstyled">
+                                    <li class="media border-bottom p-3">
+                                        <img class="mr-3" src="images/postcard.png" alt="Generic placeholder image">
+                                        <div class="media-body">
+                                            <h5 class="mt-0 mb-1">Card Name - $10.0</h5>
+                                            <small>Date: June 1, 2018</small>
+                                            <p class="mb-1">70 The Pond St Toronto Ontario M4G5F1</p>
+                                            <small class="text-danger ">Not Finished</small>
+
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <ul class="list-unstyled">
+                                    <li class="media border-bottom p-3">
+                                        <img class="mr-3" src="images/postcard.png" alt="Generic placeholder image">
+                                        <div class="media-body">
+                                            <h5 class="mt-0 mb-1">Card Name</h5>
+                                            <small>Date: June 1, 2018</small>
+                                            <p class="mb-1">To: Jihye Lee <small>70 The Pond St Toronto Ontario M4G5F1</small></p>
+                                            <small class="text-success">Sent</small>
+
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="line1">Line 1</label>
-                        <input name="line2" type="text" class="form-control bg-white border-light font-weight-bold" id="line1" placeholder="Line 1" value="64 Hord Cres" disabled>
-                    </div>
-                    <div class="form-group">
-                        <label for="line2">Line 2</label>
-                        <input name="line2" type="text" class="form-control bg-white border-light font-weight-bold" id="line2" placeholder="Apartment, studio, or floor" value=" "
-                            disabled>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="city">City</label>
-                            <input name="city" type="text" class="form-control bg-white border-light font-weight-bold" id="city" value="Thornhill" disabled>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="state">State</label>
-                            <input name="state" type="text" class="form-control bg-white border-light font-weight-bold" id="state" value="Ontario" disabled>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="postalcode">Postal Code</label>
-                            <input name="postalcode" type="text" class="form-control bg-white border-light font-weight-bold" id="postalcode" value="L4J3A7" disabled>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary" disabled>Update</button>
-                </form>
+                    <div class="tab-pane fade" id="list-payment" role="tabpanel" aria-labelledby="list-messages-list">...</div>
+                    <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
+                </div>
             </div>
         </div>
-    </section>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="js/bootstrap.min.js"></script>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+        <script src="js/bootstrap.min.js"></script>
 </body>
 
 </html>

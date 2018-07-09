@@ -8,6 +8,9 @@ input:disabled{
 }
 
 /*bootstrap overrides*/
+.media > img{
+    height: 100px;
+}
 
 .form-control:disabled, .form-control[readonly] {
     background-color: white;
@@ -108,4 +111,3 @@ border-color: #343a40;
     width: auto;
     height: 50px;;
 }
-
