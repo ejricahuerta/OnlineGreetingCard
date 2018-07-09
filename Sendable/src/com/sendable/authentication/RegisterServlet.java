@@ -1,4 +1,4 @@
-package com.sendable.security;
+package com.sendable.authentication;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -70,12 +70,14 @@ public class RegisterServlet extends HttpServlet {
 			}
 			HttpSession session = request.getSession(true);
 			Cookie cookie = new Cookie("email", email);
-			session.setAttribute("user", email);
+			UserDto userDto = service.FindUserByEmail(email);
+			System.out.println("USER ID: "+userDto.getId());
+			session.setAttribute("userId", userDto.getId());
+			session.setAttribute("userEmail",userDto.getEmail());
 			response.addCookie(cookie);
 			response.sendRedirect("index.jsp");
 		}
 	}
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.sendRedirect("register.jsp");

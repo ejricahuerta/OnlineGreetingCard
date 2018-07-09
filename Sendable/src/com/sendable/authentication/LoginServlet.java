@@ -1,4 +1,4 @@
-package com.sendable.security;
+package com.sendable.authentication;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -51,16 +51,18 @@ public class LoginServlet extends HttpServlet {
 		System.out.println(password);
 		String error = "<b>Invalid Login!</b> Please Try Again.";
 		UserService service = (UserService) request.getServletContext().getAttribute("userService");
-		
+
 		if (service.ValidateLogin(email, password)) {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("user", email);
 			UserDto userfound = service.FindUserByEmail(email);
-			System.out.println(userfound.getCurrentAddress());
-			session.setAttribute("UserInfo", userfound);
+			System.out.println("USER ID: "+userfound.getId());
+			session.setAttribute("userId", userfound.getId());
+			session.setAttribute("userEmail", userfound.getEmail());
 			response.sendRedirect("index.jsp");
+		} else {
+			request.setAttribute("validationMessage", error);
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
-		request.setAttribute("validationMessage", error);
-		request.getRequestDispatcher("login.jsp").forward(request, response);
 	}
 }
