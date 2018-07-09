@@ -65,41 +65,133 @@
                         aria-controls="settings">Security</a>
                 </div>
             </div>
+
+
+            <!-- TAB Content-->
             <div class="col-8 border rounded bg-light">
                 <div class="tab-content" id="nav-tabContent">
+
+                    <!-- Profile Tab Content-->
                     <div class="tab-pane fade show active" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-                        <form class="m-5">
-                            <h4 class="text-center">Your Profile <a class="btn btn-link" id="editProfile">EDIT</a> </h4>
-
-                            <div class="form-group col-md-8 mt-2 ">
-                                <label class="font-italic" for="fulname">Full Name</label>
-                                <input name="fullname" type="text" class="form-control bg-light border font-weight-bold" id="fullname" placeholder="Full Name"
-                                    value="Edmel Ricahuerta" disabled>
-                            </div>
-
-                            <div class="form-group mt-1 col-md-10">
-                                <label class="font-italic" for="address">Address</label>
-                                <input name="adress" type="text" class="form-control bg-light border font-weight-bold" id="address" placeholder="Line 1"
-                                    value="64 Hord Cres, Thornhill, Ontario, L4J3A7" disabled>
-                            </div>
-
-                            <div class="form-group mt-1 col-md-6">
-                                <label class="font-italic" for="phone">Phone</label>
-                                <input name="phone" type="text" class="form-control bg-light border font-weight-bold" id="phone" placeholder="Mobile / Tel"
-                                    value="581-998-5673" disabled>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary" id="#updateProfile" disabled>Update</button>
-                        </form>
+                        <div class="m-5">
+                            <h4 class="text-center">Your Profile</h4>
+                            <ul class="list-group">
+                                <li class="list-group-item justify-content-between d-flex">
+                                    <p>Full Name</p>
+                                    <p>Edmel Ricahuerta</p><button type="button" class="btn btn-link" data-toggle="modal" data-target="#fullnameModal">Edit</button></li>
+                                <li class="list-group-item justify-content-between d-flex">
+                                    <p>Phone</p>
+                                    <p>5819885673</p> <button type="button" class="btn btn-link" data-toggle="modal" data-target="#phoneModal">Edit</button></li>
+                                <li class="list-group-item justify-content-between d-flex">
+                                    <p>Address</p>
+                                    <p>64 Hord Cress, Thornhill, Ontario, L4J3A7</p>
+                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target="#addressModal">Edit</button>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="tab-pane fade sendable-usercards" id="list-card" role="tabpanel" aria-labelledby="list-card-list">
 
+                    <!--Full Name Modal -->
+                    <div class="modal fade" id="fullnameModal" tabindex="-1" role="dialog" aria-labelledby="FullName" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="ProfileModal">Edit Name</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="" class="form">
+                                        <div class="form-group">
+                                            <label class="font-italic" for="firstname">First Name</label>
+                                            <input name="firstname" type="text" class="form-control" id="firstname" placeholder="First Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="font-italic" for="lastname">Last Name</label>
+                                            <input name="lastname" type="text" class="form-control" id="lastname" placeholder="Last Name">
+                                        </div>
+
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Phone Modal -->
+                    <div class="modal fade" id="phoneModal" tabindex="-1" role="dialog" aria-labelledby="Phone" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="ProfileModal">Edit Contact Number</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="" class="form">
+                                        <div class="form-group">
+                                            <label class="font-italic" for="phone">Phone Number</label>
+                                            <input name="phone" type="tel" class="form-control" id="phone" placeholder="Mobile / Tel">
+                                        </div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Addres Modal-->
+                    <div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="Address" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="ProfileModal">Edit Address</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="" class="form">
+                                        <div class="form-group">
+                                            <label class="font-italic" for="line1">Line 1</label>
+                                            <input name="line1" type="text" class="form-control" id="line1" placeholder="Line 1">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="font-italic" for="lastname">Line 2</label>
+                                            <input name="line2" type="text" class="form-control" id="line2" placeholder="Line 2">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="font-italic" for="city">City</label>
+                                            <input name="city" type="text" class="form-control" id="city" placeholder="City">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="font-italic" for="state">State</label>
+                                            <input name="state" type="text" class="form-control" id="state" placeholder="State">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="font-italic" for="postalcode">Postal Code</label>
+                                            <input name="postalcode" type="text" class="form-control" id="postalcode" placeholder="Postal Code">
+                                        </div>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="tab-pane fade sendable-usercards" id="list-card" role="tabpanel" aria-labelledby="list-card-list">
                         <h4 class="text-center mt-4">Your Cards</h4>
                         <div class="row p-4">
                             <div class="col">
 
                                 <ul class="list-unstyled">
-                                    <li class="media border-bottom p-3">
+                                    <li class="media border-top p-3">
                                         <img class="mr-3" src="images/postcard.png" alt="Generic placeholder image">
                                         <div class="media-body">
                                             <h5 class="mt-0 mb-1">Card Name - $10.0</h5>
@@ -112,7 +204,7 @@
                                 </ul>
 
                                 <ul class="list-unstyled">
-                                    <li class="media border-bottom p-3">
+                                    <li class="media border-top p-3">
                                         <img class="mr-3" src="images/postcard.png" alt="Generic placeholder image">
                                         <div class="media-body">
                                             <h5 class="mt-0 mb-1">Card Name</h5>
@@ -155,30 +247,10 @@
         </div>
         <!-- Optional JavaScript -->
 
-
         </script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
 
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $("#editProfile").click(
-                    function () {
-
-                        $("#fullname").prop("disabled", false);
-                        $("#address").prop("disabled", false);
-                        $("#phone").prop("disabled", false);
-                        $("#fullname").removeClass("bg-light");
-                        $("#fullname").addClass("bg-white");
-                        $("#address").removeClass("bg-light");
-                        $("#address").addClass("bg-white");
-                        $("#phone").removeClass("bg-light");
-                        $("#phone").addClass("bg-white");
-                        $("#updateProfile").prop("disabled", false);
-
-                    });
-            });
-        </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
             crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
