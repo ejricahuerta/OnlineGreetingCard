@@ -34,7 +34,6 @@ public class CardServlet extends HttpServlet {
 		if (request.getParameter("search") == null) {
 			response.sendRedirect("cards.jsp");
 		} else {
-
 			CardService service = (CardService) request.getServletContext().getAttribute("cardService");
 			String filter = request.getParameter("search").toLowerCase().trim();
 			List<CardDto> allcards = new ArrayList<CardDto>();

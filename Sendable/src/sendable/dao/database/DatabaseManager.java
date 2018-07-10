@@ -5,7 +5,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import javax.persistence.Query;
+
+import sendable.dao.entities.Category;
 import sendable.dao.interfaces.DatabaseManagerInterface;
+import sendable.dao.interfaces.UnitOfWorkInterface;
+import sendable.dao.repository.UnitOfWork;
 
 public class DatabaseManager implements DatabaseManagerInterface {
 
@@ -19,7 +23,7 @@ public class DatabaseManager implements DatabaseManagerInterface {
 			}
 			this.setEntityManager(this.entityManagerFactory.createEntityManager());
 		}
-		if(!this.entityManager.getTransaction().isActive()) {			
+		if (!this.entityManager.getTransaction().isActive()) {
 			this.entityManager.getTransaction().begin();
 		}
 		return entityManager;

@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class AuthorizationFilter
  */
-@WebFilter({"/User", "/Payment", })
+@WebFilter({ "/User", "/Payment",  "/MyAccount" })
 public class AuthorizationFilter implements Filter {
 
 	private ServletContext context;
@@ -40,18 +40,21 @@ public class AuthorizationFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
 
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
-
+		
+		String loginURI = req.getContextPath() + "/login.jsp";
+		
 		HttpSession session = req.getSession(false);
-		if (session == null) {
-			this.context.log("Unauthorized access request");
-			res.sendRedirect("index.jsp");
-		} else {
+		
+		boolean loggedIn = session != null && session.getAttribute("userId") != null;
+		boolean loginRequest = req.getRequestURI().equals(loginURI);
+
+		if (loggedIn || loginRequest) {
 			chain.doFilter(request, response);
+		} else {
+			res.sendRedirect(loginURI);
 		}
 	}
 
