@@ -19,7 +19,7 @@ public class Card {
 	boolean Available;
 	String DateAdded;
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	Category Category;
 
 	public Card() {

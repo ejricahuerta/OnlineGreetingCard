@@ -128,11 +128,10 @@ public class UserService implements UserInterface {
 			AllUsers.forEach(u -> {
 				if (u.getId() == UserId) {
 					u.getCardLetters().add(letter);
-
 					// add new card
 					User userLetter = this.unit.GetUserRepo().Get(UserId);
 					Card card = this.unit.GetCardRepo().Get(letter.getCardId());
-					this.unit.GetCardLetterRepo().Insert(new CardLetter(userLetter, card, letter.getMessage(),
+					this.unit.GetCardLetterRepo().Insert(new CardLetter(userLetter, card, letter.getRecipient(), letter.getMessage(),
 							letter.getFontStyle(), letter.getTotalCost(), letter.getDateAdded()));
 				}
 			});
@@ -169,8 +168,11 @@ public class UserService implements UserInterface {
 			// get all cards where user id == userId
 			this.unit.GetCardLetterRepo().ListAll().forEach(c -> {
 				if (c.getUser() == user) {
-					cardletters.add(new CardLetterDto(c.getId(), c.getUser().getId(), c.getCard().getId(),
-							c.getMessage(), c.getFont(), c.getTotalCost(), c.getDateAdded()));
+					String url = c.getCard().getImageURL();
+					CardLetterDto newletter = new CardLetterDto(c.getId(), c.getUser().getId(), c.getCard().getId(),
+						c.getRecipient(),c.getMessage(), c.getFont(), c.getTotalCost(), c.getDateAdded());
+					newletter.setImageURL(url);
+					cardletters.add(newletter);
 				}
 			});
 

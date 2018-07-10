@@ -4,11 +4,13 @@ public class CardLetterDto {
 	int Id;
 	int UserId;
 	int CardId;
+	String ImageURL;
+	String Recipient;
 	String Message;
 	String FontStyle;
 	double TotalCost;
 	String DateAdded;
-
+	String Status;
 	/**
 	 * @param id
 	 * @param userId
@@ -18,16 +20,17 @@ public class CardLetterDto {
 	 * @param totalCost
 	 * @param dateAdded
 	 */
-	public CardLetterDto(int id, int userId, int cardId, String message, String fontStyle, double totalCost,
+	public CardLetterDto(int id, int userId, int cardId,String recipient, String message, String fontStyle, double totalCost,
 			String dateAdded) {
-		super();
 		Id = id;
 		UserId = userId;
 		CardId = cardId;
+		Recipient = recipient;
 		Message = message;
 		FontStyle = fontStyle;
 		TotalCost = totalCost;
 		DateAdded = dateAdded;
+		Status = "Pending";
 	}
 
 	public int getId() {
@@ -85,5 +88,31 @@ public class CardLetterDto {
 	public void setTotalCost(double totalCost) {
 		TotalCost = totalCost;
 	}
+
+	public String getImageURL() {
+		return ImageURL;
+	}
+
+	public void setImageURL(String imageURL) {
+		ImageURL = imageURL;
+	}
+
+	public String getRecipient() {
+		return Recipient;
+	}
+
+	public void setRecipient(String recipient) {
+		Recipient = recipient;
+	}
+
+	public String getStatus() {
+		return Status;
+	}
+
+	public void setStatus(String status) {
+		Status = status;
+	}
+	
+	
 
 }

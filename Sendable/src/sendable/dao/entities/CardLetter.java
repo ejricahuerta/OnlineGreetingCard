@@ -9,6 +9,8 @@ public class CardLetter {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	int Id;
+
+	String Recipient;
 	String Message;
 	String FontStyle;
 	double TotalCost;
@@ -16,18 +18,19 @@ public class CardLetter {
 	String Status;
 	String DateSent;
 
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	User User;
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	Card Card;
 
 	public CardLetter() {
 	}
 
-	public CardLetter(User user, Card card, String message, String font, double totalCost, String dateAdded) {
+	public CardLetter(User user, Card card,String recipient, String message, String font, double totalCost, String dateAdded) {
 
 		this.User = user;
 		this.Card = card;
+		this.Recipient = recipient;
 		this.Message = message;
 		this.FontStyle = font;
 		this.setTotalCost(totalCost);
@@ -111,5 +114,14 @@ public class CardLetter {
 		this.Status = "Sent";
 		this.DateSent = DateTime.GetCurrentDate();
 	}
+
+	public String getRecipient() {
+		return Recipient;
+	}
+
+	public void setRecipient(String recipient) {
+		Recipient = recipient;
+	}
+	
 
 }
