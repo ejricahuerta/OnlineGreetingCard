@@ -1,4 +1,4 @@
-package com.sendable.config;
+package com.sendable.serlvet.config;
 
 import java.util.List;
 

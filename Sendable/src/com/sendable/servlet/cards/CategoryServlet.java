@@ -1,4 +1,4 @@
-package com.sendable.cards;
+package com.sendable.servlet.cards;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.sendable.authentication;
+package com.sendable.servlet.authentication;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
