@@ -8,14 +8,16 @@ input:disabled{
 }
 
 /*bootstrap overrides*/
+
+.list-group-item.active {
+    z-index: 2;
+    color: #fff;
+    background-color: #495057;
+    border-color: #495057;
+}
 .media > img{
     height: 100px;
 }
-
-.form-control:disabled, .form-control[readonly] {
-    background-color: white;
-}
-
 
 .jumbotron {
     background-color:royalblue;
