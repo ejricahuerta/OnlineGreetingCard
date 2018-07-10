@@ -21,10 +21,10 @@ public class User {
 	String HashedPassword;
 	String DateAdded;
 
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.PERSIST,fetch=FetchType.LAZY)
 	Account Account;
 
-	@OneToOne(cascade  = CascadeType.ALL)
+	@OneToOne(cascade  = CascadeType.ALL,fetch=FetchType.LAZY)
 	Address CurrentAddress;
 
 	@OneToMany(cascade = CascadeType.PERSIST)

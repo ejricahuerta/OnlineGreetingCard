@@ -12,7 +12,7 @@ public class Account {
 	double Credit;
 	String LastTopUpDate;
 
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	User User;
 
 	public Account() {
