@@ -1,7 +1,6 @@
 
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="sendable.logic.dtos.CardDto"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="header.jsp" />
 
@@ -22,8 +21,7 @@
 					<form action="Cards" method="POST"
 						class="form-inline justify-content-center">
 						<div class="form-group mx-sm-3 mb-2">
-							<label for="Search" class="sr-only">Search</label> 
-							<input
+							<label for="Search" class="sr-only">Search</label> <input
 								type="search" name="search" class="form-control" id="search"
 								placeholder="Search">
 						</div>
@@ -64,10 +62,11 @@
 									<img class="img-fluid" src="${card.getImageURL()}"
 										alt="${card.getName()}" style="width: 100%;" />
 								</div>
-								<div class="modal-footer">
-									<p>${ card.getDescription() }<span class="d-flex">$${card.getPrice() }
-										</span>
+								<div class="modal-footer d-flex justify-content-between">
+									<p>${ card.getDescription() }<span class="d-block">$${card.getPrice()
+											} </span>
 									</p>
+									<a class="btn btn-primary" href="Write?cardId=${card.getId()}">Select Card</a>
 								</div>
 							</div>
 						</div>
