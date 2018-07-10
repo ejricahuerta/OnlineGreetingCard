@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
-        version="2.0">
-             
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+
 	<persistence-unit name="sendable_persistence"
 		transaction-type="RESOURCE_LOCAL">
-		
+
 		<class>sendable.dao.entities.User</class>
 		<class>sendable.dao.entities.Card</class>
 		<class>sendable.dao.entities.Category</class>
 		<class>sendable.dao.entities.CardLetter</class>
 		<class>sendable.dao.entities.Payment</class>
 		<class>sendable.dao.entities.Address</class>
-		
+
 		<properties>
 			<property name="javax.persistence.jdbc.url"
 				value="jdbc:mysql://localhost:3306/sendable" />
@@ -30,26 +30,30 @@
 
 	</persistence-unit>
 	<persistence-unit name="sendable_hibernate"
-		transaction-type="RESOURCE_LOCAL">     
-	 
+		transaction-type="RESOURCE_LOCAL">
+
 		<class>sendable.dao.entities.Category</class>
 		<class>sendable.dao.entities.Card</class>
 		<class>sendable.dao.entities.Address</class>
 		<class>sendable.dao.entities.User</class>
 		<class>sendable.dao.entities.CardLetter</class>
 		<class>sendable.dao.entities.Payment</class>
-		<properties>	
-		
-     		<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sendable" />
+		<properties>
+
+			<property name="javax.persistence.jdbc.driver"
+				value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://localhost:3306/sendable" />
 			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="password" />											
-				 
-			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
-			<property name="hibernate.hbm2ddl.auto" value="update"/>
-			<property name="hibernate.show_sql" value="true"/>
-			<property name="hibernate.format_sql" value="true"/>			
-			<property name="hibernate.id.new_generator_mappings" value="true"/>	
-		</properties>		
-</persistence-unit>
+			<property name="javax.persistence.jdbc.password"
+				value="password" />
+			<property name="hibernate.connection.driver_class"
+				value="com.mysql.jdbc.Driver" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.id.new_generator_mappings"
+				value="true" />
+		</properties>
+	</persistence-unit>
 </persistence>
