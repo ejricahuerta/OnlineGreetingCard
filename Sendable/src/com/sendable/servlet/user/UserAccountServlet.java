@@ -40,6 +40,7 @@ public class UserAccountServlet extends HttpServlet {
 		UserDto user = service.FindUserById(id);
 		
 		if(user==null) {
+			
 			response.sendRedirect("index.jsp");
 		}
 		
