@@ -73,6 +73,11 @@ public class CardServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-			response.sendRedirect("cards.jsp");
+			if(request.getParameter("search") != null) {
+				this.doPost(request, response);
+			}
+			else {				
+				response.sendRedirect("cards.jsp");
+			}
 	}
 }

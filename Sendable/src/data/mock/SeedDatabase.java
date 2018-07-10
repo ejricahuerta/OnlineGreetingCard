@@ -28,9 +28,6 @@ public class SeedDatabase {
 
 	public List<Card> AddCards() {
 		if (AllCards.isEmpty()) {
-		
-			
-			
 			AllCards.add(new Card(AllCategories.get(1), "Birthday 1", "", 0, null, Seeded));
 			AllCards.add(new Card(AllCategories.get(1), "Birthday 2", null, 0, null, Seeded));
 			AllCards.add(new Card(AllCategories.get(1), "Birthday 2", null, 0, null, Seeded));

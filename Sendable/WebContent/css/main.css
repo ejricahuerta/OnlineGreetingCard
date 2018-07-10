@@ -1,115 +1,168 @@
-body{
-    background: none;
-    font-family: 'Roboto', sans-serif;
-font-family: 'Open Sans', sans-serif;
-}
-input:disabled{
-    background-color: white;
+body {
+	background: none;
+	font-family: 'Roboto', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 }
 
 /*bootstrap overrides*/
-
 .list-group-item.active {
-    z-index: 2;
-    color: #fff;
-    background-color: #495057;
-    border-color: #495057;
+	z-index: 2;
+	color: #fff;
+	background-color: #495057;
+	border-color: #495057;
 }
-.media > img{
-    height: 100px;
+
+.media>img {
+	height: 100px;
 }
 
 .jumbotron {
-    background-color:royalblue;
-    border-radius: 0;
-    color:ghostwhite;
+	background-color: royalblue;
+	border-radius: 0;
+	color: ghostwhite;
 }
 
-.card{
-    box-shadow: #343a40;
+.card {
+	box-shadow: #343a40;
 }
-.display-4{
-    color: azure;
-    
-}
-.container-fluid{
-    padding-left: 0%;
-    padding-right: 0%;
-}
-.card{
-    border-radius: 0;
-}
-.btn-primary{
-    background-color: darkslategrey;
-border-color: #343a40;
-}
-.btn-primary:hover{
-    background-color:  azure;
-    color: #343a40;
 
+.display-4 {
+	color: azure;
+}
+
+.container-fluid {
+	padding-left: 0%;
+	padding-right: 0%;
+}
+
+.card {
+	border-radius: 0;
+}
+
+.btn-primary {
+	background-color: darkslategrey;
+	border-color: #343a40;
+}
+
+.btn-primary:hover {
+	background-color: azure;
+	color: #343a40;
 }
 
 
 /*Custom CSS*/
-.sendable-main-content{
-    width: 100%;
-    min-height: 600px;
+
+
+overlay {
+	border-radius: 0;
+	background-color: rgba(0, 0, 0, 0.8);
+	border: none;
+	color: #fff;
+	cursor: pointer;
+	display: block;
+	font-size: 100px;
+	height: 100%;
+	width: 100%;
+	padding-top: 40px;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	text-align: center;
+	transition: all 0.5s ease 0s;
+	z-index: 20;
 }
 
-.sidenav-card{
-    background-color: #343a40;
-    height: 800px;
+.overlay2 {
+	background-color: rgba(0, 0, 0, 0.8);
+	color: #fff;
+	cursor: pointer;
+	display: block;
+	font-size: 50px;
+	height: 100%;
+	width: 100%;
+	padding-top: 100px;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	text-align: center;
+	transition: all 0.5s ease 0s;
+	z-index: 20;
+}
+.gallery a{
+	position: relative;
+	display: block;
 }
 
-.text-space{
-    min-height: 350px;
+.gallery a:hover .overlay, .gallery a:hover .overlay2 {
+	opacity: 0.8;
 }
 
-.font1{
-    font-family: 'Sacramento', cursive;
-    
-}
-.font2{
-    font-family: 'Nothing You Could Do', cursive;
-    
-}
-.font3{
-    font-family: 'Homemade Apple', cursive;
-    
-}
-.font4{
-    font-family: 'Allura', cursive;
-    
+.img-space {
+	margin: 20px 0px;
 }
 
-.write-card-space{
-    background-color: azure;
-    height: 800px;
+.sendable-main-content {
+	width: 100%;
+	min-height: 600px;
 }
 
-.register-form, .allcategories{
-    margin: 40px;
-    min-width: 200px;
+.sidenav-card {
+	background-color: #343a40;
+	height: 800px;
 }
 
-.break{
-    margin-top: 100px;
+.text-space {
+	min-height: 350px;
 }
 
-.required-field{
-    color: red;
+.font1 {
+	font-family: 'Sacramento', cursive;
 }
 
-.write-card{
-    background-color: ghostwhite;
+.font2 {
+	font-family: 'Nothing You Could Do', cursive;
 }
 
-.send-card{
-    background-color:ghostwhite;
-    height: 100%;
+.font3 {
+	font-family: 'Homemade Apple', cursive;
 }
 
-.img-selected{
-    width: auto;
-    height: 50px;;
+.font4 {
+	font-family: 'Allura', cursive;
+}
+
+.write-card-space {
+	background-color: azure;
+	height: 800px;
+}
+
+.register-form, .allcategories {
+	margin: 40px;
+	min-width: 200px;
+}
+
+.break {
+	margin-top: 100px;
+}
+
+.required-field {
+	color: red;
+}
+
+.write-card {
+	background-color: ghostwhite;
+}
+
+.send-card {
+	background-color: ghostwhite;
+	height: 100%;
+}
+
+.img-selected {
+	width: auto;
+	height: 50px;;
 }

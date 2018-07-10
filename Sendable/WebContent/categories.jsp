@@ -19,18 +19,13 @@
 				<div class="card-body">
 					<div class="row justify-content-center">
 						<div class="m-3 categories-card col-md col-sm">
-							<ul class="list-group mx-auto pl-3 pr-3">
-								<c:forEach items="${applicationScope['allcategories']}"
-									var="category">
-									<li
-										class="list-group-item d-flex justify-content-between
-										align-items-center">
-										<form action="Cards" method="POST">
-											<input type="hidden" name="search" id="search"
-												value='${category.getName()}'> <button type="submit"
-												class="btn bg-white">${category.getName()}</button> <span
-												class="badge badge-primary badge-pill">${category.getCards().size()}</span>
-										</form>
+							<ul class="list-group mx-auto pl-3 pr-3 text-center">
+								<c:forEach items="${applicationScope['allcategories']}" var="category">
+									<li class="list-group-item text-center">
+								
+										<a class="btn btn-link" href="Cards?search=${category.getName()}">${category.getName()}
+											<span class="badge badge-primary badge-pill">${category.getCards().size()}</span>
+										</a>
 									</li>
 								</c:forEach>
 							</ul>
