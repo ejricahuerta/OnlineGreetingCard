@@ -32,16 +32,20 @@ public class UserAccountServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		HttpSession session = (HttpSession) request.getSession(false);
 		int id = (int) session.getAttribute("userId");
-		
+		System.out.println("ID: "+ id);
 		UserService service = (UserService) session.getServletContext().getAttribute("userService");
 		UserDto user = service.FindUserById(id);
+		
+		if(user==null) {
+			response.sendRedirect("index.jsp");
+		}
+		
 		System.out.println("Current User Email: " + user.getEmail());
 		session.setAttribute("user", user);
-		
-		request.getRequestDispatcher("myaccount.jsp").forward(request, response);
+		response.sendRedirect("myaccount.jsp");
 	}
 
 	/**
@@ -50,6 +54,6 @@ public class UserAccountServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+		this.doGet(request, response);
 	}
 }
