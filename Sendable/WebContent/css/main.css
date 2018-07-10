@@ -3,9 +3,58 @@ body{
     font-family: 'Roboto', sans-serif;
 font-family: 'Open Sans', sans-serif;
 }
+input:disabled{
+    background-color: white;
+}
+
+/*bootstrap overrides*/
+
+.list-group-item.active {
+    z-index: 2;
+    color: #fff;
+    background-color: #495057;
+    border-color: #495057;
+}
+.media > img{
+    height: 100px;
+}
+
+.jumbotron {
+    background-color:royalblue;
+    border-radius: 0;
+    color:ghostwhite;
+}
+
+.card{
+    box-shadow: #343a40;
+}
+.display-4{
+    color: azure;
+    
+}
+.container-fluid{
+    padding-left: 0%;
+    padding-right: 0%;
+}
+.card{
+    border-radius: 0;
+}
+.btn-primary{
+    background-color: darkslategrey;
+border-color: #343a40;
+}
+.btn-primary:hover{
+    background-color:  azure;
+    color: #343a40;
+
+}
 
 
 /*Custom CSS*/
+.sendable-main-content{
+    width: 100%;
+    min-height: 600px;
+}
 
 .sidenav-card{
     background-color: #343a40;
@@ -57,86 +106,10 @@ font-family: 'Open Sans', sans-serif;
 
 .send-card{
     background-color:ghostwhite;
-}
-
-
-.overlay {
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #fff;
-    cursor: pointer;
-    display: block;
-    font-size: 100px;
     height: 100%;
-	width: 100%;
-    padding-top:40px;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    text-align: center;
-    transition: all 0.5s ease 0s;
-    z-index: 20;
 }
 
-.overlay2{
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #fff;
-    cursor: pointer;
-    display: block;
-    font-size: 40px;
-    height: 100%;
-	width: 100%;
-    padding-top:100px;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    text-align: center;
-    transition: all 0.5s ease 0s;
-    z-index: 20;
-}
-
-.gallery a:hover .overlay ,
-.gallery a:hover .overlay2 {
-    opacity: 0.8;
-}
-
-.img-space{
-    margin:20px 0px;
-}
-.display-4{
-color: azure;
-
-}
-.container-fluid{
-    padding-left: 0%;
-    padding-right: 0%;
-}
-.btn-primary{
-background-color: darkslategrey;
-border-color: #343a40;
-}
-.btn-primary:hover{
-    background-color:  azure;
-    color: #343a40;
-
-}
-
-/*bootstrap overrides*/
-.modal-dialog {
-    max-width: 600px;
-    margin: 1.75rem auto;
-    border: none;
-    border-radius: 0;
-}
-.jumbotron {
-    background-color:royalblue;
-    border-radius: 0;
-    color:ghostwhite;
-}
-.gallery a {
-	position: relative;
-	display: block;
+.img-selected{
+    width: auto;
+    height: 50px;;
 }
