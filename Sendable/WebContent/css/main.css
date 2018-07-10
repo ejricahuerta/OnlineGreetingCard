@@ -92,6 +92,7 @@ overlay {
 	transition: all 0.5s ease 0s;
 	z-index: 20;
 }
+
 .gallery a{
 	position: relative;
 	display: block;
@@ -119,12 +120,13 @@ overlay {
 	min-height: 350px;
 }
 
+/*Gaegu|Gochi+Hand|Homemade+Apple|Marck+Script|Nothing+You+Could+Do|Permanent+Marker|Sacramento*/
 .font1 {
-	font-family: 'Sacramento', cursive;
+	font-family: 'Gaegu', cursive;
 }
 
 .font2 {
-	font-family: 'Nothing You Could Do', cursive;
+	font-family: 'Gochi Hand', cursive;
 }
 
 .font3 {
@@ -132,12 +134,23 @@ overlay {
 }
 
 .font4 {
-	font-family: 'Allura', cursive;
+	font-family: 'Marck Script', cursive;
+}
+.font5{
+	font-family: NothingYou Could Do, cursive;
+}
+
+.font6{
+	font-family: Permanent Marker, cursive;
+}
+
+.font7{
+	 font-family: Sacramento,cursive;
 }
 
 .write-card-space {
 	background-color: azure;
-	height: 800px;
+	height: 1080px;
 }
 
 .register-form, .allcategories {
