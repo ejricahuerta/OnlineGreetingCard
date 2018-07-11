@@ -84,7 +84,6 @@
 							</ul>
 						</div>
 					</div>
-
 					<!--Full Name Modal -->
 					<div class="modal fade" id="fullnameModal" tabindex="-1"
 						role="dialog" aria-labelledby="FullName" aria-hidden="true">
@@ -99,21 +98,22 @@
 								</div>
 								<div class="modal-body">
 									<form action="" class="form">
+										<input type="hidden" name="modal" value="fullnamemodal">
 										<div class="form-group">
 											<label class="font-italic" for="firstname">First Name</label>
 											<input name="firstname" type="text" class="form-control"
-												id="firstname" placeholder="First Name">
+												id="firstname" placeholder="First Name"  value="${user.getFullName().split(' ')[0]}">
 										</div>
 										<div class="form-group">
 											<label class="font-italic" for="lastname">Last Name</label> <input
 												name="lastname" type="text" class="form-control"
-												id="lastname" placeholder="Last Name">
+												id="lastname" placeholder="Last Name" value="${user.getFullName().split(' ')[1]}">
 										</div>
 										<div class="form-group">
 											<label class="font-italic" for="currentpassword">Current
 												Password</label> <input name="currentpassword" type="password"
 												class="form-control" id="currentpassword"
-												placeholder="Current Password">
+												placeholder="Current Password" ${user.getHashedPassword()}>
 										</div>
 										<div class="float-right">
 											<button type="button" class="btn btn-secondary"
@@ -143,9 +143,10 @@
 								<div class="modal-body">
 									<form action="" class="form">
 										<div class="form-group">
+											<input type="hidden" name="modal" value="phonemodal">
 											<label class="font-italic" for="phone">Phone Number</label> <input
-												name="phone" type="tel" class="form-control" id="phone"
-												placeholder="Mobile / Tel">
+												name="phone" type="text" class="form-control" id="phone"
+												placeholder="Mobile / Tel" value="${user.getPhone()}">
 										</div>
 										<div class="form-group">
 											<label class="font-italic" for="currentpassword">Current
@@ -181,8 +182,9 @@
 								<div class="modal-body">
 									<form action="" class="form">
 										<div class="form-group">
-											<label class="font-italic" for="line1">Line 1</label> <input
-												name="line1" type="text" class="form-control" id="line1"
+											<label class="font-italic" for="line1">Line 1</label> 
+											
+											<input name="line1" type="text" class="form-control" id="line1"
 												placeholder="Line 1">
 										</div>
 										<div class="form-group">
@@ -404,8 +406,7 @@
 			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
 			integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
 			crossorigin="anonymous"></script>
-		<script text="text/javascript"
-			src="js/bootstrap.min.js"></script>
+		<script text="text/javascript" src="js/bootstrap.min.js"></script>
 </body>
 
 </html>

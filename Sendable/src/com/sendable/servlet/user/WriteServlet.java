@@ -37,27 +37,24 @@ public class WriteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		if (request.getParameter("cardId") == null) {
-			String loginURL = request.getContextPath() +"card.jsp";
-			response.sendRedirect("/Cards");
-		}
-
-		String message = request.getParameter("message");
-		if (message == null || message.length() < 5) {	
-			request.setAttribute("validationMessage", "<b>Invalid Message!</b> Please Enter your message again.");
-		
-			CardDto card =  this.cardservice.getCard(Integer.parseInt(request.getParameter("cardId")));
-			request.setAttribute("cardSelected", card);
-			request.getRequestDispatcher("write.jsp").forward(request, response);
+			response.sendRedirect("card.jsp");
+		} else {
+			String message = request.getParameter("message");
+			if (message == null || message.length() < 5) {
+				request.setAttribute("validationMessage", "<b>Invalid Message!</b> Please Enter your message again.");
+				CardDto card = this.cardservice.getCard(Integer.parseInt(request.getParameter("cardId")));
+				request.setAttribute("cardSelected", card);
+				request.getRequestDispatcher("write.jsp").forward(request, response);
+			}
 		}
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("ID: "+request.getParameter("cardId"));
+		System.out.println("ID: " + request.getParameter("cardId"));
 		if (request.getParameter("cardId") == null) {
-			response.sendRedirect("card.jsp");
+			response.sendRedirect(request.getContextPath()+"/card.jsp");
 		} else {
-
 			int id = Integer.parseInt(request.getParameter("cardId"));
 			CardDto card = cardservice.getCard(id);
 			request.setAttribute("cardSelected", card);

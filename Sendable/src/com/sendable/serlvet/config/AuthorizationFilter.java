@@ -1,4 +1,4 @@
-	package com.sendable.serlvet.config;
+package com.sendable.serlvet.config;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class AuthorizationFilter
  */
-@WebFilter({ "/User", "/Payment", "/MyAccount", "/myaccount.jsp" , "/Write", "/write.jsp"})
+@WebFilter({ "/User", "/Payment", "/MyAccount", "/myaccount.jsp", "/Write", "/write.jsp" })
 public class AuthorizationFilter implements Filter {
 
 	private ServletContext context;
@@ -48,17 +48,13 @@ public class AuthorizationFilter implements Filter {
 
 		HttpSession session = req.getSession(false);
 
-		boolean loggedIn = session != null && session.getAttribute("userId") != null;
+		boolean loggedIn = session != null && session.getAttribute("user") != null;
 		boolean loginRequest = req.getRequestURI().equals(loginURI);
 
 		if (loggedIn || loginRequest) {
 			chain.doFilter(request, response);
-		} 
-		else
-		{
-			
-			res.setHeader("Cache-Control", "no-cache");
-			res.setHeader("Cache-Control", "no-store");
+		} else {
+			res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 			res.setHeader("Pragma", "no-cache");
 			res.setDateHeader("Expires", 0);
 			res.sendRedirect(loginURI);

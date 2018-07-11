@@ -49,7 +49,7 @@
 
 	<!--Registration Form-->
 	<div class="row justify-content-center mb-5">
-		<div class="col-xl-6 col-lg-8 col-md-8 col-sm-12">
+		<div class="col-xl-4 col-lg-8 col-md-10 col-sm-12">
 			<div class="card register-form shadow-lg">
 				<div class="card-header lead">Login</div>
 				<div class="card-body">
@@ -68,14 +68,14 @@
 						}
 					%>
 					<form action="Login" method="POST">
-						<div class="form-row">
-							<div class="form-group col-md-6 col-sm-6">
+						<div class="form-row row">
+							<div class="form-group col-12">
 								<label for="email">Email <span class="required-field">
 										*</span>
 								</label> <input name="email" type="email" class="form-control"
 									id="email" placeholder="johndoe@example.com">
 							</div>
-							<div class="form-group col-md-6 col-sm-6">
+							<div class="form-group col-12">
 								<label for="password">Password <span
 									class="required-field"> *</span>
 								</label> <input name="password" type="password" class="form-control"
