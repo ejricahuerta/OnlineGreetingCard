@@ -7,12 +7,11 @@ import sendable.dao.entities.*;
 import sendable.dao.repository.UnitOfWork;
 import sendable.logic.dtos.*;
 import sendable.logic.interfaces.UserInterface;
+import sendable.logic.mapper.SendableMapper;
 
 public class UserService implements UserInterface {
 
 	private UnitOfWork unit;
-
-	private ArrayList<UserDto> AllUsers = new ArrayList<UserDto>();
 
 	public UserService(UnitOfWork work) {
 		unit = work;
@@ -32,18 +31,20 @@ public class UserService implements UserInterface {
 		}
 		return null;
 	}
+
 	@Override
 	public boolean ChangeUserPassword(int userId, String password) {
 		try {
-			AllUsers.forEach(u -> {
+			for (User u : unit.GetUserRepo().ListAll()) {
 				if (u.getId() == userId) {
-					u.setHashedPassword(password);
+					u.setPassword(password);
 					// Updating User
 					User user = this.unit.GetUserRepo().Get(userId);
 					user.setPassword(password);
 					this.unit.GetUserRepo().Update(user);
 				}
-			});
+			}
+			;
 			return true;
 		} catch (
 
@@ -57,22 +58,21 @@ public class UserService implements UserInterface {
 	public boolean UpdateUserInfo(int userId, String fname, String lname, String email) {
 
 		try {
-			AllUsers.forEach(u -> {
+			for (User u : unit.GetUserRepo().ListAll()) {
 				if (u.getId() == userId) {
-					u.setFullName(String.format("%s %s", fname, lname));
+					u.setFullName(fname, lname);
 					u.setEmail(email);
-
 					User user = this.unit.GetUserRepo().Get(userId);
 					user.setFullName(fname, lname);
 					user.setEmail(email);
 					this.unit.GetUserRepo().Update(user);
 				}
-			});
+			}
+			;
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return false;
 	}
 
@@ -81,21 +81,14 @@ public class UserService implements UserInterface {
 			String postalcode) {
 
 		try {
-			AllUsers.forEach(u -> {
+			for (User u : unit.GetUserRepo().ListAll()) {
 				if (u.getId() == userId) {
-					String address = null;
-					if (line2.isEmpty()) {
-						address = String.format("%s, %s, %s, %s", line1, city, state, postalcode);
-					} else {
-						address = String.format("%s, %s, %s, %s, %s", line1, line2, city, state, postalcode);
-					}
-					u.setCurrentAddress(address);
-					User user = this.unit.GetUserRepo().Get(userId);
-					Address useraddress = this.unit.GetAddressRepo().Get(user.getCurrentAddress().getId());
-					useraddress.Update(line1, line2, city, state, postalcode);
-					this.unit.GetAddressRepo().Update(useraddress);
+					Address address = new Address(line1, line2, city, state, postalcode);
+					u.setAddress(address);
+					unit.GetUserRepo().Update(u);
+					break;
 				}
-			});
+			}
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -106,15 +99,16 @@ public class UserService implements UserInterface {
 	@Override
 	public boolean TopUpUserAccount(int UserId, double amount) {
 		try {
-			AllUsers.forEach(u -> {
+			for (User u : unit.GetUserRepo().ListAll()) {
 				if (u.getId() == UserId) {
-					u.getAccountDto().setCredit(amount);
-
+					u.getAccount().setCredit(amount);
 					// Update Account
-					Account account = this.unit.GetAccountRepo().Get(u.getAccountDto().getId());
+					Account account = this.unit.GetAccountRepo().Get(u.getAccount().getId());
 					this.unit.GetAccountRepo().Update(account);
+					break;
 				}
-			});
+			}
+			;
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -125,16 +119,18 @@ public class UserService implements UserInterface {
 	@Override
 	public boolean AddUserLetter(int UserId, CardLetterDto letter) {
 		try {
-			AllUsers.forEach(u -> {
+			for (User u : unit.GetUserRepo().ListAll()) {
 				if (u.getId() == UserId) {
-					u.getCardLetters().add(letter);
-					// add new card
-					User userLetter = this.unit.GetUserRepo().Get(UserId);
+
 					Card card = this.unit.GetCardRepo().Get(letter.getCardId());
-					this.unit.GetCardLetterRepo().Insert(new CardLetter(userLetter, card, letter.getRecipient(), letter.getMessage(),
-							letter.getFontStyle(), letter.getTotalCost(), letter.getDateAdded()));
+					CardLetter newletter = new CardLetter(u, card, letter.getRecipient(), letter.getMessage(),
+							letter.getFontStyle(), letter.getTotalCost(), DateTime.GetCurrentDate());
+					u.getCardLetters().add(newletter);
+					User user = this.unit.GetUserRepo().Get(UserId);
+					unit.GetUserRepo().Update(user);
 				}
-			});
+			}
+			;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -145,9 +141,10 @@ public class UserService implements UserInterface {
 	@Override
 	public boolean RemoveUserLetter(int userId, int letterId) {
 		try {
-			AllUsers.forEach(u -> {
+			for (User u : unit.GetUserRepo().ListAll()) {
 				u.getCardLetters().removeIf(l -> l.getId() == letterId);
-			});
+			}
+			;
 
 			this.unit.GetCardLetterRepo().Remove(letterId);
 			return true;
@@ -170,7 +167,7 @@ public class UserService implements UserInterface {
 				if (c.getUser() == user) {
 					String url = c.getCard().getImageURL();
 					CardLetterDto newletter = new CardLetterDto(c.getId(), c.getUser().getId(), c.getCard().getId(),
-						c.getRecipient(),c.getMessage(), c.getFont(), c.getTotalCost(), c.getDateAdded());
+							c.getRecipient(), c.getMessage(), c.getFont(), c.getTotalCost(), c.getDateAdded());
 					newletter.setImageURL(url);
 					cardletters.add(newletter);
 				}
@@ -211,9 +208,9 @@ public class UserService implements UserInterface {
 
 	@Override
 	public AccountDto GetUserAccount(int userId) {
-		for (UserDto userDto : AllUsers) {
-			if (userDto.getId() == userId) {
-				return userDto.getAccountDto();
+		for (User user : this.unit.GetUserRepo().ListAll()) {
+			if (user.getId() == userId) {
+				return SendableMapper.MapAccount(user.getAccount());
 			}
 		}
 		return null;
@@ -232,9 +229,9 @@ public class UserService implements UserInterface {
 	@Override
 	public List<CardLetterDto> GetAllUserLetters(int userId) {
 		try {
-			for (UserDto userDto : AllUsers) {
-				if (userDto.getId() == userId) {
-					return userDto.getCardLetters();
+			for (User user : this.unit.GetUserRepo().ListAll()) {
+				if (user.getId() == userId) {
+					return SendableMapper.MapCardLetter(user.getCardLetters());
 				}
 			}
 		} catch (Exception e) {
@@ -275,10 +272,10 @@ public class UserService implements UserInterface {
 	}
 
 	public boolean ValidateLogin(String email, String password) {
-		
+
 		for (User u : unit.GetUserRepo().ListAll()) {
-			if(u.getEmail().equals(email) && u.getPassword().equals(password)) { 
-				return true; 
+			if (u.getEmail().equals(email) && u.getPassword().equals(password)) {
+				return true;
 			}
 		}
 		return false;
@@ -293,4 +290,9 @@ public class UserService implements UserInterface {
 		return IsFound;
 	}
 
+	@Override
+	public void SaveChanges() {
+
+		unit.Save();
+	}
 }
