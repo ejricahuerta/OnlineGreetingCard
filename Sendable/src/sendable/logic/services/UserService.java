@@ -55,7 +55,7 @@ public class UserService implements UserInterface {
 	}
 
 	@Override
-	public boolean UpdateUserInfo(int userId, String fname, String lname, String email) {
+	public boolean UpdateUserInfo(int userId, String fname, String lname, String email, String phone) {
 
 		try {
 			for (User u : unit.GetUserRepo().ListAll()) {
@@ -65,6 +65,7 @@ public class UserService implements UserInterface {
 					User user = this.unit.GetUserRepo().Get(userId);
 					user.setFullName(fname, lname);
 					user.setEmail(email);
+					user.setPhone(phone);
 					this.unit.GetUserRepo().Update(user);
 				}
 			}

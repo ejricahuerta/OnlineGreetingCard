@@ -17,7 +17,7 @@ public interface UserInterface {
 
 	boolean ChangeUserPassword(int userId, String password);
 
-	boolean UpdateUserInfo(int userId, String fname, String lname, String email);
+	boolean UpdateUserInfo(int userId, String fname, String lname, String email, String phone);
 
 	boolean UpdateUserAddress(int userId, String line1, String line2, String city, String state, String postalcode);
 
