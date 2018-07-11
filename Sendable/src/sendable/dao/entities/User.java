@@ -21,17 +21,18 @@ public class User {
 	String HashedPassword;
 	String DateAdded;
 
-	@OneToOne(cascade = CascadeType.PERSIST,fetch=FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	Account Account;
 
-	@OneToOne(cascade  = CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	Address CurrentAddress;
 
 	@OneToMany(cascade = CascadeType.PERSIST)
 	List<Payment> Payments = new ArrayList<Payment>();
-	
+
 	@OneToMany(cascade = CascadeType.ALL)
 	List<CardLetter> CardLetters = new ArrayList<CardLetter>();
+
 	public User() {
 		this.DateAdded = DateTime.GetCurrentDate();
 	}
@@ -49,7 +50,8 @@ public class User {
 		this.setEmail(email);
 		this.setPhone(phone);
 		this.CurrentAddress = current;
-		this.Account = new Account(this,0,DateTime.GetCurrentDate());	}
+		this.Account = new Account(this, 0, DateTime.GetCurrentDate());
+	}
 
 	public int getId() {
 		return Id;
@@ -85,7 +87,15 @@ public class User {
 	}
 
 	public void setAddress(Address address) {
-		this.CurrentAddress = address;
+		if (address.getId() != this.CurrentAddress.getId() || this.CurrentAddress != null) {
+			this.CurrentAddress.Line1 = address.Line1;
+			this.CurrentAddress.Line2 = address.Line2;
+			this.CurrentAddress.City = address.City;
+			this.CurrentAddress.State = address.State;
+			this.CurrentAddress.PostalCode = address.PostalCode;
+		} else {
+			this.CurrentAddress = address;
+		}
 	}
 
 	public Address getCurrentAddress() {
@@ -118,7 +128,13 @@ public class User {
 	}
 
 	private void setAccount(Account account) {
-		Account = account;
+		if (this.Account != null) {
+			this.Account.Credit = account.Credit;
+			this.Account.LastTopUpDate = DateTime.GetCurrentDate();
+		} else {
+
+			Account = account;
+		}
 	}
 
 	public List<Payment> getPayments() {
@@ -137,5 +153,4 @@ public class User {
 		CardLetters = cardLetters;
 	}
 
-	
 }
