@@ -2,7 +2,6 @@
 
 <body class="container-fluid">
 
-	
  	<jsp:include page="navigationheader.jsp"/>
  	
   <!--spacer-->
