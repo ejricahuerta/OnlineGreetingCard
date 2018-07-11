@@ -129,4 +129,13 @@ public class User {
 		Payments = payments;
 	}
 
+	public List<CardLetter> getCardLetters() {
+		return CardLetters;
+	}
+
+	public void setCardLetters(List<CardLetter> cardLetters) {
+		CardLetters = cardLetters;
+	}
+
+	
 }
