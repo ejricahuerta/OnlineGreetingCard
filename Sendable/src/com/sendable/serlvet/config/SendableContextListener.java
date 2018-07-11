@@ -153,9 +153,10 @@ public class SendableContextListener implements ServletContextListener {
 					uow.GetCardRepo().Insert(
 							new Card(c4, "Cute Love", "Pets and Love!", 10.0, "images/valentines/val1.jpeg", true));
 				}
+				
 				uow.Save();
 			} catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
 			}
 		}
 
@@ -167,11 +168,11 @@ public class SendableContextListener implements ServletContextListener {
 		}
 		List<CardDto> allcards = cardservice.ListCards();
 		List<CategoryDto> allcat = cardservice.ListCategories();
-		arg0.getServletContext().setAttribute("allcategories", allcat);
 		arg0.getServletContext().setAttribute("allcards", allcards);
 		arg0.getServletContext().setAttribute("db", database);
 		arg0.getServletContext().setAttribute("uow", uow);
-
+		
+		arg0.getServletContext().setAttribute("allcategories", allcat);
 		arg0.getServletContext().setAttribute("cardService", cardservice);
 		arg0.getServletContext().setAttribute("userService", new UserService(uow));
 		arg0.getServletContext().setAttribute("paymentService", new PaymentService(uow));
