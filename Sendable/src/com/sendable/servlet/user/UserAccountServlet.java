@@ -59,40 +59,65 @@ public class UserAccountServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		HttpSession session = (HttpSession) request.getSession();
 		UserDto user = (UserDto) session.getAttribute("user");
 		int Id = (int) session.getAttribute("userId");
 		String modalType = request.getParameter("editmodal");
-		if (modalType.isEmpty()) {
+
+		if(modalType.isEmpty()) {
 			this.doGet(request, response);
-		} else {
+		}		
+		
+		else {
 
 			// validate user password
 			String password = request.getParameter("currentpassword");
 			boolean validUser = userservice.ValidateLogin(user.getEmail(), password);
-			boolean success= false;
+			//boolean IsFieldEmpty = (request.getParameterNames() != null);
+			boolean success = false;
 			if (validUser) {
 				// Edit Modal Type
 				switch (modalType) {
-				case "fullname": // edit for fullname
+				
+				case "fullname": // edit for full name
 					String fname = request.getParameter("firstname");
 					String lname = request.getParameter("lastname");
-					success = userservice.UpdateUserInfo(Id, fname, lname, user.getEmail());
+					success = userservice.UpdateUserInfo(Id, fname, lname, user.getEmail(), user.getPhone());
 					break;
+
+				case "phone": //edit phone
+					String phone = request.getParameter("phone");
+					success = userservice.UpdateUserInfo(Id, 
+							user.getFullName().split(" ")[0], 
+							user.getFullName().split(" ")[1], 
+							user.getEmail(), phone);
+					break;
+				
 				case "address": // edit for address
+
+					String line1 = request.getParameter("line1");
+					String line2 = request.getParameter("line2");
+					String city = request.getParameter("city");
+					String state = request.getParameter("state");
+					String postalcode = request.getParameter("postalcode");
+					success = userservice.UpdateUserAddress(Id, line1, line2, city, state, postalcode);
 					break;
+					
 				default: // nothing then returns to page
 					this.doGet(request, response);
 					break;
 				}
+				
+				if (success) {
+					userservice.SaveChanges();
+					System.out.println("Saved Changes");
+					UserDto updatedUser = userservice.FindUserById(Id);
+					session.setAttribute("user", updatedUser);
+				}
 			}
-			if (success) {
-				userservice.SaveChanges();
-				System.out.println("Saved Changes");
-				UserDto updatedUser = userservice.FindUserById(Id);
-				session.setAttribute("user", updatedUser);
-			} else {
-				request.setAttribute("validationMessage", "<b>Update Failed!</b> Unable to Process Update.");
+			else {
+				request.setAttribute("validationMessage", "<b>Update  Failed!</b> Unable to Process Update.");
 			}
 			request.getRequestDispatcher("myaccount.jsp").forward(request, response);
 		}
