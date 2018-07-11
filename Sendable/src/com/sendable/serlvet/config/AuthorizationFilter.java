@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class AuthorizationFilter
  */
-@WebFilter({ "/User", "/Payment", "/MyAccount", "/myaccount.jsp", "/Write", "/write.jsp" })
+@WebFilter({ "/User", "/Payment", "/MyAccount", "/Write" })
 public class AuthorizationFilter implements Filter {
 
 	private ServletContext context;
