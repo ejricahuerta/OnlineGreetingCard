@@ -48,8 +48,8 @@
 	<div class="break"></div>
 
 	<!--Registration Form-->
-	<div class="row justify-content-center mb-5">
-		<div class="col-xl-4 col-lg-8 col-md-10 col-sm-12">
+	<div class="row justify-content-center mb-4">
+		<div class="col-xl-4 col-lg-6 col-md-9 col-sm-12">
 			<div class="card register-form shadow-lg">
 				<div class="card-header lead">Login</div>
 				<div class="card-body">
