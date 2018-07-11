@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="header.jsp" />
+
 <body class="container-fluid">
 	<!--Navigation Bar-->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -32,7 +33,7 @@
 	<div class="break"></div>
 	<section class="container">
 		<%
-			if (request.getAttribute("validationMessage") != null) {
+			if (request.getAttribute("validationMessage") == null) {
 		%>
 		<div class="alert alert-light text-right shadow-sm d-sm-block-none"
 			role="alert">Welcome to your Page!</div>
@@ -153,12 +154,12 @@
 									</button>
 								</div>
 								<div class="modal-body">
-									<form action="" class="form">
+									<form action="MyAccount" method="POST" class="form">
 										<div class="form-group">
 											<input type="hidden" name="editmodal" value="phone">
 											<label class="font-italic" for="phone">Phone Number</label> <input
 												name="phone" type="text" class="form-control" id="phone"
-												placeholder="Mobile / Tel" value="${user.getPhone()}">
+												placeholder="Mobile / Tel">
 										</div>
 										<div class="form-group">
 											<label class="font-italic" for="currentpassword">Current
@@ -169,7 +170,7 @@
 										<div class="float-right">
 											<button type="button" class="btn btn-secondary"
 												data-dismiss="modal">Close</button>
-											<button type="button" class="btn btn-primary">Save
+											<button type="submit" class="btn btn-primary">Save
 												changes</button>
 										</div>
 									</form>
@@ -229,8 +230,9 @@
 										<div class="float-right">
 											<button type="button" class="btn btn-secondary"
 												data-dismiss="modal">Close</button>
-											<button type="button" class="btn btn-primary">Save
-												changes</button>
+												
+											<button type="submit" class="btn btn-primary">Save
+												Changes</button>
 										</div>
 									</form>
 								</div>
