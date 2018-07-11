@@ -36,4 +36,6 @@ public interface UserInterface {
 	boolean ValidateLogin(String email, String password);
 	
 	boolean IsUserFound(String email);
+
+	void SaveChanges();
 }
