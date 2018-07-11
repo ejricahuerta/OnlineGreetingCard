@@ -31,8 +31,20 @@
 	<!--spacer-->
 	<div class="break"></div>
 	<section class="container">
+		<%
+			if (request.getAttribute("validationMessage") != null) {
+		%>
 		<div class="alert alert-light text-right shadow-sm d-sm-block-none"
 			role="alert">Welcome to your Page!</div>
+		<%
+			} else {
+		%>
+
+		<div class="alert alert-danger text-right show-sm d-sm-block-none"
+			role="alert">${requestScope['validationMessage']}</div>
+		<%
+			}
+		%>
 		<!--left-side bar-->
 		<div class="row justify-content-center">
 			<div class="col-lg-3 col-md-4 col-sm-10 col-10 mb-3">
@@ -97,28 +109,28 @@
 									</button>
 								</div>
 								<div class="modal-body">
-									<form action="" class="form">
-										<input type="hidden" name="modal" value="fullnamemodal">
+									<form action="MyAccount" method="POST" class="form">
+										<input type="hidden" name="editmodal" value="fullname">
 										<div class="form-group">
 											<label class="font-italic" for="firstname">First Name</label>
 											<input name="firstname" type="text" class="form-control"
-												id="firstname" placeholder="First Name"  value="${user.getFullName().split(' ')[0]}">
+												id="firstname" placeholder="First Name">
 										</div>
 										<div class="form-group">
 											<label class="font-italic" for="lastname">Last Name</label> <input
 												name="lastname" type="text" class="form-control"
-												id="lastname" placeholder="Last Name" value="${user.getFullName().split(' ')[1]}">
+												id="lastname" placeholder="Last Name">
 										</div>
 										<div class="form-group">
 											<label class="font-italic" for="currentpassword">Current
 												Password</label> <input name="currentpassword" type="password"
 												class="form-control" id="currentpassword"
-												placeholder="Current Password" ${user.getHashedPassword()}>
+												placeholder="Current Password">
 										</div>
 										<div class="float-right">
 											<button type="button" class="btn btn-secondary"
 												data-dismiss="modal">Close</button>
-											<button type="button" class="btn btn-primary">Save
+											<button type="submit" class="btn btn-primary">Save
 												changes</button>
 										</div>
 									</form>
@@ -143,7 +155,7 @@
 								<div class="modal-body">
 									<form action="" class="form">
 										<div class="form-group">
-											<input type="hidden" name="modal" value="phonemodal">
+											<input type="hidden" name="editmodal" value="phone">
 											<label class="font-italic" for="phone">Phone Number</label> <input
 												name="phone" type="text" class="form-control" id="phone"
 												placeholder="Mobile / Tel" value="${user.getPhone()}">
@@ -180,11 +192,11 @@
 									</button>
 								</div>
 								<div class="modal-body">
-									<form action="" class="form">
+									<form action="MyAccount" method="POST" class="form">
+										<input type="hidden" name="editmodal" value="address">
 										<div class="form-group">
-											<label class="font-italic" for="line1">Line 1</label> 
-											
-											<input name="line1" type="text" class="form-control" id="line1"
+											<label class="font-italic" for="line1">Line 1</label> <input
+												name="line1" type="text" class="form-control" id="line1"
 												placeholder="Line 1">
 										</div>
 										<div class="form-group">
@@ -327,6 +339,7 @@
 								</div>
 								<div class="modal-body">
 									<form action="" class="form">
+										<input type="hidden" name="editmodal" value="email">
 										<div class="form-group">
 											<label class="font-italic" for="email">Email</label> <input
 												name="email" type="text" class="form-control" id="email"
@@ -363,7 +376,8 @@
 									</button>
 								</div>
 								<div class="modal-body">
-									<form action="" class="form">
+									<form action="MyAccount" method="POST" class="form">
+										<input type="hidden" name="editmodal" value="password">
 										<div class="form-group">
 											<label class="font-italic" for="currentpassword">Current
 												Password</label> <input name="currentpassword" type="password"
