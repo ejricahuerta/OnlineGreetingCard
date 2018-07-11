@@ -53,7 +53,10 @@ public class AuthorizationFilter implements Filter {
 
 		if (loggedIn || loginRequest) {
 			chain.doFilter(request, response);
-		} else {
+		} 
+		else
+		{
+			
 			res.setHeader("Cache-Control", "no-cache");
 			res.setHeader("Cache-Control", "no-store");
 			res.setHeader("Pragma", "no-cache");

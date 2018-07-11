@@ -37,7 +37,8 @@ public class WriteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		if (request.getParameter("cardId") == null) {
-			response.sendRedirect("card.jsp");
+			String loginURL = request.getContextPath() +"card.jsp";
+			response.sendRedirect("/Cards");
 		}
 
 		String message = request.getParameter("message");
@@ -48,11 +49,11 @@ public class WriteServlet extends HttpServlet {
 			request.setAttribute("cardSelected", card);
 			request.getRequestDispatcher("write.jsp").forward(request, response);
 		}
-
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("ID: "+request.getParameter("cardId"));
 		if (request.getParameter("cardId") == null) {
 			response.sendRedirect("card.jsp");
 		} else {
@@ -61,7 +62,6 @@ public class WriteServlet extends HttpServlet {
 			CardDto card = cardservice.getCard(id);
 			request.setAttribute("cardSelected", card);
 			request.getRequestDispatcher("write.jsp").forward(request, response);
-
 		}
 	}
 

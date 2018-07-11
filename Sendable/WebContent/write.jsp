@@ -10,13 +10,14 @@
 	<!--spacer-->
 	<div class="break"></div>
 
-
 	<!-- Set var for card selected -->
 	<c:set var="card" value="${requestScope['cardSelected']}" />
-
+	<c:if test="${card ==null }">
+		<c:redirect url="cards.jsp" />
+	</c:if>
+	
 	<div class="container">
 		<!--content write-->
-
 		<section class="row">
 			<!--side-->
 			<div class="col-lg-3 col-md-4">
