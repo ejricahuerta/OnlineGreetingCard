@@ -18,22 +18,22 @@ public class UserService implements UserInterface {
 	}
 
 	@Override
-	public UserDto FindUserById(int id) {
-		return this.MapUser(this.unit.GetUserRepo().Get(id));
+	public UserDto findUserById(int id) {
+		return this.mapUser(this.unit.GetUserRepo().Get(id));
 	}
 
 	@Override
-	public UserDto FindUserByEmail(String email) {
+	public UserDto findUserByEmail(String email) {
 		for (User user : unit.GetUserRepo().ListAll()) {
 			if (user.getEmail().equals(email)) {
-				return this.MapUser(user);
+				return this.mapUser(user);
 			}
 		}
 		return null;
 	}
 
 	@Override
-	public boolean ChangeUserPassword(int userId, String password) {
+	public boolean changeUserPassword(int userId, String password) {
 		try {
 			for (User u : unit.GetUserRepo().ListAll()) {
 				if (u.getId() == userId) {
@@ -55,7 +55,7 @@ public class UserService implements UserInterface {
 	}
 
 	@Override
-	public boolean UpdateUserInfo(int userId, String fname, String lname, String email, String phone) {
+	public boolean updateUserInfo(int userId, String fname, String lname, String email, String phone) {
 
 		try {
 			for (User u : unit.GetUserRepo().ListAll()) {
@@ -79,7 +79,7 @@ public class UserService implements UserInterface {
 	}
 
 	@Override
-	public boolean UpdateUserAddress(int userId, String line1, String line2, String city, String state,
+	public boolean updateUserAddress(int userId, String line1, String line2, String city, String state,
 			String postalcode) {
 
 		try {
@@ -99,7 +99,7 @@ public class UserService implements UserInterface {
 	}
 
 	@Override
-	public boolean TopUpUserAccount(int UserId, double amount) {
+	public boolean topUpUserAccount(int UserId, double amount) {
 		try {
 			for (User u : unit.GetUserRepo().ListAll()) {
 				if (u.getId() == UserId) {
@@ -119,7 +119,17 @@ public class UserService implements UserInterface {
 	}
 
 	@Override
-	public int AddUserLetter(int UserId, CardLetterDto letter) {
+	public boolean updateUserLetter(int UserId, CardLetterDto letter) {
+		User user = this.unit.GetUserRepo().Get(UserId);
+		for (CardLetter	c	 : user.getCardLetters()) {
+			if(c.getId() == letter.getCardId()) {
+				
+			}
+		}
+		return false;
+	}
+	@Override
+	public int addUserLetter(int UserId, CardLetterDto letter) {
 		try {
 			for (User u : unit.GetUserRepo().ListAll()) {
 				if (u.getId() == UserId) {
@@ -146,7 +156,7 @@ public class UserService implements UserInterface {
 	}
 
 	@Override
-	public boolean RemoveUserLetter(int userId, int letterId) {
+	public boolean removeUserLetter(int userId, int letterId) {
 		try {
 			for (User u : unit.GetUserRepo().ListAll()) {
 				u.getCardLetters().removeIf(l -> l.getId() == letterId);
@@ -162,7 +172,7 @@ public class UserService implements UserInterface {
 		return false;
 	}
 
-	private UserDto MapUser(User user) {
+	private UserDto mapUser(User user) {
 		if (user == null) {
 			return null;
 		} else {
@@ -214,18 +224,18 @@ public class UserService implements UserInterface {
 	}
 
 	@Override
-	public AccountDto GetUserAccount(int userId) {
+	public AccountDto getUserAccount(int userId) {
 		for (User user : this.unit.GetUserRepo().ListAll()) {
 			if (user.getId() == userId) {
-				return SendableMapper.MapAccount(user.getAccount());
+				//return SendableMapper.mapAccountDto(user.getAccount());
 			}
 		}
 		return null;
 	}
 
 	@Override
-	public CardLetterDto GetUserLetter(int userId, int letterId) {
-		for (CardLetterDto letter : this.GetAllUserLetters(userId)) {
+	public CardLetterDto getUserLetter(int userId, int letterId) {
+		for (CardLetterDto letter : this.getAllUserLetters(userId)) {
 			if (letter.getId() == letterId) {
 				return letter;
 			}
@@ -234,11 +244,11 @@ public class UserService implements UserInterface {
 	}
 
 	@Override
-	public List<CardLetterDto> GetAllUserLetters(int userId) {
+	public List<CardLetterDto> getAllUserLetters(int userId) {
 		try {
 			for (User user : this.unit.GetUserRepo().ListAll()) {
 				if (user.getId() == userId) {
-					return SendableMapper.MapCardLetter(user.getCardLetters());
+					return SendableMapper.mapCardLetterDto(user.getCardLetters());
 				}
 			}
 		} catch (Exception e) {
@@ -248,7 +258,7 @@ public class UserService implements UserInterface {
 	}
 
 	@Override
-	public void AddNewUser(UserDto user, AddressDto address) {
+	public void addNewUser(UserDto user, AddressDto address) {
 		try {
 			String[] name = user.getFullName().split(" ");
 			String fname = name[0];
@@ -278,7 +288,7 @@ public class UserService implements UserInterface {
 		unit.Save();
 	}
 
-	public boolean ValidateLogin(String email, String password) {
+	public boolean validateLogin(String email, String password) {
 
 		for (User u : unit.GetUserRepo().ListAll()) {
 			if (u.getEmail().equals(email) && u.getPassword().equals(password)) {
@@ -289,7 +299,7 @@ public class UserService implements UserInterface {
 	}
 
 	@Override
-	public boolean IsUserFound(String email) {
+	public boolean isUserFound(String email) {
 		boolean IsFound = false;
 		for (User u : unit.GetUserRepo().ListAll()) {
 			IsFound = (u.getEmail().equals(email)) ? true : false;
@@ -298,8 +308,9 @@ public class UserService implements UserInterface {
 	}
 
 	@Override
-	public void SaveChanges() {
-
+	public void saveChanges() {
 		unit.Save();
 	}
+
+	
 }

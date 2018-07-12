@@ -9,33 +9,34 @@ import sendable.logic.dtos.UserDto;
 
 public interface UserInterface {
 
-	void AddNewUser(UserDto user,AddressDto address);
+	void addNewUser(UserDto user,AddressDto address);
 		
-	UserDto FindUserById(int id);
+	UserDto findUserById(int id);
 
-	UserDto FindUserByEmail(String email);
+	UserDto findUserByEmail(String email);
 
-	boolean ChangeUserPassword(int userId, String password);
+	boolean changeUserPassword(int userId, String password);
 
-	boolean UpdateUserInfo(int userId, String fname, String lname, String email, String phone);
+	boolean updateUserInfo(int userId, String fname, String lname, String email, String phone);
 
-	boolean UpdateUserAddress(int userId, String line1, String line2, String city, String state, String postalcode);
+	boolean updateUserAddress(int userId, String line1, String line2, String city, String state, String postalcode);
 
-	AccountDto GetUserAccount(int userId);
+	AccountDto getUserAccount(int userId);
 
-	boolean TopUpUserAccount(int UserId, double amount);
+	boolean topUpUserAccount(int UserId, double amount);
 
-	CardLetterDto GetUserLetter(int userId, int letterId);
+	CardLetterDto getUserLetter(int userId, int letterId);
 
-	List<CardLetterDto> GetAllUserLetters(int userId);
+	List<CardLetterDto> getAllUserLetters(int userId);
 
-	int AddUserLetter(int UserId, CardLetterDto letter);
+	int addUserLetter(int UserId, CardLetterDto letter);
+	boolean updateUserLetter(int UserId, CardLetterDto letter);
 
-	boolean RemoveUserLetter(int userId, int letterId);
+	boolean removeUserLetter(int userId, int letterId);
 	
-	boolean ValidateLogin(String email, String password);
+	boolean validateLogin(String email, String password);
 	
-	boolean IsUserFound(String email);
+	boolean isUserFound(String email);
 
-	void SaveChanges();
+	void saveChanges();
 }

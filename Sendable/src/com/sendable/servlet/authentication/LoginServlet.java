@@ -56,10 +56,10 @@ public class LoginServlet extends HttpServlet {
 		String error = "<b>Invalid Login!</b> Please Try Again.";
 		UserService service = (UserService) request.getServletContext().getAttribute("userService");
 
-		if (service.ValidateLogin(email, password)) {
+		if (service.validateLogin(email, password)) {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("user", email);
-			UserDto userfound = service.FindUserByEmail(email);
+			UserDto userfound = service.findUserByEmail(email);
 			System.out.println("USER ID: " + userfound.getId());
 			session.setAttribute("userId", userfound.getId());
 			session.setAttribute("userEmail", userfound.getEmail());

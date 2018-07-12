@@ -41,7 +41,7 @@ public class UserAccountServlet extends HttpServlet {
 		int id = (int) session.getAttribute("userId");
 		System.out.println("ID: " + id);
 		UserService service = (UserService) session.getServletContext().getAttribute("userService");
-		UserDto user = service.FindUserById(id);
+		UserDto user = service.findUserById(id);
 
 		if (user == null) {
 
@@ -72,7 +72,7 @@ public class UserAccountServlet extends HttpServlet {
 		else {
 			// validate user password
 			String password = request.getParameter("currentpassword");
-			boolean validUser = userservice.ValidateLogin(user.getEmail(), password);
+			boolean validUser = userservice.validateLogin(user.getEmail(), password);
 			//boolean IsFieldEmpty = (request.getParameterNames() != null);
 			boolean success = false;
 			if (validUser) {
@@ -82,12 +82,12 @@ public class UserAccountServlet extends HttpServlet {
 				case "fullname": // edit for full name
 					String fname = request.getParameter("firstname");
 					String lname = request.getParameter("lastname");
-					success = userservice.UpdateUserInfo(Id, fname, lname, user.getEmail(), user.getPhone());
+					success = userservice.updateUserInfo(Id, fname, lname, user.getEmail(), user.getPhone());
 					break;
 
 				case "phone": //edit phone
 					String phone = request.getParameter("phone");
-					success = userservice.UpdateUserInfo(Id, 
+					success = userservice.updateUserInfo(Id, 
 							user.getFullName().split(" ")[0], 
 							user.getFullName().split(" ")[1], 
 							user.getEmail(), phone);
@@ -100,7 +100,7 @@ public class UserAccountServlet extends HttpServlet {
 					String city = request.getParameter("city");
 					String state = request.getParameter("state");
 					String postalcode = request.getParameter("postalcode");
-					success = userservice.UpdateUserAddress(Id, line1, line2, city, state, postalcode);
+					success = userservice.updateUserAddress(Id, line1, line2, city, state, postalcode);
 					break;
 					
 				case "password":
@@ -108,7 +108,7 @@ public class UserAccountServlet extends HttpServlet {
 					String newpassword = request.getParameter("newpassword");
 					String retypepassword  = request.getParameter("retypepassword");
 					
-					success = (newpassword.equals(retypepassword)?this.userservice.ChangeUserPassword(Id, newpassword): false);
+					success = (newpassword.equals(retypepassword)?this.userservice.changeUserPassword(Id, newpassword): false);
 					break;
 					
 				default: // nothing then returns to page
@@ -117,10 +117,10 @@ public class UserAccountServlet extends HttpServlet {
 				}
 				
 				if (success) { // Saves all changes
-					userservice.SaveChanges();
+					userservice.saveChanges();
 					
 					System.out.println("Saved Changes");
-					UserDto updatedUser = userservice.FindUserById(Id);
+					UserDto updatedUser = userservice.findUserById(Id);
 					session.setAttribute("user", updatedUser);
 				}
 			}

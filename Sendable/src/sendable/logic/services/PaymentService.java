@@ -28,7 +28,7 @@ public class PaymentService implements PaymentInterface {
 		if(AllPayments.isEmpty())
 		{
 			for (Payment p : unit.GetPaymentRepo().ListAll()) {
-				AllPayments.add(SendableMapper.MapPayment(p));
+				AllPayments.add(SendableMapper.mapPaymentDto(p));
 			}
 		}
 		return AllPayments;

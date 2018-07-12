@@ -16,7 +16,7 @@ import sendable.logic.dtos.PaymentDto;
 
 public class SendableMapper {
 
-	public static CardDto MapCard(Card card) {
+	public static CardDto mapCardDto(Card card) {
 		if (card == null) {
 			return null;
 		}
@@ -26,7 +26,7 @@ public class SendableMapper {
 		return temp;
 	}
 
-	public static PaymentDto MapPayment(Payment payment) {
+	public static PaymentDto mapPaymentDto(Payment payment) {
 		try {
 
 			return new PaymentDto(payment.getId(), payment.getCardLetter().getId(), payment.getUser().getId(),
@@ -40,16 +40,16 @@ public class SendableMapper {
 
 	}
 
-	public static AddressDto MapAddress(Address address) {
+	public static AddressDto mapAddressDto(Address address) {
 		return new AddressDto(address.getId(), address.getLine1(), address.getLine2(), address.getCity(),
 				address.getState(), address.getPostalCode());
 	}
 
-	public static AccountDto MapAccount(Account account) {
+	public static AccountDto mapAccountDto(Account account) {
 		return new AccountDto(account.getId(), account.getUser().getId(), account.getCredit(), account.getLastTopUpDate());
 	}
 
-	public static List<CardLetterDto> MapCardLetter(List<CardLetter> cardLetters) {
+	public static List<CardLetterDto> mapCardLetterDto(List<CardLetter> cardLetters) {
 		List<CardLetterDto> allLetters = new ArrayList<CardLetterDto>();	
 		for (CardLetter c : cardLetters) {
 			allLetters.add(new CardLetterDto(c.getId(),c.getUser().getId(), c.getCard().getId(),c.getRecipient(), c.getMessage(), c.getFont(), c.getTotalCost(), c.getDateAdded()));

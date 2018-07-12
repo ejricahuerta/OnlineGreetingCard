@@ -58,14 +58,14 @@ public class WriteServlet extends HttpServlet {
 			String button = request.getParameter("button");
 			int userId = (int) request.getSession().getAttribute("userId");
 
-			UserDto user = this.userservice.FindUserById(userId);
+			UserDto user = this.userservice.findUserById(userId);
 			CardLetterDto newLetter = new CardLetterDto(0, user.getId(), cardId, recipient, message, font,
 					card.getPrice(), DateTime.GetCurrentDate());
-			int letterId = this.userservice.AddUserLetter(userId, newLetter);
+			int letterId = this.userservice.addUserLetter(userId, newLetter);
 
 			if (letterId != -1) {
-				this.userservice.SaveChanges();
-				newLetter = this.userservice.GetUserLetter(userId, letterId);
+				this.userservice.saveChanges();
+				newLetter = this.userservice.getUserLetter(userId, letterId);
 				request.setAttribute("letter", newLetter);
 				if(button.equals("Pay Now")) {
 					request.getRequestDispatcher("payment.jps").forward(request, response);

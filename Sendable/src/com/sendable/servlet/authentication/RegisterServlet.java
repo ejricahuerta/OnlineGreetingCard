@@ -51,7 +51,7 @@ public class RegisterServlet extends HttpServlet {
 			request.getRequestDispatcher("register.jsp").forward(request, response);
 			return;
 		}
-		if (service.IsUserFound(email)) {
+		if (service.isUserFound(email)) {
 			request.setAttribute("validationMessage", "Email Exist! Please go and Login");
 			request.getRequestDispatcher("register.jsp").forward(request, response);
 		} 
@@ -63,13 +63,13 @@ public class RegisterServlet extends HttpServlet {
 						request.getParameter("password"), 
 						phone, postalcode, null, null, postalcode, null);
 				AddressDto address = new AddressDto(0, line1,line2, city, state,postalcode);
-				service.AddNewUser(newUser, address);
+				service.addNewUser(newUser, address);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			HttpSession session = request.getSession(true);
 			Cookie cookie = new Cookie("email", email);
-			UserDto userDto = service.FindUserByEmail(email);
+			UserDto userDto = service.findUserByEmail(email);
 			System.out.println("USER ID: "+userDto.getId());
 			session.setAttribute("userId", userDto.getId());
 			session.setAttribute("userEmail",userDto.getEmail());

@@ -28,7 +28,7 @@ public class CardService implements CardInterface {
 	public List<CardDto> ListCards() {
 		if (AllCards.isEmpty()) {
 			for (Card c : unit.GetCardRepo().ListAll()) {
-				AllCards.add(SendableMapper.MapCard(c));
+				AllCards.add(SendableMapper.mapCardDto(c));
 			}
 		}
 		return this.AllCards;
@@ -116,7 +116,7 @@ public class CardService implements CardInterface {
 			List<CardDto> cardtmp = new ArrayList<CardDto>();
 			for (Card card : unit.GetCardRepo().ListAll()) {
 				if (card.getCategory().getId() == category.getId()) {
-					cardtmp.add(SendableMapper.MapCard(card));
+					cardtmp.add(SendableMapper.mapCardDto(card));
 				}
 			}
 			tmp.setCards(cardtmp);
