@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class AuthorizationFilter
  */
-@WebFilter({ "/User", "/Payment", "/myaccount.jsp", "/Write" })
+@WebFilter({ "/User", "/Payment", "/MyAccount", "/Write" })
 public class AuthorizationFilter implements Filter {
 
 	private ServletContext context;
@@ -53,7 +53,8 @@ public class AuthorizationFilter implements Filter {
 
 		if (loggedIn || loginRequest) {
 			chain.doFilter(request, response);
-		} else {
+		} 
+		else {
 			res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 			res.setHeader("Pragma", "no-cache");
 			res.setDateHeader("Expires", 0);
