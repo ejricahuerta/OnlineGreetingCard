@@ -25,11 +25,11 @@ public interface UserInterface {
 
 	boolean TopUpUserAccount(int UserId, double amount);
 
-	CardLetterDto GetUserLetters(int userId, int letterId);
+	CardLetterDto GetUserLetter(int userId, int letterId);
 
 	List<CardLetterDto> GetAllUserLetters(int userId);
 
-	boolean AddUserLetter(int UserId, CardLetterDto letter);
+	int AddUserLetter(int UserId, CardLetterDto letter);
 
 	boolean RemoveUserLetter(int userId, int letterId);
 	
