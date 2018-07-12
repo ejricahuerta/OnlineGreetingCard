@@ -16,7 +16,7 @@
         <p class="lead">We aim to connect emotions via Cards</p>
         <hr class="my-4">
         <p>Browse our Quality Cards </p>
-        <a class="btn btn-primary btn-lg" href="cards.jsp" role="button">Choose Card</a>
+        <a class="btn btn-primary btn-lg" href="cards.jsp" role="button">Choose a Card</a>
       </div>
     </div>
   </section>
@@ -52,7 +52,7 @@
         <div class="card-body">
           <h5 class="card-title">Send <i class="fas fa-shipping-fast"></i></h5>
           <p class="card-text">We print and send your personalized card.</p>
-          <a href="${sessionScope['user']== null?'cards.jsp':'write.jsp'} " class="btn btn-primary">Write Now</a>
+          <a href="write.jsp" class="btn btn-primary">Write Now</a>
         </div>
       </div>
     </div>
