@@ -243,7 +243,7 @@
 					<div class="tab-pane fade sendable-usercards" id="list-card"
 						role="tabpanel" aria-labelledby="list-card-list">
 						<h4 class="text-center mt-4">Your Cards</h4>
-						<div class="row p-4">
+						<div class="row p-2">
 							<!-- loop cards -->
 							<c:forEach items="${user.getCardLetters()}" var="letter">
 								<c:if test="${letter !=null }">
@@ -269,7 +269,7 @@
 					<div class="tab-pane fade sendable-usercards" id="list-payment"
 						role="tabpanel" aria-labelledby="list-payment-list">
 						<h4 class="text-center mt-4">Your Payments</h4>
-						<div class="row p-4">
+						<div class="row p-2">
 							<!-- loop cards -->
 							<div class="col">
 								<div class="list-group">
@@ -401,7 +401,7 @@
 										<div class="float-right">
 											<button type="button" class="btn btn-secondary"
 												data-dismiss="modal">Close</button>
-											<button type="button" class="btn btn-primary">Save
+											<button type="submit" class="btn btn-primary">Save
 												changes</button>
 										</div>
 									</form>
