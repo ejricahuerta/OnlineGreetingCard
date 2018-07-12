@@ -9,8 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import sendable.dao.entities.DateTime;
 import sendable.logic.dtos.CardDto;
+import sendable.logic.dtos.CardLetterDto;
+import sendable.logic.dtos.UserDto;
 import sendable.logic.services.CardService;
+import sendable.logic.services.UserService;
 
 /**
  * Servlet implementation class WriteServlet
@@ -20,14 +24,14 @@ public class WriteServlet extends HttpServlet {
 
 	private CardService cardservice;
 
+	private UserService userservice;
+
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public WriteServlet() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -36,24 +40,55 @@ public class WriteServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (request.getParameter("cardId") == null) {
-			response.sendRedirect("card.jsp");
+
+		String message = request.getParameter("message");
+		String recipient = request.getParameter("recipient");
+		String font = request.getParameter("font");
+
+		int cardId = Integer.parseInt(request.getParameter("cardId"));
+		CardDto card = cardservice.getCard(cardId);
+		request.setAttribute("cardSelected", card);
+		if (message == null || message.length() < 5) {
+			request.setAttribute("validationMessage", "<b>Invalid Message!</b> Please Enter your message again.");
+
+		} else if (recipient == null) {
+			request.setAttribute("validationMessage", "<b>Invalid Recipient!</b> Please Enter your message again.");
+			request.getRequestDispatcher("write.jsp").forward(request, response);
 		} else {
-			String message = request.getParameter("message");
-			if (message == null || message.length() < 5) {
-				request.setAttribute("validationMessage", "<b>Invalid Message!</b> Please Enter your message again.");
-				CardDto card = this.cardservice.getCard(Integer.parseInt(request.getParameter("cardId")));
-				request.setAttribute("cardSelected", card);
+			String button = request.getParameter("button");
+			int userId = (int) request.getSession().getAttribute("userId");
+
+			UserDto user = this.userservice.FindUserById(userId);
+			CardLetterDto newLetter = new CardLetterDto(0, user.getId(), cardId, recipient, message, font,
+					card.getPrice(), DateTime.GetCurrentDate());
+			int letterId = this.userservice.AddUserLetter(userId, newLetter);
+
+			if (letterId != -1) {
+				this.userservice.SaveChanges();
+				newLetter = this.userservice.GetUserLetter(userId, letterId);
+				request.setAttribute("letter", newLetter);
+				if(button.equals("Pay Now")) {
+					request.getRequestDispatcher("payment.jps").forward(request, response);
+				}
+				else {
+					response.sendRedirect("myaccount.jp");
+				}
+				
+			} else {
+				request.setAttribute("validationMessage", "<b>Unable to Proccess!</b>Please Re-Enter Message.");
 				request.getRequestDispatcher("write.jsp").forward(request, response);
 			}
+			
+
 		}
+
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("ID: " + request.getParameter("cardId"));
 		if (request.getParameter("cardId") == null) {
-			response.sendRedirect(request.getContextPath()+"/card.jsp");
+			response.sendRedirect(request.getContextPath() + "/card.jsp");
 		} else {
 			int id = Integer.parseInt(request.getParameter("cardId"));
 			CardDto card = cardservice.getCard(id);
@@ -65,6 +100,7 @@ public class WriteServlet extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		this.cardservice = (CardService) config.getServletContext().getAttribute("cardService");
+		this.userservice = (UserService) config.getServletContext().getAttribute("userService");
 	}
 
 }
