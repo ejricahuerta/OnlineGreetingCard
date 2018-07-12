@@ -66,6 +66,9 @@
 			</div>
 
 			<c:set var="user" value="${sessionScope['user']}" />
+			<c:if test="${user ==null}">
+				<c:redirect url="index.jsp"/>
+			</c:if>
 			<!-- TAB Content-->
 			<div class="col-8 border rounded bg-light">
 				<div class="tab-content" id="nav-tabContent">
@@ -258,7 +261,8 @@
 													<h5 class="mt-0 mb-1">To: ${letter.getRecipient()}</h5>
 													<small name="date">${letter.getDateAdded()}</small>
 													<p class="mb-1" name="message ">${letter.getMessage()}</p>
-													<small class="text-danger" name="status">${letter.getStatus()}</small>
+													
+													<small class="text-danger">${letter.getStatus()}</small>
 												</div>
 												</li>
 										</ul>
