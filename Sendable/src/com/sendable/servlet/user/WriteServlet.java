@@ -68,10 +68,10 @@ public class WriteServlet extends HttpServlet {
 				newLetter = this.userservice.getUserLetter(userId, letterId);
 				request.setAttribute("letter", newLetter);
 				if(button.equals("Pay Now")) {
-					request.getRequestDispatcher("payment.jps").forward(request, response);
+					request.getRequestDispatcher("payment.jsp").forward(request, response);
 				}
 				else {
-					response.sendRedirect("myaccount.jp");
+					request.getRequestDispatcher("myaccount.jsp").forward(request, response);
 				}
 				
 			} else {
