@@ -108,7 +108,7 @@ public class UserAccountServlet extends HttpServlet {
 					String newpassword = request.getParameter("newpassword");
 					String retypepassword  = request.getParameter("retypepassword");
 					
-					success = (newpassword.equals(retypepassword)?this.userservice.changeUserPassword(Id, newpassword): false);
+					success = (newpassword.equals(retypepassword) && !newpassword.isEmpty() && newpassword.length() > 5?this.userservice.changeUserPassword(Id, newpassword): false);
 					break;
 					
 				default: // nothing then returns to page
