@@ -70,7 +70,6 @@ public class UserAccountServlet extends HttpServlet {
 		}		
 		
 		else {
-
 			// validate user password
 			String password = request.getParameter("currentpassword");
 			boolean validUser = userservice.ValidateLogin(user.getEmail(), password);
@@ -104,13 +103,22 @@ public class UserAccountServlet extends HttpServlet {
 					success = userservice.UpdateUserAddress(Id, line1, line2, city, state, postalcode);
 					break;
 					
+				case "password":
+					
+					String newpassword = request.getParameter("newpassword");
+					String retypepassword  = request.getParameter("retypepassword");
+					
+					success = (newpassword.equals(retypepassword)?this.userservice.ChangeUserPassword(Id, newpassword): false);
+					break;
+					
 				default: // nothing then returns to page
 					this.doGet(request, response);
 					break;
 				}
 				
-				if (success) {
+				if (success) { // Saves all changes
 					userservice.SaveChanges();
+					
 					System.out.println("Saved Changes");
 					UserDto updatedUser = userservice.FindUserById(Id);
 					session.setAttribute("user", updatedUser);
@@ -121,7 +129,6 @@ public class UserAccountServlet extends HttpServlet {
 			}
 			request.getRequestDispatcher("myaccount.jsp").forward(request, response);
 		}
-
 	}
 
 	@Override
