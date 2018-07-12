@@ -15,7 +15,7 @@
 	<c:if test="${card ==null }">
 		<c:redirect url="cards.jsp" />
 	</c:if>
-	
+
 	<div class="container">
 		<!--content write-->
 		<section class="row">
@@ -34,22 +34,22 @@
 			</div>
 			<!--textarea-->
 			<div class="col-lg-9 col-md-8 mb-5">
-				<div class="row m-1">
+				<form action="Write" method="POST" class="row m-1">
 					<div class="col-12 shadow-sm">
 						<ul class="nav justify-content-around">
 							<li class="nav-item nav-link disabled font1">Gaegu</li>
 							<li class="nav-item dropdown"><a
 								class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-								role="buton" aria-haspopup="true" aria aria-expanded="false">Choose
+								role="buton" aria-haspopup="true" aria-expanded="false">Choose
 									Font</a>
 								<div class="dropdown-menu">
-									<a href="#" class="dropdown-item font1">Gaegu</a> <a
-										href="#" class="dropdown-item font2">Gochi Hand</a>
-									<a href="#" class="dropdown-item font3">Homemade Apple</a> 
-									<a href="#" class="dropdown-item font4">Marck Script</a>
-									<a href="#" class="dropdown-item font4">NothingYou Could Do</a>
-									<a href="#" class="dropdown-item font4">Permanent Marker</a>
-									<a href="#" class="dropdown-item font4">Sacramento</a>									
+									<a href="#" class="dropdown-item font1">Gaegu</a> <a href="#"
+										class="dropdown-item font2">Gochi Hand</a> <a href="#"
+										class="dropdown-item font3">Homemade Apple</a> <a href="#"
+										class="dropdown-item font4">Marck Script</a> <a href="#"
+										class="dropdown-item font4">NothingYou Could Do</a> <a
+										href="#" class="dropdown-item font4">Permanent Marker</a> <a
+										href="#" class="dropdown-item font4">Sacramento</a>
 								</div></li>
 						</ul>
 					</div>
@@ -68,28 +68,28 @@
 						<%
 							}
 						%>
-						<form class="mt-1 col-12" action="Write" method="POST">
-							<input type="hidden" name="cardId" value="${card.getId()}" />
 
-							<div class="form-group">
-								<label class="font-italic" for="personalizedmsg ">Your Message</label>
-								<textarea class=" form-control font1" id="personalizedmsg"
-									name="message" rows="15" required></textarea>
-							</div>
-							<div class="form-group d-block">
-								<label class="font-italic" for="cardfor">To:</label> <input type="text"
-									class="form-control col-6 font1" id="cardfor" name="cardfor" required/>
-							</div>
-
-							<button type="submit" class="btn btn-primary m-3">Save</button>
-							<a class="btn" href="Write?cardId=${card.getId()}">Clear</a>
-
-						</form>
-
+						<input type="hidden" name="cardId" value="${card.getId()}" />
+						<div class="form-group">
+							<label class="font-italic" for="personalizedmsg ">Your
+								Message</label>
+							<textarea class=" form-control font1" id="personalizedmsg"
+								name="message" rows="15" required></textarea>
+						</div>
+						<div class="form-group d-block">
+							<label class="font-italic" for="cardfor">To:</label> <input
+								type="text" class="form-control col-6 font1" id="cardfor"
+								name="recipient" required />
+						</div>
+						<div class="m-2 d-block">
+							<input name="button" type="submit" class="btn btn-primary"
+								value="Save"> <input name="button" type="submit"
+								class="btn btn-primary" value="Pay Now" />
+						</div>
 					</div>
-				</div>
+				</form>
 			</div>
-		</section>
+	</section>
 	</div>
 
 
