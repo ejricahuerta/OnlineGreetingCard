@@ -66,7 +66,10 @@
 									<p>${ card.getDescription() }<span class="d-block">$${card.getPrice()
 											} </span>
 									</p>
-									<a class="btn btn-primary" href="Write?cardId=${card.getId()}">Select Card</a>
+									<form action="Write" method="GET">
+									<input name="cardId" type="hidden" value="${card.getId()}">
+									<button class="btn btn-primary" type="submit">Select Card</Button>
+									</form>
 								</div>
 							</div>
 						</div>
