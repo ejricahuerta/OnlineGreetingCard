@@ -250,7 +250,8 @@
 									<div class="col">
 										<ul class="list-unstyled">
 											<!-- list of card letters of user -->
-											<li class="media border-top p-3"><img class="mr-3"
+											<li class="media border-top p-3">
+											<img class="mr-3"
 												src="${letter.getImageURL()}"
 												alt="Generic placeholder image">
 												<div class="media-body">
@@ -258,7 +259,8 @@
 													<small name="date">${letter.getDateAdded()}</small>
 													<p class="mb-1" name="message ">${letter.getMessage()}</p>
 													<small class="text-danger" name="status">${letter.getStatus()}</small>
-												</div></li>
+												</div>
+												</li>
 										</ul>
 									</div>
 								</c:if>
@@ -309,10 +311,10 @@
 					<div class="tab-pane fade show" id="list-security" role="tabpanel"
 						aria-labelledby="list-profile-list">
 						<div class="mb-5 mt-5">
-							<h4 class="text-center">Your Security</h4>
+							<h4 class="text-center">Your Secure Login</h4>
 							<ul class="list-group">
 								<li class="list-group-item justify-content-between d-flex">
-									<p>Email Addres</p>
+									<p>Email Address</p>
 									<p>${user.getEmail()}</p>
 									<button type="button" class="btn btn-link" data-toggle="modal"
 										data-target="#emailModal">Edit</button>
