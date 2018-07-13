@@ -76,12 +76,12 @@
 							<label class="font-italic" for="personalizedmsg ">Your
 								Message</label>
 							<textarea class=" form-control font1" id="personalizedmsg"
-								name="message" rows="15" required></textarea>
+								name="message" rows="15" required>${requestScope['message']}</textarea>
 						</div>
 						<div class="form-group d-block">
 							<label class="font-italic" for="cardfor">To:</label> <input
 								type="text" class="form-control col-6 font1" id="cardfor"
-								name="recipient" required />
+								name="recipient" required value="${requestScope['recipient']}"/>
 						</div>
 						<div class="m-2 d-block">
 							<input name="button" type="submit" class="btn btn-primary"
@@ -93,7 +93,6 @@
 			</div>
 	</section>
 	</div>
-
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
