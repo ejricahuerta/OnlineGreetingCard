@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class AuthorizationFilter
  */
-@WebFilter({ "/User", "/Payment", "/MyAccount", "/Write" })
+@WebFilter(urlPatterns = {"/MyAccount", "/Write"})
 public class AuthorizationFilter implements Filter {
 
 	private ServletContext context;
@@ -48,7 +48,7 @@ public class AuthorizationFilter implements Filter {
 
 		HttpSession session = req.getSession(false);
 
-		boolean loggedIn = session != null && session.getAttribute("user") != null;
+		boolean loggedIn = session != null && session.getAttribute("userEmail") != null;
 		boolean loginRequest = req.getRequestURI().equals(loginURI);
 
 		if (loggedIn || loginRequest) {
