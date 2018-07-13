@@ -262,8 +262,8 @@
 													<h5 class="mt-0 mb-1">To: ${letter.getRecipient()}</h5>
 													<small name="date">${letter.getDateAdded()}</small>
 													<p class="mb-1" name="message ">${letter.getMessage()}</p>
-													
 													<small class="text-danger">${letter.getStatus()}</small>
+													<a class="btn btn-link" href="Write?letterId=${letter.getId()}">Edit</a>
 												</div>
 												</li>
 										</ul>
