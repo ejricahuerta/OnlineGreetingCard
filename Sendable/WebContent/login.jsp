@@ -1,8 +1,3 @@
-<%
-	if(session != null){
-		response.sendRedirect("index.jsp");
-	}
-%>
 
 <jsp:include page="header.jsp"/>
 

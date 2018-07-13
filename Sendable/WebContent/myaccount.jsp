@@ -3,14 +3,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="header.jsp" />
 
-<%
-	if(session.getAttribute("userEmail") == null || session == null){
-		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-		response.setHeader("Pragma", "no-cache");
-		response.setDateHeader("Expires", 0);
-		response.sendRedirect("login.jsp");
-	}
-%>
 
 <body class="container-fluid">
 	<!--Navigation Bar-->
