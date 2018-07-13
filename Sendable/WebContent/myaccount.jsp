@@ -3,6 +3,15 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="header.jsp" />
 
+<%
+	if(session.getAttribute("userEmail") == null || session == null){
+		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+		response.setHeader("Pragma", "no-cache");
+		response.setDateHeader("Expires", 0);
+		response.sendRedirect("login.jsp");
+	}
+%>
+
 <body class="container-fluid">
 	<!--Navigation Bar-->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -65,7 +74,7 @@
 				</div>
 			</div>
 
-			<c:set var="user" value="${sessionScope['user']}" />
+			<c:set var="user" value="${requestScope['user']}" />
 			<c:if test="${user ==null}">
 				<c:redirect url="index.jsp"/>
 			</c:if>
@@ -362,8 +371,8 @@
 										<div class="float-right">
 											<button type="button" class="btn btn-secondary"
 												data-dismiss="modal">Close</button>
-											<button type="button" class="btn btn-primary">Save
-												changes</button>
+											<button type="submit" class="btn btn-primary">Save
+												Changes</button>
 										</div>
 									</form>
 								</div>
