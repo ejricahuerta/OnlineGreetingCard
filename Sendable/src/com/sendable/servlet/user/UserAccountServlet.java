@@ -42,14 +42,12 @@ public class UserAccountServlet extends HttpServlet {
 		System.out.println("ID: " + id);
 		UserService service = (UserService) session.getServletContext().getAttribute("userService");
 		UserDto user = service.findUserById(id);
-
 		if (user == null) {
-
 			response.sendRedirect("index.jsp");
 		} else {
 			System.out.println("Current User Email: " + user.getEmail());
-			session.setAttribute("user", user);
-			response.sendRedirect("myaccount.jsp");
+			request.setAttribute("user", user);
+			request.getRequestDispatcher("myaccount.jsp").forward(request, response);
 		}
 	}
 
@@ -61,22 +59,20 @@ public class UserAccountServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = (HttpSession) request.getSession();
-		UserDto user = (UserDto) session.getAttribute("user");
 		int Id = (int) session.getAttribute("userId");
 		String modalType = request.getParameter("editmodal");
-
 		if(modalType.isEmpty()) {
 			this.doGet(request, response);
 		}		
-		
 		else {
+			String email = (String)session.getAttribute("userEmail");
 			// validate user password
 			String password = request.getParameter("currentpassword");
-			boolean validUser = userservice.validateLogin(user.getEmail(), password);
-			//boolean IsFieldEmpty = (request.getParameterNames() != null);
+			boolean validUser = userservice.validateLogin(email, password);
 			boolean success = false;
 			if (validUser) {
 				// Edit Modal Type
+				UserDto user = this.userservice.findUserById(Id);
 				switch (modalType) {
 				
 				case "fullname": // edit for full name
@@ -121,7 +117,7 @@ public class UserAccountServlet extends HttpServlet {
 					
 					System.out.println("Saved Changes");
 					UserDto updatedUser = userservice.findUserById(Id);
-					session.setAttribute("user", updatedUser);
+					request.setAttribute("user", updatedUser);
 				}
 			}
 			else {
