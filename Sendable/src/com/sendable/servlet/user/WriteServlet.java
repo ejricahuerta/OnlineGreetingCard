@@ -48,6 +48,7 @@ public class WriteServlet extends HttpServlet {
 		int cardId = Integer.parseInt(request.getParameter("cardId"));
 		CardDto card = cardservice.getCard(cardId);
 		request.setAttribute("cardSelected", card);
+		
 		if (message == null || message.length() < 5) {
 			request.setAttribute("validationMessage", "<b>Invalid Message!</b> Please Enter your message again.");
 
@@ -57,14 +58,14 @@ public class WriteServlet extends HttpServlet {
 		} else {
 			String button = request.getParameter("button");
 			int userId = (int) request.getSession().getAttribute("userId");
-
-			UserDto user = this.userservice.findUserById(userId);
-			CardLetterDto newLetter = new CardLetterDto(0, user.getId(), cardId, recipient, message, font,
+			CardLetterDto newLetter = new CardLetterDto(0, userId, cardId, recipient, message, font,
 					card.getPrice(), DateTime.GetCurrentDate());
 			int letterId = this.userservice.addUserLetter(userId, newLetter);
 
 			if (letterId != -1) {
 				this.userservice.saveChanges();
+				UserDto updatedUser = this.userservice.findUserById(userId);
+				request.getSession().setAttribute("user", updatedUser);
 				newLetter = this.userservice.getUserLetter(userId, letterId);
 				request.setAttribute("letter", newLetter);
 				if(button.equals("Pay Now")) {
@@ -78,8 +79,6 @@ public class WriteServlet extends HttpServlet {
 				request.setAttribute("validationMessage", "<b>Unable to Proccess!</b>Please Re-Enter Message.");
 				request.getRequestDispatcher("write.jsp").forward(request, response);
 			}
-			
-
 		}
 
 	}
