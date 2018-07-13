@@ -18,5 +18,4 @@ public interface PaymentInterface {
 	PaymentDto GetLatestPaymentByUser(int userId);
 
 	PaymentDto GetLatestPayment();
-
 }
