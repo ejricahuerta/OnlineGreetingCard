@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if (request.getSession().getAttribute("user") != null) {
+		if (request.getSession().getAttribute("userEmail") != null) {
 			response.sendRedirect("index.jsp");
 		} else {
 
@@ -58,7 +58,6 @@ public class LoginServlet extends HttpServlet {
 
 		if (service.validateLogin(email, password)) {
 			HttpSession session = request.getSession(true);
-			session.setAttribute("user", email);
 			UserDto userfound = service.findUserByEmail(email);
 			System.out.println("USER ID: " + userfound.getId());
 			session.setAttribute("userId", userfound.getId());
