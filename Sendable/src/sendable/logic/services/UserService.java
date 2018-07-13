@@ -133,11 +133,11 @@ public class UserService implements UserInterface {
 		try {
 			for (User u : unit.GetUserRepo().ListAll()) {
 				if (u.getId() == UserId) {
-
 					Card card = this.unit.GetCardRepo().Get(letter.getCardId());
 					CardLetter newletter = new CardLetter(u, card, letter.getRecipient(), letter.getMessage(),
 							letter.getFontStyle(), letter.getTotalCost(), DateTime.GetCurrentDate());
 					u.getCardLetters().add(newletter);
+					unit.GetCardLetterRepo().Insert(newletter);
 					User user = this.unit.GetUserRepo().Get(UserId);
 					unit.GetUserRepo().Update(user);
 				}
@@ -161,8 +161,6 @@ public class UserService implements UserInterface {
 			for (User u : unit.GetUserRepo().ListAll()) {
 				u.getCardLetters().removeIf(l -> l.getId() == letterId);
 			}
-			;
-
 			this.unit.GetCardLetterRepo().Remove(letterId);
 			return true;
 		} catch (Exception e) {
@@ -235,6 +233,7 @@ public class UserService implements UserInterface {
 
 	@Override
 	public CardLetterDto getUserLetter(int userId, int letterId) {
+		
 		for (CardLetterDto letter : this.getAllUserLetters(userId)) {
 			if (letter.getId() == letterId) {
 				return letter;
