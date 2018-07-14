@@ -34,11 +34,11 @@
 	</section>
 	<section id="gallery">
 		<div class="container">
-			<div class="row">
+			<div class="row justify-content-center" >
 				<c:forEach
 					items="${requestScope['allcards'] == null? applicationScope['allcards']:requestScope['allcards']}"
 					var="card">
-					<div class="col-lg-4 col-md-6 col-xs-11 img-space">
+					<div class="col-lg-4 col-md-6 col-sm-10 img-space">
 						<div class="gallery">
 							<a type="button" href="${card.getImageURL()}" data-toggle="modal"
 								data-target="#${card.getId()}"> <img class="img-responsive"
