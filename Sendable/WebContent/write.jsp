@@ -71,7 +71,7 @@
 							}
 						%>
 
-						<input type="hidden" name="cardId" value="${card.getId()}" />
+						<input type="hidden" name="letterId" value="${requestScope['letterId'] }" />
 						<div class="form-group">
 							<label class="font-italic" for="personalizedmsg ">Your
 								Message</label>
