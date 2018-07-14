@@ -68,12 +68,11 @@
 
 			<c:set var="user" value="${requestScope['user']}" />
 			<c:if test="${user ==null}">
-				<c:redirect url="index.jsp"/>
+				<c:redirect url="index.jsp" />
 			</c:if>
 			<!-- TAB Content-->
 			<div class="col-8 border rounded bg-light">
 				<div class="tab-content" id="nav-tabContent">
-
 					<!-- Profile Tab Content-->
 					<div class="tab-pane fade show active" id="list-profile"
 						role="tabpanel" aria-labelledby="list-profile-list">
@@ -81,19 +80,19 @@
 							<h4 class="text-center">Your Profile</h4>
 							<ul class="list-group">
 								<li class="list-group-item justify-content-between d-flex">
-									<p class="font-italic">Full Name</p>
+									<label class="font-italic d-none d-md-block d-lg-block d-xl-block">Full Name</label>
 									<p>${user.getFullName()}</p>
 									<button type="button" class="btn btn-link" data-toggle="modal"
 										data-target="#fullnameModal">Edit</button>
 								</li>
 								<li class="list-group-item justify-content-between d-flex">
-									<p class="font-italic">Phone</p>
+									<label class="font-italic d-none d-md-block d-lg-block d-xl-block">Phone</label>
 									<p>${user.getPhone()}</p>
 									<button type="button" class="btn btn-link" data-toggle="modal"
 										data-target="#phoneModal">Edit</button>
 								</li>
 								<li class="list-group-item justify-content-between d-flex">
-									<p class="font-italic">Address</p>
+									<label class="font-italic d-none d-md-block d-lg-block d-xl-block">Address</label>
 									<p>${user.getCurrentAddress()}</p>
 									<button type="button" class="btn btn-link" data-toggle="modal"
 										data-target="#addressModal">Edit</button>
@@ -119,18 +118,18 @@
 										<div class="form-group">
 											<label class="font-italic" for="firstname">First Name</label>
 											<input name="firstname" type="text" class="form-control"
-												id="firstname" placeholder="First Name">
+												id="firstname" placeholder="First Name" required>
 										</div>
 										<div class="form-group">
 											<label class="font-italic" for="lastname">Last Name</label> <input
 												name="lastname" type="text" class="form-control"
-												id="lastname" placeholder="Last Name">
+												id="lastname" placeholder="Last Name" required>
 										</div>
 										<div class="form-group">
 											<label class="font-italic" for="currentpassword">Current
 												Password</label> <input name="currentpassword" type="password"
 												class="form-control" id="currentpassword"
-												placeholder="Current Password">
+												placeholder="Current Password" required>
 										</div>
 										<div class="float-right">
 											<button type="button" class="btn btn-secondary"
@@ -163,13 +162,13 @@
 											<input type="hidden" name="editmodal" value="phone">
 											<label class="font-italic" for="phone">Phone Number</label> <input
 												name="phone" type="text" class="form-control" id="phone"
-												placeholder="Mobile / Tel">
+												placeholder="Mobile / Tel" required>
 										</div>
 										<div class="form-group">
 											<label class="font-italic" for="currentpassword">Current
 												Password</label> <input name="currentpassword" type="password"
 												class="form-control" id="currentpassword"
-												placeholder="Current Password">
+												placeholder="Current Password" required>
 										</div>
 										<div class="float-right">
 											<button type="button" class="btn btn-secondary"
@@ -202,7 +201,7 @@
 										<div class="form-group">
 											<label class="font-italic" for="line1">Line 1</label> <input
 												name="line1" type="text" class="form-control" id="line1"
-												placeholder="Line 1">
+												placeholder="Line 1" required>
 										</div>
 										<div class="form-group">
 											<label class="font-italic" for="lastname">Line 2</label> <input
@@ -212,18 +211,18 @@
 										<div class="form-group">
 											<label class="font-italic" for="city">City</label> <input
 												name="city" type="text" class="form-control" id="city"
-												placeholder="City">
+												placeholder="City" required>
 										</div>
 										<div class="form-group">
 											<label class="font-italic" for="state">State</label> <input
 												name="state" type="text" class="form-control" id="state"
-												placeholder="State">
+												placeholder="State" required>
 										</div>
 										<div class="form-group">
 											<label class="font-italic" for="postalcode">Postal
 												Code</label> <input name="postalcode" type="text"
 												class="form-control" id="postalcode"
-												placeholder="Postal Code">
+												placeholder="Postal Code" required>
 										</div>
 										<div class="form-group">
 											<label class="font-italic" for="currentpassword">Current
@@ -234,7 +233,7 @@
 										<div class="float-right">
 											<button type="button" class="btn btn-secondary"
 												data-dismiss="modal">Close</button>
-												
+
 											<button type="submit" class="btn btn-primary">Save
 												Changes</button>
 										</div>
@@ -243,6 +242,7 @@
 							</div>
 						</div>
 					</div>
+					
 					<!-- CARD Tab Content-->
 					<div class="tab-pane fade sendable-usercards" id="list-card"
 						role="tabpanel" aria-labelledby="list-card-list">
@@ -254,18 +254,17 @@
 									<div class="col">
 										<ul class="list-unstyled">
 											<!-- list of card letters of user -->
-											<li class="media border-top p-3">
-											<img class="mr-3"
+											<li class="media border-top p-3"><img class="mr-3"
 												src="${letter.getImageURL()}"
 												alt="Generic placeholder image">
 												<div class="media-body">
 													<h5 class="mt-0 mb-1">To: ${letter.getRecipient()}</h5>
 													<small name="date">${letter.getDateAdded()}</small>
 													<p class="mb-1" name="message ">${letter.getMessage()}</p>
-													<small class="text-danger">${letter.getStatus()}</small>
-													<a class="btn btn-link" href="Write?letterId=${letter.getId()}">Edit</a>
-												</div>
-												</li>
+													<small class="text-danger">${letter.getStatus()}</small> <a
+														class="btn btn-link"
+														href="Write?letterId=${letter.getId()}">Edit</a>
+												</div></li>
 										</ul>
 									</div>
 								</c:if>
@@ -319,13 +318,13 @@
 							<h4 class="text-center">Your Secure Login</h4>
 							<ul class="list-group">
 								<li class="list-group-item justify-content-between d-flex">
-									<p>Email Address</p>
+									<label class="d-none d-md-block d-lg-block d-xl-block">Email Address</label>
 									<p>${user.getEmail()}</p>
 									<button type="button" class="btn btn-link" data-toggle="modal"
 										data-target="#emailModal">Edit</button>
 								</li>
 								<li class="list-group-item justify-content-between d-flex">
-									<p>Password</p>
+									<label class="d-none d-md-block d-lg-block d-xl-block">Password</label>
 									<p>Reset Password?</p>
 									<button type="button" class="btn btn-link" data-toggle="modal"
 										data-target="#passwordModal">Reset</button>
@@ -352,13 +351,13 @@
 										<div class="form-group">
 											<label class="font-italic" for="email">Email</label> <input
 												name="email" type="text" class="form-control" id="email"
-												placeholder="Email Address">
+												placeholder="Email Address" required>
 										</div>
 										<div class="form-group">
 											<label class="font-italic" for="currentpassword">Current
 												Password</label> <input name="currentpassword" type="password"
 												class="form-control" id="currentpassword"
-												placeholder="Current Password">
+												placeholder="Current Password" required>
 										</div>
 										<div class="float-right">
 											<button type="button" class="btn btn-secondary"
@@ -391,19 +390,19 @@
 											<label class="font-italic" for="currentpassword">Current
 												Password</label> <input name="currentpassword" type="password"
 												class="form-control" id="currentpassword"
-												placeholder="Current Password">
+												placeholder="Current Password" required>
 										</div>
 										<div class="form-group">
 											<label class="font-italic" for="newpassword">New
 												Password</label> <input name="newpassword" type="password"
 												class="form-control" id="newpassword"
-												placeholder="New Password">
+												placeholder="New Password" required>
 										</div>
 										<div class="form-group">
 											<label class="font-italic" for="retypepassword">Retype
 												Password</label> <input name="retypepassword" type="password"
 												class="form-control" id="retypepassword"
-												placeholder="Retype New Password">
+												placeholder="Retype New Password" required>
 										</div>
 										<div class="float-right">
 											<button type="button" class="btn btn-secondary"
@@ -419,17 +418,16 @@
 				</div>
 			</div>
 		</div>
-		</div>
-
-		<!-- Optional JavaScript -->
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-			integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-			crossorigin="anonymous"></script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-			integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-			crossorigin="anonymous"></script>
-		<script text="text/javascript" src="js/bootstrap.min.js"></script>
+	</section>
+	<!-- Optional JavaScript -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+		crossorigin="anonymous"></script>
+	<script text="text/javascript" src="js/bootstrap.min.js"></script>
 </body>
 
 </html>
