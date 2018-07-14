@@ -53,15 +53,13 @@ public class WriteServlet extends HttpServlet {
 
 		if (request.getParameter("cardId") != null) {
 			this.proccesCardRequest(request, response, true);
-		} else if (request.getParameter("letterId") != null) {
+		}
+
+		if (request.getParameter("letterId") != null) {
 			int userId = (int) request.getSession().getAttribute("userId");
 			int letterId = Integer.parseInt(request.getParameter("letterId"));
 			this.proccesLetterRequest(request, response, (this.userservice.getUserLetter(userId, letterId) != null),
 					true);
-		}
-		else {
-			this.context.log("No parameters");
-			response.sendRedirect("/cards.jsp");
 		}
 
 	}
@@ -72,11 +70,15 @@ public class WriteServlet extends HttpServlet {
 		if (request.getParameter("cardId") != null) { // is a card
 			this.context.log("Processing letter request.");
 			this.proccesCardRequest(request, response, false);
-		} else if (request.getParameter("letterId") != null) {
+		}
+		if (request.getParameter("letterId") != null) {
 			int userId = (int) request.getSession().getAttribute("userId");
 			int letterId = Integer.parseInt(request.getParameter("letterId"));
 			this.proccesLetterRequest(request, response, (this.userservice.getUserLetter(userId, letterId) != null),
 					false);
+		} else {
+			response.sendRedirect("cards.jsp");
+			return;
 		}
 	}
 
@@ -98,14 +100,14 @@ public class WriteServlet extends HttpServlet {
 			if (!isPost) {
 				CardDto cardSelected = this.cardservice.getCard(cardId);
 				request.setAttribute("cardSelected", cardSelected);
-				request.getRequestDispatcher("write.jsp").forward(request, response);
+				request.getRequestDispatcher("/write.jsp").forward(request, response);
 			} else {
 				String message = request.getParameter("message");
 				String recipient = request.getParameter("recipient");
 				String font = request.getParameter("font");
 				String button = request.getParameter("button");
-				try {
 
+				try {
 					CardDto card = this.cardservice.getCard(cardId);
 
 					CardLetterDto newLetter = new CardLetterDto(0, userId, cardId, recipient, message, font,
@@ -117,7 +119,7 @@ public class WriteServlet extends HttpServlet {
 					response.sendError(cardId, "Unable to Process. Please see WriteServlet.java");
 				} finally {
 					this.userservice.saveChanges(); // save all if no errors;
-					String URL = (button.contains("Pay") ? "payment.jsp" : "myaccount.jsp");
+					String URL = (button.contains("Pay") ? "/payment.jsp" : "/myaccount.jsp");
 					request.getRequestDispatcher(URL).forward(request, response);
 				}
 			}
@@ -125,7 +127,8 @@ public class WriteServlet extends HttpServlet {
 
 		else {
 			this.context.log("Cannot find card with ID: " + cardId);
-			response.sendRedirect("cards.jsp");
+			response.sendRedirect("/cards.jsp");
+			return;
 		}
 
 	}// end of method
@@ -144,7 +147,7 @@ public class WriteServlet extends HttpServlet {
 		int userId = (int) request.getSession().getAttribute("userId");
 
 		String URL = null;
-		URL = "/write.jsp";
+
 		if (isPost) {
 			String message = request.getParameter("message");
 			String recipient = request.getParameter("recipient");
@@ -163,14 +166,12 @@ public class WriteServlet extends HttpServlet {
 				} catch (Exception e) {
 					this.context.log("Error on processing letter request: " + e.getMessage());
 					response.sendError(letterId, "Unable to Process. Please see WriteServlet.java");
-				} finally {
-					this.userservice.saveChanges();
-					UserDto updatedUser = this.userservice.findUserById(userId);
-					request.setAttribute("user", updatedUser);
-					request.getRequestDispatcher("myaccount.jsp").forward(request, response);
+					return;
 				}
-
 			}
+			this.userservice.saveChanges();
+			UserDto updatedUser = this.userservice.findUserById(userId);
+			request.getSession().setAttribute("user", updatedUser);
 		} else {
 			CardLetterDto letter = this.userservice.getUserLetter(userId, letterId);
 			if (letter == null) {
@@ -185,12 +186,11 @@ public class WriteServlet extends HttpServlet {
 				request.getRequestDispatcher("write.jsp").forward(request, response);
 			}
 		}
-
+		request.getRequestDispatcher("myaccount.jsp").forward(request, response);
 	}// end of proccesLetterRequest
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-
 		this.context = (ServletContext) config.getServletContext();
 		this.cardservice = (CardService) config.getServletContext().getAttribute("cardService");
 		this.userservice = (UserService) config.getServletContext().getAttribute("userService");
