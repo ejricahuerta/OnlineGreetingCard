@@ -97,6 +97,7 @@ public class WriteServlet extends HttpServlet {
 		boolean isValid = (request.getParameter("cardId") != null);
 
 		if (isValid) {
+			String button = request.getParameter("button");
 			if (!isPost) {
 				CardDto cardSelected = this.cardservice.getCard(cardId);
 				request.setAttribute("cardSelected", cardSelected);
@@ -105,7 +106,6 @@ public class WriteServlet extends HttpServlet {
 				String message = request.getParameter("message");
 				String recipient = request.getParameter("recipient");
 				String font = request.getParameter("font");
-				String button = request.getParameter("button");
 
 				try {
 					CardDto card = this.cardservice.getCard(cardId);
@@ -119,10 +119,10 @@ public class WriteServlet extends HttpServlet {
 					response.sendError(cardId, "Unable to Process. Please see WriteServlet.java");
 				} finally {
 					this.userservice.saveChanges(); // save all if no errors;
-					String URL = (button.contains("Pay") ? "/payment.jsp" : "/myaccount.jsp");
-					request.getRequestDispatcher(URL).forward(request, response);
 				}
 			}
+			String URL = (button.contains("Pay") ? "/payment.jsp" : "/myaccount.jsp");
+			request.getRequestDispatcher(URL).forward(request, response);
 		}
 
 		else {
@@ -168,10 +168,11 @@ public class WriteServlet extends HttpServlet {
 					response.sendError(letterId, "Unable to Process. Please see WriteServlet.java");
 					return;
 				}
+				this.userservice.saveChanges();
 			}
-			this.userservice.saveChanges();
 			UserDto updatedUser = this.userservice.findUserById(userId);
 			request.getSession().setAttribute("user", updatedUser);
+			request.getRequestDispatcher("myaccount.jsp").forward(request, response);
 		} else {
 			CardLetterDto letter = this.userservice.getUserLetter(userId, letterId);
 			if (letter == null) {
@@ -186,7 +187,6 @@ public class WriteServlet extends HttpServlet {
 				request.getRequestDispatcher("write.jsp").forward(request, response);
 			}
 		}
-		request.getRequestDispatcher("myaccount.jsp").forward(request, response);
 	}// end of proccesLetterRequest
 
 	@Override
