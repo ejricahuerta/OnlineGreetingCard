@@ -29,8 +29,9 @@
 					<div class="card-body">
 						<h5 class="card-title">${card.getName() }</h5>
 						<p>${card.getDescription()}</p>
+						<c:if test="${requestScope['letterId'] == null}">
 						<a class="btn btn-info" href="Cards">Change Card</a>
-
+						</c:if>
 					</div>
 				</div>
 			</div>
