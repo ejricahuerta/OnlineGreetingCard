@@ -20,15 +20,8 @@ import sendable.logic.services.UserService;
 public class UserAccountServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	
 	private UserService userservice;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public UserAccountServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
