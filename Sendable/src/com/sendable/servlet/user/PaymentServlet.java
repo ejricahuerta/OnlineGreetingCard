@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import sendable.logic.dtos.CardLetterDto;
 import sendable.logic.services.PaymentService;
+import sendable.logic.services.UserService;
 
 /**
  * Servlet implementation class PaymentServlet
@@ -17,7 +19,9 @@ import sendable.logic.services.PaymentService;
 public class PaymentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	private PaymentService service;
+	private PaymentService paymentservice;
+
+	private UserService userservice;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -30,14 +34,21 @@ public class PaymentServlet extends HttpServlet {
 	 * @see Servlet#init(ServletConfig)
 	 */
 	public void init(ServletConfig config) throws ServletException {
-		this.service = (PaymentService)config.getServletContext().getAttribute("paymentService");
+		this.paymentservice = (PaymentService)config.getServletContext().getAttribute("paymentService");
+		this.userservice = (UserService)config.getServletContext().getAttribute("userService");
 	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			request.getRequestDispatcher("pay.jsp").forward(request, response);
+		
+		
+		int letterId  = Integer.parseInt(request.getParameter("letterId"));	
+		int userId = (int)request.getSession().getAttribute("userId");
+		CardLetterDto letter = this.userservice.getUserLetter(userId, letterId);
+		request.setAttribute("letter", letter);
+		request.getRequestDispatcher("pay.jsp").forward(request, response);
 	}
 
 	/**
