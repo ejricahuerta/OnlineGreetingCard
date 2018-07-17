@@ -69,7 +69,7 @@
 				</div>
 			</div>
 			<!-- TAB Content-->
-			<div class="col-11 border rounded bg-light">
+			<div class="col-lg-8 col-md-8 col-11 border rounded bg-light">
 				<div class="tab-content" id="nav-tabContent">
 					<!-- Profile Tab Content-->
 					<div class="tab-pane fade show active" id="list-profile"
