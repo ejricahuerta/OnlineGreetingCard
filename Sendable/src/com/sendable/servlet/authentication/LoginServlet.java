@@ -54,7 +54,9 @@ public class LoginServlet extends HttpServlet {
 		UserService service = (UserService) request.getServletContext().getAttribute("userService");
 
 		if (service.validateLogin(email, password)) {
+			request.getSession().invalidate();
 			HttpSession session = request.getSession(true);
+			session.setMaxInactiveInterval(5*60);
 			UserDto userfound = service.findUserByEmail(email);
 			System.out.println("USER ID: " + userfound.getId());
 			session.setAttribute("userId", userfound.getId());

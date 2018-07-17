@@ -67,7 +67,9 @@ public class RegisterServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			request.getSession().invalidate();
 			HttpSession session = request.getSession(true);
+			session.setMaxInactiveInterval(5*60);
 			Cookie cookie = new Cookie("email", email);
 			UserDto userDto = service.findUserByEmail(email);
 			System.out.println("USER ID: "+userDto.getId());
