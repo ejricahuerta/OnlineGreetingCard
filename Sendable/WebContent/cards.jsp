@@ -39,7 +39,7 @@
 					items="${requestScope['allcards'] == null? applicationScope['allcards']:requestScope['allcards']}"
 					var="card">
 					<div class=" col-xl-3 col-lg-3 col-md-5 col-5 img-space">
-						<div class="gallery">
+						<div class="gallery shadow-lg">
 							<a type="button" href="${card.getImageURL()}" data-toggle="modal"
 								data-target="#${card.getId()}"> <img class="img-responsive"
 								src="${card.getImageURL()}" style="width: 100%;" /> <span
@@ -66,10 +66,7 @@
 									<p>${ card.getDescription() }<span class="d-block">$${card.getPrice()
 											} </span>
 									</p>
-									<form action="Write" method="GET">
-									<input name="cardId" type="hidden" value="${card.getId()}">
-									<button class="btn btn-primary" type="submit">Select Card</Button>
-									</form>
+									<a class="btn btn-primary" href="Write?cardId=${card.getId()}">Select Card</a>
 								</div>
 							</div>
 						</div>
