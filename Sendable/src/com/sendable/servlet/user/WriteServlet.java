@@ -35,160 +35,77 @@ public class WriteServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public WriteServlet() {
-	}
+	
+	
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	
 
-		System.out.println("CARD ID: " + request.getParameter("cardId"));
-		System.out.println("LETTER ID" + request.getParameter("letterId"));
 
-		if (request.getParameter("cardId") != null) {
-			this.proccesCardRequest(request, response, true);
+
+
+
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		int cardId = Integer.parseInt(req.getParameter("cardId"));
+		
+		CardDto cardSelected =  this.cardservice.getCard(cardId);	
+		if(cardSelected == null) {
+			resp.sendRedirect("cards.jsp");
 		}
-		if (request.getParameter("letterId") != null) {
-			this.proccesLetterRequest(request, response, true);
-		}
-
-	}
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		if (request.getParameter("cardId") != null) { // is a card
-			this.context.log("Processing letter request.");
-			this.proccesCardRequest(request, response, false);
-		}
-		if (request.getParameter("letterId") != null) {
-			int userId = (int) request.getSession().getAttribute("userId");
-			int letterId = Integer.parseInt(request.getParameter("letterId"));
-			this.proccesLetterRequest(request, response, false);
-		} else {
-			response.sendRedirect("cards.jsp");
-			return;
-		}
-	}
-
-	/**
-	 * @param req
-	 * @param res
-	 * @param isPost
-	 * @throws IOException
-	 * @throws ServletException
-	 */
-	private void proccesCardRequest(HttpServletRequest request, HttpServletResponse response, boolean isPost)
-			throws IOException, ServletException {
-
-		int cardId = Integer.parseInt(request.getParameter("cardId"));
-		int userId = (int) request.getSession().getAttribute("userId");
-		boolean isValid = (request.getParameter("cardId") != null);
-
-		if (isValid) {
-			String button = request.getParameter("button");
-			if (!isPost) {
-				CardDto cardSelected = this.cardservice.getCard(cardId);
-				request.setAttribute("cardSelected", cardSelected);
-				request.getRequestDispatcher("/write.jsp").forward(request, response);
-			} else {
-				String message = request.getParameter("message");
-				String recipient = request.getParameter("recipient");
-				String font = request.getParameter("font");
-
-				try {
-					CardDto card = this.cardservice.getCard(cardId);
-
-					CardLetterDto newLetter = new CardLetterDto(0, userId, cardId, recipient, message, font,
-							card.getPrice(), DateTime.GetCurrentDate()); // new letter
-					newLetter = this.userservice.getUserLetter(userId,
-							this.userservice.addUserLetter(userId, newLetter));
-				} catch (Exception e) {
-					this.context.log("Error on processing letter request: " + e.getMessage());
-					response.sendError(cardId, "Unable to Process. Please see WriteServlet.java");
-				} finally {
-					this.userservice.saveChanges(); // save all if no errors;
-				}
-			}
-			String URL = (button.contains("Pay") ? "payment.jsp" : "myaccount.jsp");
-			request.getRequestDispatcher(URL).forward(request, response);
-		}
-
 		else {
-			this.context.log("Cannot find card with ID: " + cardId);
-			response.sendRedirect("cards.jsp");
-			return;
+			req.setAttribute("cardSelected", cardSelected);
+			req.setAttribute("type", "Write");
+			req.getRequestDispatcher("write.jsp").forward(req, resp);
 		}
+	}
 
-	}// end of method
 
-	/**
-	 * @param request
-	 * @param response
-	 * @param isNew
-	 * @throws ServletException
-	 * @throws IOException
-	 */
-	private void proccesLetterRequest(HttpServletRequest request, HttpServletResponse response, boolean isPost)
-			throws ServletException, IOException {
 
-		int letterId = Integer.parseInt(request.getParameter("letterId"));
-		int userId = (int) request.getSession().getAttribute("userId");
-
-		String URL = null;
-
-		if (isPost) {
-			String message = request.getParameter("message");
-			String recipient = request.getParameter("recipient");
-			String font = request.getParameter("font");
-			String button = request.getParameter("button");
-			if (message.isEmpty() && recipient.isEmpty()) {
-				request.setAttribute("validationMessage", "<b>Invalid Message or Recipient!</b> Please try again.");
-			} else {
-				try {
-					CardLetterDto oldLetter = this.userservice.getUserLetter(userId, letterId);
-					oldLetter.setMessage(message);
-					oldLetter.setRecipient(recipient);
-					if (!this.userservice.updateUserLetter(userId, oldLetter)) {
-						throw new Exception("Unable to Update letter for user.");
-					}
-					this.userservice.saveChanges();
-				} catch (Exception e) {
-					this.context.log("Error on processing letter request: " + e.getMessage());
-					request.setAttribute("validationMessage", "<b>Invalid Message or Recipient!</b> Please try again.");
-					return;
-				}
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		String message = req.getParameter("message");
+		String recipient = req.getParameter("recipient");
+		String font = req.getParameter("font");
+		int cardId = Integer.parseInt(req.getParameter("cardId"));
+		
+		if(message.isEmpty() || recipient.isEmpty() || message.length() < 4) {
+			req.setAttribute("validationMessage", "<b>Invalid Message or Recipient!</b> Please try again.");
+			req.getRequestDispatcher("write.jsp");
+		}
+		else {
+			int userId = (int)req.getSession().getAttribute("userId");
+			CardDto cardSelected =  this.cardservice.getCard(cardId);	
+			CardLetterDto newletter = new CardLetterDto(0,userId,cardId,recipient,message,font,cardSelected.getPrice(),DateTime.GetCurrentDate());
+			int newLetterId = this.userservice.addUserLetter(userId, newletter);
+			if(newLetterId ==-1) {
+				this.context.log("Unable to add new Letter");
+				req.setAttribute("validationMessage", "<b>Invalid Message or Recipient!</b> Please try again.");
+				req.getRequestDispatcher("write.jsp").forward(req, resp);
 			}
-			UserDto updatedUser = this.userservice.findUserById(userId);
-			request.getSession().setAttribute("user", updatedUser);
-			request.getRequestDispatcher("myaccount.jsp").forward(request, response);
-		} else {
-			CardLetterDto letter = this.userservice.getUserLetter(userId, letterId);
-			if (letter == null) {
-				this.context.log("Unable to find Letter with Id: " + letterId);
-				response.sendRedirect("cards.jsp");
-			} else {
-				CardDto card = this.cardservice.getCard(letter.getCardId());
-				request.setAttribute("cardSelected", card);
-				request.setAttribute("message", letter.getMessage());
-				request.setAttribute("recipient", letter.getRecipient());
-				request.setAttribute("letterId", letter.getId());
-				request.getRequestDispatcher("write.jsp").forward(request, response);
+			else {
+				UserDto user = this.userservice.findUserById(userId);
+				req.setAttribute("user", user);
+				req.getRequestDispatcher("myaccount.jsp").forward(req, resp);
 			}
 		}
-	}// end of proccesLetterRequest
+	}
+
+
+
+
+
+
+
+
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
+
 		this.context = (ServletContext) config.getServletContext();
+
 		this.cardservice = (CardService) config.getServletContext().getAttribute("cardService");
+
 		this.userservice = (UserService) config.getServletContext().getAttribute("userService");
+
 	}
 
 }

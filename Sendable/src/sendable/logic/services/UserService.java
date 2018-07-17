@@ -121,18 +121,12 @@ public class UserService implements UserInterface {
 	@Override
 	public boolean updateUserLetter(int UserId, CardLetterDto letter) {
 		User user = this.unit.GetUserRepo().Get(UserId);
-		Card card =  this.unit.GetCardRepo().Get(letter.getCardId());
-		for (CardLetter	c	 : user.getCardLetters()) {
-			if(c.getId() == letter.getId()) {
-			
-				c.setCard(card);
-				c.setFont(letter.getFontStyle());
-				c.setMessage(letter.getMessage());
-				c.setRecipient(letter.getRecipient());
-				c.setStatus(letter.getStatus());
-				this.unit.GetCardLetterRepo().Update(c);
-				return true;
-			}
+		if(user != null) {
+			CardLetter oldletter =  this.unit.GetCardLetterRepo().Get(letter.getId());
+			oldletter.setMessage(letter.getMessage());
+			oldletter.setRecipient(letter.getRecipient());
+			this.unit.GetCardLetterRepo().Update(oldletter);
+			return true;
 		}
 		return false;
 	}

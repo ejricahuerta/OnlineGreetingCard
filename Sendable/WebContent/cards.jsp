@@ -38,7 +38,7 @@
 				<c:forEach
 					items="${requestScope['allcards'] == null? applicationScope['allcards']:requestScope['allcards']}"
 					var="card">
-					<div class="col-lg-4 col-md-6 col-sm-10 img-space">
+					<div class=" col-xl-3 col-lg-3 col-md-5 col-5 img-space">
 						<div class="gallery">
 							<a type="button" href="${card.getImageURL()}" data-toggle="modal"
 								data-target="#${card.getId()}"> <img class="img-responsive"

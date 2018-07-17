@@ -263,7 +263,7 @@
 													<p class="mb-1" name="message ">${letter.getMessage()}</p>
 													<small class="text-danger">${letter.getStatus()}</small> <a
 														class="btn btn-link"
-														href="Write?letterId=${letter.getId()}">Edit</a>
+														href="EditLetter?letterId=${letter.getId()}">Edit</a>
 												</div></li>
 										</ul>
 									</div>
