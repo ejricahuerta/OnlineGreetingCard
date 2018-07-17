@@ -13,7 +13,7 @@ import sendable.logic.services.PaymentService;
 /**
  * Servlet implementation class PaymentServlet
  */
-@WebServlet(description = "Payment Servlet for User", urlPatterns = { "/PaymentServlet" })
+@WebServlet(description = "Payment Servlet for User", urlPatterns = { "/Payment" })
 public class PaymentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,16 +37,14 @@ public class PaymentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+			request.getRequestDispatcher("pay.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
 	}
 
 }

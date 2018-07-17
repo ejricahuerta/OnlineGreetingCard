@@ -35,15 +35,6 @@ public class WriteServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	
-	
-
-	
-
-
-
-
-
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int cardId = Integer.parseInt(req.getParameter("cardId"));
 		
@@ -57,8 +48,6 @@ public class WriteServlet extends HttpServlet {
 			req.getRequestDispatcher("write.jsp").forward(req, resp);
 		}
 	}
-
-
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
@@ -82,19 +71,19 @@ public class WriteServlet extends HttpServlet {
 				req.getRequestDispatcher("write.jsp").forward(req, resp);
 			}
 			else {
+				
+				if(req.getParameter("button").equals("Save")) {
+					
 				UserDto user = this.userservice.findUserById(userId);
 				req.setAttribute("user", user);
 				req.getRequestDispatcher("myaccount.jsp").forward(req, resp);
+				}
+				else {
+					resp.sendRedirect("Payment?letterId=" + newLetterId);
+				}
 			}
 		}
 	}
-
-
-
-
-
-
-
 
 
 	@Override

@@ -80,7 +80,13 @@ public class EditLetterServlet extends HttpServlet {
 			UserDto user  = this.userservice.findUserById(userId);
 			req.setAttribute("type", "EditLetter");
 			req.setAttribute("user", user);
+			if(req.getParameter("button").contains("Save")) {
+				
 			req.getRequestDispatcher("myaccount.jsp").forward(req, resp);
+			}
+			else {
+				resp.sendRedirect("Payment?letterId=" + letterId);
+			}
 		}
 		else {
 			resp.sendRedirect("index.jsp");
