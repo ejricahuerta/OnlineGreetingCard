@@ -35,42 +35,32 @@ public class UserService implements UserInterface {
 	@Override
 	public boolean changeUserPassword(int userId, String password) {
 		try {
-			for (User u : unit.GetUserRepo().ListAll()) {
-				if (u.getId() == userId) {
-					u.setPassword(password);
-					// Updating User
-					User user = this.unit.GetUserRepo().Get(userId);
-					user.setPassword(password);
-					this.unit.GetUserRepo().Update(user);
-				}
-			}
-			;
+			User user = this.unit.GetUserRepo().Get(userId);
+			user.setPassword(password);
+			this.unit.GetUserRepo().Update(user);
 			return true;
-		} catch (
-
-		Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+
 		}
 		return false;
+
 	}
 
 	@Override
 	public boolean updateUserInfo(int userId, String fname, String lname, String email, String phone) {
 
 		try {
-			for (User u : unit.GetUserRepo().ListAll()) {
-				if (u.getId() == userId) {
-					u.setFullName(fname, lname);
-					u.setEmail(email);
-					User user = this.unit.GetUserRepo().Get(userId);
-					user.setFullName(fname, lname);
-					user.setEmail(email);
-					
-					user.setPhone(phone);
-					this.unit.GetUserRepo().Update(user);
-				}
-			}
-			;
+			User u = unit.GetUserRepo().Get(userId);
+
+			u.setFullName(fname, lname);
+			u.setEmail(email);
+			User user = this.unit.GetUserRepo().Get(userId);
+			user.setFullName(fname, lname);
+			user.setEmail(email);
+			user.setPhone(phone);
+			this.unit.GetUserRepo().Update(user);
+
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -83,14 +73,10 @@ public class UserService implements UserInterface {
 			String postalcode) {
 
 		try {
-			for (User u : unit.GetUserRepo().ListAll()) {
-				if (u.getId() == userId) {
-					Address address = new Address(line1, line2, city, state, postalcode);
-					u.setAddress(address);
-					unit.GetUserRepo().Update(u);
-					break;
-				}
-			}
+			User u = unit.GetUserRepo().Get(userId);
+			Address address = new Address(line1, line2, city, state, postalcode);
+			u.setAddress(address);
+			unit.GetUserRepo().Update(u);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -121,8 +107,8 @@ public class UserService implements UserInterface {
 	@Override
 	public boolean updateUserLetter(int UserId, CardLetterDto letter) {
 		User user = this.unit.GetUserRepo().Get(UserId);
-		if(user != null) {
-			CardLetter oldletter =  this.unit.GetCardLetterRepo().Get(letter.getId());
+		if (user != null) {
+			CardLetter oldletter = this.unit.GetCardLetterRepo().Get(letter.getId());
 			oldletter.setMessage(letter.getMessage());
 			oldletter.setRecipient(letter.getRecipient());
 			this.unit.GetCardLetterRepo().Update(oldletter);
@@ -130,23 +116,22 @@ public class UserService implements UserInterface {
 		}
 		return false;
 	}
+
 	@Override
 	public int addUserLetter(int UserId, CardLetterDto letter) {
 		try {
-			for (User u : unit.GetUserRepo().ListAll()) {
-				if (u.getId() == UserId) {
-					Card card = this.unit.GetCardRepo().Get(letter.getCardId());
-					CardLetter newletter = new CardLetter(u, card, letter.getRecipient(), letter.getMessage(),
-							letter.getFontStyle(), letter.getTotalCost(), DateTime.GetCurrentDate());
-					u.getCardLetters().add(newletter);
-					unit.GetCardLetterRepo().Insert(newletter);
-					User user = this.unit.GetUserRepo().Get(UserId);
-					unit.GetUserRepo().Update(user);
-				}
-			}
-			
+			User u = unit.GetUserRepo().Get(UserId);
+
+			Card card = this.unit.GetCardRepo().Get(letter.getCardId());
+			CardLetter newletter = new CardLetter(u, card, letter.getRecipient(), letter.getMessage(),
+					letter.getFontStyle(), letter.getTotalCost(), DateTime.GetCurrentDate());
+			u.getCardLetters().add(newletter);
+			unit.GetCardLetterRepo().Insert(newletter);
+			User user = this.unit.GetUserRepo().Get(UserId);
+			unit.GetUserRepo().Update(user);
+
 			for (CardLetter c : this.unit.GetCardLetterRepo().ListAll()) {
-				if(c.getUser().getId() == letter.getUserId()) {					
+				if (c.getUser().getId() == letter.getUserId()) {
 					return c.getId();
 				}
 			}
@@ -227,7 +212,7 @@ public class UserService implements UserInterface {
 	public AccountDto getUserAccount(int userId) {
 		for (User user : this.unit.GetUserRepo().ListAll()) {
 			if (user.getId() == userId) {
-				//return SendableMapper.mapAccountDto(user.getAccount());
+				// return SendableMapper.mapAccountDto(user.getAccount());
 			}
 		}
 		return null;
@@ -235,7 +220,7 @@ public class UserService implements UserInterface {
 
 	@Override
 	public CardLetterDto getUserLetter(int userId, int letterId) {
-		
+
 		for (CardLetterDto letter : this.getAllUserLetters(userId)) {
 			if (letter.getId() == letterId) {
 				return letter;
@@ -313,5 +298,4 @@ public class UserService implements UserInterface {
 		unit.Save();
 	}
 
-	
 }
