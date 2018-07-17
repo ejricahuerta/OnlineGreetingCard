@@ -68,8 +68,6 @@ public class WriteServlet extends HttpServlet {
 			this.proccesCardRequest(request, response, false);
 		}
 		if (request.getParameter("letterId") != null) {
-			int userId = (int) request.getSession().getAttribute("userId");
-			int letterId = Integer.parseInt(request.getParameter("letterId"));
 			this.proccesLetterRequest(request, response, false);
 		} else {
 			response.sendRedirect("cards.jsp");
@@ -90,13 +88,13 @@ public class WriteServlet extends HttpServlet {
 		int cardId = Integer.parseInt(request.getParameter("cardId"));
 		int userId = (int) request.getSession().getAttribute("userId");
 		boolean isValid = (request.getParameter("cardId") != null);
-
+		String button = request.getParameter("button");
+		
 		if (isValid) {
-			String button = request.getParameter("button");
 			if (!isPost) {
 				CardDto cardSelected = this.cardservice.getCard(cardId);
 				request.setAttribute("cardSelected", cardSelected);
-				request.getRequestDispatcher("/write.jsp").forward(request, response);
+				request.getRequestDispatcher("write.jsp").forward(request, response);
 			} else {
 				String message = request.getParameter("message");
 				String recipient = request.getParameter("recipient");
@@ -111,9 +109,9 @@ public class WriteServlet extends HttpServlet {
 							this.userservice.addUserLetter(userId, newLetter));
 				} catch (Exception e) {
 					this.context.log("Error on processing letter request: " + e.getMessage());
-					response.sendError(cardId, "Unable to Process. Please see WriteServlet.java");
 				} finally {
 					this.userservice.saveChanges(); // save all if no errors;
+					
 				}
 			}
 			String URL = (button.contains("Pay") ? "payment.jsp" : "myaccount.jsp");
@@ -137,8 +135,11 @@ public class WriteServlet extends HttpServlet {
 	 */
 	private void proccesLetterRequest(HttpServletRequest request, HttpServletResponse response, boolean isPost)
 			throws ServletException, IOException {
-
-		int letterId = Integer.parseInt(request.getParameter("letterId"));
+		int letterId = 0;
+		if(request.getParameter("letterId") != null) {
+			
+			letterId = Integer.parseInt(request.getParameter("letterId"));
+		}
 		int userId = (int) request.getSession().getAttribute("userId");
 
 		String URL = null;
@@ -165,9 +166,7 @@ public class WriteServlet extends HttpServlet {
 					return;
 				}
 			}
-			UserDto updatedUser = this.userservice.findUserById(userId);
-			request.getSession().setAttribute("user", updatedUser);
-			request.getRequestDispatcher("myaccount.jsp").forward(request, response);
+			response.sendRedirect("myaccount.jsp");
 		} else {
 			CardLetterDto letter = this.userservice.getUserLetter(userId, letterId);
 			if (letter == null) {

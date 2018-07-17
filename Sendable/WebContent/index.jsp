@@ -9,7 +9,7 @@
 
   <!--heading-->
   <section class="mt-3 catchphrase row mx-auto">
-  	<img class="img-responsive col-12" src="images/banner.jpg" />
+  	<img class="img-fluid d-sm-none d-md-block col-12" src="images/banner.jpg" />
     <div class="col-md-12 mt-2">
       <div class="jumbotron shadow-lg">
         <h1 class="display-4">Sendable</h1>

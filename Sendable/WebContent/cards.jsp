@@ -13,7 +13,7 @@
 	<div class="break"></div>
 
 	<!--heading-->
-	<section class="catchphrase row justify-content-center mt-3 mx-auto">
+	<section class="row justify-content-center mt-3 mx-auto">
 		<div class="col-lg-8 col-md-10 col-sm-12 ">
 			<div class="card text-center shadow-sm">
 				<div class="card-header lead">Filter</div>
@@ -38,7 +38,7 @@
 				<c:forEach
 					items="${requestScope['allcards'] == null? applicationScope['allcards']:requestScope['allcards']}"
 					var="card">
-					<div class="col-lg-4 col-md-6 col-sm-10 img-space">
+					<div class="col-lg-3 col-md-5 col-5 img-space">
 						<div class="gallery">
 							<a type="button" href="${card.getImageURL()}" data-toggle="modal"
 								data-target="#${card.getId()}"> <img class="img-responsive"

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet Filter implementation class PageComponentFilter
  */
-@WebFilter({"/PageComponentFilter", "/header.jsp", "/footer.jsp", "/navigationheader.jsp"})
+@WebFilter({"/PageComponentFilter"})
 public class PageComponentFilter implements Filter {
 
     /**

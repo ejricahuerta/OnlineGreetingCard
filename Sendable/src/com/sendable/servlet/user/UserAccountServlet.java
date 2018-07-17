@@ -21,7 +21,7 @@ public class UserAccountServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
-	private UserService userservice;
+	private UserService service;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -30,11 +30,10 @@ public class UserAccountServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		HttpSession session = (HttpSession) request.getSession(false);
-		int id = (int) session.getAttribute("userId");
-		System.out.println("ID: " + id);
-		UserService service = (UserService) session.getServletContext().getAttribute("userService");
-		UserDto user = service.findUserById(id);
+		
+		String email  = (String)request.getSession().getAttribute("userEmail");
+		System.out.println("Email: " + email);
+		UserDto user = service.findUserByEmail(email);
 		if (user == null) {
 			response.sendRedirect("index.jsp");
 		} else {
@@ -61,22 +60,22 @@ public class UserAccountServlet extends HttpServlet {
 			String email = (String)session.getAttribute("userEmail");
 			// validate user password
 			String password = request.getParameter("currentpassword");
-			boolean validUser = userservice.validateLogin(email, password);
+			boolean validUser = service.validateLogin(email, password);
 			boolean success = false;
 			if (validUser) {
 				// Edit Modal Type
-				UserDto user = this.userservice.findUserById(Id);
+				UserDto user = this.service.findUserById(Id);
 				switch (modalType) {
 				
 				case "fullname": // edit for full name
 					String fname = request.getParameter("firstname");
 					String lname = request.getParameter("lastname");
-					success = userservice.updateUserInfo(Id, fname, lname, user.getEmail(), user.getPhone());
+					success = service.updateUserInfo(Id, fname, lname, user.getEmail(), user.getPhone());
 					break;
 
 				case "phone": //edit phone
 					String phone = request.getParameter("phone");
-					success = userservice.updateUserInfo(Id, 
+					success = service.updateUserInfo(Id, 
 							user.getFullName().split(" ")[0], 
 							user.getFullName().split(" ")[1], 
 							user.getEmail(), phone);
@@ -89,15 +88,14 @@ public class UserAccountServlet extends HttpServlet {
 					String city = request.getParameter("city");
 					String state = request.getParameter("state");
 					String postalcode = request.getParameter("postalcode");
-					success = userservice.updateUserAddress(Id, line1, line2, city, state, postalcode);
+					success = service.updateUserAddress(Id, line1, line2, city, state, postalcode);
 					break;
 					
 				case "password":
 					
 					String newpassword = request.getParameter("newpassword");
-					String retypepassword  = request.getParameter("retypepassword");
-					
-					success = (newpassword.equals(retypepassword) && !newpassword.isEmpty() && newpassword.length() > 5?this.userservice.changeUserPassword(Id, newpassword): false);
+					String retypepassword  = request.getParameter("retypepassword");					
+					success = (newpassword.equals(retypepassword) && !newpassword.isEmpty() && newpassword.length() > 5?this.service.changeUserPassword(Id, newpassword): false);
 					break;
 					
 				default: // nothing then returns to page
@@ -106,10 +104,10 @@ public class UserAccountServlet extends HttpServlet {
 				}
 				
 				if (success) { // Saves all changes
-					userservice.saveChanges();
+					service.saveChanges();
 					
 					System.out.println("Saved Changes");
-					UserDto updatedUser = userservice.findUserById(Id);
+					UserDto updatedUser = service.findUserById(Id);
 					request.setAttribute("user", updatedUser);
 				}
 			}
@@ -122,7 +120,7 @@ public class UserAccountServlet extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-		this.userservice = (UserService) config.getServletContext().getAttribute("userService");
+		this.service = (UserService) config.getServletContext().getAttribute("userService");
 	}
 
 }
