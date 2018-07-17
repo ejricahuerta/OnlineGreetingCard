@@ -67,7 +67,7 @@ public class EditLetterServlet extends HttpServlet {
 		CardLetterDto letter = this.userservice.getUserLetter(userId, letterId);
 		boolean success = false;
 		if(letter == null) {
-			resp.sendRedirect("myaccount.jsp");
+			resp.sendRedirect("MyAccount");
 		}
 		else {
 			letter.setMessage(message);
@@ -81,7 +81,7 @@ public class EditLetterServlet extends HttpServlet {
 			req.setAttribute("type", "EditLetter");
 			req.setAttribute("user", user);
 			if(req.getParameter("button").contains("Save")) {
-			resp.sendRedirect("myaccount.jsp");
+			resp.sendRedirect("MyAccount");
 			}
 			else {
 				resp.sendRedirect("Payment?letterId=" + letterId);

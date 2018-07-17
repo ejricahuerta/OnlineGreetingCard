@@ -31,6 +31,9 @@ public class UserAccountServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession session = (HttpSession) request.getSession(false);
+		if(session == null) {
+			response.sendRedirect("login.jsp");
+		}
 		int id = (int) session.getAttribute("userId");
 		System.out.println("ID: " + id);
 		UserService service = (UserService) session.getServletContext().getAttribute("userService");
@@ -108,14 +111,13 @@ public class UserAccountServlet extends HttpServlet {
 				if (success) { // Saves all changes
 					userservice.saveChanges();
 					System.out.println("Saved Changes");
-					response.sendRedirect("myaccount.jsp");
+				response.sendRedirect("MyAccount");
 				}
 			}
 			else {
 				request.setAttribute("validationMessage", "<b>Update  Failed!</b> Unable to Process Update.");
-				request.getRequestDispatcher("myaccount.jsp").forward(request, response);
+				this.doGet(request, response);
 			}
-			response.sendRedirect("myaccount.jsp");
 		}
 	}
 
