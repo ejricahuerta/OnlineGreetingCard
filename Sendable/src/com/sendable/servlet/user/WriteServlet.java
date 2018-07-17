@@ -58,7 +58,7 @@ public class WriteServlet extends HttpServlet {
 		
 		if(message.isEmpty() || recipient.isEmpty() || message.length() < 4) {
 			req.setAttribute("validationMessage", "<b>Invalid Message or Recipient!</b> Please try again.");
-			req.getRequestDispatcher("write.jsp");
+			req.getRequestDispatcher("write.jsp").forward(req, resp);;
 		}
 		else {
 			int userId = (int)req.getSession().getAttribute("userId");
@@ -68,18 +68,16 @@ public class WriteServlet extends HttpServlet {
 			if(newLetterId ==-1) {
 				this.context.log("Unable to add new Letter");
 				req.setAttribute("validationMessage", "<b>Invalid Message or Recipient!</b> Please try again.");
-				req.getRequestDispatcher("write.jsp").forward(req, resp);
 			}
 			else {
 				
 				if(req.getParameter("button").equals("Save")) {
-					
-				UserDto user = this.userservice.findUserById(userId);
-				req.setAttribute("user", user);
+					resp.sendRedirect("myaccount.jsp");
 				req.getRequestDispatcher("myaccount.jsp").forward(req, resp);
 				}
 				else {
 					resp.sendRedirect("Payment?letterId=" + newLetterId);
+					req.getRequestDispatcher("write.jsp").forward(req, resp);
 				}
 			}
 		}

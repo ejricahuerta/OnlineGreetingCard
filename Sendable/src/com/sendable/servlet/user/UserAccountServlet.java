@@ -107,16 +107,15 @@ public class UserAccountServlet extends HttpServlet {
 				
 				if (success) { // Saves all changes
 					userservice.saveChanges();
-					
 					System.out.println("Saved Changes");
-					UserDto updatedUser = userservice.findUserById(Id);
-					request.setAttribute("user", updatedUser);
+					response.sendRedirect("myaccount.jsp");
 				}
 			}
 			else {
 				request.setAttribute("validationMessage", "<b>Update  Failed!</b> Unable to Process Update.");
+				request.getRequestDispatcher("myaccount.jsp").forward(request, response);
 			}
-			request.getRequestDispatcher("myaccount.jsp").forward(request, response);
+			response.sendRedirect("myaccount.jsp");
 		}
 	}
 

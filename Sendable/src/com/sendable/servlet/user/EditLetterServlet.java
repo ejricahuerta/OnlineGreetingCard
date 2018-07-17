@@ -81,8 +81,7 @@ public class EditLetterServlet extends HttpServlet {
 			req.setAttribute("type", "EditLetter");
 			req.setAttribute("user", user);
 			if(req.getParameter("button").contains("Save")) {
-				
-			req.getRequestDispatcher("myaccount.jsp").forward(req, resp);
+			resp.sendRedirect("myaccount.jsp");
 			}
 			else {
 				resp.sendRedirect("Payment?letterId=" + letterId);
