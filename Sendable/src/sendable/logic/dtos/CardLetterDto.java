@@ -10,6 +10,7 @@ public class CardLetterDto {
 	String FontStyle;
 	double TotalCost;
 	String DateAdded;
+	String DateSent;
 	String Status;
 	/**
 	 * @param id
@@ -111,6 +112,14 @@ public class CardLetterDto {
 
 	public void setStatus(String status) {
 		Status = status;
+	}
+
+	public String getDateSent() {
+		return DateSent;
+	}
+
+	public void setDateSent(String dateSent) {
+		DateSent = dateSent;
 	}
 	
 	
