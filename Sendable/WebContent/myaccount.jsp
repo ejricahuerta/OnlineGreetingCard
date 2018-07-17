@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <jsp:include page="header.jsp" />
 
 
@@ -47,9 +48,11 @@
 		<%
 			}
 		%>
-		<!--left-side bar-->
+		
 		<div class="row justify-content-center">
-			<div class="col-lg-3 col-md-4 col-sm-10 col-10 mb-3">
+			
+			<!-- side navbar -->
+			<div class="col-lg-3 col-md-4 col-sm-12 col-12 mb-3 ">
 				<div class="list-group" id="list-tab" role="tablist">
 					<a class="list-group-item list-group-item-action active"
 						id="list-profile-list" data-toggle="list" href="#list-profile"
@@ -65,13 +68,8 @@
 						role="tab" aria-controls="profile">Security</a>
 				</div>
 			</div>
-
-			<c:set var="user" value="${requestScope['user']}" />
-			<c:if test="${user ==null}">
-				<c:redirect url="index.jsp" />
-			</c:if>
 			<!-- TAB Content-->
-			<div class="col-8 border rounded bg-light">
+			<div class="col-11 border rounded bg-light">
 				<div class="tab-content" id="nav-tabContent">
 					<!-- Profile Tab Content-->
 					<div class="tab-pane fade show active" id="list-profile"
@@ -94,6 +92,7 @@
 								<li class="list-group-item justify-content-between d-flex">
 									<label class="font-italic d-none d-md-block d-lg-block d-xl-block">Address</label>
 									<p>${user.getCurrentAddress()}</p>
+		
 									<button type="button" class="btn btn-link" data-toggle="modal"
 										data-target="#addressModal">Edit</button>
 								</li>
@@ -261,9 +260,12 @@
 													<h5 class="mt-0 mb-1">To: ${letter.getRecipient()}</h5>
 													<small name="date">${letter.getDateAdded()}</small>
 													<p class="mb-1" name="message ">${letter.getMessage()}</p>
-													<small class="text-danger">${letter.getStatus()}</small> <a
+													<small class="text-danger">${letter.getStatus()}</small> 
+													<c:if test="${eltter.getDateSent() == null }">
+													<a
 														class="btn btn-link"
 														href="EditLetter?letterId=${letter.getId()}">Edit</a>
+													</c:if>
 												</div></li>
 										</ul>
 									</div>
