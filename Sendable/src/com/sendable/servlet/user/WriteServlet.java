@@ -63,7 +63,7 @@ public class WriteServlet extends HttpServlet {
 		else {
 			int userId = (int)req.getSession().getAttribute("userId");
 			CardDto cardSelected =  this.cardservice.getCard(cardId);	
-			CardLetterDto newletter = new CardLetterDto(0,userId,cardId,recipient,message,font,cardSelected.getPrice(),DateTime.GetCurrentDate());
+			CardLetterDto newletter = new CardLetterDto(0,userId,cardId,recipient,message,font,cardSelected.getPrice()*(1.13),DateTime.GetCurrentDate());
 			int newLetterId = this.userservice.addUserLetter(userId, newletter);
 			if(newLetterId ==-1) {
 				this.context.log("Unable to add new Letter");
