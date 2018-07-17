@@ -4,16 +4,35 @@
 <body class="container-fluid">
 	<jsp:include page="navigationheader.jsp" />
 
-	<section class="container">
 
-		<form class="row" action="Payment" method="post">
+	<!--Spaces-->
+	<div class="break"></div>
+	
+	<!-- pay form -->
+	<section class="container border p-1 justify-content-center">
+		<%
+						if (request.getAttribute("validationMessage") == null) {
+					%>
+					<div class="alert alert-info" role="alert">Enter your shipping
+						information.</div>
+					<%
+						} else {
+					%>
+					<div class="alert alert-danger" role="alert">
+						<%=request.getAttribute("validationMessage")%>
+					</div>
+					<%
+						}
+					%>
+		<form class="row border rounded p-3 m-3" action="Payment" method="post">
 			<div class="form-row">
-				<div class="form-group col-md">
+			<h5 class="p-lead">Shipping Address</h5>
+				<div class="form-group col-md-12">
 					<label for="line1">Line 1<span class="required-field">
 							*</span></label> <input name="line1" type="text" class="form-control" id="line1"
 						placeholder="70 The Pond Rd" required>
 				</div>
-				<div class="form-group col-sm">
+				<div class="form-group col-md-12">
 					<label for="line2">Line 2</label> <input name="line2" type="text"
 						class="form-control" id="line2"
 						placeholder="Apartment, studio, or floor">
@@ -35,6 +54,10 @@
 							*</span></label> <input type="text" class="form-control" id="postal"
 						name="postalcode" placeholder="A1A 1A1" required>
 				</div>
+				
+			</div>
+			<div class="form-row">
+				
 			</div>
 		</form>
 	</section>
