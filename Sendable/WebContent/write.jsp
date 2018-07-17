@@ -87,8 +87,9 @@
 						</div>
 						<div class="m-2 d-block">
 							<input name="button" type="submit" class="btn btn-primary"
-								value="Save"> <input name="button" type="submit"
-								class="btn btn-primary" value="Pay Now" />
+								value="Save"> 
+								<input name="button" type="submit"
+								class="btn btn-primary" value="Pay Now"/>
 						</div>
 					</div>
 				</form>
