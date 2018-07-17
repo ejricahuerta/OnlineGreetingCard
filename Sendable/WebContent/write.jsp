@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -37,7 +37,8 @@
 			</div>
 			<!--textarea-->
 			<div class="col-lg-9 col-md-8 mb-5">
-				<form action="Write" method="POST" class="row m-1">
+				<form action="${resquestScope['type']}" method="POST" class="row m-1">
+					<input type="hidden" name="cardId" value="${card.getId()}">
 					<div class="col-12 shadow-sm">
 						<ul class="nav justify-content-around">
 							<li class="nav-item nav-link disabled font1">Gaegu</li>
@@ -56,6 +57,7 @@
 								</div></li>
 						</ul>
 					</div>
+					
 					<div class=" text-space col-12 shadow-lg mt-3">
 						<%
 							if (request.getAttribute("validationMessage") == null) {
@@ -71,8 +73,7 @@
 						<%
 							}
 						%>
-
-						<input type="hidden" name="letterId" value="${requestScope['letterId'] }" />
+						<input type="hidden" name="letterId" value="${requestScope['letterId']}" />
 						<div class="form-group">
 							<label class="font-italic" for="personalizedmsg ">Your
 								Message</label>

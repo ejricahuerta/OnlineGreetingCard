@@ -124,13 +124,13 @@ public class UserService implements UserInterface {
 		Card card =  this.unit.GetCardRepo().Get(letter.getCardId());
 		for (CardLetter	c	 : user.getCardLetters()) {
 			if(c.getId() == letter.getId()) {
-			
+				
 				c.setCard(card);
 				c.setFont(letter.getFontStyle());
 				c.setMessage(letter.getMessage());
 				c.setRecipient(letter.getRecipient());
 				c.setStatus(letter.getStatus());
-				this.unit.GetCardLetterRepo().Update(c);
+				unit.GetCardLetterRepo().Update(c);
 				return true;
 			}
 		}
