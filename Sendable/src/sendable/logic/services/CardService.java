@@ -3,8 +3,10 @@ package sendable.logic.services;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.mock.SeedDatabase;
 import sendable.dao.entities.Card;
 import sendable.dao.entities.Category;
+import sendable.dao.interfaces.UnitOfWorkInterface;
 import sendable.dao.repository.*;
 import sendable.logic.dtos.CardDto;
 import sendable.logic.dtos.CategoryDto;
@@ -13,15 +15,18 @@ import sendable.logic.mapper.SendableMapper;
 
 public class CardService implements CardInterface {
 
-	private UnitOfWork unit;
+	private UnitOfWorkInterface unit;
 
 	private List<CardDto> AllCards = new ArrayList<CardDto>();
 	private List<CategoryDto> AllCategory = new ArrayList<CategoryDto>();
 
 	CardDto card = null;
 
-	public CardService(UnitOfWork work) {
-		unit = work;
+	public CardService(UnitOfWorkInterface uow) {
+		unit = uow;
+		if(unit.GetCategoryRepo().ListAll().isEmpty()) {
+			SeedDatabase seed = new SeedDatabase(unit);
+		}
 	}
 
 	@Override

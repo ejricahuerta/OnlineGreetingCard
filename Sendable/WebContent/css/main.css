@@ -49,15 +49,10 @@ body {
 	color: #343a40;
 }
 
-@media (min-width: 400px) {
-	
+@media ( min-width : 400px) {
 }
 
-
-
 /*Custom CSS*/
-
-
 overlay {
 	border-radius: 0;
 	background-color: rgba(0, 0, 0, 0.8);
@@ -98,7 +93,7 @@ overlay {
 	z-index: 30;
 }
 
-.gallery a{
+.gallery a {
 	position: relative;
 	display: block;
 }
@@ -141,16 +136,17 @@ overlay {
 .font4 {
 	font-family: 'Marck Script', cursive;
 }
-.font5{
+
+.font5 {
 	font-family: NothingYou Could Do, cursive;
 }
 
-.font6{
+.font6 {
 	font-family: Permanent Marker, cursive;
 }
 
-.font7{
-	 font-family: Sacramento,cursive;
+.font7 {
+	font-family: Sacramento, cursive;
 }
 
 .write-card-space {
@@ -183,4 +179,11 @@ overlay {
 .img-selected {
 	width: auto;
 	height: 50px;;
+}
+
+.message-text {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 200px;
 }

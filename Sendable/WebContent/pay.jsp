@@ -3,8 +3,6 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
-
 <jsp:include page="header.jsp" />
 <body class="container-fluid">
 	<jsp:include page="navigationheader.jsp" />
@@ -102,11 +100,14 @@
 					</div>
 					<div class="form-check">
 						<input class="form-check-input" type="radio" name="payment"
-							id="visa" value="visa"> <label class="form-check-label"
-							for="visa"> Visa</label>
+							id="visa" value="visa" disabled> <label
+							class="form-check-label" for="visa"> Visa</label>
 					</div>
 					<div class="col-12 mt-5 p-1">
 						<button type="submit" class="btn btn-primary">Pay</button>
+						<a class="btn btn-secondary"
+							href="Payment?letterId=${letter.getId()}">Reset</a> <a
+							class="btn btn-link" href="myaccount.jsp">Go to Account</a>
 					</div>
 				</form>
 			</div>

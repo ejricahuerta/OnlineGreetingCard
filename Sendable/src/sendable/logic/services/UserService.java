@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sendable.dao.entities.*;
+import sendable.dao.interfaces.UnitOfWorkInterface;
 import sendable.dao.repository.UnitOfWork;
 import sendable.logic.dtos.*;
 import sendable.logic.interfaces.UserInterface;
@@ -11,10 +12,10 @@ import sendable.logic.mapper.SendableMapper;
 
 public class UserService implements UserInterface {
 
-	private UnitOfWork unit;
+	private UnitOfWorkInterface unit;
 
-	public UserService(UnitOfWork work) {
-		unit = work;
+	public UserService(UnitOfWorkInterface uow) {
+		unit = uow;
 	}
 
 	@Override

@@ -3,9 +3,11 @@ package sendable.logic.services;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import sendable.dao.entities.Account;
+import sendable.dao.entities.Address;
+import sendable.dao.entities.CardLetter;
 import sendable.dao.entities.Payment;
-
+import sendable.dao.interfaces.UnitOfWorkInterface;
 import sendable.dao.repository.UnitOfWork;
 import sendable.logic.dtos.PaymentDto;
 import sendable.logic.interfaces.PaymentInterface;
@@ -13,20 +15,18 @@ import sendable.logic.mapper.SendableMapper;
 
 public class PaymentService implements PaymentInterface {
 
-	private UnitOfWork unit ;
-	
-	public PaymentService(UnitOfWork work) {
-		unit = work;
-	}
-	
-	private List<PaymentDto> AllPayments = new ArrayList<PaymentDto>();
+	private UnitOfWorkInterface unit;
 
+	public PaymentService(UnitOfWorkInterface uow) {
+		unit = uow;
+	}
+
+	private List<PaymentDto> AllPayments = new ArrayList<PaymentDto>();
 
 	@Override
 	public List<PaymentDto> ListAlllPayments() {
-		
-		if(AllPayments.isEmpty())
-		{
+
+		if (AllPayments.isEmpty()) {
 			for (Payment p : unit.GetPaymentRepo().ListAll()) {
 				AllPayments.add(SendableMapper.mapPaymentDto(p));
 			}
@@ -50,38 +50,43 @@ public class PaymentService implements PaymentInterface {
 	}
 
 	@Override
-	public PaymentDto GetLatestPaymentByUser(int userId) {
-		List<PaymentDto> payments = new ArrayList<PaymentDto>();
-		try {
-			this.AllPayments.forEach(p -> {
-				if (p.getUserId() == userId) {
-					payments.add(p);
-				}
-			});
-		} catch (Exception e) {
-			e.printStackTrace();
+	public PaymentDto GetPaymentByUser(int userId, int paymentId) {
+		if (unit.GetUserRepo().Get(userId) != null) {
+			return SendableMapper.mapPaymentDto(this.unit.GetPaymentRepo().Get(paymentId));
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public boolean MakePayment(int cardLetterId, String paymentType, double totalAmount, int billingId,
+			int shippingId) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean MakePaymentByAccount(int cardLetterId, int accountId, String paymentType, double totalAmount,
+			int billingId, int shippingId) {
+		CardLetter letter = this.unit.GetCardLetterRepo().Get(cardLetterId);
+		Account account = this.unit.GetAccountRepo().Get(accountId);
+		Address shipping = this.unit.GetAddressRepo().Get(shippingId);
+
+		if (account.getCredit() <= totalAmount) {
+			return false;
 		}
 
-		return payments.get(payments.size() - 1);
-	}
-
-	@Override
-	public PaymentDto GetLatestPayment() {
-		return AllPayments.get(AllPayments.size() - 1);
-	}
-
-	@Override
-	public boolean MakePayment(int id, int cardLetterId, int userId, String paymentType, double totalAmount,
-			int billingId, int shippingId) {
-		// TODO Auto-generated method stub
+		else if (letter != null) {
+			try {
+				Payment newpay = new Payment(letter, letter.getUser(), paymentType, totalAmount,
+						letter.getUser().getCurrentAddress(), shipping);
+				this.unit.GetPaymentRepo().Insert(newpay);
+				return true;
+			} catch (Exception e) {
+				System.out.println("Unable to make payment");
+				e.printStackTrace();
+			}
+		}
 		return false;
 	}
-
-	@Override
-	public boolean MakePaymentByAccount(int id, int cardLetterId, int userId, int accountId, String paymentType,
-			double totalAmount, int billingId, int shippingId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

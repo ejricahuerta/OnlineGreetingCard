@@ -42,7 +42,7 @@
 					class="row m-1">
 					<input type="hidden" name="cardId" value="${card.getId()}">
 
-					<div class="col-12 shadow-sm">
+					<div class="col-12 shadow-sm mt-5">
 						<div class="form-group">
 							<label id="sampletext" for="text">Example select</label> <select
 								class="form-control" id="text">
@@ -55,32 +55,19 @@
 							</select>
 						</div>
 						<script>
-							$("select").change(function() {
-								var str = "";
-								$("select option:selected").each(function() {
-									str += $(this).value;	
-								});
-							$('#sampletext').removeClass('*').addClass(str);								
-							}).change();
+							$("select").change(
+									function() {
+										var str = "";
+										$("select option:selected").each(
+												function() {
+													str += $(this).value;
+												});
+										$('#sampletext').removeClass('*')
+												.addClass(str);
+									}).change();
 						</script>
-						<ul class="nav justify-content-around">
-							<li id="sampletext">Sample Text Here</li>
-							<li class="nav-item dropdown"><a
-								class="nav-link dropdown-toggle" data-toggle="dropdown"
-								role="buton" aria-haspopup="true" aria-expanded="false">Choose
-									Font</a>
-								<div class="dropdown-menu">
-									<a id="#font1" class="dropdown-item font1">Gaegu</a> <a
-										id="#font2" class="dropdown-item font2">Gochi Hand</a> <a
-										id="#font3" class="dropdown-item font3">Homemade Apple</a> <a
-										id="#font1" class="dropdown-item font4">Marck Script</a> <a
-										id="#font1" class="dropdown-item font4">NothingYou Could
-										Do</a> <a id="#font1" class="dropdown-item font4">Permanent
-										Marker</a> <a id="#font1" class="dropdown-item font4">Sacramento</a>
-								</div></li>
-						</ul>
 					</div>
-					
+
 					<div class=" text-space col-12 shadow-lg mt-3">
 						<%
 							if (request.getAttribute("validationMessage") == null) {

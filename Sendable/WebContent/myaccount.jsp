@@ -48,9 +48,9 @@
 		<%
 			}
 		%>
-		
+
 		<div class="row justify-content-center">
-			
+
 			<!-- side navbar -->
 			<div class="col-lg-3 col-md-4 col-sm-12 col-12 mb-3 ">
 				<div class="list-group" id="list-tab" role="tablist">
@@ -78,21 +78,25 @@
 							<h4 class="text-center">Your Profile</h4>
 							<ul class="list-group">
 								<li class="list-group-item justify-content-between d-flex">
-									<label class="font-italic d-none d-md-block d-lg-block d-xl-block">Full Name</label>
+									<label
+									class="font-italic d-none d-md-block d-lg-block d-xl-block">Full
+										Name</label>
 									<p>${user.getFullName()}</p>
 									<button type="button" class="btn btn-link" data-toggle="modal"
 										data-target="#fullnameModal">Edit</button>
 								</li>
 								<li class="list-group-item justify-content-between d-flex">
-									<label class="font-italic d-none d-md-block d-lg-block d-xl-block">Phone</label>
+									<label
+									class="font-italic d-none d-md-block d-lg-block d-xl-block">Phone</label>
 									<p>${user.getPhone()}</p>
 									<button type="button" class="btn btn-link" data-toggle="modal"
 										data-target="#phoneModal">Edit</button>
 								</li>
 								<li class="list-group-item justify-content-between d-flex">
-									<label class="font-italic d-none d-md-block d-lg-block d-xl-block">Address</label>
+									<label
+									class="font-italic d-none d-md-block d-lg-block d-xl-block">Address</label>
 									<p>${user.getCurrentAddress()}</p>
-		
+
 									<button type="button" class="btn btn-link" data-toggle="modal"
 										data-target="#addressModal">Edit</button>
 								</li>
@@ -241,7 +245,7 @@
 							</div>
 						</div>
 					</div>
-					
+
 					<!-- CARD Tab Content-->
 					<div class="tab-pane fade sendable-usercards" id="list-card"
 						role="tabpanel" aria-labelledby="list-card-list">
@@ -253,18 +257,18 @@
 									<div class="col">
 										<ul class="list-unstyled">
 											<!-- list of card letters of user -->
-											<li class="media border-top p-3"><img class="mr-3"
+											<li class="media border-top p-2"><img class="mr-3"
 												src="${letter.getImageURL()}"
 												alt="Generic placeholder image">
 												<div class="media-body">
 													<h5 class="mt-0 mb-1">To: ${letter.getRecipient()}</h5>
-													<small name="date">${letter.getDateAdded()}</small>
-													<p class="mb-1" name="message ">${letter.getMessage()}</p>
-													<small class="text-danger">${letter.getStatus()}</small> 
+													<small>${letter.getDateAdded()}</small>
+													<p class="mb-1 message-text">${letter.getMessage()}</p>
+													
+													<small class="text-danger">${letter.getStatus()}</small>
 													<c:if test="${eltter.getDateSent() == null }">
-													<a
-														class="btn btn-link"
-														href="EditLetter?letterId=${letter.getId()}">Edit</a>
+														<a class="btn btn-link"
+															href="EditLetter?letterId=${letter.getId()}">Edit</a>
 													</c:if>
 												</div></li>
 										</ul>
@@ -320,7 +324,8 @@
 							<h4 class="text-center">Your Secure Login</h4>
 							<ul class="list-group">
 								<li class="list-group-item justify-content-between d-flex">
-									<label class="d-none d-md-block d-lg-block d-xl-block">Email Address</label>
+									<label class="d-none d-md-block d-lg-block d-xl-block">Email
+										Address</label>
 									<p>${user.getEmail()}</p>
 									<button type="button" class="btn btn-link" data-toggle="modal"
 										data-target="#emailModal">Edit</button>
