@@ -43,7 +43,7 @@ public class EditLetterServlet extends HttpServlet {
 				req.setAttribute("letterId", letter.getId());
 				req.setAttribute("message", letter.getMessage());
 				req.setAttribute("recipient", letter.getRecipient());
-				req.getRequestDispatcher("write.jsp").forward(req, resp);
+				req.getRequestDispatcher("/write.jsp").forward(req, resp);
 			} 
 			else {
 				UserDto user  =this.userservice.findUserById(userId);

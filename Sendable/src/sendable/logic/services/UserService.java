@@ -124,7 +124,7 @@ public class UserService implements UserInterface {
 
 			Card card = this.unit.GetCardRepo().Get(letter.getCardId());
 			CardLetter newletter = new CardLetter(u, card, letter.getRecipient(), letter.getMessage(),
-					letter.getFontStyle(), letter.getTotalCost(), DateTime.GetCurrentDate());
+					letter.getFontStyle(),  Math.round(letter.getTotalCost() * 100) / 100, DateTime.GetCurrentDate());
 			u.getCardLetters().add(newletter);
 			unit.GetCardLetterRepo().Insert(newletter);
 			User user = this.unit.GetUserRepo().Get(UserId);

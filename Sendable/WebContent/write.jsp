@@ -1,4 +1,5 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -30,30 +31,52 @@
 						<h5 class="card-title">${card.getName() }</h5>
 						<p>${card.getDescription()}</p>
 						<c:if test="${requestScope['letterId'] == null}">
-						<a class="btn btn-info" href="Cards">Change Card</a>
+							<a class="btn btn-info" href="Cards">Change Card</a>
 						</c:if>
 					</div>
 				</div>
 			</div>
 			<!--textarea-->
 			<div class="col-lg-9 col-md-8 mb-5">
-				<form action="${resquestScope['type']}" method="POST" class="row m-1">
+				<form action="${resquestScope['type']}" method="POST"
+					class="row m-1">
 					<input type="hidden" name="cardId" value="${card.getId()}">
+
 					<div class="col-12 shadow-sm">
+						<div class="form-group">
+							<label id="sampletext" for="text">Example select</label> <select
+								class="form-control" id="text">
+								<option value="font1">Gaegu</option>
+								<option value="font2">Gochi Hand</option>
+								<option value="font3">Homemade Apple</option>
+								<option value="font4">Marck Script</option>
+								<option value="font5">Nothing You Can Do</option>
+								<option value="font6">Sacramento</option>
+							</select>
+						</div>
+						<script>
+							$("select").change(function() {
+								var str = "";
+								$("select option:selected").each(function() {
+									str += $(this).value;	
+								});
+							$('#sampletext').removeClass('*').addClass(str);								
+							}).change();
+						</script>
 						<ul class="nav justify-content-around">
-							<li class="nav-item nav-link disabled font1">Gaegu</li>
+							<li id="sampletext">Sample Text Here</li>
 							<li class="nav-item dropdown"><a
-								class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+								class="nav-link dropdown-toggle" data-toggle="dropdown"
 								role="buton" aria-haspopup="true" aria-expanded="false">Choose
 									Font</a>
 								<div class="dropdown-menu">
-									<a href="#" class="dropdown-item font1">Gaegu</a> <a href="#"
-										class="dropdown-item font2">Gochi Hand</a> <a href="#"
-										class="dropdown-item font3">Homemade Apple</a> <a href="#"
-										class="dropdown-item font4">Marck Script</a> <a href="#"
-										class="dropdown-item font4">NothingYou Could Do</a> <a
-										href="#" class="dropdown-item font4">Permanent Marker</a> <a
-										href="#" class="dropdown-item font4">Sacramento</a>
+									<a id="#font1" class="dropdown-item font1">Gaegu</a> <a
+										id="#font2" class="dropdown-item font2">Gochi Hand</a> <a
+										id="#font3" class="dropdown-item font3">Homemade Apple</a> <a
+										id="#font1" class="dropdown-item font4">Marck Script</a> <a
+										id="#font1" class="dropdown-item font4">NothingYou Could
+										Do</a> <a id="#font1" class="dropdown-item font4">Permanent
+										Marker</a> <a id="#font1" class="dropdown-item font4">Sacramento</a>
 								</div></li>
 						</ul>
 					</div>
@@ -73,41 +96,41 @@
 						<%
 							}
 						%>
-						<input type="hidden" name="letterId" value="${requestScope['letterId']}" />
+						<input type="hidden" name="letterId"
+							value="${requestScope['letterId']}" />
 						<div class="form-group">
 							<label class="font-italic" for="personalizedmsg ">Your
 								Message</label>
 							<textarea class=" form-control font1" id="personalizedmsg"
-								name="message" rows="15" required>${requestScope['message']}</textarea>
+								name="message" rows="15" required cols="">${requestScope['message']}</textarea>
 						</div>
 						<div class="form-group d-block">
 							<label class="font-italic" for="cardfor">To:</label> <input
 								type="text" class="form-control col-6 font1" id="cardfor"
-								name="recipient" required value="${requestScope['recipient']}"/>
+								name="recipient" required value="${requestScope['recipient']}" />
 						</div>
 						<div class="m-2 d-block">
 							<input name="button" type="submit" class="btn btn-primary"
-								value="Save"> 
-								<input name="button" type="submit"
-								class="btn btn-primary" value="Pay Now"/>
+								value="Save"> <input name="button" type="submit"
+								class="btn btn-primary" value="Pay Now" />
 						</div>
 					</div>
 				</form>
 			</div>
-	</section>
+		</section>
 	</div>
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
+		crossorigin="anonymous" type="text/javascript"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
 		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-		crossorigin="anonymous"></script>
-	<script src="js/bootstrap.min.js"></script>
+		crossorigin="anonymous" type="text/javascript"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>
 
 </body>
 
-</html>
+<html></html>

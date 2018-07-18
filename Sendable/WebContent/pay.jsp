@@ -1,7 +1,7 @@
 <%@page import="sendable.logic.services.UserService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
 
@@ -16,22 +16,35 @@
 	<!-- pay form -->
 	<section class="container">
 		<div class="row justify-content-center">
-			<div class="col-4">
+			<div class="col-lg-4 col-md-4 col-10">
 				<div class="card">
 					<div class="card-body">
-						<h5 class="card-title">Payment</h5>
-						<p class="card-text">
-							Card Id: ${letter.getCardId()}
-						</p>
-						<p class="card-text">
-							
-							Total Cost: $${letter.getTotalCost()}
-						</p>
+						<h5 class="card-title">Pay Letter</h5>
+						<table class="table">
+							<tbody>
+								<tr>
+									<th scope="row">Letter Id:</th>
+									<td>${letter.getId()}</td>
+								</tr>
+								<tr>
+									<th scope="row">Greeting Card Id:</th>
+									<td>${letter.getCardId() }</td>
+								</tr>
+								<tr>
+									<th scope="row">Total Cost</th>
+									<td>${letter.getTotalCost()}</td>
+
+								</tr>
+								<tr>
+									<th scope="row">Recipient</th>
+									<td>${letter.getRecipient()}</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</div>
-
-			<div class="col-7 border rounded p-4">
+			<div class="col-lg-6 col-md-5 col-10 border rounded p-4">
 				<form class="container " action="Payment" method="post">
 
 					<%
@@ -44,15 +57,14 @@
 						} else {
 					%>
 
-					<div class="alert alert-danger " role="alert">
-					</div>
+					<div class="alert alert-danger " role="alert"></div>
 
 					<%
 						}
 					%>
 
+					<h5 class="p-lead">Shipping Address</h5>
 					<div class="form-row">
-						<h5 class="p-lead">Shipping Address</h5>
 						<div class="form-group col-md-12">
 							<label for="line1">Line 1<span class="required-field">
 									*</span></label> <input name="line1" type="text" class="form-control"
@@ -81,7 +93,21 @@
 								name="postalcode" placeholder="A1A 1A1" required>
 						</div>
 					</div>
-					<div class="form-row"></div>
+
+					<h5 class="p-lead">Payment Type</h5>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="payment"
+							id="acount" value="account" checked> <label
+							class="form-check-label" for="account"> Account Credit</label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="payment"
+							id="visa" value="visa"> <label class="form-check-label"
+							for="visa"> Visa</label>
+					</div>
+					<div class="col-12 mt-5 p-1">
+						<button type="submit" class="btn btn-primary">Pay</button>
+					</div>
 				</form>
 			</div>
 		</div>
