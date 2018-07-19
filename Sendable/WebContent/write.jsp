@@ -37,6 +37,8 @@
 				</div>
 			</div>
 			<!--textarea-->
+			
+			
 			<div class="col-lg-9 col-md-8 mb-5">
 				<form action="${resquestScope['type']}" method="POST"
 					class="row m-1">
@@ -46,7 +48,7 @@
 						<div class="form-group">
 							<label id="sampletext" for="text">Example select</label> 
 							<select name="font"
-								class="form-control" id="text">
+								class="form-control" id="text">						
 								<option value="font1" <%if(((String)request.getAttribute("font")).contains("1")){%> selected <%}%>>Gaegu</option>
 								<option value="font2" <%if(((String)request.getAttribute("font")).contains("2")){%> selected <%}%>>Gochi Hand</option>
 							 	<option value="font3" <%if(((String)request.getAttribute("font")).contains("3")){%> selected <%}%>>Homemade Apple</option>
