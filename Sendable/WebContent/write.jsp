@@ -44,14 +44,15 @@
 
 					<div class="col-12 shadow-sm mt-5">
 						<div class="form-group">
-							<label id="sampletext" for="text">Example select</label> <select
+							<label id="sampletext" for="text">Example select</label> 
+							<select name="font"
 								class="form-control" id="text">
-								<option value="font1">Gaegu</option>
-								<option value="font2">Gochi Hand</option>
-								<option value="font3">Homemade Apple</option>
-								<option value="font4">Marck Script</option>
-								<option value="font5">Nothing You Can Do</option>
-								<option value="font6">Sacramento</option>
+								<option value="font1" <%if(((String)request.getAttribute("font")).contains("1")){%> selected <%}%>>Gaegu</option>
+								<option value="font2" <%if(((String)request.getAttribute("font")).contains("2")){%> selected <%}%>>Gochi Hand</option>
+							 	<option value="font3" <%if(((String)request.getAttribute("font")).contains("3")){%> selected <%}%>>Homemade Apple</option>
+								<option value="font4" <%if(((String)request.getAttribute("font")).contains("4")){%> selected <%}%>>Marck Script</option>
+								<option value="font5" <%if(((String)request.getAttribute("font")).contains("5")){%> selected <%}%>>Nothing You Can Do</option>
+								<option value="font6" <%if(((String)request.getAttribute("font")).contains("6")){%> selected <%}%>>Sacramento</option>
 							</select>
 						</div>
 						<script>
@@ -88,12 +89,12 @@
 						<div class="form-group">
 							<label class="font-italic" for="personalizedmsg ">Your
 								Message</label>
-							<textarea class=" form-control font1" id="personalizedmsg"
+							<textarea class=" form-control <%=request.getAttribute("font")%>" id="personalizedmsg"
 								name="message" rows="15" required cols="">${requestScope['message']}</textarea>
 						</div>
 						<div class="form-group d-block">
 							<label class="font-italic" for="cardfor">To:</label> <input
-								type="text" class="form-control col-6 font1" id="cardfor"
+								type="text" class="form-control col-6 <%=request.getAttribute("font")%>" id="cardfor"
 								name="recipient" required value="${requestScope['recipient']}" />
 						</div>
 						<div class="m-2 d-block">
