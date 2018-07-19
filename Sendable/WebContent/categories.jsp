@@ -14,15 +14,14 @@
 
 	<!--all category Section-->
 	<section class="row justify-content-center">
-		<div class="col-lg-8 col-md-8 col-sm-10 col-xs-12">
+		<div class="col-lg-6 col-md-6 col-sm-10 col-xs-12">
 			<div class=" card allcategories shadow-lg">
 				<div class="card-body">
 					<div class="row justify-content-center">
 						<div class="m-3 categories-card col-md col-sm">
 							<ul class="list-group mx-auto pl-3 pr-3 text-center">
 								<c:forEach items="${applicationScope['allcategories']}" var="category">
-									<li class="list-group-item text-center">
-								
+									<li class="list-group-item text-center">						
 										<a class="btn btn-link" href="Cards?search=${category.getName()}">${category.getName()}
 											<span class="badge badge-primary badge-pill">${category.getCards().size()}</span>
 										</a>
