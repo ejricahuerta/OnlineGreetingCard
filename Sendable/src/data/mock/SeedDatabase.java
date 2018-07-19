@@ -16,6 +16,7 @@ public class SeedDatabase {
 	ArrayList<Category> AllCategories = new ArrayList<Category>();
 
 	public SeedDatabase(UnitOfWorkInterface uow) {
+		
 		this.uow = uow;
 		if (uow.GetCategoryRepo().ListAll().isEmpty()) {
 			for (Category c : this.AddCategories()) {
@@ -33,10 +34,30 @@ public class SeedDatabase {
 		}
 	}
 
-	private void SeedCard() {
+	public  void SeedCard() {
+		Category c1 = null, c2 = null, c3 = null, c4 = null;
 		if (uow.GetCardRepo().ListAll().isEmpty()) {
+
+			for (Category c : this.uow.GetCategoryRepo().ListAll()) {
+				System.out.println(c.getName());	
+				switch (c.getName()) {
+				case "Birthdays":
+					c1 = c;
+					break;
+				case "Aniversaries":
+					c2 = c;
+					break;
+				case "Christmas":
+					c3 = c;
+					break;
+				case "Valentines":
+					c4 = c;
+					break;
+				default:
+					break;
+				}
+			}
 			// Birthday!
-			Category c1 = uow.GetCategoryRepo().Get(1);
 			try {
 				if (c1.getCards().isEmpty()) {
 					uow.GetCardRepo().Insert(new Card(c1, "Special Day", "Birthday Wishes on your Special day", 5,
@@ -60,7 +81,7 @@ public class SeedDatabase {
 				}
 
 				// Aniversaries
-				Category c2 = uow.GetCategoryRepo().Get(2);
+
 				if (c2.getCards().isEmpty()) {
 					uow.GetCardRepo().Insert(new Card(c2, "Stephen", "To my Boyfriend Stephen", 6.0,
 							"images/aniversaries/anv1.jpeg", true));
@@ -79,7 +100,7 @@ public class SeedDatabase {
 				}
 
 				// Chrstmas
-				Category c3 = uow.GetCategoryRepo().Get(3);
+
 				if (c3.getCards().isEmpty()) {
 					uow.GetCardRepo()
 							.Insert(new Card(c3, "Tree", "Lets Get Merry!", 7.0, "images/christmas/xmas1.jpeg", true));
@@ -95,7 +116,6 @@ public class SeedDatabase {
 							new Card(c3, "Silver", "Silver and Gold Card!", 7.0, "images/christmas/xmas1.jpeg", true));
 				}
 
-				Category c4 = uow.GetCategoryRepo().Get(4);
 				if (c4.getCards().isEmpty()) {
 					uow.GetCardRepo().Insert(new Card(c4, "Be my Valentine", "Arrows and Heart!", 10.0,
 							"images/valentines/val1.jpeg", true));
@@ -120,18 +140,10 @@ public class SeedDatabase {
 					uow.GetCardRepo().Insert(
 							new Card(c4, "Cute Love", "Pets and Love!", 10.0, "images/valentines/val1.jpeg", true));
 				}
-
 				uow.Save();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
-
-		List<Card> cards = uow.GetCardRepo().ListAll();
-		for (Card card : cards) {
-			Category ct = uow.GetCategoryRepo().Get(card.getCategory().getId());
-			ct.getCards().add(card);
-			uow.GetCategoryRepo().Update(ct);
 		}
 	}
 
