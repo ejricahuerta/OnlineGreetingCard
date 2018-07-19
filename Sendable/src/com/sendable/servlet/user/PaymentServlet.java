@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import sendable.logic.dtos.AddressDto;
 import sendable.logic.dtos.CardLetterDto;
+import sendable.logic.dtos.UserDto;
 import sendable.logic.services.PaymentService;
 import sendable.logic.services.UserService;
 
@@ -80,9 +81,16 @@ public class PaymentServlet extends HttpServlet {
 				request.getRequestDispatcher("pay.jsp").forward(request, response);
 			} else {
 				AddressDto shipping = new AddressDto(0, line1, line2, city, state, postalcode);
-
+			 boolean success = this.paymentservice.MakePaymentByAccount(userId, Integer.parseInt(letterId), paymentType, totalAmount, shipping);
+			 
+			 if(success) {
+				 this.userservice.saveChanges();
+			 }
+			 	UserDto  user =  this.userservice.findUserById(userId);
+				request.setAttribute("user", user);
+				request.getRequestDispatcher("myaccount.jsp").forward(request, response);
 			}
-		}
+		} 
 
 	}
 
