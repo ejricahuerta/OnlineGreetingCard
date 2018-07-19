@@ -112,6 +112,7 @@ public class UserService implements UserInterface {
 			CardLetter oldletter = this.unit.GetCardLetterRepo().Get(letter.getId());
 			oldletter.setMessage(letter.getMessage());
 			oldletter.setRecipient(letter.getRecipient());
+			oldletter.setFont(letter.getFontStyle());
 			this.unit.GetCardLetterRepo().Update(oldletter);
 			return true;
 		}
