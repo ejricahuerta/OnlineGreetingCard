@@ -60,7 +60,8 @@
 					<%
 						}
 					%>
-
+					<input name="letterId" type="hidden" value="${letter.getId()}"/>
+					<input name="totalAmount" type="hidden" value="${letter.getTotalCost()}"/>
 					<h5 class="p-lead">Shipping Address</h5>
 					<div class="form-row">
 						<div class="form-group col-md-12">
@@ -94,16 +95,16 @@
 
 					<h5 class="p-lead">Payment Type</h5>
 					<div class="form-check">
-						<input class="form-check-input" type="radio" name="payment"
+						<input class="form-check-input" type="radio" name="paymentType"
 							id="acount" value="account" checked> <label
 							class="form-check-label" for="account"> Account Credit</label>
 					</div>
 					<div class="form-check">
-						<input class="form-check-input" type="radio" name="payment"
+						<input class="form-check-input" type="radio" name="paymentType"
 							id="visa" value="visa" disabled> <label
 							class="form-check-label" for="visa"> Visa</label>
 					</div>
-					<div class="col-12 mt-5 p-1">
+					<div class="col-6 mt-5">
 						<button type="submit" class="btn btn-primary">Pay</button>
 						<a class="btn btn-secondary"
 							href="Payment?letterId=${letter.getId()}">Reset</a> <a
