@@ -1,6 +1,9 @@
 package sendable.dao.entities;
 
 import javax.persistence.Entity;
+
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,6 +14,7 @@ public class CardLetter {
 	int Id;
 
 	String Recipient;
+	@Type(type="text")
 	String Message;
 	String FontStyle;
 	double TotalCost;
