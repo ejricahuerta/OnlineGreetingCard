@@ -18,6 +18,9 @@
         <li class="nav-item">
           <a class="btn nav-link" href="categories.jsp">Categories</a>
         </li>
+                <li class="nav-item">
+          <a class="btn nav-link" href="fonts.jsp">Fonts</a>
+        </li>
       </ul>
       
       <ul class=" navbar-nav ml-auto">
