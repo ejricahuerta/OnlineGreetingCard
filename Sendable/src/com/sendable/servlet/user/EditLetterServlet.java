@@ -43,6 +43,7 @@ public class EditLetterServlet extends HttpServlet {
 				req.setAttribute("letterId", letter.getId());
 				req.setAttribute("message", letter.getMessage());
 				req.setAttribute("recipient", letter.getRecipient());
+				req.setAttribute("font", letter.getFontStyle());
 				req.getRequestDispatcher("/write.jsp").forward(req, resp);
 			} 
 			else {
@@ -63,6 +64,7 @@ public class EditLetterServlet extends HttpServlet {
 		int userId = (int)req.getSession().getAttribute("userId");
 		String message  = req.getParameter("message");
 		String recipient = req.getParameter("recipient");
+		String font = req.getParameter("font");
 		int letterId = Integer.parseInt(req.getParameter("letterId"));
 		CardLetterDto letter = this.userservice.getUserLetter(userId, letterId);
 		boolean success = false;
@@ -72,6 +74,7 @@ public class EditLetterServlet extends HttpServlet {
 		else {
 			letter.setMessage(message);
 			letter.setRecipient(recipient);
+			letter.setFontStyle(font);
 		 success = this.userservice.updateUserLetter(userId, letter);
 		 
 		}
