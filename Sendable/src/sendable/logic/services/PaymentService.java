@@ -7,8 +7,9 @@ import sendable.dao.entities.Account;
 import sendable.dao.entities.Address;
 import sendable.dao.entities.CardLetter;
 import sendable.dao.entities.Payment;
+import sendable.dao.entities.User;
 import sendable.dao.interfaces.UnitOfWorkInterface;
-import sendable.dao.repository.UnitOfWork;
+import sendable.logic.dtos.AddressDto;
 import sendable.logic.dtos.PaymentDto;
 import sendable.logic.interfaces.PaymentInterface;
 import sendable.logic.mapper.SendableMapper;
@@ -66,22 +67,25 @@ public class PaymentService implements PaymentInterface {
 	}
 	
 	@Override
-	public boolean MakePaymentByAccount(int userId, int cardLetterId, int accountId, String paymentType, double totalAmount,
-			int billingId, int shippingId) {
-		if(this.unit.GetUserRepo().Get(userId) == null) {
+	public boolean MakePaymentByAccount(int userId, int cardLetterId,String paymentType, double totalAmount,
+			AddressDto shipping) {
+		User user = this.unit.GetUserRepo().Get(userId);
+		if(user== null) {
 			System.out.println("Unable to find User");
 			return false;
 		}
 		CardLetter letter = this.unit.GetCardLetterRepo().Get(cardLetterId);
-		Account account = this.unit.GetAccountRepo().Get(accountId);
-		Address shipping = this.unit.GetAddressRepo().Get(shippingId);
+		Account account = this.unit.GetAccountRepo().Get(user.getAccount().getId());
+		Address a = new Address(shipping.getLine1(),shipping.getLine2(),shipping.getCity(), shipping.getState(),shipping.getPostalCode());
+		
+
 		if (account.getCredit() <= totalAmount) {
 			return false;
 		}
 		else if (letter != null) {
 			try {
 				Payment newpay = new Payment(letter, letter.getUser(), paymentType, totalAmount,
-						letter.getUser().getCurrentAddress(), shipping);
+						letter.getUser().getCurrentAddress(), a);
 				this.unit.GetPaymentRepo().Insert(newpay);
 				account.setCredit(account.getCredit()-totalAmount);
 				this.unit.GetAccountRepo().Update(account);
