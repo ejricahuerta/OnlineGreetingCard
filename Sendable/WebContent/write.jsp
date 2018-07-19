@@ -60,7 +60,7 @@
 										var str = "";
 										$("select option:selected").each(
 												function() {
-													str += $(this).value;
+													str = $(this).value;
 												});
 										$('#sampletext').removeClass('*')
 												.addClass(str);

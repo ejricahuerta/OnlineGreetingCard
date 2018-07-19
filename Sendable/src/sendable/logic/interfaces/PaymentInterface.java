@@ -5,10 +5,10 @@ import sendable.logic.dtos.PaymentDto;
 
 public interface PaymentInterface {
 
-	boolean MakePayment(int cardLetterId, String paymentType, double totalAmount, int billingId,
+	boolean MakePayment(int userId, int cardLetterId, String paymentType, double totalAmount, int billingId,
 			int shippingId);
 
-	boolean MakePaymentByAccount(int cardLetterId, int accountId, String paymentType,
+	boolean MakePaymentByAccount(int userId, int cardLetterId, int accountId, String paymentType,
 			double totalAmount, int billingId, int shippingId);
 
 	List<PaymentDto> ListAlllPayments();

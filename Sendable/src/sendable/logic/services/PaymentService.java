@@ -59,28 +59,32 @@ public class PaymentService implements PaymentInterface {
 	}
 
 	@Override
-	public boolean MakePayment(int cardLetterId, String paymentType, double totalAmount, int billingId,
+	public boolean MakePayment(int userId, int cardLetterId, String paymentType, double totalAmount, int billingId,
 			int shippingId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
 	@Override
-	public boolean MakePaymentByAccount(int cardLetterId, int accountId, String paymentType, double totalAmount,
+	public boolean MakePaymentByAccount(int userId, int cardLetterId, int accountId, String paymentType, double totalAmount,
 			int billingId, int shippingId) {
+		if(this.unit.GetUserRepo().Get(userId) == null) {
+			System.out.println("Unable to find User");
+			return false;
+		}
 		CardLetter letter = this.unit.GetCardLetterRepo().Get(cardLetterId);
 		Account account = this.unit.GetAccountRepo().Get(accountId);
 		Address shipping = this.unit.GetAddressRepo().Get(shippingId);
-
 		if (account.getCredit() <= totalAmount) {
 			return false;
 		}
-
 		else if (letter != null) {
 			try {
 				Payment newpay = new Payment(letter, letter.getUser(), paymentType, totalAmount,
 						letter.getUser().getCurrentAddress(), shipping);
 				this.unit.GetPaymentRepo().Insert(newpay);
+				account.setCredit(account.getCredit()-totalAmount);
+				this.unit.GetAccountRepo().Update(account);
 				return true;
 			} catch (Exception e) {
 				System.out.println("Unable to make payment");
