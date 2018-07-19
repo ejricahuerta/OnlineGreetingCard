@@ -48,6 +48,11 @@ public class SendableContextListener implements ServletContextListener {
 		
 		DatabaseManagerInterface database = new DatabaseManager();
 		UnitOfWorkInterface uow = new UnitOfWork(database);
+		if(uow.GetCategoryRepo().ListAll().isEmpty()) {
+			SeedDatabase seed = new SeedDatabase(uow);
+			seed.SeedCard();
+			
+		}
 		CardInterface cardservice = new CardService(uow);
 		List<CardDto> allcards = cardservice.ListCards();
 		List<CategoryDto> allcat = cardservice.ListCategories();
