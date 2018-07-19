@@ -24,9 +24,6 @@ public class CardService implements CardInterface {
 
 	public CardService(UnitOfWorkInterface uow) {
 		unit = uow;
-		if(unit.GetCategoryRepo().ListAll().isEmpty()) {
-			SeedDatabase seed = new SeedDatabase(unit);
-		}
 	}
 
 	@Override
