@@ -261,15 +261,38 @@
 												src="${letter.getImageURL()}"
 												alt="Generic placeholder image">
 												<div class="media-body">
-													<h5 class="mt-0 mb-1">To: ${letter.getRecipient()}</h5>
+													<h5 class="mt-0 mb-1"><span class="font-italic">To:</span> ${letter.getRecipient()}</h5>
 													<small>${letter.getDateAdded()}</small>
-													<p class="mb-1 message-text">${letter.getMessage()}</p>
-													
+													<p class="mb-1 message-text ${letter.getFontStyle()}">${letter.getMessage()}</p>
+
 													<small class="text-danger">${letter.getStatus()}</small>
-													<c:if test="${eltter.getDateSent() == null }">
-														<a class="btn btn-link"
-															href="EditLetter?letterId=${letter.getId()}">Edit</a>
-													</c:if>
+													<button type="button" class="btn btn-link"
+														data-toggle="modal" data-target="#messageModal">
+														View</button>
+													<div class="modal fade" id="messageModal" tabindex="-1"
+														role="dialog" aria-labelledby="messageModalLabel"
+														aria-hidden="true">
+														<div class="modal-dialog" role="document">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h5 class="modal-title" id="messageModalLabel">TO: ${letter.getRecipient() }</h5>
+																	<button type="button" class="close"
+																		data-dismiss="modal" aria-label="Close">
+																		<span aria-hidden="true">&times;</span>
+																	</button>
+																</div>
+																<div class="modal-body">
+																	<p class="${letter.getFontStyle()}">${letter.getMessage()}</p>
+																</div>
+																<div class="modal-footer">
+																	<c:if test="${letter.getDateSent() == null }">
+																		<a class="btn btn-secondary"
+																			href="EditLetter?letterId=${letter.getId()}">Edit</a>
+																	</c:if>
+																</div>
+															</div>
+														</div>
+													</div>
 												</div></li>
 										</ul>
 									</div>
