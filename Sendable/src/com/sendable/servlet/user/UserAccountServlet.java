@@ -29,15 +29,11 @@ public class UserAccountServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		HttpSession session = (HttpSession) request.getSession(false);
-		if(session == null) {
-			response.sendRedirect("login.jsp");
-		}
 		int id = (int) session.getAttribute("userId");
 		System.out.println("ID: " + id);
-		UserService service = (UserService) session.getServletContext().getAttribute("userService");
-		UserDto user = service.findUserById(id);
+		UserDto user = this.userservice.findUserById(id);
 		if (user == null) {
 			response.sendRedirect("index.jsp");
 		} else {
@@ -103,8 +99,13 @@ public class UserAccountServlet extends HttpServlet {
 					success = (newpassword.equals(retypepassword) && !newpassword.isEmpty() && newpassword.length() > 5?this.userservice.changeUserPassword(Id, newpassword): false);
 					break;
 					
-				default: // nothing then returns to page
-					this.doGet(request, response);
+				case "topup":
+					
+					double amount = Double.parseDouble(request.getParameter("topupamount"));
+					success =  this.userservice.topUpUserAccount(Id, amount);
+					
+					break;
+				default:
 					break;
 				}
 				
@@ -120,7 +121,7 @@ public class UserAccountServlet extends HttpServlet {
 			}
 		}
 	}
-
+	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		this.userservice = (UserService) config.getServletContext().getAttribute("userService");
