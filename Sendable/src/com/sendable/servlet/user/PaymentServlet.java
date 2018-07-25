@@ -47,12 +47,16 @@ public class PaymentServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		if (request.getSession() == null) {
+			response.sendRedirect("login.jsp");
+		} else {
 
-		int letterId = Integer.parseInt(request.getParameter("letterId"));
-		int userId = (int) request.getSession().getAttribute("userId");
-		CardLetterDto letter = this.userservice.getUserLetter(userId, letterId);
-		request.setAttribute("letter", letter);
-		request.getRequestDispatcher("pay.jsp").forward(request, response);
+			int letterId = Integer.parseInt(request.getParameter("letterId"));
+			int userId = (int) request.getSession().getAttribute("userId");
+			CardLetterDto letter = this.userservice.getUserLetter(userId, letterId);
+			request.setAttribute("letter", letter);
+			request.getRequestDispatcher("pay.jsp").forward(request, response);
+		}
 	}
 
 	/**
@@ -81,16 +85,15 @@ public class PaymentServlet extends HttpServlet {
 				request.getRequestDispatcher("pay.jsp").forward(request, response);
 			} else {
 				AddressDto shipping = new AddressDto(0, line1, line2, city, state, postalcode);
-			 boolean success = this.paymentservice.MakePaymentByAccount(userId, Integer.parseInt(letterId), paymentType, totalAmount, shipping);
-			 
-			 if(success) {
-				 this.userservice.saveChanges();
-			 }
-			 	UserDto  user =  this.userservice.findUserById(userId);
-				request.setAttribute("user", user);
-				request.getRequestDispatcher("myaccount.jsp").forward(request, response);
+				boolean success = this.paymentservice.MakePaymentByAccount(userId, Integer.parseInt(letterId),
+						paymentType, totalAmount, shipping);
+
+				if (success) {
+					this.userservice.saveChanges();
+				}
+				response.sendRedirect("MyAccount");
 			}
-		} 
+		}
 
 	}
 
