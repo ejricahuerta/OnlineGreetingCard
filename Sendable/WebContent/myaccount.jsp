@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <jsp:include page="header.jsp" />
 
@@ -272,11 +273,12 @@
 
 													<small class="text-danger">${letter.getStatus()}</small>
 													<button type="button" class="btn btn-link"
-														data-toggle="modal" data-target="#<c:out value="${letter.getId()}"/>">
+														data-toggle="modal"
+														data-target="#<c:out value="${letter.getId()}"/>">
 														View</button>
-													<div class="modal fade" id="${letter.getId()}" tabindex="-1"
-														role="dialog" aria-labelledby="messageModalLabel"
-														aria-hidden="true">
+													<div class="modal fade" id="${letter.getId()}"
+														tabindex="-1" role="dialog"
+														aria-labelledby="messageModalLabel" aria-hidden="true">
 														<div class="modal-dialog" role="document">
 															<div class="modal-content">
 																<div class="modal-header">
@@ -291,7 +293,7 @@
 																	<p class="${letter.getFontStyle()}">${letter.getMessage()}</p>
 																</div>
 																<div class="modal-footer">
-																	<c:if test="${letter.getDateSent() == null }">
+																	<c:if test="${letter.getStatus() != 'Paid' }">
 																		<a class="btn btn-secondary"
 																			href="EditLetter?letterId=${letter.getId()}">Edit</a>
 																	</c:if>
@@ -309,43 +311,75 @@
 					<!-- PAYMENT Tab Content-->
 					<div class="tab-pane fade sendable-usercards" id="list-payment"
 						role="tabpanel" aria-labelledby="list-payment-list">
+						<div class="text-right m-4 border-bottom p-4">
+							<p>
+								YOUR CURRENT BALANCE: $
+								<fmt:formatNumber value="${user.getAccountDto().getCredit()}" />
+							</p>
+							<button class="btn btn-primary" data-toggle="modal"
+								data-target="#topupModal">TOP UP</button>
+						</div>
 						<h4 class="text-center mt-4">Your Payments</h4>
 						<div class="row p-2">
 							<!-- loop cards -->
 							<div class="col">
 								<div class="list-group">
-									<a href="#"
+								<c:forEach items="${user.getPayments()}" var="payment" >
+									<div 
 										class="list-group-item list-group-item-action flex-column align-items-start">
 										<div class="d-flex w-100 justify-content-between">
-											<h5 class="mb-1">List group item heading</h5>
-											<small>3 days ago</small>
+											<h5 class="mb-1">Payment for Card: ${payment.getCardLetterId()}</h5>
+											<small>Date of Payment: ${payment.getDateAdded()}</small>
 										</div>
-										<p class="mb-1">Donec id elit non mi porta gravida at eget
-											metus. Maecenas sed diam eget risus varius blandit.</p> <small>Donec
-											id elit non mi porta.</small>
-									</a> <a href="#"
-										class="list-group-item list-group-item-action flex-column align-items-start">
-										<div class="d-flex w-100 justify-content-between">
-											<h5 class="mb-1">List group item heading</h5>
-											<small class="text-muted">3 days ago</small>
-										</div>
-										<p class="mb-1">Donec id elit non mi porta gravida at eget
-											metus. Maecenas sed diam eget risus varius blandit.</p> <small
-										class="text-muted">Donec id elit non mi porta.</small>
-									</a> <a href="#"
-										class="list-group-item list-group-item-action flex-column align-items-start">
-										<div class="d-flex w-100 justify-content-between">
-											<h5 class="mb-1">List group item heading</h5>
-											<small class="text-muted">3 days ago</small>
-										</div>
-										<p class="mb-1">Donec id elit non mi porta gravida at eget
-											metus. Maecenas sed diam eget risus varius blandit.</p> <small
-										class="text-muted">Donec id elit non mi porta.</small>
-									</a>
+										<p class="mb-1"> Shipped to: ${payment.getShipping()}</p> <small> Total Amount Paid: ${payment.getTotalAmount()} </small>
+									</div> 
+								</c:forEach>
 								</div>
 							</div>
 						</div>
 					</div>
+					<!-- Top up Modal -->
+					<div class="modal fade" id="topupModal" tabindex="-1" role="dialog"
+						aria-labelledby="TopUp" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title">Top Up</h5>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									<form action="MyAccount" method="POST" class="form">
+										<input type="hidden" name="editmodal" value="topup">
+										<div class="form-group">
+											<label class="font-italic" for="current">Current
+												Balance ${user.getAccountDto().getCredit() }</label>
+										</div>
+										<div class="form-group">
+											<label class="font-italic" for="topupamount">Amount </label>
+											<input name="topupamount" type="text" class="form-control"
+												id="topupamount" placeholder="0.00" autofocus required>
+										</div>
+										<div class="form-group">
+											<label class="font-italic" for="currentpassword">Current
+												Password</label> <input name="currentpassword" type="password"
+												class="form-control" id="currentpassword"
+												placeholder="Current Password" required>
+										</div>
+										<div class="float-right">
+											<button type="button" class="btn btn-secondary"
+												data-dismiss="modal">Close</button>
+											<button type="submit" class="btn btn-primary">Save
+												Changes</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+
 					<!-- Security  TAB CONTENT-->
 					<div class="tab-pane fade show" id="list-security" role="tabpanel"
 						aria-labelledby="list-profile-list">
@@ -382,7 +416,7 @@
 									</button>
 								</div>
 								<div class="modal-body">
-									<form action="" class="form">
+									<form action="MyAccount" method="POST" class="form">
 										<input type="hidden" name="editmodal" value="email">
 										<div class="form-group">
 											<label class="font-italic" for="email">Email</label> <input
