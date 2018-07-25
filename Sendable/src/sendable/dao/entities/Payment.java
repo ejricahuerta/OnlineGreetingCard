@@ -14,15 +14,15 @@ public class Payment {
 	String PaymentType;
 	double TotalAmount;
 	
-	@OneToOne(cascade = CascadeType.DETACH,fetch=FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.PERSIST,fetch=FetchType.LAZY)
 	Address BillingAddress;
 	
-	@OneToOne(cascade = CascadeType.DETACH,fetch=FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.PERSIST,fetch=FetchType.LAZY)
 	Address ShippingAddress;
 
-	@OneToOne(cascade = CascadeType.DETACH,fetch=FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.PERSIST,fetch=FetchType.LAZY)
 	CardLetter CardLetter;
-	@OneToOne(cascade = CascadeType.DETACH,fetch=FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.PERSIST,fetch=FetchType.LAZY)
 	User User;
 	
 	public Payment() {
@@ -32,6 +32,8 @@ public class Payment {
 
 	public Payment(CardLetter cardLetter, User user, String paymentType, double totalAmount, Address billingAddress,
 			Address shippingAddress) {
+		CardLetter = cardLetter;
+		User = user;
 		PaymentType = paymentType;
 		TotalAmount = totalAmount;
 		BillingAddress = billingAddress;
