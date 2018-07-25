@@ -77,18 +77,21 @@ public class PaymentService implements PaymentInterface {
 		CardLetter letter = this.unit.GetCardLetterRepo().Get(cardLetterId);
 		Account account = this.unit.GetAccountRepo().Get(user.getAccount().getId());
 		Address a = new Address(shipping.getLine1(),shipping.getLine2(),shipping.getCity(), shipping.getState(),shipping.getPostalCode());
-		
-
 		if (account.getCredit() <= totalAmount) {
 			return false;
 		}
 		else if (letter != null) {
 			try {
-				Payment newpay = new Payment(letter, letter.getUser(), paymentType, totalAmount,
+				
+				Payment newpay = new Payment(letter, user, paymentType, totalAmount,
 						letter.getUser().getCurrentAddress(), a);
-				this.unit.GetPaymentRepo().Insert(newpay);
 				account.setCredit(account.getCredit()-totalAmount);
+				user.getPayments().add(newpay);
 				this.unit.GetAccountRepo().Update(account);
+				this.unit.GetPaymentRepo().Insert(newpay);
+				letter.setStatus("Paid");
+				this.unit.GetCardLetterRepo().Update(letter);
+				this.unit.GetUserRepo().Update(user);
 				return true;
 			} catch (Exception e) {
 				System.out.println("Unable to make payment");
