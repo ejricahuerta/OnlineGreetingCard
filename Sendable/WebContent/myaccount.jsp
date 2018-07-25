@@ -23,6 +23,8 @@
 				</li>
 				<li class="nav-item"><a class="btn nav-link"
 					href="categories.jsp">Categories</a></li>
+				<li class="nav-item"><a class="btn nav-link" href="fonts.jsp">Fonts</a>
+				</li>
 			</ul>
 			<ul class=" navbar-nav ml-auto">
 				<li class="nav-item"><a class="btn nav-link" href="login.jsp">Logout</a>
@@ -261,21 +263,25 @@
 												src="${letter.getImageURL()}"
 												alt="Generic placeholder image">
 												<div class="media-body">
-													<h5 class="mt-0 mb-1"><span class="font-italic">To:</span> ${letter.getRecipient()}</h5>
+													<h5 class="mt-0 mb-1">
+														<span class="font-italic">To:</span>
+														${letter.getRecipient()}
+													</h5>
 													<small>${letter.getDateAdded()}</small>
 													<p class="mb-1 message-text ${letter.getFontStyle()}">${letter.getMessage()}</p>
 
 													<small class="text-danger">${letter.getStatus()}</small>
 													<button type="button" class="btn btn-link"
-														data-toggle="modal" data-target="#messageModal">
+														data-toggle="modal" data-target="#<c:out value="${letter.getId()}"/>">
 														View</button>
-													<div class="modal fade" id="messageModal" tabindex="-1"
+													<div class="modal fade" id="${letter.getId()}" tabindex="-1"
 														role="dialog" aria-labelledby="messageModalLabel"
 														aria-hidden="true">
 														<div class="modal-dialog" role="document">
 															<div class="modal-content">
 																<div class="modal-header">
-																	<h5 class="modal-title" id="messageModalLabel">TO: ${letter.getRecipient() }</h5>
+																	<h5 class="modal-title" id="messageModalLabel">TO:
+																		${letter.getRecipient() }</h5>
 																	<button type="button" class="close"
 																		data-dismiss="modal" aria-label="Close">
 																		<span aria-hidden="true">&times;</span>
