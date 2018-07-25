@@ -87,22 +87,23 @@ public class UserService implements UserInterface {
 
 	@Override
 	public boolean topUpUserAccount(int UserId, double amount) {
-		try {
-			for (User u : unit.GetUserRepo().ListAll()) {
-				if (u.getId() == UserId) {
-					u.getAccount().setCredit(amount);
-					// Update Account
-					Account account = this.unit.GetAccountRepo().Get(u.getAccount().getId());
-					this.unit.GetAccountRepo().Update(account);
-					break;
-				}
+		boolean success = false;
+		User user = this.unit.GetUserRepo().Get(UserId);
+		if (amount < 1 || user == null) {
+			success = false;
+		} else {
+			try {
+				Account account = user.getAccount();
+				double total = account.getCredit() + amount;
+				account.setCredit(total);
+				this.unit.GetAccountRepo().Update(account);
+				success = true;
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			;
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
-		return false;
+		return success;
+
 	}
 
 	@Override
@@ -126,7 +127,7 @@ public class UserService implements UserInterface {
 
 			Card card = this.unit.GetCardRepo().Get(letter.getCardId());
 			CardLetter newletter = new CardLetter(u, card, letter.getRecipient(), letter.getMessage(),
-					letter.getFontStyle(),  Math.round(letter.getTotalCost() * 100) / 100, DateTime.GetCurrentDate());
+					letter.getFontStyle(), Math.round(letter.getTotalCost() * 100) / 100, DateTime.GetCurrentDate());
 			u.getCardLetters().add(newletter);
 			unit.GetCardLetterRepo().Insert(newletter);
 			User user = this.unit.GetUserRepo().Get(UserId);
@@ -173,6 +174,8 @@ public class UserService implements UserInterface {
 					CardLetterDto newletter = new CardLetterDto(c.getId(), c.getUser().getId(), c.getCard().getId(),
 							c.getRecipient(), c.getMessage(), c.getFont(), c.getTotalCost(), c.getDateAdded());
 					newletter.setImageURL(url);
+					newletter.setStatus(c.getStatus());
+					newletter.setDateSent(c.getDateSent());
 					cardletters.add(newletter);
 				}
 			});
@@ -185,16 +188,12 @@ public class UserService implements UserInterface {
 					account.getLastTopUpDate());
 
 			List<PaymentDto> allpayments = new ArrayList<PaymentDto>();
-			this.unit.GetPaymentRepo().ListAll().forEach(p -> {
-				if (p.getUser() == user) {
-
-					// user payment mapping
-					allpayments.add(new PaymentDto(p.getId(), p.getUser().getId(), p.getCardLetter().getId(),
-							p.getBillingAddress().GetAddressString(), p.getShippingAddress().GetAddressString(),
-							p.getPaymentType(), p.getDateAdded(), p.getTotalAmount()));
+			for (Payment payment : this.unit.GetPaymentRepo().ListAll()) {
+				if(payment.getUser() == user) {
+					allpayments.add(SendableMapper.mapPaymentDto(payment));
 				}
-			});
-
+			}
+			
 			for (Address address : this.unit.GetAddressRepo().ListAll()) {
 				if (address.getId() == user.getCurrentAddress().getId()) {
 					user.setAddress(address);
