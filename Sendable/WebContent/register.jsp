@@ -1,4 +1,5 @@
 
+
 <jsp:include page="header.jsp" />
 <!--Body-->
 <body class="container-fluid">
@@ -61,20 +62,20 @@
 								<label for="firstname">First Name<span
 									class="required-field"> *</span></label> <input name="firstname"
 									type="text" class="form-control" id="firstname"
-									placeholder="Enter your First Name" required>
+									placeholder="First Name" required>
 							</div>
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="lastname">Last Name<span
 									class="required-field"> *</span>
 								</label> <input name="lastname" type="text" class="form-control"
-									id="lastname" placeholder="Enter your Last Name" required>
+									id="lastname" placeholder="Last Name" required>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="email">Email<span class="required-field">
 										*</span></label> <input name="email" type="email" class="form-control"
-									id="email" placeholder="Enter your Email Address" required>
+									id="email" placeholder="Email Address" required>
 							</div>
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="phone">Phone</label> <input name="phone" type="text"
@@ -86,7 +87,7 @@
 								<label for="password">Password<span
 									class="required-field"> *</span></label> <input name="password"
 									type="password" class="form-control" id="password"
-									placeholder="Enter new password" required>
+									placeholder="New Password" required>
 							</div>
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="retypepassword">Re-type Password<span
@@ -99,7 +100,7 @@
 							<div class="form-group col-md">
 								<label for="line1">Line 1<span class="required-field">
 										*</span></label> <input name="line1" type="text" class="form-control"
-									id="line1" placeholder="Street Number and Street Name" required>
+									id="line1" placeholder="# Street Name" required>
 							</div>
 							<div class="form-group col-sm">
 								<label for="line2">Line 2</label> <input name="line2"
@@ -111,17 +112,17 @@
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="city">City<span class="required-field">
 										*</span></label> <input name="city" type="text" class="form-control"
-									id="city" placeholder="Enter City" required>
+									id="city" placeholder="City" required>
 							</div>
 							<div class="form-group col-md-6 col-sm-4">
 								<label for="state">State<span class="required-field">
 										*</span></label> <input name="state" type="text" id="state"
-									class="form-control" placeholder="Enter State" required>
+									class="form-control" placeholder="State" required>
 							</div>
 							<div class="form-group col-md-3 col-sm-4 col-xs-4 col-6">
 								<label for="postal">Zip<span class="required-field">
 										*</span></label> <input type="text" class="form-control" id="postal"
-									name="postalcode" placeholder="Enter your Postal Code" required>
+									name="postalcode" placeholder="A1A1A1" required>
 							</div>
 						</div>
 						<button type="submit" class="btn btn-primary">Register</button>

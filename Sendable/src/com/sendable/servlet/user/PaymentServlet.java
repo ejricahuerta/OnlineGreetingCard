@@ -91,8 +91,13 @@ public class PaymentServlet extends HttpServlet {
 
 				if (success) {
 					this.userservice.saveChanges();
+					response.sendRedirect("MyAccount");
 				}
-				response.sendRedirect("MyAccount");
+				else {
+					request.setAttribute("validationMessage", "<b>Unable to Proccess!</b> Please check your balance.");
+					request.getRequestDispatcher("pay.jsp").forward(request, response);
+				}
+				
 			}
 		}
 

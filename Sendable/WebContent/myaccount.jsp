@@ -3,7 +3,15 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<%
+	if(request.getAttribute("user") == null){
+		response.sendRedirect("MyAccount");
+	}
+%>
+
+
 <jsp:include page="header.jsp" />
+
 
 
 <body class="container-fluid">

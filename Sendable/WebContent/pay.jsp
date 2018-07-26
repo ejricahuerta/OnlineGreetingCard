@@ -4,6 +4,14 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<%
+
+	if(request.getAttribute("letter") == null){
+		response.sendRedirect("index.jsp");
+	}
+%>
+
+
 <jsp:include page="header.jsp" />
 <body class="container-fluid">
 	<jsp:include page="navigationheader.jsp" />
@@ -57,8 +65,8 @@
 						} else {
 					%>
 
-					<div class="alert alert-danger " role="alert"></div>
-
+					<div class="alert alert-danger " role="alert">${requestScope['validationMessage']} <a href = "MyAccount">see account</a></div>
+		
 					<%
 						}
 					%>
