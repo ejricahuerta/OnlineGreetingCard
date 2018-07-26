@@ -133,16 +133,14 @@ public class UserService implements UserInterface {
 			User user = this.unit.GetUserRepo().Get(UserId);
 			unit.GetUserRepo().Update(user);
 
-			for (CardLetter c : this.unit.GetCardLetterRepo().ListAll()) {
-				if (c.getUser().getId() == letter.getUserId()) {
-					return c.getId();
-				}
-			}
+			ArrayList<CardLetter> list =  (ArrayList<CardLetter>) this.unit.GetCardLetterRepo().ListAll();
+			return list.get(list.size()-1).getId();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return -1;
+
 	}
 
 	@Override

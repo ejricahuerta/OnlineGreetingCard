@@ -10,6 +10,7 @@
 	<div class="break"></div>
 	<section class="container">
 		<div class="row">
+			<h1 class="display-3">All Fonts</h1>
 			<div class="col-sm-12 mb-2">
 				<div class="card ">
 					<div class="card-body">

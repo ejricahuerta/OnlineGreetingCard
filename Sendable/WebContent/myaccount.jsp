@@ -331,7 +331,7 @@
 											<h5 class="mb-1">Payment for Card: ${payment.getCardLetterId()}</h5>
 											<small>Date of Payment: ${payment.getDateAdded()}</small>
 										</div>
-										<p class="mb-1"> Shipped to: ${payment.getShipping()}</p> <small> Total Amount Paid: ${payment.getTotalAmount()} </small>
+										<p class="mb-1"> Shipped to: ${payment.getShipping()}</p> <small> Total Amount Paid: $<fmt:formatNumber value="${payment.getTotalAmount()}" />  </small>
 									</div> 
 								</c:forEach>
 								</div>

@@ -61,24 +61,24 @@
 								<label for="firstname">First Name<span
 									class="required-field"> *</span></label> <input name="firstname"
 									type="text" class="form-control" id="firstname"
-									placeholder="Seneca" required>
+									placeholder="Enter your First Name" required>
 							</div>
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="lastname">Last Name<span
 									class="required-field"> *</span>
 								</label> <input name="lastname" type="text" class="form-control"
-									id="lastname" placeholder="College" required>
+									id="lastname" placeholder="Enter your Last Name" required>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="email">Email<span class="required-field">
 										*</span></label> <input name="email" type="email" class="form-control"
-									id="email" placeholder=" ptreg@senecacollege.ca" required>
+									id="email" placeholder="Enter your Email Address" required>
 							</div>
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="phone">Phone</label> <input name="phone" type="text"
-									class="form-control" id="phone" placeholder="4164934144">
+									class="form-control" id="phone" placeholder="Tel / Mobile">
 							</div>
 						</div>
 						<div class="form-row">
@@ -86,42 +86,42 @@
 								<label for="password">Password<span
 									class="required-field"> *</span></label> <input name="password"
 									type="password" class="form-control" id="password"
-									placeholder="Password" required>
+									placeholder="Enter new password" required>
 							</div>
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="retypepassword">Re-type Password<span
 									class="required-field"> *</span></label> <input name="retypepassword"
 									type="password" class="form-control" id="retypepassword"
-									placeholder="Password" required>
+									placeholder="Re-enter New Password" required>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md">
 								<label for="line1">Line 1<span class="required-field">
 										*</span></label> <input name="line1" type="text" class="form-control"
-									id="line1" placeholder="70 The Pond Rd" required>
+									id="line1" placeholder="Street Number and Street Name" required>
 							</div>
 							<div class="form-group col-sm">
 								<label for="line2">Line 2</label> <input name="line2"
 									type="text" class="form-control" id="line2"
-									placeholder="Apartment, studio, or floor">
+									placeholder="Apartment, Studio, or Floor">
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="city">City<span class="required-field">
 										*</span></label> <input name="city" type="text" class="form-control"
-									id="city" placeholder="Toronto" required>
+									id="city" placeholder="Enter City" required>
 							</div>
 							<div class="form-group col-md-6 col-sm-4">
 								<label for="state">State<span class="required-field">
 										*</span></label> <input name="state" type="text" id="state"
-									class="form-control" placeholder="Ontario" required>
+									class="form-control" placeholder="Enter State" required>
 							</div>
 							<div class="form-group col-md-3 col-sm-4 col-xs-4 col-6">
 								<label for="postal">Zip<span class="required-field">
 										*</span></label> <input type="text" class="form-control" id="postal"
-									name="postalcode" placeholder="A1A 1A1" required>
+									name="postalcode" placeholder="Enter your Postal Code" required>
 							</div>
 						</div>
 						<button type="submit" class="btn btn-primary">Register</button>
@@ -134,10 +134,6 @@
 
 
 	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
 		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"

@@ -78,6 +78,8 @@ public class WriteServlet extends HttpServlet {
 				req.getRequestDispatcher("write.jsp").forward(req, resp);
 			} else {
 				this.userservice.saveChanges();
+				UserDto user  = this.userservice.findUserById(userId);
+				req.setAttribute("user", user);
 				if (req.getParameter("button").equals("Save")) {
 					resp.sendRedirect("MyAccount");
 

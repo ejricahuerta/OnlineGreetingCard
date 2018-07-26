@@ -44,11 +44,12 @@ public class EditLetterServlet extends HttpServlet {
 				req.setAttribute("message", letter.getMessage());
 				req.setAttribute("recipient", letter.getRecipient());
 				req.setAttribute("font", letter.getFontStyle());
-				req.getRequestDispatcher("/write.jsp").forward(req, resp);
+				req.getRequestDispatcher("write.jsp").forward(req, resp);
 			} 
 			else {
 				UserDto user  =this.userservice.findUserById(userId);
 				req.setAttribute("user", user);
+				req.setAttribute("type", "EditLetter");
 				req.getRequestDispatcher("myaccount.jsp").forward(req, resp);
 			}
 		} catch (Exception e) {
@@ -81,7 +82,6 @@ public class EditLetterServlet extends HttpServlet {
 		if(success) {
 			this.userservice.saveChanges();
 			UserDto user  = this.userservice.findUserById(userId);
-			req.setAttribute("type", "EditLetter");
 			req.setAttribute("user", user);
 			if(req.getParameter("button").contains("Save")) {
 			resp.sendRedirect("MyAccount");

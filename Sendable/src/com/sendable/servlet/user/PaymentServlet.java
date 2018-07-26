@@ -41,6 +41,7 @@ public class PaymentServlet extends HttpServlet {
 		this.userservice = (UserService) config.getServletContext().getAttribute("userService");
 	}
 
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
