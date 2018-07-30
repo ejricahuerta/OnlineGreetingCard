@@ -5,6 +5,11 @@ import java.util.List;
 import sendable.logic.dtos.AddressDto;
 import sendable.logic.dtos.PaymentDto;
 
+/**
+ * @author ejricahuerta
+ * Most of the interfaces are not used but is useful when adding new Functionalities
+ *
+ */
 public interface PaymentInterface {
 
 	boolean MakePayment(int userId, int cardLetterId, String paymentType, double totalAmount, int billingId,

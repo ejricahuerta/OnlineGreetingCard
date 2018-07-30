@@ -7,10 +7,16 @@ import sendable.logic.dtos.AddressDto;
 import sendable.logic.dtos.CardLetterDto;
 import sendable.logic.dtos.UserDto;
 
+/**
+ * @author ejricahuerta 
+ * 	Most of the interfaces are not used but is useful when
+ *         adding new Functionalities
+ *
+ */
 public interface UserInterface {
 
-	void addNewUser(UserDto user,AddressDto address);
-		
+	void addNewUser(UserDto user, AddressDto address);
+
 	UserDto findUserById(int id);
 
 	UserDto findUserByEmail(String email);
@@ -30,12 +36,13 @@ public interface UserInterface {
 	List<CardLetterDto> getAllUserLetters(int userId);
 
 	int addUserLetter(int UserId, CardLetterDto letter);
+
 	boolean updateUserLetter(int UserId, CardLetterDto letter);
 
 	boolean removeUserLetter(int userId, int letterId);
-	
+
 	boolean validateLogin(String email, String password);
-	
+
 	boolean isUserFound(String email);
 
 	void saveChanges();

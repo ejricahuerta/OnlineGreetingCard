@@ -337,7 +337,7 @@
 										<input type="hidden" name="editmodal" value="topup">
 										<div class="form-group">
 											<label class="font-italic" for="current">Current
-												Balance ${user.getAccountDto().getCredit() }</label>
+												Balance: $${user.getAccountDto().getCredit() }</label>
 										</div>
 										<div class="form-group">
 											<label class="font-italic" for="topupamount">Amount </label>

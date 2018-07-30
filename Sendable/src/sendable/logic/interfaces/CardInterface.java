@@ -5,6 +5,12 @@ import java.util.List;
 import sendable.logic.dtos.CardDto;
 import sendable.logic.dtos.CategoryDto;
 
+/**
+ * @author ejricahuerta 
+ * Most of the interfaces are not used but is useful when
+ *         adding new Functionalities
+ *
+ */
 public interface CardInterface {
 
 	List<CardDto> ListCards();

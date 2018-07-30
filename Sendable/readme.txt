@@ -11,3 +11,6 @@ Default Data
 	-Only Cards and Categories are seeded when the application starts.
 	-There are no users or any other data seeded. You have to register first.
 	
+	
+if lib in WEB-INF is missing please copy and paste the jar files from externals folder attached.
+	

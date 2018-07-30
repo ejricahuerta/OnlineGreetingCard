@@ -28,12 +28,11 @@
 			<li class="nav-item"><a class="btn nav-link" href="MyAccount">
 					<%=session.getAttribute("userEmail")%>
 			</a> <c:if test="${user != null}">
-					<li class="nav-item"><a class="btn nav-link"
-						data-toggle="modal" href="#topupModal"> BALANCE: $ <fmt:formatNumber
+					<li class="nav-item" title="Top Up Balance"><a
+						class="btn nav-link" data-toggle="modal" href="#topupModal">
+							BALANCE: $ <fmt:formatNumber
 								value="${user.getAccountDto().getCredit()}" />
-					</a></li>
-					<li class="nav-item"><a class="btn nav-link"
-						data-toggle="modal" href="#topupModal">TOP UP</a></li>
+					</a></li>	
 				</c:if>
 			<li class="nav-item"><a class="btn nav-link" href="Logout">
 					Logout</a></li>

@@ -60,38 +60,38 @@
 						<div class="form-row">
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="firstname">First Name<span
-									class="required-field"> *</span></label> <input name="firstname"
+									class="required-field"> *</span></label> <input name="firstname" pattern=".{5,}"
 									type="text" class="form-control" id="firstname"
 									placeholder="First Name" required>
 							</div>
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="lastname">Last Name<span
 									class="required-field"> *</span>
-								</label> <input name="lastname" type="text" class="form-control"
+								</label> <input name="lastname" type="text" class="form-control" pattern=".{5,}"
 									id="lastname" placeholder="Last Name" required>
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="email">Email<span class="required-field">
-										*</span></label> <input name="email" type="email" class="form-control"
+										*</span></label> <input name="email" type="email" class="form-control" pattern=".{6,}"
 									id="email" placeholder="Email Address" required>
 							</div>
 							<div class="form-group col-md-6 col-sm-6">
-								<label for="phone">Phone</label> <input name="phone" type="text"
+								<label for="phone">Phone</label> <input name="phone" type="text" pattern=".{9,14}"
 									class="form-control" id="phone" placeholder="Tel / Mobile">
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="password">Password<span
-									class="required-field"> *</span></label> <input name="password"
+									class="required-field"> *</span></label> <input name="password" pattern=".{6,20}"
 									type="password" class="form-control" id="password"
 									placeholder="New Password" required>
 							</div>
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="retypepassword">Re-type Password<span
-									class="required-field"> *</span></label> <input name="retypepassword"
+									class="required-field"> *</span></label> <input name="retypepassword" pattern=".{6,20}"
 									type="password" class="form-control" id="retypepassword"
 									placeholder="Re-enter New Password" required>
 							</div>
@@ -99,7 +99,7 @@
 						<div class="form-row">
 							<div class="form-group col-md">
 								<label for="line1">Line 1<span class="required-field">
-										*</span></label> <input name="line1" type="text" class="form-control"
+										*</span></label> <input name="line1" type="text" class="form-control" pattern=".{5,}"
 									id="line1" placeholder="# Street Name" required>
 							</div>
 							<div class="form-group col-sm">
@@ -121,7 +121,7 @@
 							</div>
 							<div class="form-group col-md-3 col-sm-4 col-xs-4 col-6">
 								<label for="postal">Zip<span class="required-field">
-										*</span></label> <input type="text" class="form-control" id="postal"
+										*</span></label> <input type="text" class="form-control" id="postal" pattern=".{,7}"
 									name="postalcode" placeholder="A1A1A1" required>
 							</div>
 						</div>
