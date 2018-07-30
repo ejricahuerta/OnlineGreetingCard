@@ -16,31 +16,7 @@
 
 <body class="container-fluid">
 	<!--Navigation Bar-->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-		<a class="navbar-brand" href="index.jsp">SENDABLE</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#sendablenav" aria-controls="sendablenav"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-
-		<div class="collapse navbar-collapse" id="sendablenav">
-			<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-				<li class="nav-item active"><a class="btn nav-link"
-					href="index.jsp">Home </a></li>
-				<li class="nav-item"><a class="btn nav-link" href="cards.jsp">Cards</a>
-				</li>
-				<li class="nav-item"><a class="btn nav-link"
-					href="categories.jsp">Categories</a></li>
-				<li class="nav-item"><a class="btn nav-link" href="fonts.jsp">Fonts</a>
-				</li>
-			</ul>
-			<ul class=" navbar-nav ml-auto">
-				<li class="nav-item"><a class="btn nav-link" href="login.jsp">Logout</a>
-				</li>
-			</ul>
-		</div>
-	</nav>
+	<jsp:include page="navigationheader.jsp" />
 
 	<!--spacer-->
 	<div class="break"></div>
@@ -279,7 +255,8 @@
 													<small>${letter.getDateAdded()}</small>
 													<p class="mb-1 message-text ${letter.getFontStyle()}">${letter.getMessage()}</p>
 
-													<small class="text-danger">${letter.getStatus()}</small>
+													<small
+														class="text-info">${letter.getStatus()}</small>
 													<button type="button" class="btn btn-link"
 														data-toggle="modal"
 														data-target="#<c:out value="${letter.getId()}"/>">
@@ -290,7 +267,7 @@
 														<div class="modal-dialog" role="document">
 															<div class="modal-content">
 																<div class="modal-header">
-																	<h5 class="modal-title" id="messageModalLabel">TO:
+																	<h5 class="modal-title" id="messageModalLabel">To:
 																		${letter.getRecipient() }</h5>
 																	<button type="button" class="close"
 																		data-dismiss="modal" aria-label="Close">
@@ -319,29 +296,26 @@
 					<!-- PAYMENT Tab Content-->
 					<div class="tab-pane fade sendable-usercards" id="list-payment"
 						role="tabpanel" aria-labelledby="list-payment-list">
-						<div class="text-right m-4 border-bottom p-4">
-							<p>
-								YOUR CURRENT BALANCE: $
-								<fmt:formatNumber value="${user.getAccountDto().getCredit()}" />
-							</p>
-							<button class="btn btn-primary" data-toggle="modal"
-								data-target="#topupModal">TOP UP</button>
-						</div>
+					
 						<h4 class="text-center mt-4">Your Payments</h4>
 						<div class="row p-2">
 							<!-- loop cards -->
 							<div class="col">
 								<div class="list-group">
-								<c:forEach items="${user.getPayments()}" var="payment" >
-									<div 
-										class="list-group-item list-group-item-action flex-column align-items-start">
-										<div class="d-flex w-100 justify-content-between">
-											<h5 class="mb-1">Payment for Card: ${payment.getCardLetterId()}</h5>
-											<small>Date of Payment: ${payment.getDateAdded()}</small>
+									<c:forEach items="${user.getPayments()}" var="payment">
+										<div
+											class="list-group-item list-group-item-action flex-column align-items-start">
+											<div class="d-flex w-100 justify-content-between">
+												<h5 class="mb-1">Payment for Card:
+													${payment.getCardLetterId()}</h5>
+												<small>Date of Payment: ${payment.getDateAdded()}</small>
+											</div>
+											<p class="mb-1">Shipped to: ${payment.getShipping()}</p>
+											<small> Total Amount Paid: $<fmt:formatNumber
+													value="${payment.getTotalAmount()}" />
+											</small>
 										</div>
-										<p class="mb-1"> Shipped to: ${payment.getShipping()}</p> <small> Total Amount Paid: $<fmt:formatNumber value="${payment.getTotalAmount()}" />  </small>
-									</div> 
-								</c:forEach>
+									</c:forEach>
 								</div>
 							</div>
 						</div>
