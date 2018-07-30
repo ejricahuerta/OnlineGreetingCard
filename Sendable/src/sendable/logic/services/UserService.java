@@ -100,6 +100,7 @@ public class UserService implements UserInterface {
 				success = true;
 			} catch (Exception e) {
 				e.printStackTrace();
+				success = false;
 			}
 		}
 		return success;
