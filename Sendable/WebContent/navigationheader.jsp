@@ -29,7 +29,7 @@
 					<%=session.getAttribute("userEmail")%>
 			</a> <c:if test="${user != null}">
 					<li class="nav-item" title="Top Up Balance"><a
-						class="btn nav-link" data-toggle="modal" href="#topupModal">
+						class="btn nav-link text-success" data-toggle="modal" href="#topupModal">
 							BALANCE: $<fmt:formatNumber
 								value="${user.getAccountDto().getCredit()}" />
 					</a></li>	
