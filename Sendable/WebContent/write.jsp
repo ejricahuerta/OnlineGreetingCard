@@ -37,8 +37,8 @@
 				</div>
 			</div>
 			<!--textarea-->
-			
-			
+
+
 			<div class="col-lg-9 col-md-8 mb-5">
 				<form action="${resquestScope['type']}" method="POST"
 					class="row m-1">
@@ -46,15 +46,26 @@
 
 					<div class="col-12 shadow-sm mt-5">
 						<div class="form-group">
-							<label id="sampletext" for="text">Example select</label> 
-							<select name="font"
-								class="form-control" id="text">						
-								<option value="font1" <%if(((String)request.getAttribute("font")).contains("1")){%> selected <%}%>>Gaegu</option>
-								<option value="font2" <%if(((String)request.getAttribute("font")).contains("2")){%> selected <%}%>>Gochi Hand</option>
-							 	<option value="font3" <%if(((String)request.getAttribute("font")).contains("3")){%> selected <%}%>>Homemade Apple</option>
-								<option value="font4" <%if(((String)request.getAttribute("font")).contains("4")){%> selected <%}%>>Marck Script</option>
-								<option value="font5" <%if(((String)request.getAttribute("font")).contains("5")){%> selected <%}%>>Nothing You Can Do</option>
-								<option value="font6" <%if(((String)request.getAttribute("font")).contains("6")){%> selected <%}%>>Sacramento</option>
+							<label id="sampletext" for="text">Select Font</label> <select
+								name="font" class="form-control" id="text">
+								<option value="font1"
+									<%if (((String) request.getAttribute("font")).contains("1")) {%>
+									selected <%}%>>Gaegu</option>
+								<option value="font2"
+									<%if (((String) request.getAttribute("font")).contains("2")) {%>
+									selected <%}%>>Gochi Hand</option>
+								<option value="font3"
+									<%if (((String) request.getAttribute("font")).contains("3")) {%>
+									selected <%}%>>Homemade Apple</option>
+								<option value="font4"
+									<%if (((String) request.getAttribute("font")).contains("4")) {%>
+									selected <%}%>>Marck Script</option>
+								<option value="font5"
+									<%if (((String) request.getAttribute("font")).contains("5")) {%>
+									selected <%}%>>Nothing You Can Do</option>
+								<option value="font6"
+									<%if (((String) request.getAttribute("font")).contains("6")) {%>
+									selected <%}%>>Sacramento</option>
 							</select>
 						</div>
 						<script>
@@ -91,13 +102,15 @@
 						<div class="form-group">
 							<label class="font-italic" for="personalizedmsg ">Your
 								Message</label>
-							<textarea class=" form-control <%=request.getAttribute("font")%>" id="personalizedmsg"
-								name="message" rows="15" required cols="">${requestScope['message']}</textarea>
+							<textarea class=" form-control <%=request.getAttribute("font")%>"
+								id="personalizedmsg" name="message" rows="15" required cols="">${requestScope['message']}</textarea>
 						</div>
 						<div class="form-group d-block">
 							<label class="font-italic" for="cardfor">To:</label> <input
-								type="text" class="form-control col-6 <%=request.getAttribute("font")%>" id="cardfor"
-								name="recipient" required value="${requestScope['recipient']}" />
+								type="text"
+								class="form-control col-6 <%=request.getAttribute("font")%>"
+								id="cardfor" name="recipient" required
+								value="${requestScope['recipient']}" />
 						</div>
 						<div class="m-2 d-block">
 							<input name="button" type="submit" class="btn btn-primary"
@@ -109,18 +122,4 @@
 			</div>
 		</section>
 	</div>
-
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-		crossorigin="anonymous" type="text/javascript"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-		crossorigin="anonymous" type="text/javascript"></script>
-	<script src="js/bootstrap.min.js" type="text/javascript"></script>
-
-</body>
-
-<html></html>
+	<jsp:include page="footer.jsp" />

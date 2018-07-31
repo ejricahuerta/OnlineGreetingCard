@@ -67,16 +67,7 @@ public class RegisterServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			request.getSession().invalidate();
-			HttpSession session = request.getSession(true);
-			session.setMaxInactiveInterval(5*60);
-			Cookie cookie = new Cookie("email", email);
-			UserDto userDto = service.findUserByEmail(email);
-			System.out.println("USER ID: "+userDto.getId());
-			session.setAttribute("userId", userDto.getId());
-			session.setAttribute("userEmail",userDto.getEmail());
-			response.addCookie(cookie);
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("login.jsp");
 		}
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

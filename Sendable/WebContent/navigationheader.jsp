@@ -30,7 +30,7 @@
 			</a> <c:if test="${user != null}">
 					<li class="nav-item" title="Top Up Balance"><a
 						class="btn nav-link" data-toggle="modal" href="#topupModal">
-							BALANCE: $ <fmt:formatNumber
+							BALANCE: $<fmt:formatNumber
 								value="${user.getAccountDto().getCredit()}" />
 					</a></li>	
 				</c:if>

@@ -66,13 +66,13 @@
 								<label for="email">Email <span class="required-field">
 										*</span>
 								</label> <input name="email" type="email" class="form-control"
-									id="email" placeholder="johndoe@example.com">
+									id="email" placeholder="johndoe@example.com" required>
 							</div>
 							<div class="form-group col-12">
 								<label for="password">Password <span
 									class="required-field"> *</span>
 								</label> <input name="password" type="password" class="form-control"
-									id="password" placeholder="Enter your password">
+									id="password" placeholder="Enter your password" required>
 							</div>
 						</div>
 						<button type="submit" class="btn btn-primary">Login</button>

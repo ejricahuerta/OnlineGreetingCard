@@ -60,14 +60,14 @@
 						<div class="form-row">
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="firstname">First Name<span
-									class="required-field"> *</span></label> <input name="firstname" pattern=".{5,}"
+									class="required-field"> *</span></label> <input name="firstname" pattern=".{2,}"
 									type="text" class="form-control" id="firstname"
 									placeholder="First Name" required>
 							</div>
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="lastname">Last Name<span
 									class="required-field"> *</span>
-								</label> <input name="lastname" type="text" class="form-control" pattern=".{5,}"
+								</label> <input name="lastname" type="text" class="form-control" pattern=".{2,}"
 									id="lastname" placeholder="Last Name" required>
 							</div>
 						</div>
@@ -85,13 +85,13 @@
 						<div class="form-row">
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="password">Password<span
-									class="required-field"> *</span></label> <input name="password" pattern=".{6,20}"
+									class="required-field"> *</span></label> <input name="password" pattern=".{6,}" maxlength = "20"
 									type="password" class="form-control" id="password"
 									placeholder="New Password" required>
 							</div>
 							<div class="form-group col-md-6 col-sm-6">
 								<label for="retypepassword">Re-type Password<span
-									class="required-field"> *</span></label> <input name="retypepassword" pattern=".{6,20}"
+									class="required-field"> *</span></label> <input name="retypepassword" pattern=".{6,}" maxlength = "20"
 									type="password" class="form-control" id="retypepassword"
 									placeholder="Re-enter New Password" required>
 							</div>
@@ -99,7 +99,7 @@
 						<div class="form-row">
 							<div class="form-group col-md">
 								<label for="line1">Line 1<span class="required-field">
-										*</span></label> <input name="line1" type="text" class="form-control" pattern=".{5,}"
+										*</span></label> <input name="line1" type="text" class="form-control" maxlength="40"
 									id="line1" placeholder="# Street Name" required>
 							</div>
 							<div class="form-group col-sm">
@@ -116,12 +116,12 @@
 							</div>
 							<div class="form-group col-md-6 col-sm-4">
 								<label for="state">State<span class="required-field">
-										*</span></label> <input name="state" type="text" id="state"
+										*</span></label> <input name="state" type="text" id="state" maxlength = "20"
 									class="form-control" placeholder="State" required>
 							</div>
 							<div class="form-group col-md-3 col-sm-4 col-xs-4 col-6">
 								<label for="postal">Zip<span class="required-field">
-										*</span></label> <input type="text" class="form-control" id="postal" pattern=".{,7}"
+										*</span></label> <input type="text" class="form-control" id="postal" pattern=".{5,}" maxlength = "7"
 									name="postalcode" placeholder="A1A1A1" required>
 							</div>
 						</div>

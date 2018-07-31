@@ -24,9 +24,9 @@
 	<section class="container">
 		<div class="row justify-content-center">
 			<div class="col-lg-4 col-md-6 col-10 mb-3 text-left">
-				<div class="card">
+				<div class="card shadow-sm">
 					<div class="card-body">
-						<h5 class="card-title">Pay Card Letter</h5>
+						<h3 class="card-title">Pay Card Letter</h3>
 						<table class="table">
 							<tbody>
 								<tr>
@@ -52,7 +52,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-6 col-md-6 col-10 border rounded p-4">
+			<div class="col-lg-6 col-md-6 col-10 border rounded p-4 shadow-sm">
 				<form class="container " action="Payment" method="post">
 
 					<%
