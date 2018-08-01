@@ -4,15 +4,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%
-	if(request.getAttribute("user") == null){
+	if (request.getAttribute("user") == null) {
 		response.sendRedirect("MyAccount");
 	}
 %>
 
-
 <jsp:include page="header.jsp" />
-
-
 
 <body class="container-fluid">
 	<!--Navigation Bar-->
@@ -255,8 +252,7 @@
 													<small>${letter.getDateAdded()}</small>
 													<p class="mb-1 message-text ${letter.getFontStyle()}">${letter.getMessage()}</p>
 
-													<small
-														class="text-info">${letter.getStatus()}</small>
+													<small class="text-info">${letter.getStatus()}</small>
 													<button type="button" class="btn btn-link"
 														data-toggle="modal"
 														data-target="#<c:out value="${letter.getId()}"/>">
@@ -296,7 +292,7 @@
 					<!-- PAYMENT Tab Content-->
 					<div class="tab-pane fade sendable-usercards" id="list-payment"
 						role="tabpanel" aria-labelledby="list-payment-list">
-					
+
 						<h4 class="text-center mt-4">Your Payments</h4>
 						<div class="row p-2">
 							<!-- loop cards -->
@@ -471,6 +467,7 @@
 			</div>
 		</div>
 	</section>
+	
 	<!-- Optional JavaScript -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
